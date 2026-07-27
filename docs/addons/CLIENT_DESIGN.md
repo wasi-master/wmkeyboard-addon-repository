@@ -150,7 +150,9 @@ stored version → show **Update**. Re-running install overwrites in place.
 
 ## 7. Security & privacy
 
-All addons are **pure data — no code runs**. Residual surface + mitigations:
+Every addon type but one is **pure data — no code runs**. The exception is
+`plugin`, which ships Lua and is covered separately below. Residual surface +
+mitigations:
 
 - **Transport:** `https` only. Size caps on manifest and every payload type (theme image cap,
   32 MiB dict cap). Optional but recommended `sha256` verification.
@@ -169,6 +171,42 @@ All addons are **pure data — no code runs**. Residual surface + mitigations:
   install on arrival. It navigates to the addon's detail screen showing the repo URL, name and
   author, and the user taps Install. Adding a repository from a link needs the same explicit
   confirm, with the resolved host shown so a lookalike URL is visible before it is trusted.
+
+
+### 7a. Plugins
+
+`plugin` is the one type whose payload is code, so the sentence above stops being
+true for it and a different set of guarantees takes over.
+
+A plugin's Lua runs in a sandbox with **no API for reading typed text, the text
+field, the clipboard, or the network** — not gated behind a permission, not
+prompted for at use: absent. It also cannot load code at runtime, reach Android,
+see other apps, or run while its panel is closed. The one thing it can declare is
+local storage, which cannot leave the device because nothing in the sandbox can
+send anything anywhere.
+
+That capability set is deliberate rather than minimal-for-now. A keyboard sees
+everything its user types, and third-party code that could read that *and* reach
+the network is a keylogger with extra steps — which no consent dialog makes
+untrue, since the user cannot audit what a script does with a permission after
+granting it. Play's Device and Network Abuse policy asks the same question of
+runtime-loaded interpreted code, naming Lua specifically: it "must not allow
+potential violations". That is about capability, not consent.
+
+Rules this type does not share with the others:
+
+- **`sha256` is required**, not optional. The app refuses to install code it
+  cannot verify; "unverified" is not a state a plugin gets to be in.
+- **Nothing is applied on install.** Every other single-slot type switches to
+  what was just installed; for code, "apply" would mean "execute", which is not
+  a decision an install makes on the user's behalf.
+- **The subsystem is off by default.** Nothing installs or runs until the user
+  turns plugins on.
+- **The preview is a capability list**, shown before Install and built from the
+  manifest alone — the script is never read to work out what a plugin claims it
+  can do.
+
+Full detail: `docs/plugins/SECURITY.md` in the app repository.
 
 ## 8. Future work
 

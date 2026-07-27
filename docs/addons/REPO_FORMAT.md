@@ -179,8 +179,54 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. Declare `langIds` when the face only covers some scripts. |
 | `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
 | `sound` | `*.mp3` | A single short key-press sound. Keep it under ~300 ms and a few tens of KB: it is loaded into a `SoundPool` and replayed on every keystroke. |
+| `plugin` | `*.wmplugin` | ZIP archive containing a `plugin.json` manifest (`"format":"wmkeyboard-plugin"`) and a Lua script. **The only payload that is code rather than data** — see [Plugins](#plugins). |
 
 To make a theme/layout/snippet/sticker/icon payload, just **export it from the app** and drop the file into your repo — the exported files already match these formats.
+
+
+### Plugins
+
+```
+cipher.wmplugin
+├── plugin.json
+└── main.lua
+```
+
+```json
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.example.cipher",
+  "name": "Cipher Tool",
+  "pluginVersion": "1.0.0",
+  "author": "Example Author",
+  "description": "Caesar and Vigenere ciphers.",
+  "apiVersion": 1,
+  "entry": "main.lua",
+  "permissions": []
+}
+```
+
+A plugin is a Lua script that draws a small tool panel. It runs in a sandbox
+with no way to read what the user types, read the text field, read the
+clipboard, or use the network — see `docs/plugins/` in the app repository for
+the developer guide and the full security model.
+
+Three things differ from every other type, all because the payload is code:
+
+- **`sha256` is required.** The app refuses to install a plugin it cannot
+  verify. `tools/build_index.py` fills it in; `tools/validate.py` fails without
+  it.
+- **The id must be a safe path segment** — lowercase, 3–64 characters of
+  `a-z 0-9 . _ -`, starting alphanumeric — because it becomes the plugin's
+  directory on the device.
+- **Unknown `permissions` values refuse the install.** That is also how an older
+  app version safely declines a plugin built against a newer API: it does not
+  install something whose capabilities it cannot describe to the user.
+
+The script must be plain source; precompiled Lua is refused. Build archives with
+`tools/build_plugins.py`, which zips `plugins-src/<name>/` deterministically so
+rebuilds do not churn the index.
 
 ### Sticker packs
 
