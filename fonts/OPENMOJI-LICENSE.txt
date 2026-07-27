@@ -1,0 +1,18 @@
+OpenMoji Black — openmoji-black.ttf
+===================================
+
+openmoji-black.ttf is the "OpenMoji-black-glyf" build (release 17.0.0): the
+monochrome outline set, as plain TrueType glyphs rather than a colour font, so
+emoji draw in the keyboard's own text colour.
+
+  Project:  https://openmoji.org
+  Source:   https://github.com/hfg-gmuend/openmoji
+
+  Copyright OpenMoji — the open-source emoji and icon project.
+  Licensed under CC BY-SA 4.0:
+  https://creativecommons.org/licenses/by-sa/4.0/
+
+CC BY-SA 4.0 asks that you credit the project and share any adaptations under
+the same licence. Attribution for anyone redistributing this file:
+
+  Emoji artwork from OpenMoji, licensed under CC BY-SA 4.0.

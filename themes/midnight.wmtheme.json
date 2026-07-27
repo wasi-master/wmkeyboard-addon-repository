@@ -19,5 +19,8 @@
   "enterKeyText": 4278587423,
   "accent": 4285245183,
   "popupBackground": 4279970889,
+  "toolbarIcon": 4289250280,
+  "toolCircleBackground": 4279641406,
+  "toolCircleActiveBackground": 4280967096,
   "animation": "NONE"
 }

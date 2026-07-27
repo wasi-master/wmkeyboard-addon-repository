@@ -58,7 +58,17 @@
           "pattern": "^[A-Za-z0-9._-]+$"
         },
         "type": {
-          "enum": ["theme", "layout", "dictionary", "snippets", "stickers", "icon_pack", "font", "sound"],
+          "enum": [
+            "theme",
+            "layout",
+            "dictionary",
+            "snippets",
+            "stickers",
+            "icon_pack",
+            "font",
+            "emoji_font",
+            "sound"
+          ],
           "description": "Addon kind. Determines which native import path installs it."
         },
         "name": { "type": "string" },
@@ -97,6 +107,23 @@
         "langId": {
           "type": "string",
           "description": "Language id from the app's LanguageRegistry. REQUIRED for type=dictionary; optional grouping hint for type=layout. Must be an already-registered id."
+        },
+        "langIds": {
+          "type": "array",
+          "description": "Languages this addon covers, when one id is not enough. Mainly for fonts: a face that declares its languages is only offered in the pickers for those scripts, so a Latin-only display font is not offered for Bengali. Omit to make no claim, which offers it everywhere.",
+          "items": { "type": "string" }
+        },
+        "license": {
+          "type": "string",
+          "description": "Licence identifier — an SPDX id where one fits (MIT, OFL-1.1, CC0-1.0, CC-BY-4.0), otherwise any short name. Shown on the addon's page."
+        },
+        "licenseText": {
+          "type": "string",
+          "description": "Full licence text inline. Use for a licence with no identifier worth quoting; prefer licenseFile for anything long."
+        },
+        "licenseFile": {
+          "type": "string",
+          "description": "Licence text as a file: a path relative to this manifest, or an absolute https URL. Fetched on demand when the user opens the licence."
         }
       },
       "allOf": [

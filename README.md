@@ -11,7 +11,7 @@ Add it in WM Keyboard: **Settings → Addons → Add repository**, then paste th
 | Addon | Type | File |
 |---|---|---|
 | Midnight | theme | [`themes/midnight.wmtheme.json`](themes/midnight.wmtheme.json) |
-| Français BÉPO | layout | [`layouts/fr-bepo.wmlayout.json`](layouts/fr-bepo.wmlayout.json) |
+| Braille (Unicode) | layout | [`layouts/braille.wmlayout.json`](layouts/braille.wmlayout.json) |
 | Developer Dictionary | dictionary | [`dictionaries/en-developer.txt`](dictionaries/en-developer.txt) |
 | Internet Slang & Urban Dictionary | dictionary | [`dictionaries/en-slang.txt`](dictionaries/en-slang.txt) |
 | Handy snippets | snippets | [`snippets/dev-shortcuts.wmsnippets.json`](snippets/dev-shortcuts.wmsnippets.json) |
@@ -24,6 +24,8 @@ Add it in WM Keyboard: **Settings → Addons → Add repository**, then paste th
 | JetBrains Mono | font | [`fonts/jetbrains-mono.ttf`](fonts/jetbrains-mono.ttf) |
 | Caveat | font | [`fonts/caveat.ttf`](fonts/caveat.ttf) |
 | Press Start 2P | font | [`fonts/press-start-2p.ttf`](fonts/press-start-2p.ttf) |
+| Twemoji | emoji_font | [`fonts/twemoji.ttf`](fonts/twemoji.ttf) |
+| OpenMoji Black | emoji_font | [`fonts/openmoji-black.ttf`](fonts/openmoji-black.ttf) |
 | Typewriter | sound | [`sounds/typewriter.mp3`](sounds/typewriter.mp3) |
 | Marimba | sound | [`sounds/marimba.mp3`](sounds/marimba.mp3) |
 | Droplet | sound | [`sounds/droplet.mp3`](sounds/droplet.mp3) |
@@ -44,7 +46,21 @@ licensed ([`icons/LUCIDE-LICENSE.txt`](icons/LUCIDE-LICENSE.txt)), Boxicons MIT
 
 **Fonts.** **Inter** (clean UI sans-serif), **JetBrains Mono** (developer monospace),
 **Caveat** (handwriting script) and **Press Start 2P** (retro 8-bit arcade). All are licensed
-under the SIL Open Font License.
+under the SIL Open Font License ([`fonts/OFL-LICENSE.txt`](fonts/OFL-LICENSE.txt)). Inter and
+JetBrains Mono declare `langIds: ["en", "ru", "el"]` — they carry Cyrillic and Greek as well as
+Latin; Caveat and Press Start 2P declare `["en"]`, so the app doesn't offer them for scripts
+they cannot draw.
+
+**Emoji fonts.** **Twemoji** (Twitter's colour set, via Mozilla's COLRv0 build, CC BY 4.0 —
+[`fonts/TWEMOJI-LICENSE.txt`](fonts/TWEMOJI-LICENSE.txt)) and **OpenMoji Black** (monochrome
+outlines that take the keyboard's own text colour, CC BY-SA 4.0 —
+[`fonts/OPENMOJI-LICENSE.txt`](fonts/OPENMOJI-LICENSE.txt)). Same file format as a text font,
+but `emoji_font` is its own type: it is chosen under Emoji settings rather than in the
+key-label pickers, and installing one switches to it.
+
+**Braille.** A layout that types Unicode braille cells (⠁⠃⠉⠙) from QWERTY key positions, with
+the Latin letter on long-press and shown as the corner hint. It writes braille *as text* — it
+is not six-key chorded braille entry.
 
 **Sounds.** Four key-press sounds, synthesised from scratch by
 [`tools/make_sounds.py`](tools/make_sounds.py) and released CC0
@@ -61,6 +77,15 @@ under the SIL Open Font License.
 4. Bump an addon's `version` (semver) whenever you update its file — that's how the app offers
    updates. Bump `repo.updatedAt` too.
 5. Push to any public `https` host and share the URL.
+
+Link straight to your repo, or to one addon inside it, with a `wmkeyboard://` URL:
+
+```
+wmkeyboard://repo?url=https://github.com/you/your-addons
+wmkeyboard://addon?repo=https://github.com/you/your-addons&id=midnight
+```
+
+Both open the app on the right page. Neither installs anything — that stays the user's tap.
 
 ### Checksums are optional
 
@@ -84,9 +109,9 @@ pip install jsonschema
 python3 tools/validate.py
 ```
 
-Runs the JSON Schema, then the checks a schema can't express: every `path`, `previews[]` and
-`repo.icon` resolves to a real file, ids are unique, dictionaries declare a `langId`, and any
-checksum you did provide is correct. [`.github/workflows/validate.yml`](.github/workflows/validate.yml)
+Runs the JSON Schema, then the checks a schema can't express: every `path`, `previews[]`,
+`licenseFile` and `repo.icon` resolves to a real file, ids are unique, dictionaries declare a
+`langId`, every addon states a licence, and any checksum you did provide is correct. [`.github/workflows/validate.yml`](.github/workflows/validate.yml)
 runs the same thing on every push and pull request.
 
 ## Format reference
@@ -98,7 +123,9 @@ Full spec, field tables and the JSON Schema live in [`docs/addons/`](docs/addons
 
 Notes:
 - Supported addon types: `theme`, `layout`, `dictionary`, `snippets`, `stickers`, `icon_pack`,
-  `font`, and `sound`.
+  `font`, `emoji_font`, and `sound`.
 - `dictionary` and `layout` attach to a language by `langId` (e.g. `fr`) — it must be a
-  language the app already supports.
+  language the app already supports. Fonts use `langIds` to say which scripts they cover.
+- State a licence on every addon: `license` for the identifier, `licenseFile` for the text.
+  The app shows both on the addon's page.
 - Everything here is **pure data**. Installing an addon never runs code.

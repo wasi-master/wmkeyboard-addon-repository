@@ -46,6 +46,10 @@ FIELD_ORDER = [
     "previews",
     "minAppVersion",
     "langId",
+    "langIds",
+    "license",
+    "licenseText",
+    "licenseFile",
 ]
 
 # Where each type's payloads conventionally live, used only to spot files that

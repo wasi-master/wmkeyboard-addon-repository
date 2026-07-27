@@ -4,9 +4,9 @@
 Two passes:
 
 1. The JSON Schema at ``docs/addons/wmkeyboard-repo.schema.json`` (draft 2020-12).
-2. The things a schema cannot express — that every ``path``, ``previews[]`` and
-   ``repo.icon`` resolves to a file that is actually here, that ids are unique,
-   and that any checksum present is correct.
+2. The things a schema cannot express — that every ``path``, ``previews[]``,
+   ``licenseFile`` and ``repo.icon`` resolves to a file that is actually here,
+   that ids are unique, and that any checksum present is correct.
 
 ``sha256`` and ``sizeBytes`` are **optional**. A manifest without them is valid
 and installs fine; they are only checked when a publisher chose to provide them.
@@ -36,6 +36,7 @@ EXPECTED_SUFFIX = {
     "stickers": ".wmstickers",
     "icon_pack": ".wmicons",
     "font": (".ttf", ".otf"),
+    "emoji_font": (".ttf", ".otf"),
     "sound": ".mp3",
 }
 
@@ -132,8 +133,18 @@ def main() -> int:
         for preview in entry.get("previews", []):
             check_asset(f"{ident}.previews", preview, errors, warnings)
 
+        licence_file = entry.get("licenseFile")
+        if licence_file:
+            check_asset(f"{ident}.licenseFile", licence_file, errors, warnings)
+
         if kind == "dictionary" and not entry.get("langId"):
             errors.append(f"{ident}: dictionaries must declare a langId")
+
+        # Not required, but an addon whose licence nobody can find is one
+        # nobody can safely reuse — and for a font or an icon set that is the
+        # first thing a publisher is asked.
+        if not any(entry.get(k) for k in ("license", "licenseText", "licenseFile")):
+            warnings.append(f"{ident}: no licence stated")
 
     icon = manifest.get("repo", {}).get("icon")
     if icon:

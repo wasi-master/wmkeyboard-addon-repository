@@ -16,36 +16,39 @@
       "id": "midnight",
       "type": "theme",
       "name": "Midnight",
-      "version": "1.0.0",
+      "version": "1.3.0",
       "author": "Wasi Master",
-      "description": "Deep navy dark theme with a subtle gradient board and blue accent.",
+      "description": "Deep navy dark theme with a soft blue gradient, squircle keys and a matching toolbar.",
       "tags": [
         "dark",
         "blue",
         "gradient"
       ],
       "path": "themes/midnight.wmtheme.json",
-      "sha256": "bb1684ebc36771171fa92d72d0e9ba1607789eedec687e213394267473d9ba16",
-      "sizeBytes": 489,
+      "sha256": "9bf40f422eb8863c85220fe5a7c321de02e9650c0509dc9e4e7836aa142b9043",
+      "sizeBytes": 600,
       "previews": [
         "previews/midnight.png"
-      ]
+      ],
+      "license": "CC0-1.0"
     },
     {
-      "id": "fr-bepo",
+      "id": "braille",
       "type": "layout",
-      "name": "Français BÉPO",
+      "name": "Braille (Unicode)",
       "version": "1.0.0",
-      "author": "Wasi Master",
-      "description": "Ergonomic BÉPO layout for French.",
+      "author": "WM Keyboard",
+      "description": "Types Unicode braille cells (⠁⠃⠉⠙) from QWERTY key positions, with the Latin letter on long-press and shown as the corner hint. Includes the capital and number signs. For writing braille as text — it is not a six-key chorded braille input.",
       "tags": [
-        "french",
-        "ergonomic"
+        "braille",
+        "accessibility",
+        "unicode"
       ],
-      "path": "layouts/fr-bepo.wmlayout.json",
-      "sha256": "1f4133b7d8c46c0394940add7434c48eb6b231e2b403100f7321b41c7b2d32d5",
-      "sizeBytes": 3991,
-      "langId": "fr"
+      "path": "layouts/braille.wmlayout.json",
+      "sha256": "2f857c5863a412328b07f932462a0947720b89ddd4afc4322f1e18c4d81a0535",
+      "sizeBytes": 7307,
+      "langId": "en",
+      "license": "CC0-1.0"
     },
     {
       "id": "en-developer",
@@ -61,7 +64,8 @@
       "path": "dictionaries/en-developer.txt",
       "sha256": "353edbd2a56a205c9a3da12eebc15a113b4e0c65965493ee84c7e267a5df067d",
       "sizeBytes": 17126,
-      "langId": "en"
+      "langId": "en",
+      "license": "CC0-1.0"
     },
     {
       "id": "en-slang",
@@ -81,7 +85,8 @@
       "path": "dictionaries/en-slang.txt",
       "sha256": "03b8cb2035c65d47b9e3af735529a271697eee4486b88f15bd0527572f71d8d3",
       "sizeBytes": 6572,
-      "langId": "en"
+      "langId": "en",
+      "license": "CC0-1.0"
     },
     {
       "id": "dev-shortcuts",
@@ -95,7 +100,8 @@
       ],
       "path": "snippets/dev-shortcuts.wmsnippets.json",
       "sha256": "76bcf51601467835ab180a7f477ff8c89bfba2a2d1ce958954889ab1d5b7a19e",
-      "sizeBytes": 381
+      "sizeBytes": 381,
+      "license": "CC0-1.0"
     },
     {
       "id": "lucide",
@@ -115,7 +121,9 @@
       "sizeBytes": 35487,
       "previews": [
         "previews/lucide.png"
-      ]
+      ],
+      "license": "ISC",
+      "licenseFile": "icons/LUCIDE-LICENSE.txt"
     },
     {
       "id": "bootstrap-icons",
@@ -131,7 +139,9 @@
       ],
       "path": "icons/bootstrap-icons.wmicons",
       "sha256": "2d0167f69868db0ddb1b5b3d93ff5d34d01f9bf2c1c2877f282fe604f62d95ea",
-      "sizeBytes": 44485
+      "sizeBytes": 44485,
+      "license": "MIT",
+      "licenseFile": "icons/BOOTSTRAP-LICENSE.txt"
     },
     {
       "id": "boxicons",
@@ -148,7 +158,9 @@
       ],
       "path": "icons/boxicons.wmicons",
       "sha256": "824416100045ebe93dd6a386f77ba53fdedfd522d515720f5896b508264a9414",
-      "sizeBytes": 37142
+      "sizeBytes": 37142,
+      "license": "MIT",
+      "licenseFile": "icons/BOXICONS-LICENSE.txt"
     },
     {
       "id": "fontawesome",
@@ -165,7 +177,9 @@
       ],
       "path": "icons/fontawesome.wmicons",
       "sha256": "f46b677ceefd553d0f9c4998f3f99c15e6cb63896ce948defdf716a0c0cbe7c9",
-      "sizeBytes": 48862
+      "sizeBytes": 48862,
+      "license": "CC-BY-4.0",
+      "licenseFile": "icons/FONTAWESOME-LICENSE.txt"
     },
     {
       "id": "inter",
@@ -183,7 +197,14 @@
       ],
       "path": "fonts/inter.ttf",
       "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
-      "sizeBytes": 876576
+      "sizeBytes": 876576,
+      "langIds": [
+        "en",
+        "ru",
+        "el"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "jetbrains-mono",
@@ -200,7 +221,14 @@
       ],
       "path": "fonts/jetbrains-mono.ttf",
       "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
-      "sizeBytes": 187208
+      "sizeBytes": 187208,
+      "langIds": [
+        "en",
+        "ru",
+        "el"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "caveat",
@@ -217,7 +245,12 @@
       ],
       "path": "fonts/caveat.ttf",
       "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
-      "sizeBytes": 403648
+      "sizeBytes": 403648,
+      "langIds": [
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "press-start-2p",
@@ -235,7 +268,49 @@
       ],
       "path": "fonts/press-start-2p.ttf",
       "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d",
-      "sizeBytes": 118204
+      "sizeBytes": 118204,
+      "langIds": [
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "twemoji",
+      "type": "emoji_font",
+      "name": "Twemoji",
+      "version": "0.7.0",
+      "author": "Twitter, Inc and other contributors",
+      "description": "Twitter's emoji set as a colour font — the flat, friendly look used across the web. Mozilla's COLRv0 build, so it draws in colour on Android 8 and newer.",
+      "tags": [
+        "emoji",
+        "colour",
+        "twemoji"
+      ],
+      "path": "fonts/twemoji.ttf",
+      "sha256": "6d90152ee0d29e82fe2a87793af5aa4b7ad13e6538360889e141e81ed299ee8e",
+      "sizeBytes": 1474284,
+      "license": "CC-BY-4.0",
+      "licenseFile": "fonts/TWEMOJI-LICENSE.txt"
+    },
+    {
+      "id": "openmoji-black",
+      "type": "emoji_font",
+      "name": "OpenMoji Black",
+      "version": "17.0.0",
+      "author": "OpenMoji",
+      "description": "The open-source OpenMoji set as monochrome outlines, so emoji take the keyboard's own text colour instead of bringing their own. Quiet next to a colour set, and it never clashes with a theme.",
+      "tags": [
+        "emoji",
+        "monochrome",
+        "outline",
+        "openmoji"
+      ],
+      "path": "fonts/openmoji-black.ttf",
+      "sha256": "bfa18b01a9038fe06f0fe72c72bb6ad38e9de4d6ec99951e170f8e5cb776159a",
+      "sizeBytes": 1475052,
+      "license": "CC-BY-SA-4.0",
+      "licenseFile": "fonts/OPENMOJI-LICENSE.txt"
     },
     {
       "id": "undraw-illustrations",
@@ -253,7 +328,9 @@
       ],
       "path": "stickers/undraw-illustrations.wmstickers",
       "sha256": "0052eaf7295f6a64f2ce7cc819d74fd5fdbb17ada19b5b2cc4d2af102cdd0347",
-      "sizeBytes": 3105729
+      "sizeBytes": 3105729,
+      "license": "unDraw License",
+      "licenseFile": "stickers/UNDRAW-LICENSE.txt"
     },
     {
       "id": "typewriter",
@@ -269,7 +346,9 @@
       ],
       "path": "sounds/typewriter.mp3",
       "sha256": "52c4934097378c4f72f3c84b75fe2931696ed03b2428be18a51eeb08b9795307",
-      "sizeBytes": 1506
+      "sizeBytes": 1506,
+      "license": "CC0-1.0",
+      "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
     {
       "id": "marimba",
@@ -285,7 +364,9 @@
       ],
       "path": "sounds/marimba.mp3",
       "sha256": "34b369d877bb320a6766c62f326b2f60ba427fea93ceb60e826c22361dbdaa24",
-      "sizeBytes": 2342
+      "sizeBytes": 2342,
+      "license": "CC0-1.0",
+      "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
     {
       "id": "droplet",
@@ -301,7 +382,9 @@
       ],
       "path": "sounds/droplet.mp3",
       "sha256": "59bcd9f72ea33a7680630129ed8a34cbe24595775d651f64135c86df031ebb5f",
-      "sizeBytes": 1506
+      "sizeBytes": 1506,
+      "license": "CC0-1.0",
+      "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
     {
       "id": "blip",
@@ -318,7 +401,9 @@
       ],
       "path": "sounds/blip.mp3",
       "sha256": "5afde141024b75e4bd3146e20a717cf8ccb8eced9e5e8a79df3c6507c269c7d4",
-      "sizeBytes": 1088
+      "sizeBytes": 1088,
+      "license": "CC0-1.0",
+      "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     }
   ]
 }

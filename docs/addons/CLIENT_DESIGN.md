@@ -1,7 +1,7 @@
 # Addon Repositories — Client Handling Design
 
 How the app should fetch, resolve, validate and install addons from a repository.
-Companion to [REPO_FORMAT.md](REPO_FORMAT.md). Status: **design** (not yet implemented).
+Companion to [REPO_FORMAT.md](REPO_FORMAT.md). Status: **implemented** — this describes what the app does.
 
 Guiding principle: **reuse everything.** Every addon payload is already a native import
 format, so install = *download the file, hand it to the existing importer*. The only new
@@ -39,6 +39,10 @@ codec settings the rest of the app uses (`Json { ignoreUnknownKeys = true; coerc
     val previews: List<String> = emptyList(),
     val minAppVersion: Int? = null,
     val langId: String? = null,
+    val langIds: List<String> = emptyList(),   // script coverage, mostly for fonts
+    val license: String? = null,               // SPDX id or short name
+    val licenseText: String? = null,           // inline
+    val licenseFile: String? = null,           // relative or absolute; fetched on demand
 )
 ```
 
@@ -92,8 +96,8 @@ entries whose local target the user has since deleted by hand.
 
 ## 5. Install dispatch
 
-Six of the eight types route straight to an importer that already exists. Two do not, and are
-built as part of this work — the rows are marked.
+Six of the nine types route straight to an importer that already existed. Three did not, and
+were built as part of this work — the rows are marked.
 
 | type | Install path |
 |---|---|
@@ -104,10 +108,39 @@ built as part of this work — the rows are marked.
 | `stickers` | `StickerPackFile.import(input, store)` — extracts `*.wmstickers` ZIP archive, validates `wmkeyboard-stickers` envelope in `pack.json`, normalizes images to app-private sticker storage, and registers pack in `StickerPackStore`. |
 | `icon_pack` | `IconPackFile.import(input, store)` — extracts `*.wmicons`, validates the `wmkeyboard-icons` envelope in `pack.json`, keeps every entry naming a slot `IconSlots` knows (parsing each SVG to prove it renders), and registers the pack in `IconPackStore`. Then `SettingsRepository.setIconPack(id)` to switch to it. |
 | `font` | **new subsystem.** The app had three fixed custom-font slots, each overwritten on import, so a *library* of installed fonts had to be built first: `FontStore` (`filesDir/fonts/installed/`, `fonts.json` index, 50-font cap) + `FontFile.import(stream, store, name)` validating the sfnt magic and proving the face actually loads. `KeyboardFonts` resolves an `installed:<id>` font id through the store, so installed faces appear in the font picker beside the Google Fonts. |
+| `emoji_font` | Same `FontFile.import` as `font`, flagged `emoji = true` in the store. Kept a separate type because it is chosen somewhere else entirely — `EmojiFontChoice.INSTALLED` under Emoji settings, not the key-label pickers — and because a colour emoji font on the key labels is not a choice anyone makes on purpose. There is exactly one emoji slot, so installing one **switches to it**, the way a theme or an icon pack does. |
 | `sound` | **new subsystem.** Key sounds were five synthesised waveforms behind a `KeySoundStyle` enum with no import path at all. Adds a `CUSTOM` style, `SoundStore` (`filesDir/keysounds/`, `sounds.json`, 30-sound cap) and `SoundFile.import(stream, store, name)` validating the MPEG frame header; `KeySoundPlayer` loads the chosen file into its `SoundPool` instead of a synthesised buffer. |
 
 Record the result in `installed_addons`. Uninstall reverses the local action
 (`deleteCustomTheme` / `deleteCustomLayout` / delete the dict file / remove snippets / delete sticker pack / etc.).
+
+Installing puts the payload on the device; for most types *choosing* it is a second step on
+another screen, so the detail page offers **Use**, which navigates to whichever settings screen
+owns that type (`themes`, `keymaps`, `customdictionaries`, `tool/SNIPPETS`, `sticker_packs`,
+`icons`, `fonts`, `emoji`, `keypress`).
+
+### Reconciliation
+
+Nothing forces a user through the Addons screen to get rid of something. A theme deleted from
+the Themes gallery, a font from the font picker, an icon pack from the Icons screen — each
+leaves `installed.json` still claiming the addon is there, which shows as *Uninstall* for
+something already gone and later offers an *Update* for it. So `AddonReconciler.reconcile()`
+runs when each addon screen appears: it asks every record's own subsystem whether its
+`localRef` still resolves, and drops the ones that don't. It runs **before** the status
+recompute, so a deleted theme reads as available again rather than installed.
+
+## 5b. Previewing without installing
+
+For the four types whose *content* is the choice — `snippets`, `dictionary`, `sound`,
+`stickers` — the detail page offers **Preview**: it downloads the payload to `cacheDir` (a
+12 MiB ceiling, under every install cap) and reads it into a summary — the snippets in the
+pack, a sample of the word list with a count, a play button, the first two dozen sticker
+images. Nothing is installed and no setting changes; the path touches neither the status map
+nor the single-install lock, so a preview can't interfere with a download in flight.
+
+`theme`, `layout`, `font` and `emoji_font` deliberately offer no preview: they are judged by
+looking at the keyboard wearing them, which a panel in the settings app cannot honestly
+reproduce. Those rely on `previews[]` screenshots instead.
 
 ## 6. Update detection
 
@@ -128,6 +161,10 @@ All addons are **pure data — no code runs**. Residual surface + mitigations:
   field the user is typing in (no exfiltration, no off-device effect). Already part of the trusted
   layout format; note in review, no extra gate needed for v1.
 - **Privacy:** manifests are fetched only from user-added URLs. No telemetry, no phone-home.
+  Previews and licence texts are fetched only when the user asks for them.
+- **Licences:** `license` / `licenseText` / `licenseFile` are metadata shown on the addon's
+  page so the user can see what they are installing. Nothing is enforced, and a licence file is
+  fetched lazily, capped at 256 KB.
 - **Deep links:** a `wmkeyboard://` link is untrusted input from a web page, so it may never
   install on arrival. It navigates to the addon's detail screen showing the repo URL, name and
   author, and the user taps Install. Adding a repository from a link needs the same explicit

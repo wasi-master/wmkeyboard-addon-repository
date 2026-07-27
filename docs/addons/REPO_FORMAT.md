@@ -1,8 +1,8 @@
 # WM Keyboard Addon Repository Format
 
-Version 1 · status: **spec** (client not yet implemented)
+Version 1 · status: **implemented** — shipping in WM Keyboard
 
-WM Keyboard can install extra **themes, layouts, dictionaries, and snippet packs** from the web. Anyone can publish these by putting a small **manifest** and the addon files in a public Git repository (GitHub, GitLab, a raw host — anything that serves files over `https`). Users add a repository by pasting its URL into the app.
+WM Keyboard can install extra **themes, layouts, dictionaries, snippet packs, sticker packs, icon packs, fonts, emoji fonts and key sounds** from the web. Anyone can publish these by putting a small **manifest** and the addon files in a public Git repository (GitHub, GitLab, a raw host — anything that serves files over `https`). Users add a repository by pasting its URL into the app.
 
 A repository is nothing more than an **index over files the app already knows how to import** — the addon files are the same formats the app produces when you export a theme/layout/etc. from the app itself. There is no packaging, signing or build step.
 
@@ -23,7 +23,7 @@ dictionaries/ <langId>.txt
 snippets/     *.wmsnippets.json
 stickers/     *.wmstickers
 icons/        *.wmicons
-fonts/        *.ttf, *.otf
+fonts/        *.ttf, *.otf     ← text faces and emoji faces alike
 sounds/       *.mp3
 previews/     *.png            ← optional screenshots
 ```
@@ -81,14 +81,17 @@ Unknown fields are ignored, so future versions can add fields without breaking o
   "sizeBytes": 24680,
   "previews": ["previews/midnight.png"],
   "minAppVersion": 40,
-  "langId": "fr"
+  "langId": "fr",
+  "langIds": ["en", "ru", "el"],
+  "license": "OFL-1.1",
+  "licenseFile": "fonts/OFL-LICENSE.txt"
 }
 ```
 
 | Field | Req | Notes |
 |---|---|---|
 | `id` | ✔ | Unique within the repo. |
-| `type` | ✔ | `theme` \| `layout` \| `dictionary` \| `snippets` \| `stickers` \| `icon_pack` \| `font` \| `sound`. |
+| `type` | ✔ | `theme` \| `layout` \| `dictionary` \| `snippets` \| `stickers` \| `icon_pack` \| `font` \| `emoji_font` \| `sound`. |
 | `name` | ✔ | Display name. |
 | `version` | ✔ | **Semver** string. Bump it to offer an update. |
 | `path` | ✔ | Payload location — relative to the manifest, or an absolute `https` URL (§4). |
@@ -98,6 +101,52 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | `previews` | | Screenshot images (relative or absolute). |
 | `minAppVersion` | | App `versionCode` floor; older apps hide/disable the addon. |
 | `langId` | *dict* | **Required for `dictionary`**, optional hint for `layout`. Must be a registered language id (§5). |
+| `langIds` | | Languages this addon covers, when one id isn't enough. See [Language coverage](#language-coverage). |
+| `license` | | Licence identifier — SPDX where one fits (`MIT`, `OFL-1.1`, `CC0-1.0`, `CC-BY-4.0`), otherwise any short name. Shown on the addon's page. |
+| `licenseText` | | Full licence text, inline. |
+| `licenseFile` | | Licence text as a file, relative or absolute; fetched when the user opens it. |
+
+### Licensing
+
+None of the three licence fields is required, but state something. An addon
+with no licence is one nobody can safely reuse, and for a font or an icon set
+it is the first thing anyone asks. `tools/validate.py` warns when all three are
+absent.
+
+Use whichever fits:
+
+- **`license` alone** — enough for a well-known licence. `"license": "MIT"`.
+- **`license` + `licenseFile`** — the usual choice. The identifier shows on the
+  addon's page; tapping it fetches and displays the full text. Point it at the
+  licence file already sitting beside your payload:
+  `"licenseFile": "fonts/OFL-LICENSE.txt"`.
+- **`licenseText`** — the whole text inline, for a short custom licence with no
+  identifier worth quoting. It travels in the manifest, so keep it short: every
+  client downloads it whether or not anyone reads it.
+
+The app shows the identifier in the addon's Details, and opens the text in a
+dialog when there is one. Nothing is enforced — this is metadata for the person
+deciding whether to install, not a licence check.
+
+### Language coverage
+
+`langIds` says which languages an addon is *for*. It matters most for fonts:
+plenty of faces carry Latin and nothing else, and offering one in the Bengali
+font picker offers a keyboard of empty boxes.
+
+```json
+{ "id": "caveat", "type": "font", "langIds": ["en"] }
+{ "id": "inter",  "type": "font", "langIds": ["en", "ru", "el"] }
+```
+
+The app groups the pickers by script, so a font is offered wherever any of its
+languages is written: `en` reaches the English picker (which also drives Cyrillic
+and Greek), `bn` the Bengali one. **Omitting `langIds` makes no claim**, and the
+font is offered everywhere — the right default for a face with broad coverage,
+and what every font published before this field existed gets.
+
+Dictionaries use the singular `langId` instead, and must: a word list has exactly
+one language. `langIds` is ignored for them.
 
 ## 4. Path & URL resolution (hybrid model)
 
@@ -127,7 +176,8 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `snippets` | `*.wmsnippets.json` | `{ "format":"wmkeyboard-snippets", "version":1, "snippets":[ { "id":1, "label":"…", "text":"…", "trigger":"…"? }, … ] }`. Ids are reassigned on import. |
 | `stickers` | `*.wmstickers` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-stickers"`, `"version":1`, `pack` metadata, `stickers[]`) and the image files under `stickers/`. See [Sticker packs](#sticker-packs). |
 | `icon_pack` | `*.wmicons` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-icons"`, `"version":1`, `pack` metadata) and one SVG per replaced icon under `icons/`, named for its slot. See [Icon packs](#icon-packs). |
-| `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. |
+| `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. Declare `langIds` when the face only covers some scripts. |
+| `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
 | `sound` | `*.mp3` | A single short key-press sound. Keep it under ~300 ms and a few tens of KB: it is loaded into a `SoundPool` and replayed on every keystroke. |
 
 To make a theme/layout/snippet/sticker/icon payload, just **export it from the app** and drop the file into your repo — the exported files already match these formats.
@@ -234,13 +284,32 @@ Do not ship SVGs with one — most exporters can be told to omit it.
 
 Dictionaries and layouts attach to a language by `langId` (e.g. `en`, `fr`, `bn`). The app can only accept a `langId` that is **already built into it**. A dictionary for a brand-new language the app has never heard of cannot be added as data alone today — that needs an app update that registers the language. So: pick a `langId` the current app supports.
 
-## 6. Versioning & updates
+## 6. Install links
+
+A repository README, a blog post or a share sheet can link straight into the
+app:
+
+| Link | Opens |
+|---|---|
+| `wmkeyboard://addons` | the Addons screen |
+| `wmkeyboard://repo?url=<repo or manifest URL>` | the Addons screen with the add-repository dialog pre-filled |
+| `wmkeyboard://addon?repo=<repo or manifest URL>&id=<addonId>` | that addon's page |
+
+The URL is percent-encoded and resolved by the same rules as pasted input
+(§4) — **`https` only**.
+
+A link can never install anything or add a repository on its own. It navigates
+to a page showing the repository's host, the addon and its author, and the user
+taps Install; that tap is also what adds the repository to their list. Treat the
+links as a shortcut to the page, not as an install button.
+
+## 7. Versioning & updates
 
 - Bump an addon's `version` (semver) to publish an update; the app compares it against the installed version and offers **Update**.
 - Bump `repo.updatedAt` when you change the manifest.
 - Never recycle an `id` for a different addon — ids are how installs are tracked.
 
-## 7. Publishing checklist
+## 8. Publishing checklist
 
 1. Put `wmkeyboard-repo.json` at the repo root; list every addon.
 2. Add the payload files; set each `path`.
@@ -249,8 +318,9 @@ Dictionaries and layouts attach to a language by `langId` (e.g. `en`, `fr`, `bn`
    compute them by hand; run `python3 tools/build_index.py` (in the
    [sample repo](https://github.com/wasi-master/wmkeyboard-addon-repository/blob/main/tools/build_index.py))
    after every payload change and it keeps them current.
-4. Validate: `python3 tools/validate.py` runs the JSON Schema plus the file-existence and
+4. State a licence on every addon — `license`, and `licenseFile` when you have the text.
+5. Validate: `python3 tools/validate.py` runs the JSON Schema plus the file-existence and
    checksum checks a schema can't express.
-5. Push to a public `https` host and share the repo URL.
+6. Push to a public `https` host and share the repo URL.
 
 See also: [CLIENT_DESIGN.md](CLIENT_DESIGN.md) for how the app fetches, resolves and installs these.
