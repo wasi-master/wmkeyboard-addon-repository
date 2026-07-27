@@ -4,7 +4,12 @@
   "title": "WM Keyboard addon repository manifest",
   "description": "Schema for wmkeyboard-repo.json, the root index of a WM Keyboard addon repository.",
   "type": "object",
-  "required": ["format", "version", "repo", "addons"],
+  "required": [
+    "format",
+    "version",
+    "repo",
+    "addons"
+  ],
   "additionalProperties": true,
   "properties": {
     "format": {
@@ -16,16 +21,23 @@
       "minimum": 1,
       "description": "Manifest schema version. Currently 1."
     },
-    "repo": { "$ref": "#/$defs/repoInfo" },
+    "repo": {
+      "$ref": "#/$defs/repoInfo"
+    },
     "addons": {
       "type": "array",
-      "items": { "$ref": "#/$defs/addon" }
+      "items": {
+        "$ref": "#/$defs/addon"
+      }
     }
   },
   "$defs": {
     "repoInfo": {
       "type": "object",
-      "required": ["id", "name"],
+      "required": [
+        "id",
+        "name"
+      ],
       "additionalProperties": true,
       "properties": {
         "id": {
@@ -33,10 +45,20 @@
           "description": "Stable repository id (reverse-DNS recommended, e.g. com.example.coolpack). Used to namespace installed addons.",
           "pattern": "^[A-Za-z0-9._-]+$"
         },
-        "name": { "type": "string", "description": "Human-readable repository name." },
-        "description": { "type": "string" },
-        "author": { "type": "string" },
-        "homepage": { "type": "string", "format": "uri" },
+        "name": {
+          "type": "string",
+          "description": "Human-readable repository name."
+        },
+        "description": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri"
+        },
         "icon": {
           "type": "string",
           "description": "Repository icon: a path relative to this manifest, or an absolute https URL."
@@ -49,7 +71,13 @@
     },
     "addon": {
       "type": "object",
-      "required": ["id", "type", "name", "version", "path"],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "version",
+        "path"
+      ],
       "additionalProperties": true,
       "properties": {
         "id": {
@@ -67,19 +95,31 @@
             "icon_pack",
             "font",
             "emoji_font",
-            "sound"
+            "sound",
+            "plugin"
           ],
           "description": "Addon kind. Determines which native import path installs it."
         },
-        "name": { "type": "string" },
+        "name": {
+          "type": "string"
+        },
         "version": {
           "type": "string",
           "description": "Semver version string. Drives update detection.",
           "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+].+)?$"
         },
-        "author": { "type": "string" },
-        "description": { "type": "string" },
-        "tags": { "type": "array", "items": { "type": "string" } },
+        "author": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "path": {
           "type": "string",
           "description": "Payload location: a path relative to this manifest's directory, or an absolute https URL (hybrid model)."
@@ -97,7 +137,9 @@
         "previews": {
           "type": "array",
           "description": "Optional screenshot/preview images (relative paths or absolute https URLs).",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "minAppVersion": {
           "type": "integer",
@@ -111,7 +153,9 @@
         "langIds": {
           "type": "array",
           "description": "Languages this addon covers, when one id is not enough. Mainly for fonts: a face that declares its languages is only offered in the pickers for those scripts, so a Latin-only display font is not offered for Bengali. Omit to make no claim, which offers it everywhere.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "license": {
           "type": "string",
@@ -128,8 +172,18 @@
       },
       "allOf": [
         {
-          "if": { "properties": { "type": { "const": "dictionary" } } },
-          "then": { "required": ["langId"] }
+          "if": {
+            "properties": {
+              "type": {
+                "const": "dictionary"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "langId"
+            ]
+          }
         }
       ]
     }

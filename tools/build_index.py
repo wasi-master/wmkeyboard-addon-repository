@@ -64,6 +64,7 @@ PAYLOAD_DIRS = {
     "icons": "*.wmicons",
     "fonts": "*.[to]tf",
     "sounds": "*.mp3",
+    "plugins": "*.wmplugin",
 }
 
 

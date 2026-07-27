@@ -18,7 +18,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,7 +40,68 @@ EXPECTED_SUFFIX = {
     "font": (".ttf", ".otf"),
     "emoji_font": (".ttf", ".otf"),
     "sound": ".mp3",
+    "plugin": ".wmplugin",
 }
+
+# Types whose payload is executable code rather than data. The rules are
+# stricter for these: the app refuses to install one without a checksum,
+# because "unverified" is not a state code gets to be in.
+EXECUTABLE_TYPES = {"plugin"}
+
+# Mirrors PluginPermission.kt. A permission the app does not recognise makes
+# it refuse the install outright, so publishing one ships a dead plugin.
+KNOWN_PLUGIN_PERMISSIONS = {"storage"}
+
+
+def check_plugin(ident, payload, errors, warnings):
+    """Reads a .wmplugin's manifest and checks what the app will check.
+
+    Catching this here means a broken plugin fails in CI rather than silently
+    refusing to install on someone's phone with a message they can't act on.
+    """
+    try:
+        with zipfile.ZipFile(payload) as archive:
+            names = set(archive.namelist())
+            if "plugin.json" not in names:
+                errors.append(f"{ident}: no plugin.json in the archive")
+                return
+            manifest = json.loads(archive.read("plugin.json"))
+            entry_name = manifest.get("entry", "main.lua")
+            if entry_name not in names:
+                errors.append(f"{ident}: entry {entry_name} is missing from the archive")
+            else:
+                script = archive.read(entry_name)
+                if script[:1] == b"\x1b":
+                    errors.append(
+                        f"{ident}: {entry_name} is compiled Lua — plugins must ship "
+                        f"source so their code can be read before it runs"
+                    )
+    except (zipfile.BadZipFile, KeyError, ValueError) as error:
+        errors.append(f"{ident}: unreadable plugin archive — {error}")
+        return
+
+    if manifest.get("format") != "wmkeyboard-plugin":
+        errors.append(f"{ident}: plugin.json format must be 'wmkeyboard-plugin'")
+    for field in ("id", "name", "pluginVersion"):
+        if not manifest.get(field):
+            errors.append(f"{ident}: plugin.json is missing {field}")
+    plugin_id = manifest.get("id", "")
+    if plugin_id and not re.fullmatch(r"[a-z0-9][a-z0-9._-]{2,63}", plugin_id):
+        errors.append(
+            f"{ident}: plugin id {plugin_id!r} must be lowercase, 3-64 characters, "
+            f"and only letters, numbers, dots, dashes and underscores"
+        )
+    if manifest.get("apiVersion", 1) > 1:
+        warnings.append(
+            f"{ident}: apiVersion {manifest['apiVersion']} is newer than this "
+            f"validator knows — current app versions will refuse it"
+        )
+    for permission in manifest.get("permissions", []):
+        if permission not in KNOWN_PLUGIN_PERMISSIONS:
+            errors.append(
+                f"{ident}: unknown permission {permission!r} — the app refuses to "
+                f"install a plugin whose capabilities it cannot explain"
+            )
 
 
 def is_remote(path: str) -> bool:
@@ -271,6 +334,17 @@ def main() -> int:
                 check_sticker_pack(ident, payload, errors, warnings)
             elif kind == "emoji_font":
                 check_emoji_font(ident, payload, errors, warnings)
+            elif kind == "plugin":
+                check_plugin(ident, payload, errors, warnings)
+
+            # For code, the checksum is the install gate rather than a badge:
+            # the app refuses a plugin that has none, so publishing one without
+            # is publishing something nobody can install.
+            if kind in EXECUTABLE_TYPES and not entry.get("sha256"):
+                errors.append(
+                    f"{ident}: a {kind} must declare a sha256 — the app refuses to "
+                    f"install code it cannot verify (run tools/build_index.py)"
+                )
 
         for preview in entry.get("previews", []):
             check_asset(f"{ident}.previews", preview, errors, warnings)

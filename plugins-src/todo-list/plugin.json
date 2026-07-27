@@ -1,0 +1,12 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.todo",
+  "name": "Todo List",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "A checklist that remembers itself. Shows how plugin storage works.",
+  "apiVersion": 1,
+  "entry": "main.lua",
+  "permissions": ["storage"]
+}

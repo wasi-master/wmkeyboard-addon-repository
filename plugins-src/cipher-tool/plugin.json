@@ -1,0 +1,12 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.cipher",
+  "name": "Cipher Tool",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Caesar and Vigenere ciphers, encode and decode.",
+  "apiVersion": 1,
+  "entry": "main.lua",
+  "permissions": []
+}
