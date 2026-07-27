@@ -117,8 +117,8 @@
         "complete"
       ],
       "path": "icons/lucide.wmicons",
-      "sha256": "45dc0418d95eb79b4831832c3c629d241c56e25a93a67becab983c3090aed646",
-      "sizeBytes": 35487,
+      "sha256": "d556f51079eadb6879cd35f023cda9a5f154606369ee2ad61e9c45e177a41628",
+      "sizeBytes": 35469,
       "previews": [
         "previews/lucide.png"
       ],
@@ -176,8 +176,8 @@
         "complete"
       ],
       "path": "icons/fontawesome.wmicons",
-      "sha256": "f46b677ceefd553d0f9c4998f3f99c15e6cb63896ce948defdf716a0c0cbe7c9",
-      "sizeBytes": 48862,
+      "sha256": "c500e3fc973bdd264b85aeb34a53a14db1047f58028841d657ded2973bd5b7b7",
+      "sizeBytes": 42986,
       "license": "CC-BY-4.0",
       "licenseFile": "icons/FONTAWESOME-LICENSE.txt"
     },
@@ -288,29 +288,48 @@
         "twemoji"
       ],
       "path": "fonts/twemoji.ttf",
-      "sha256": "6d90152ee0d29e82fe2a87793af5aa4b7ad13e6538360889e141e81ed299ee8e",
-      "sizeBytes": 1474284,
+      "sha256": "cbab5a8e18f4c0ea7df617776998c92245a29b31fe75863a4fe67cf7a220d619",
+      "sizeBytes": 1501780,
       "license": "CC-BY-4.0",
       "licenseFile": "fonts/TWEMOJI-LICENSE.txt"
     },
     {
-      "id": "openmoji-black",
+      "id": "openmoji-color",
       "type": "emoji_font",
-      "name": "OpenMoji Black",
+      "name": "OpenMoji Color",
       "version": "17.0.0",
       "author": "OpenMoji",
-      "description": "The open-source OpenMoji set as monochrome outlines, so emoji take the keyboard's own text colour instead of bringing their own. Quiet next to a colour set, and it never clashes with a theme.",
+      "description": "The full-colour open-source OpenMoji set with hand-crafted illustrations, distinct outlines and vibrant palette.",
       "tags": [
         "emoji",
-        "monochrome",
-        "outline",
+        "colour",
+        "vector",
         "openmoji"
       ],
-      "path": "fonts/openmoji-black.ttf",
-      "sha256": "bfa18b01a9038fe06f0fe72c72bb6ad38e9de4d6ec99951e170f8e5cb776159a",
-      "sizeBytes": 1475052,
+      "path": "fonts/openmoji-color.ttf",
+      "sha256": "a3cf6c344bcc87bcd91c4228512e1d417121239c071768c1e4781033430706ad",
+      "sizeBytes": 11155208,
       "license": "CC-BY-SA-4.0",
       "licenseFile": "fonts/OPENMOJI-LICENSE.txt"
+    },
+    {
+      "id": "emojitwo",
+      "type": "emoji_font",
+      "name": "Emojitwo",
+      "version": "2.3.0",
+      "author": "Emojitwo contributors and Ranks.com",
+      "description": "The open-source Emojitwo emoji set (fork of EmojiOne 2.2) as a COLRv0 colour font — flat, friendly vector emojis.",
+      "tags": [
+        "emoji",
+        "colour",
+        "emojitwo",
+        "emojione"
+      ],
+      "path": "fonts/emojitwo.ttf",
+      "sha256": "b5ba9f3a70f5d674f85d12f3f32e846f396965753aaed5b3d1e2ffee3fe94ef4",
+      "sizeBytes": 1349544,
+      "license": "CC-BY-4.0",
+      "licenseFile": "fonts/EMOJITWO-LICENSE.txt"
     },
     {
       "id": "undraw-illustrations",

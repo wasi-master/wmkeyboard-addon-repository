@@ -25,7 +25,8 @@ Add it in WM Keyboard: **Settings → Addons → Add repository**, then paste th
 | Caveat | font | [`fonts/caveat.ttf`](fonts/caveat.ttf) |
 | Press Start 2P | font | [`fonts/press-start-2p.ttf`](fonts/press-start-2p.ttf) |
 | Twemoji | emoji_font | [`fonts/twemoji.ttf`](fonts/twemoji.ttf) |
-| OpenMoji Black | emoji_font | [`fonts/openmoji-black.ttf`](fonts/openmoji-black.ttf) |
+| OpenMoji Color | emoji_font | [`fonts/openmoji-color.ttf`](fonts/openmoji-color.ttf) |
+| Emojitwo | emoji_font | [`fonts/emojitwo.ttf`](fonts/emojitwo.ttf) |
 | Typewriter | sound | [`sounds/typewriter.mp3`](sounds/typewriter.mp3) |
 | Marimba | sound | [`sounds/marimba.mp3`](sounds/marimba.mp3) |
 | Droplet | sound | [`sounds/droplet.mp3`](sounds/droplet.mp3) |
@@ -52,11 +53,12 @@ Latin; Caveat and Press Start 2P declare `["en"]`, so the app doesn't offer them
 they cannot draw.
 
 **Emoji fonts.** **Twemoji** (Twitter's colour set, via Mozilla's COLRv0 build, CC BY 4.0 —
-[`fonts/TWEMOJI-LICENSE.txt`](fonts/TWEMOJI-LICENSE.txt)) and **OpenMoji Black** (monochrome
-outlines that take the keyboard's own text colour, CC BY-SA 4.0 —
-[`fonts/OPENMOJI-LICENSE.txt`](fonts/OPENMOJI-LICENSE.txt)). Same file format as a text font,
-but `emoji_font` is its own type: it is chosen under Emoji settings rather than in the
-key-label pickers, and installing one switches to it.
+[`fonts/TWEMOJI-LICENSE.txt`](fonts/TWEMOJI-LICENSE.txt)), **OpenMoji Color** (full-colour vector
+build with COLRv0 and SVG tables, CC BY-SA 4.0 — [`fonts/OPENMOJI-LICENSE.txt`](fonts/OPENMOJI-LICENSE.txt)), and
+**Emojitwo** (the open-source Emojitwo/EmojiOne 2.2 colour set via Emoji-COLRv0, CC BY 4.0 —
+[`fonts/EMOJITWO-LICENSE.txt`](fonts/EMOJITWO-LICENSE.txt)).
+Same file format as a text font, but `emoji_font` is its own type: it is chosen under Emoji settings
+rather than in the key-label pickers, and installing one switches to it.
 
 **Braille.** A layout that types Unicode braille cells (⠁⠃⠉⠙) from QWERTY key positions, with
 the Latin letter on long-press and shown as the corner hint. It writes braille *as text* — it

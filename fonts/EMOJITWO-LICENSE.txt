@@ -1,0 +1,23 @@
+Emojitwo — emojitwo.ttf
+=======================
+
+emojitwo.ttf is a COLRv0 colour font assembled by the Emoji-COLRv0 project from
+the Emojitwo emoji artwork set (version 2.3.0).
+
+  Font build:  https://github.com/Emoji-COLRv0/Emoji-COLRv0
+  Artwork:     https://github.com/EmojiTwo/emojitwo  (originally EmojiOne 2.2)
+
+Two licences apply, one to each half:
+
+  Emoji graphics   Copyright Emojitwo contributors (originally Ranks.com / EmojiOne).
+                   Licensed under CC BY 4.0:
+                   https://creativecommons.org/licenses/by/4.0/
+
+  Build tooling    Copyright Emoji-COLRv0 contributors.
+                   Licensed under the MIT License:
+                   https://opensource.org/licenses/MIT
+
+CC BY 4.0 asks that you credit the artwork. Attribution for anyone
+redistributing this file:
+
+  Emoji artwork from Emojitwo, licensed under CC BY 4.0.

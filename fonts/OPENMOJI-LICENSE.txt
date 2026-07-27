@@ -1,9 +1,8 @@
-OpenMoji Black — openmoji-black.ttf
-===================================
+OpenMoji Color — openmoji-color.ttf
+=================================
 
-openmoji-black.ttf is the "OpenMoji-black-glyf" build (release 17.0.0): the
-monochrome outline set, as plain TrueType glyphs rather than a colour font, so
-emoji draw in the keyboard's own text colour.
+openmoji-color.ttf is the "OpenMoji-color-colr0_svg" build (release 17.0.0):
+the full-colour vector set containing COLRv0 and SVG tables for wide platform support.
 
   Project:  https://openmoji.org
   Source:   https://github.com/hfg-gmuend/openmoji
