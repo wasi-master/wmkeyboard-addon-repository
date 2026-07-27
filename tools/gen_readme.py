@@ -6,14 +6,13 @@ ROOT = Path(__file__).resolve().parent.parent
 manifest = json.loads((ROOT / "wmkeyboard-repo.json").read_text(encoding="utf-8"))
 addons = manifest.get("addons", [])
 
-repo_url_enc = "https%3A%2F%2Fgithub.com%2Fwasi-master%2Fwmkeyboard-addon-repository"
-
 rows = []
 for a in addons:
     aid = a["id"]
     name = a["name"]
     atype = a["type"]
     desc = a["description"]
+    path = a["path"]
     previews = a.get("previews", [])
 
     if previews:
@@ -21,9 +20,9 @@ for a in addons:
     else:
         prev_md = "—"
 
-    badge = f'[<img src="https://img.shields.io/badge/Install-WM%20Keyboard-4CAF50?style=flat-square&logo=android" alt="Install {name}" />](wmkeyboard://addon?repo={repo_url_enc}&id={aid})'
+    file_link = f"[`{path}`]({path})"
 
-    rows.append(f"| **{name}** | `{atype}` | {desc} | {prev_md} | {badge} |")
+    rows.append(f"| **{name}** | `{atype}` | {desc} | {prev_md} | {file_link} |")
 
 table_md = "\n".join(rows)
 
@@ -31,27 +30,16 @@ readme_content = f"""<div align="center">
   <img src="icon.png" width="128" height="128" alt="WM Keyboard Icon" />
   <h1>WM Keyboard Official Addons</h1>
   <p>Official addon repository for WM Keyboard: themes, layouts, dictionaries, snippet packs, stickers, icon packs, fonts, emoji fonts, and key sounds.</p>
-
-  <p>
-    <a href="wmkeyboard://repo?url={repo_url_enc}">
-      <img src="https://img.shields.io/badge/Add%20Repository-WM%20Keyboard-4CAF50?style=for-the-badge&logo=android" alt="Add Repository Badge" />
-    </a>
-    <a href="#addons">
-      <img src="https://img.shields.io/badge/Addons-21%20Available-2196F3?style=for-the-badge" alt="Addons Count" />
-    </a>
-    <a href="wmkeyboard-repo.json">
-      <img src="https://img.shields.io/badge/Format-wmkeyboard--repo%20v1-orange?style=for-the-badge" alt="Format Version" />
-    </a>
-  </p>
 </div>
 
 ---
 
-## Addons
+## Addons Catalog
 
-Below is the complete catalog of official addons available in this repository. Tap **Install** to install any addon directly into **WM Keyboard**.
+To add this repository in **WM Keyboard**, open **Settings → Addons → Add repository** and paste the repository URL:
+`https://github.com/wasi-master/wmkeyboard-addon-repository`
 
-| Addon | Type | Description | Preview | Install |
+| Addon | Type | Description | Preview | Payload File |
 |---|---|---|---|---|
 {table_md}
 
@@ -81,13 +69,6 @@ Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the r
 4. Bump an addon's `version` (semver) whenever you update its file — that's how the app offers updates. Bump `repo.updatedAt` too.
 5. Push to any public `https` host and share the URL.
 
-Link straight to your repo, or to one addon inside it, with a `wmkeyboard://` URL:
-
-```
-wmkeyboard://repo?url=https://github.com/you/your-addons
-wmkeyboard://addon?repo=https://github.com/you/your-addons&id=midnight
-```
-
 ### Checksums & Validation
 
 `sha256` and `sizeBytes` are optional. Run tooling to keep them current and validate:
@@ -102,4 +83,4 @@ Full spec, field tables and the JSON Schema live in [`docs/addons/`](docs/addons
 """
 
 (ROOT / "README.md").write_text(readme_content, encoding="utf-8")
-print("Successfully generated rich README.md")
+print("Successfully generated clean GFM-compliant README.md")
