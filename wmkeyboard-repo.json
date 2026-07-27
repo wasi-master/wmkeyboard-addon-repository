@@ -428,6 +428,9 @@
       "path": "sounds/typewriter.mp3",
       "sha256": "52c4934097378c4f72f3c84b75fe2931696ed03b2428be18a51eeb08b9795307",
       "sizeBytes": 1506,
+      "previews": [
+        "previews/typewriter.png"
+      ],
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
@@ -446,6 +449,9 @@
       "path": "sounds/marimba.mp3",
       "sha256": "34b369d877bb320a6766c62f326b2f60ba427fea93ceb60e826c22361dbdaa24",
       "sizeBytes": 2342,
+      "previews": [
+        "previews/marimba.png"
+      ],
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
@@ -464,6 +470,9 @@
       "path": "sounds/droplet.mp3",
       "sha256": "59bcd9f72ea33a7680630129ed8a34cbe24595775d651f64135c86df031ebb5f",
       "sizeBytes": 1506,
+      "previews": [
+        "previews/droplet.png"
+      ],
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },
@@ -483,6 +492,9 @@
       "path": "sounds/blip.mp3",
       "sha256": "5afde141024b75e4bd3146e20a717cf8ccb8eced9e5e8a79df3c6507c269c7d4",
       "sizeBytes": 1088,
+      "previews": [
+        "previews/blip.png"
+      ],
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
     },

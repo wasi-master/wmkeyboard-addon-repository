@@ -114,14 +114,18 @@ def main():
     # Generate dictionary preview images
     try:
         from generate_dictionary_previews import generate_developer_preview, generate_slang_preview
+        from generate_sound_and_sticker_previews import generate_sticker_preview, generate_sound_preview
         generate_developer_preview()
         generate_slang_preview()
+        generate_sticker_preview()
     except ImportError:
         import sys
         sys.path.append(os.path.dirname(__file__))
         from generate_dictionary_previews import generate_developer_preview, generate_slang_preview
+        from generate_sound_and_sticker_previews import generate_sticker_preview
         generate_developer_preview()
         generate_slang_preview()
+        generate_sticker_preview()
 
 if __name__ == "__main__":
     main()
