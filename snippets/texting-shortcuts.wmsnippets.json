@@ -1,0 +1,246 @@
+{
+  "format": "wmkeyboard-snippets",
+  "version": 1,
+  "snippets": [
+    {
+      "id": 1,
+      "label": "On my way!",
+      "text": "On my way!",
+      "trigger": "omw"
+    },
+    {
+      "id": 2,
+      "label": "On the way!",
+      "text": "On the way!",
+      "trigger": "otw"
+    },
+    {
+      "id": 3,
+      "label": "Be right back!",
+      "text": "Be right back!",
+      "trigger": "brb"
+    },
+    {
+      "id": 4,
+      "label": "No problem!",
+      "text": "No problem!",
+      "trigger": "np"
+    },
+    {
+      "id": 5,
+      "label": "Let me know!",
+      "text": "Let me know!",
+      "trigger": "lmk"
+    },
+    {
+      "id": 6,
+      "label": "By the way,",
+      "text": "By the way,",
+      "trigger": "btw"
+    },
+    {
+      "id": 7,
+      "label": "To be honest,",
+      "text": "To be honest,",
+      "trigger": "tbh"
+    },
+    {
+      "id": 8,
+      "label": "Talk to you later!",
+      "text": "Talk to you later!",
+      "trigger": "ttyl"
+    },
+    {
+      "id": 9,
+      "label": "In my opinion,",
+      "text": "In my opinion,",
+      "trigger": "imo"
+    },
+    {
+      "id": 10,
+      "label": "In my humble opinion,",
+      "text": "In my humble opinion,",
+      "trigger": "imho"
+    },
+    {
+      "id": 11,
+      "label": "For what it's worth,",
+      "text": "For what it's worth,",
+      "trigger": "fwiw"
+    },
+    {
+      "id": 12,
+      "label": "If I recall correctly,",
+      "text": "If I recall correctly,",
+      "trigger": "iirc"
+    },
+    {
+      "id": 13,
+      "label": "As far as I know,",
+      "text": "As far as I know,",
+      "trigger": "afaik"
+    },
+    {
+      "id": 14,
+      "label": "I don't know",
+      "text": "I don't know",
+      "trigger": "idk"
+    },
+    {
+      "id": 15,
+      "label": "I don't care",
+      "text": "I don't care",
+      "trigger": "idc"
+    },
+    {
+      "id": 16,
+      "label": "Never mind",
+      "text": "Never mind",
+      "trigger": "nvm"
+    },
+    {
+      "id": 17,
+      "label": "Shaking my head",
+      "text": "shaking my head",
+      "trigger": "smh"
+    },
+    {
+      "id": 18,
+      "label": "What do you mean?",
+      "text": "What do you mean?",
+      "trigger": "wdym"
+    },
+    {
+      "id": 19,
+      "label": "Working from home",
+      "text": "working from home",
+      "trigger": "wfh"
+    },
+    {
+      "id": 20,
+      "label": "To be determined",
+      "text": "to be determined",
+      "trigger": "tbd"
+    },
+    {
+      "id": 21,
+      "label": "Thanks in advance!",
+      "text": "Thanks in advance!",
+      "trigger": "tia"
+    },
+    {
+      "id": 22,
+      "label": "Thank you very much!",
+      "text": "Thank you very much!",
+      "trigger": "tyvm"
+    },
+    {
+      "id": 23,
+      "label": "You're welcome!",
+      "text": "You're welcome!",
+      "trigger": "yw"
+    },
+    {
+      "id": 24,
+      "label": "Good luck, have fun!",
+      "text": "Good luck, have fun!",
+      "trigger": "glhf"
+    },
+    {
+      "id": 25,
+      "label": "Good game, well played!",
+      "text": "Good game, well played!",
+      "trigger": "ggwp"
+    },
+    {
+      "id": 26,
+      "label": "Got to go!",
+      "text": "Got to go!",
+      "trigger": "gtg"
+    },
+    {
+      "id": 27,
+      "label": "How are you?",
+      "text": "How are you?",
+      "trigger": "hru"
+    },
+    {
+      "id": 28,
+      "label": "What about you?",
+      "text": "What about you?",
+      "trigger": "wbu"
+    },
+    {
+      "id": 29,
+      "label": "Don't worry!",
+      "text": "Don't worry!",
+      "trigger": "dw"
+    },
+    {
+      "id": 30,
+      "label": "Right now",
+      "text": "right now",
+      "trigger": "rn"
+    },
+    {
+      "id": 31,
+      "label": "Happy birthday!",
+      "text": "Happy birthday!",
+      "trigger": "hbd"
+    },
+    {
+      "id": 32,
+      "label": "Just kidding!",
+      "text": "Just kidding!",
+      "trigger": "jk"
+    },
+    {
+      "id": 33,
+      "label": "Too much information",
+      "text": "too much information",
+      "trigger": "tmi"
+    },
+    {
+      "id": 34,
+      "label": "Too long; didn't read",
+      "text": "too long; didn't read",
+      "trigger": "tldr"
+    },
+    {
+      "id": 35,
+      "label": "As soon as possible",
+      "text": "as soon as possible",
+      "trigger": "asap"
+    },
+    {
+      "id": 36,
+      "label": "Estimated time of arrival",
+      "text": "estimated time of arrival",
+      "trigger": "eta"
+    },
+    {
+      "id": 37,
+      "label": "For your information,",
+      "text": "For your information,",
+      "trigger": "fyi"
+    },
+    {
+      "id": 38,
+      "label": "Please",
+      "text": "please",
+      "trigger": "pls"
+    },
+    {
+      "id": 39,
+      "label": "Seriously",
+      "text": "seriously",
+      "trigger": "srsly"
+    },
+    {
+      "id": 40,
+      "label": "In real life",
+      "text": "in real life",
+      "trigger": "irl"
+    }
+  ]
+}

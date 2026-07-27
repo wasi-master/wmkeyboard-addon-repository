@@ -64,6 +64,9 @@
       "path": "dictionaries/en-developer.txt",
       "sha256": "353edbd2a56a205c9a3da12eebc15a113b4e0c65965493ee84c7e267a5df067d",
       "sizeBytes": 17126,
+      "previews": [
+        "previews/en-developer.png"
+      ],
       "langId": "en",
       "license": "CC0-1.0"
     },
@@ -85,22 +88,31 @@
       "path": "dictionaries/en-slang.txt",
       "sha256": "03b8cb2035c65d47b9e3af735529a271697eee4486b88f15bd0527572f71d8d3",
       "sizeBytes": 6572,
+      "previews": [
+        "previews/en-slang.png"
+      ],
       "langId": "en",
       "license": "CC0-1.0"
     },
     {
-      "id": "dev-shortcuts",
+      "id": "texting-shortcuts",
       "type": "snippets",
-      "name": "Handy snippets",
-      "version": "1.0.0",
+      "name": "Texting Shortcuts",
+      "version": "1.1.0",
       "author": "Wasi Master",
-      "description": "A few example text snippets with triggers.",
+      "description": "A comprehensive collection of must-have texting shortcuts: quick conversational replies, common acronyms, and chat expansions.",
       "tags": [
+        "chat",
+        "texting",
+        "abbreviations",
         "productivity"
       ],
-      "path": "snippets/dev-shortcuts.wmsnippets.json",
-      "sha256": "76bcf51601467835ab180a7f477ff8c89bfba2a2d1ce958954889ab1d5b7a19e",
-      "sizeBytes": 381,
+      "path": "snippets/texting-shortcuts.wmsnippets.json",
+      "sha256": "1c4b32a8a7997b318a3167876c467d6e36b033c544cffd88d6e841d61e2cda9c",
+      "sizeBytes": 4850,
+      "previews": [
+        "previews/texting-shortcuts.png"
+      ],
       "license": "CC0-1.0"
     },
     {
@@ -276,6 +288,29 @@
       "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
+      "id": "wm-font",
+      "type": "font",
+      "name": "WM Font",
+      "version": "1.1.0",
+      "author": "Wasi Master",
+      "description": "A casual and expressive handwriting script font with Latin, Greek letters, math symbols, fractions, and blackboard bold characters.",
+      "tags": [
+        "handwriting",
+        "script",
+        "casual",
+        "font"
+      ],
+      "path": "fonts/wm-font.ttf",
+      "sha256": "d7d9fe19785190e288f73ecf4e5cbdf9287a4a19b927d5892f1146f9f5d8d148",
+      "sizeBytes": 58688,
+      "langIds": [
+        "en",
+        "el"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/WM-FONT-LICENSE.txt"
+    },
+    {
       "id": "twemoji",
       "type": "emoji_font",
       "name": "Twemoji",
@@ -346,8 +381,11 @@
         "reactions"
       ],
       "path": "stickers/undraw-illustrations.wmstickers",
-      "sha256": "10d7baee670e9584bcdd0026c0c5112cdf377dfa63d3134c8641e51528c82f2c",
-      "sizeBytes": 3105760,
+      "sha256": "2faa0b5537d726c47593b65a11cfca94eaedaa523332450b84ccdc8fb6ce817e",
+      "sizeBytes": 1710640,
+      "previews": [
+        "previews/undraw-illustrations.png"
+      ],
       "license": "unDraw License",
       "licenseFile": "stickers/UNDRAW-LICENSE.txt"
     },
@@ -423,6 +461,81 @@
       "sizeBytes": 1088,
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "cipher-tool",
+      "type": "plugin",
+      "name": "Cipher Tool",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Caesar and Vigenere ciphers, encode and decode. The plugin the getting-started guide builds.",
+      "tags": [
+        "cipher",
+        "text",
+        "demo",
+        "plugin"
+      ],
+      "path": "plugins/cipher-tool.wmplugin",
+      "sha256": "81770a40147992c88df1a2260589367038270b6c5602386d71bd8843715b02e0",
+      "sizeBytes": 1693,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "ui-kitchen-sink",
+      "type": "plugin",
+      "name": "UI Kitchen Sink",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Every plugin widget and event in one place, to look at and copy from.",
+      "tags": [
+        "demo",
+        "reference",
+        "plugin"
+      ],
+      "path": "plugins/ui-kitchen-sink.wmplugin",
+      "sha256": "73ee31df75cab7c7f0e6891b91cb85d300c63e8d822c3d375e3620a523ba8a0e",
+      "sizeBytes": 1739,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "todo-list",
+      "type": "plugin",
+      "name": "Todo List",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A checklist that remembers itself. Shows how plugin storage works.",
+      "tags": [
+        "todo",
+        "storage",
+        "demo",
+        "plugin"
+      ],
+      "path": "plugins/todo-list.wmplugin",
+      "sha256": "0912fefddc9e732043a4d5d4bbfd812f0fdba5294fea4ae09da575694896927f",
+      "sizeBytes": 1612,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "text-tools",
+      "type": "plugin",
+      "name": "Text Tools",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Change case, encode as base64/hex/URL, and count words.",
+      "tags": [
+        "text",
+        "encode",
+        "demo",
+        "plugin"
+      ],
+      "path": "plugins/text-tools.wmplugin",
+      "sha256": "10953cc6b7a618079f17c2cc42697fe4178d21c64e832814c397c92b0319c9d7",
+      "sizeBytes": 2209,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }
