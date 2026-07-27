@@ -3,8 +3,8 @@
   "format": "wmkeyboard-repo",
   "version": 1,
   "repo": {
-    "id": "com.wasimaster.wmkeyboard.sample",
-    "name": "WM Keyboard — Sample Addons",
+    "id": "com.wasimaster.wmkeyboard.official",
+    "name": "WM Keyboard Official Addons",
     "description": "Example addon repository: one payload of every type — theme, layout, dictionary, snippets, stickers, icon packs, fonts and key sounds. Fork it to make your own.",
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",

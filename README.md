@@ -1,4 +1,4 @@
-# WM Keyboard — Sample Addon Repository
+# WM Keyboard Official Addons Repository
 
 A minimal, forkable example of a **WM Keyboard addon repository**. It ships at least one of
 every addon type so you can see the exact file shapes, then copy this repo as a starting point
