@@ -1,0 +1,13 @@
+The key-press sounds in this directory — typewriter.mp3, marimba.mp3,
+droplet.mp3 and blip.mp3 — are original works, synthesised from scratch by
+tools/make_sounds.py in this repository. No sample library or third-party
+recording was used.
+
+They are released into the public domain under CC0 1.0 Universal.
+
+To the extent possible under law, the author has waived all copyright and
+related or neighbouring rights to these sound files. You may copy, modify,
+distribute and use them, including for commercial purposes, without asking
+permission and without attribution.
+
+Full text: https://creativecommons.org/publicdomain/zero/1.0/legalcode

@@ -1,0 +1,23 @@
+{
+  "format": "wmkeyboard-snippets",
+  "version": 1,
+  "snippets": [
+    {
+      "id": 1,
+      "label": "My email",
+      "text": "you@example.com",
+      "trigger": "@@"
+    },
+    {
+      "id": 2,
+      "label": "Shrug",
+      "text": "¯\\_(ツ)_/¯"
+    },
+    {
+      "id": 3,
+      "label": "Address",
+      "text": "123 Example Street",
+      "trigger": "addr"
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "$schema": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-addon-repository/main/docs/addons/wmkeyboard-repo.schema.json",
+  "format": "wmkeyboard-repo",
+  "version": 1,
+  "repo": {
+    "id": "com.wasimaster.wmkeyboard.sample",
+    "name": "WM Keyboard — Sample Addons",
+    "description": "Example addon repository: theme, layout, dictionary, snippet, icon pack, and font payloads. Fork it to make your own.",
+    "author": "Wasi Master",
+    "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
+    "icon": "icon.png",
+    "updatedAt": "2026-07-27"
+  },
+  "addons": [
+    {
+      "id": "midnight",
+      "type": "theme",
+      "name": "Midnight",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Deep navy dark theme with a subtle gradient board and blue accent.",
+      "tags": [
+        "dark",
+        "blue",
+        "gradient"
+      ],
+      "path": "themes/midnight.wmtheme.json",
+      "sha256": "bb1684ebc36771171fa92d72d0e9ba1607789eedec687e213394267473d9ba16",
+      "sizeBytes": 489
+    },
+    {
+      "id": "fr-bepo",
+      "type": "layout",
+      "name": "Français BÉPO",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Ergonomic BÉPO layout for French.",
+      "tags": [
+        "french",
+        "ergonomic"
+      ],
+      "path": "layouts/fr-bepo.wmlayout.json",
+      "sha256": "1f4133b7d8c46c0394940add7434c48eb6b231e2b403100f7321b41c7b2d32d5",
+      "sizeBytes": 3991,
+      "langId": "fr"
+    },
+    {
+      "id": "en-developer",
+      "type": "dictionary",
+      "name": "Developer Dictionary",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "An exhaustive developer dictionary containing top programming terms, syntax keywords, libraries, DevOps tools, databases, and methodologies.",
+      "tags": [
+        "developer",
+        "english"
+      ],
+      "path": "dictionaries/en-developer.txt",
+      "sha256": "353edbd2a56a205c9a3da12eebc15a113b4e0c65965493ee84c7e267a5df067d",
+      "sizeBytes": 17126,
+      "langId": "en"
+    },
+    {
+      "id": "en-slang",
+      "type": "dictionary",
+      "name": "Internet Slang & Urban Dictionary",
+      "version": "1.1.0",
+      "author": "Wasi Master",
+      "description": "An exhaustive internet slang dictionary covering Gen Z, Gen Alpha, brainrot, Twitch emotes, TikTok trends, AI tech slang, anime/K-Pop culture, gaming terminology, and Urban Dictionary acronyms.",
+      "tags": [
+        "slang",
+        "genz",
+        "genalpha",
+        "brainrot",
+        "twitch",
+        "english"
+      ],
+      "path": "dictionaries/en-slang.txt",
+      "sha256": "03b8cb2035c65d47b9e3af735529a271697eee4486b88f15bd0527572f71d8d3",
+      "sizeBytes": 6572,
+      "langId": "en"
+    },
+    {
+      "id": "dev-shortcuts",
+      "type": "snippets",
+      "name": "Handy snippets",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A few example text snippets with triggers.",
+      "tags": [
+        "productivity"
+      ],
+      "path": "snippets/dev-shortcuts.wmsnippets.json",
+      "sha256": "76bcf51601467835ab180a7f477ff8c89bfba2a2d1ce958954889ab1d5b7a19e",
+      "sizeBytes": 381
+    },
+    {
+      "id": "lucide",
+      "type": "icon_pack",
+      "name": "Lucide",
+      "version": "1.27.0",
+      "author": "Lucide Icons and Contributors",
+      "description": "The complete keyboard icon set drawn in Lucide's 24px outline style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Stroke-only and uncoloured, so it follows your theme and the per-tool accent colours. ISC licensed — see icons/LUCIDE-LICENSE.txt.",
+      "tags": [
+        "outline",
+        "minimal",
+        "lucide",
+        "complete"
+      ],
+      "path": "icons/lucide.wmicons",
+      "sha256": "45dc0418d95eb79b4831832c3c629d241c56e25a93a67becab983c3090aed646",
+      "sizeBytes": 35487
+    },
+    {
+      "id": "bootstrap-icons",
+      "type": "icon_pack",
+      "name": "Bootstrap Icons",
+      "version": "1.13.1",
+      "author": "The Bootstrap Authors",
+      "description": "The complete keyboard icon set drawn in Bootstrap Icons style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured fill/stroke SVG icons that follow your theme and per-tool accent colours. MIT licensed — see icons/BOOTSTRAP-LICENSE.txt.",
+      "tags": [
+        "bootstrap",
+        "icons",
+        "complete"
+      ],
+      "path": "icons/bootstrap-icons.wmicons",
+      "sha256": "2d0167f69868db0ddb1b5b3d93ff5d34d01f9bf2c1c2877f282fe604f62d95ea",
+      "sizeBytes": 44485
+    },
+    {
+      "id": "boxicons",
+      "type": "icon_pack",
+      "name": "Boxicons",
+      "version": "2.1.4",
+      "author": "Aniket Suvarna and Contributors",
+      "description": "The complete keyboard icon set drawn in Boxicons' 24px clean vector style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured and adaptive, so it follows your theme and per-tool accent colours. MIT licensed — see icons/BOXICONS-LICENSE.txt.",
+      "tags": [
+        "boxicons",
+        "clean",
+        "vector",
+        "complete"
+      ],
+      "path": "icons/boxicons.wmicons",
+      "sha256": "824416100045ebe93dd6a386f77ba53fdedfd522d515720f5896b508264a9414",
+      "sizeBytes": 37142
+    },
+    {
+      "id": "fontawesome",
+      "type": "icon_pack",
+      "name": "Font Awesome",
+      "version": "6.6.0",
+      "author": "Fonticons, Inc. and Font Awesome Contributors",
+      "description": "The complete keyboard icon set drawn in Font Awesome's iconic solid style: all 58 tools, every key glyph, toolbar chrome and emoji category tabs. Theme-following SVG icons. CC BY 4.0 licensed — see icons/FONTAWESOME-LICENSE.txt.",
+      "tags": [
+        "fontawesome",
+        "solid",
+        "icons",
+        "complete"
+      ],
+      "path": "icons/fontawesome.wmicons",
+      "sha256": "f46b677ceefd553d0f9c4998f3f99c15e6cb63896ce948defdf716a0c0cbe7c9",
+      "sizeBytes": 48862
+    },
+    {
+      "id": "inter",
+      "type": "font",
+      "name": "Inter",
+      "version": "4.1.0",
+      "author": "Rasmus Andersson",
+      "description": "A clean, highly legible variable sans-serif font family optimized for computer screens and mobile UI.",
+      "tags": [
+        "sans-serif",
+        "modern",
+        "clean",
+        "ui",
+        "font"
+      ],
+      "path": "fonts/inter.ttf",
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "sizeBytes": 876576
+    },
+    {
+      "id": "jetbrains-mono",
+      "type": "font",
+      "name": "JetBrains Mono",
+      "version": "2.304.0",
+      "author": "JetBrains",
+      "description": "A monospaced font family created for developers and code editing.",
+      "tags": [
+        "monospace",
+        "developer",
+        "code",
+        "font"
+      ],
+      "path": "fonts/jetbrains-mono.ttf",
+      "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
+      "sizeBytes": 187208
+    },
+    {
+      "id": "caveat",
+      "type": "font",
+      "name": "Caveat",
+      "version": "1.0.0",
+      "author": "Pablo Impallari",
+      "description": "A casual and expressive handwriting script font with a natural aesthetic.",
+      "tags": [
+        "handwriting",
+        "script",
+        "casual",
+        "font"
+      ],
+      "path": "fonts/caveat.ttf",
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
+      "sizeBytes": 403648
+    },
+    {
+      "id": "press-start-2p",
+      "type": "font",
+      "name": "Press Start 2P",
+      "version": "1.0.0",
+      "author": "CodeMan38",
+      "description": "A retro 8-bit arcade game bitmap font inspired by 1980s computer graphics.",
+      "tags": [
+        "retro",
+        "arcade",
+        "pixel",
+        "8-bit",
+        "font"
+      ],
+      "path": "fonts/press-start-2p.ttf",
+      "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d",
+      "sizeBytes": 118204
+    },
+    {
+      "id": "undraw-illustrations",
+      "type": "stickers",
+      "name": "unDraw Everyday Moments",
+      "version": "1.1.0",
+      "author": "Katerina Limpitsouni (unDraw)",
+      "description": "40 expressive open-source vector illustrations from unDraw covering work, study, coding, space, sports, and everyday moods.",
+      "tags": [
+        "undraw",
+        "stickers",
+        "vector",
+        "illustrations",
+        "reactions"
+      ],
+      "path": "stickers/undraw-illustrations.wmstickers",
+      "sha256": "0052eaf7295f6a64f2ce7cc819d74fd5fdbb17ada19b5b2cc4d2af102cdd0347",
+      "sizeBytes": 3105729
+    },
+    {
+      "id": "typewriter",
+      "type": "sound",
+      "name": "Typewriter",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Mechanical typebar strike: a hard noise transient over a short woody thunk. CC0 — see sounds/SOUNDS-LICENSE.txt.",
+      "tags": [
+        "mechanical",
+        "retro",
+        "sound"
+      ],
+      "path": "sounds/typewriter.mp3",
+      "sha256": "52c4934097378c4f72f3c84b75fe2931696ed03b2428be18a51eeb08b9795307",
+      "sizeBytes": 1506
+    },
+    {
+      "id": "marimba",
+      "type": "sound",
+      "name": "Marimba",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Soft wooden mallet: a warm fundamental with its ringing fourth harmonic. CC0 — see sounds/SOUNDS-LICENSE.txt.",
+      "tags": [
+        "soft",
+        "warm",
+        "sound"
+      ],
+      "path": "sounds/marimba.mp3",
+      "sha256": "34b369d877bb320a6766c62f326b2f60ba427fea93ceb60e826c22361dbdaa24",
+      "sizeBytes": 2342
+    },
+    {
+      "id": "droplet",
+      "type": "sound",
+      "name": "Droplet",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Water drop: a fast upward pitch bend, no transient at all. CC0 — see sounds/SOUNDS-LICENSE.txt.",
+      "tags": [
+        "water",
+        "subtle",
+        "sound"
+      ],
+      "path": "sounds/droplet.mp3",
+      "sha256": "59bcd9f72ea33a7680630129ed8a34cbe24595775d651f64135c86df031ebb5f",
+      "sizeBytes": 1506
+    },
+    {
+      "id": "blip",
+      "type": "sound",
+      "name": "Blip",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Retro square-wave blip with an 8-bit handheld flavour. CC0 — see sounds/SOUNDS-LICENSE.txt.",
+      "tags": [
+        "retro",
+        "8-bit",
+        "arcade",
+        "sound"
+      ],
+      "path": "sounds/blip.mp3",
+      "sha256": "5afde141024b75e4bd3146e20a717cf8ccb8eced9e5e8a79df3c6507c269c7d4",
+      "sizeBytes": 1088
+    }
+  ]
+}

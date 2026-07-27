@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Intermediates from tools/make_sounds.py; only the .mp3 files are committed.
+sounds/*.wav

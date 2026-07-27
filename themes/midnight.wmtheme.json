@@ -1,0 +1,23 @@
+{
+  "id": "midnight",
+  "name": "Midnight",
+  "dark": true,
+  "boardBackground": 4278981924,
+  "boardGradient": {
+    "colors": [
+      4279247679,
+      4278851110
+    ],
+    "type": "LINEAR",
+    "angleDeg": 135.0
+  },
+  "keyShape": "SQUIRCLE",
+  "keyBackground": 4279904837,
+  "keyText": 4293521659,
+  "modifierKeyBackground": 4279377978,
+  "enterKeyBackground": 4282090230,
+  "enterKeyText": 4278587423,
+  "accent": 4285245183,
+  "popupBackground": 4279970889,
+  "animation": "NONE"
+}

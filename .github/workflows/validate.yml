@@ -1,0 +1,30 @@
+name: Validate manifest
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install jsonschema
+
+      # Schema pass, plus the things a schema can't express: every path,
+      # preview and icon resolves to a file that is actually in the repo, ids
+      # are unique, and any checksum present is correct.
+      - name: Validate wmkeyboard-repo.json
+        run: python3 tools/validate.py
+
+      # sha256/sizeBytes are optional, but a stale one is worse than a missing
+      # one — the app would refuse an install that is actually fine.
+      - name: Check checksums are current
+        run: python3 tools/build_index.py --check

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-addon-repository/main/docs/addons/wmkeyboard-repo.schema.json",
+  "title": "WM Keyboard addon repository manifest",
+  "description": "Schema for wmkeyboard-repo.json, the root index of a WM Keyboard addon repository.",
+  "type": "object",
+  "required": ["format", "version", "repo", "addons"],
+  "additionalProperties": true,
+  "properties": {
+    "format": {
+      "const": "wmkeyboard-repo",
+      "description": "Magic tag. Must be exactly \"wmkeyboard-repo\"; the client rejects anything else."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Manifest schema version. Currently 1."
+    },
+    "repo": { "$ref": "#/$defs/repoInfo" },
+    "addons": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/addon" }
+    }
+  },
+  "$defs": {
+    "repoInfo": {
+      "type": "object",
+      "required": ["id", "name"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable repository id (reverse-DNS recommended, e.g. com.example.coolpack). Used to namespace installed addons.",
+          "pattern": "^[A-Za-z0-9._-]+$"
+        },
+        "name": { "type": "string", "description": "Human-readable repository name." },
+        "description": { "type": "string" },
+        "author": { "type": "string" },
+        "homepage": { "type": "string", "format": "uri" },
+        "icon": {
+          "type": "string",
+          "description": "Repository icon: a path relative to this manifest, or an absolute https URL."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO-8601 date (YYYY-MM-DD) the repo was last updated."
+        }
+      }
+    },
+    "addon": {
+      "type": "object",
+      "required": ["id", "type", "name", "version", "path"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Addon id, unique within this repository.",
+          "pattern": "^[A-Za-z0-9._-]+$"
+        },
+        "type": {
+          "enum": ["theme", "layout", "dictionary", "snippets", "stickers", "icon_pack", "font", "sound"],
+          "description": "Addon kind. Determines which native import path installs it."
+        },
+        "name": { "type": "string" },
+        "version": {
+          "type": "string",
+          "description": "Semver version string. Drives update detection.",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+].+)?$"
+        },
+        "author": { "type": "string" },
+        "description": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "path": {
+          "type": "string",
+          "description": "Payload location: a path relative to this manifest's directory, or an absolute https URL (hybrid model)."
+        },
+        "sha256": {
+          "type": "string",
+          "description": "Optional lowercase hex SHA-256 of the payload file. Verified before install when present; an addon without one installs normally and is shown as unverified.",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optional payload size, used for the UI and a pre-download guard. The client caps every download regardless."
+        },
+        "previews": {
+          "type": "array",
+          "description": "Optional screenshot/preview images (relative paths or absolute https URLs).",
+          "items": { "type": "string" }
+        },
+        "minAppVersion": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optional minimum app versionCode required to install."
+        },
+        "langId": {
+          "type": "string",
+          "description": "Language id from the app's LanguageRegistry. REQUIRED for type=dictionary; optional grouping hint for type=layout. Must be an already-registered id."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "dictionary" } } },
+          "then": { "required": ["langId"] }
+        }
+      ]
+    }
+  }
+}
