@@ -5,7 +5,7 @@
   "repo": {
     "id": "com.wasimaster.wmkeyboard.sample",
     "name": "WM Keyboard — Sample Addons",
-    "description": "Example addon repository: theme, layout, dictionary, snippet, icon pack, and font payloads. Fork it to make your own.",
+    "description": "Example addon repository: one payload of every type — theme, layout, dictionary, snippets, stickers, icon packs, fonts and key sounds. Fork it to make your own.",
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
@@ -26,7 +26,10 @@
       ],
       "path": "themes/midnight.wmtheme.json",
       "sha256": "bb1684ebc36771171fa92d72d0e9ba1607789eedec687e213394267473d9ba16",
-      "sizeBytes": 489
+      "sizeBytes": 489,
+      "previews": [
+        "previews/midnight.png"
+      ]
     },
     {
       "id": "fr-bepo",
@@ -109,7 +112,10 @@
       ],
       "path": "icons/lucide.wmicons",
       "sha256": "45dc0418d95eb79b4831832c3c629d241c56e25a93a67becab983c3090aed646",
-      "sizeBytes": 35487
+      "sizeBytes": 35487,
+      "previews": [
+        "previews/lucide.png"
+      ]
     },
     {
       "id": "bootstrap-icons",
