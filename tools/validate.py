@@ -108,6 +108,66 @@ def check_icon_pack(ident: str, payload: Path, errors: list[str], warnings: list
         errors.append(f"{ident}: corrupt .wmicons ZIP file — {e}")
 
 
+def check_sticker_pack(ident: str, payload: Path, errors: list[str], warnings: list[str]) -> None:
+    """Check that pack.json declares stickers and that each one names a real archive entry.
+
+    The app writes `stickers[]` inside `pack`; it also reads a top-level
+    `stickers[]`, `file` for `fileName`, and a path where a bare name belongs,
+    because that is what hand-written packs do. What it cannot do is invent
+    images — a manifest whose entries name nothing in the archive installs as an
+    empty pack, which is how this check came to exist.
+    """
+    import json as _json
+    import posixpath
+    import zipfile
+
+    try:
+        with zipfile.ZipFile(payload, "r") as z:
+            names = set(z.namelist())
+            if "pack.json" not in names:
+                errors.append(f"{ident}: missing pack.json in .wmstickers archive")
+                return
+            manifest = _json.loads(z.read("pack.json"))
+    except Exception as e:
+        errors.append(f"{ident}: corrupt .wmstickers ZIP file — {e}")
+        return
+
+    if manifest.get("format") != "wmkeyboard-stickers":
+        errors.append(f"{ident}: pack.json format is not wmkeyboard-stickers")
+        return
+
+    pack = manifest.get("pack") or {}
+    declared = pack.get("stickers") or manifest.get("stickers") or []
+    if not declared:
+        errors.append(f"{ident}: pack.json lists no stickers — the app refuses an empty pack")
+        return
+    if "stickers" not in pack:
+        warnings.append(
+            f"{ident}: stickers[] sits beside pack rather than inside it — accepted, "
+            f"but the app's own export nests it"
+        )
+
+    tails = {posixpath.basename(n): n for n in names if n != "pack.json"}
+    missing = []
+    for sticker in declared:
+        source = (sticker.get("fileName") or sticker.get("file") or "").strip()
+        if not source:
+            missing.append(sticker.get("id", "?"))
+            continue
+        if source in names or f"stickers/{source}" in names:
+            continue
+        if posixpath.basename(source) in tails:
+            continue
+        missing.append(sticker.get("id") or source)
+
+    if missing:
+        shown = ", ".join(missing[:5]) + (f" …and {len(missing) - 5} more" if len(missing) > 5 else "")
+        errors.append(
+            f"{ident}: {len(missing)} of {len(declared)} stickers name no image in the "
+            f"archive ({shown})"
+        )
+
+
 def check_emoji_font(ident: str, payload: Path, errors: list[str], warnings: list[str]) -> None:
     """Check GSUB ZWJ ligature coverage in emoji fonts if fontTools is installed."""
     try:
@@ -207,6 +267,8 @@ def main() -> int:
 
             if kind == "icon_pack":
                 check_icon_pack(ident, payload, errors, warnings)
+            elif kind == "stickers":
+                check_sticker_pack(ident, payload, errors, warnings)
             elif kind == "emoji_font":
                 check_emoji_font(ident, payload, errors, warnings)
 

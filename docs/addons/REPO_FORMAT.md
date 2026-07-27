@@ -174,7 +174,7 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `layout` | `*.wmlayout.json` | Envelope `{ "format":"wmkeyboard-layout", "version":1, "layout": { …LayoutSpec… } }` — the app's layout export. |
 | `dictionary` | `<langId>.txt` | Plain UTF-8, one entry per line: `word<space>frequency` (frequency optional, default 1). `#` starts a comment. May be gzipped (`.txt.gz`) for transport. |
 | `snippets` | `*.wmsnippets.json` | `{ "format":"wmkeyboard-snippets", "version":1, "snippets":[ { "id":1, "label":"…", "text":"…", "trigger":"…"? }, … ] }`. Ids are reassigned on import. |
-| `stickers` | `*.wmstickers` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-stickers"`, `"version":1`, `pack` metadata, `stickers[]`) and the image files under `stickers/`. See [Sticker packs](#sticker-packs). |
+| `stickers` | `*.wmstickers` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-stickers"`, `"version":1`, `pack` metadata with its `stickers[]`) and the image files under `stickers/`. See [Sticker packs](#sticker-packs). |
 | `icon_pack` | `*.wmicons` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-icons"`, `"version":1`, `pack` metadata) and one SVG per replaced icon under `icons/`, named for its slot. See [Icon packs](#icon-packs). |
 | `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. Declare `langIds` when the face only covers some scripts. |
 | `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
@@ -200,19 +200,31 @@ mypack.wmstickers
     "id": "undraw-illustrations",
     "name": "unDraw Everyday Moments",
     "author": "…",
-    "description": "…"
-  },
-  "stickers": [
-    { "id": "airplane", "name": "Airplane", "file": "stickers/airplane.png" }
-  ]
+    "description": "…",
+    "stickers": [
+      { "id": "airplane", "fileName": "airplane.png", "mime": "image/png", "name": "Airplane" }
+    ]
+  }
 }
 ```
 
-Unlike icon packs, sticker entry names **are** listed explicitly in `stickers[]` — `id` keys
-the sticker, `name` is what the user searches, and `file` locates the image inside the archive.
-Images are re-encoded into the app's own sticker storage on import, so any common raster format
-works. Limits: at most 500 entries and 64 MB per archive, 200 stickers per pack and 50 packs
-installed.
+Unlike icon packs, sticker entry names **are** listed explicitly — `id` keys the sticker,
+`name` is what the user searches, and `fileName` locates the image inside the archive.
+
+`stickers[]` belongs **inside `pack`**: that is what the app writes on export and what it
+reads back. Three near-misses are accepted anyway, because they are what hand-written packs
+actually do — `stickers[]` beside `pack` rather than inside it, `file` instead of `fileName`,
+and a path (`stickers/airplane.png`) instead of a bare name. None of those values is ever
+used as a path: every image is written under a name the app derives from a freshly minted
+id, so a `..` in one finds no image and is reported rather than escaping anywhere.
+
+A pack whose list is empty, or whose every entry names an image the archive doesn't hold, is
+**refused** with the reason for each. An empty pack would otherwise install, appear in the
+list and contain nothing, which reads as the app having lost the images.
+
+`mime` is informational — images are re-encoded into the app's own sticker storage on import,
+so any common raster format works. Limits: at most 500 entries and 64 MB per archive,
+200 stickers per pack and 50 packs installed.
 
 `appVersion` / `appVersionName` record the app build that wrote the file. They are informational
 — import ignores them — and both are optional in a hand-built pack.
