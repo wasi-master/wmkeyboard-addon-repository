@@ -28,7 +28,7 @@
       "sha256": "9bf40f422eb8863c85220fe5a7c321de02e9650c0509dc9e4e7836aa142b9043",
       "sizeBytes": 600,
       "previews": [
-        "previews/midnight.png"
+        "previews/midnight.jpg"
       ],
       "license": "CC0-1.0"
     },
@@ -48,7 +48,10 @@
       "sha256": "2f857c5863a412328b07f932462a0947720b89ddd4afc4322f1e18c4d81a0535",
       "sizeBytes": 7307,
       "langId": "en",
-      "license": "CC0-1.0"
+      "license": "CC0-1.0",
+      "previews": [
+        "previews/braille.jpg"
+      ]
     },
     {
       "id": "en-developer",
@@ -132,7 +135,7 @@
       "sha256": "d556f51079eadb6879cd35f023cda9a5f154606369ee2ad61e9c45e177a41628",
       "sizeBytes": 35469,
       "previews": [
-        "previews/lucide.png"
+        "previews/lucide.jpg"
       ],
       "license": "ISC",
       "licenseFile": "icons/LUCIDE-LICENSE.txt"
@@ -153,7 +156,10 @@
       "sha256": "2d0167f69868db0ddb1b5b3d93ff5d34d01f9bf2c1c2877f282fe604f62d95ea",
       "sizeBytes": 44485,
       "license": "MIT",
-      "licenseFile": "icons/BOOTSTRAP-LICENSE.txt"
+      "licenseFile": "icons/BOOTSTRAP-LICENSE.txt",
+      "previews": [
+        "previews/bootstrap-icons.jpg"
+      ]
     },
     {
       "id": "boxicons",
@@ -172,7 +178,10 @@
       "sha256": "824416100045ebe93dd6a386f77ba53fdedfd522d515720f5896b508264a9414",
       "sizeBytes": 37142,
       "license": "MIT",
-      "licenseFile": "icons/BOXICONS-LICENSE.txt"
+      "licenseFile": "icons/BOXICONS-LICENSE.txt",
+      "previews": [
+        "previews/boxicons.jpg"
+      ]
     },
     {
       "id": "fontawesome",
@@ -191,7 +200,10 @@
       "sha256": "c500e3fc973bdd264b85aeb34a53a14db1047f58028841d657ded2973bd5b7b7",
       "sizeBytes": 42986,
       "license": "CC-BY-4.0",
-      "licenseFile": "icons/FONTAWESOME-LICENSE.txt"
+      "licenseFile": "icons/FONTAWESOME-LICENSE.txt",
+      "previews": [
+        "previews/fontawesome.jpg"
+      ]
     },
     {
       "id": "inter",
@@ -216,7 +228,10 @@
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt"
+      "licenseFile": "fonts/OFL-LICENSE.txt",
+      "previews": [
+        "previews/inter.jpg"
+      ]
     },
     {
       "id": "jetbrains-mono",
@@ -240,7 +255,10 @@
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt"
+      "licenseFile": "fonts/OFL-LICENSE.txt",
+      "previews": [
+        "previews/jetbrains-mono.jpg"
+      ]
     },
     {
       "id": "caveat",
@@ -262,7 +280,10 @@
         "en"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt"
+      "licenseFile": "fonts/OFL-LICENSE.txt",
+      "previews": [
+        "previews/caveat.jpg"
+      ]
     },
     {
       "id": "press-start-2p",
@@ -285,7 +306,10 @@
         "en"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt"
+      "licenseFile": "fonts/OFL-LICENSE.txt",
+      "previews": [
+        "previews/press-start-2p.jpg"
+      ]
     },
     {
       "id": "wm-font",
