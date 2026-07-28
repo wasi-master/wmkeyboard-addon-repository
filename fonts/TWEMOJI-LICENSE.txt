@@ -1,21 +1,18 @@
-Twemoji Mozilla — twemoji.ttf
-=============================
+Twemoji — twemoji.ttf
+=====================
 
-twemoji.ttf is the "Twemoji Mozilla" build (version 0.7.0), a COLRv0 colour
-font assembled by the mozilla/twemoji-colr project from the Twemoji artwork.
+twemoji.ttf is a COLRv0 colour font built from the Twemoji artwork
+(Twemoji 17.0.2) by the Nerixyz/twemoji-colr-font project — release v0.0.2,
+asset Twemoji_GlyfColr0.ttf.
 
-  Font build:  https://github.com/mozilla/twemoji-colr
+  Font build:  https://github.com/Nerixyz/twemoji-colr-font
   Artwork:     https://github.com/jdecked/twemoji  (originally Twitter, Inc.)
 
-Two licences apply, one to each half:
+The emoji graphics are the licensed part:
 
   Emoji graphics   Copyright Twitter, Inc and other contributors.
                    Licensed under CC BY 4.0:
                    https://creativecommons.org/licenses/by/4.0/
-
-  Build tooling    Copyright Mozilla Foundation.
-                   Licensed under the Mozilla Public License 2.0:
-                   https://mozilla.org/MPL/2.0/
 
 CC BY 4.0 asks that you credit the artwork. Attribution for anyone
 redistributing this file:

@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-07-27"
+    "updatedAt": "2026-07-28"
   },
   "addons": [
     {
@@ -338,17 +338,17 @@
       "id": "twemoji",
       "type": "emoji_font",
       "name": "Twemoji",
-      "version": "0.7.0",
+      "version": "17.0.2",
       "author": "Twitter, Inc and other contributors",
-      "description": "Twitter's emoji set as a colour font — the flat, friendly look used across the web. Mozilla's COLRv0 build, so it draws in colour on Android 8 and newer.",
+      "description": "Twitter's emoji set as a colour font — the flat, friendly look used across the web. A COLRv0 build of Twemoji 17.0.2, so it draws in colour on Android 8 and newer and covers the whole emoji catalogue.",
       "tags": [
         "emoji",
         "colour",
         "twemoji"
       ],
       "path": "fonts/twemoji.ttf",
-      "sha256": "cbab5a8e18f4c0ea7df617776998c92245a29b31fe75863a4fe67cf7a220d619",
-      "sizeBytes": 1501780,
+      "sha256": "0a75e5744aba8ba9692bf814522d24f85b4846e9619d26bbacebc2af386d385a",
+      "sizeBytes": 2064468,
       "license": "CC-BY-4.0",
       "licenseFile": "fonts/TWEMOJI-LICENSE.txt"
     },
@@ -377,7 +377,7 @@
       "name": "Emojitwo",
       "version": "2.3.0",
       "author": "Emojitwo contributors and Ranks.com",
-      "description": "The open-source Emojitwo emoji set (fork of EmojiOne 2.2) as a COLRv0 colour font — flat, friendly vector emojis.",
+      "description": "The open-source Emojitwo emoji set (fork of EmojiOne 2.2) as a COLRv0 colour font — flat, friendly vector emojis. The project stopped at Unicode 9, so emoji added since (and every ZWJ sequence) are drawn in your phone's own emoji font instead.",
       "tags": [
         "emoji",
         "colour",
