@@ -527,7 +527,10 @@
       "sha256": "81770a40147992c88df1a2260589367038270b6c5602386d71bd8843715b02e0",
       "sizeBytes": 1693,
       "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt"
+      "licenseFile": "plugins/LICENSE.txt",
+      "previews": [
+        "previews/cipher-tool.jpg"
+      ]
     },
     {
       "id": "ui-kitchen-sink",
@@ -564,7 +567,11 @@
       "sha256": "0912fefddc9e732043a4d5d4bbfd812f0fdba5294fea4ae09da575694896927f",
       "sizeBytes": 1612,
       "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt"
+      "licenseFile": "plugins/LICENSE.txt",
+      "previews": [
+        "previews/todo-list-1.jpg",
+        "previews/todo-list-2.jpg"
+      ]
     },
     {
       "id": "text-tools",
@@ -583,7 +590,16 @@
       "sha256": "10953cc6b7a618079f17c2cc42697fe4178d21c64e832814c397c92b0319c9d7",
       "sizeBytes": 2209,
       "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt"
+      "licenseFile": "plugins/LICENSE.txt",
+      "previews": [
+        "previews/text-tools-1.jpg",
+        "previews/text-tools-2.jpg",
+        "previews/text-tools-3.jpg",
+        "previews/text-tools-4.jpg",
+        "previews/text-tools-5.jpg",
+        "previews/text-tools-6.jpg",
+        "previews/text-tools-7.jpg"
+      ]
     }
   ]
 }
