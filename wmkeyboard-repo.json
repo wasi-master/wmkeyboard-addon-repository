@@ -332,7 +332,10 @@
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/WM-FONT-LICENSE.txt"
+      "licenseFile": "fonts/WM-FONT-LICENSE.txt",
+      "previews": [
+        "previews/wm_font.jpg"
+      ]
     },
     {
       "id": "twemoji",
@@ -350,7 +353,10 @@
       "sha256": "0a75e5744aba8ba9692bf814522d24f85b4846e9619d26bbacebc2af386d385a",
       "sizeBytes": 2064468,
       "license": "CC-BY-4.0",
-      "licenseFile": "fonts/TWEMOJI-LICENSE.txt"
+      "licenseFile": "fonts/TWEMOJI-LICENSE.txt",
+      "previews": [
+        "previews/twemoji.jpg"
+      ]
     },
     {
       "id": "openmoji-color",
@@ -369,7 +375,10 @@
       "sha256": "a3cf6c344bcc87bcd91c4228512e1d417121239c071768c1e4781033430706ad",
       "sizeBytes": 11155208,
       "license": "CC-BY-SA-4.0",
-      "licenseFile": "fonts/OPENMOJI-LICENSE.txt"
+      "licenseFile": "fonts/OPENMOJI-LICENSE.txt",
+      "previews": [
+        "previews/openmoji.jpg"
+      ]
     },
     {
       "id": "emojitwo",
@@ -388,7 +397,10 @@
       "sha256": "b5ba9f3a70f5d674f85d12f3f32e846f396965753aaed5b3d1e2ffee3fe94ef4",
       "sizeBytes": 1349544,
       "license": "CC-BY-4.0",
-      "licenseFile": "fonts/EMOJITWO-LICENSE.txt"
+      "licenseFile": "fonts/EMOJITWO-LICENSE.txt",
+      "previews": [
+        "previews/emojitwo.jpg"
+      ]
     },
     {
       "id": "undraw-illustrations",
