@@ -1,0 +1,20 @@
+Blobmoji — blobmoji.ttf
+========================
+
+blobmoji.ttf is a CBDT/CBLC colour bitmap emoji font built from the Blobmoji artwork
+(Blobmoji 17, Release 1) by David Berdik (DavidBerdik/blobmoji2), originally based on
+Google's Noto Emoji and C1710's Blobmoji.
+
+  Font build:  https://github.com/DavidBerdik/blobmoji2
+  Original:    https://github.com/C1710/blobmoji
+               https://github.com/googlefonts/noto-emoji
+
+Licence:
+
+  Apache License, Version 2.0 (Apache-2.0)
+  https://www.apache.org/licenses/LICENSE-2.0
+
+Attribution for anyone redistributing this file:
+
+  Emoji artwork from Blobmoji / Noto Emoji, © Google LLC, C1710, David Berdik, and contributors,
+  licensed under Apache License 2.0.

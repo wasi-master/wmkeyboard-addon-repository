@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-07-28"
+    "updatedAt": "2026-08-03"
   },
   "addons": [
     {
@@ -47,11 +47,11 @@
       "path": "layouts/braille.wmlayout.json",
       "sha256": "2f857c5863a412328b07f932462a0947720b89ddd4afc4322f1e18c4d81a0535",
       "sizeBytes": 7307,
-      "langId": "en",
-      "license": "CC0-1.0",
       "previews": [
         "previews/braille.jpg"
-      ]
+      ],
+      "langId": "en",
+      "license": "CC0-1.0"
     },
     {
       "id": "en-developer",
@@ -155,11 +155,11 @@
       "path": "icons/bootstrap-icons.wmicons",
       "sha256": "2d0167f69868db0ddb1b5b3d93ff5d34d01f9bf2c1c2877f282fe604f62d95ea",
       "sizeBytes": 44485,
-      "license": "MIT",
-      "licenseFile": "icons/BOOTSTRAP-LICENSE.txt",
       "previews": [
         "previews/bootstrap-icons.jpg"
-      ]
+      ],
+      "license": "MIT",
+      "licenseFile": "icons/BOOTSTRAP-LICENSE.txt"
     },
     {
       "id": "boxicons",
@@ -177,11 +177,11 @@
       "path": "icons/boxicons.wmicons",
       "sha256": "824416100045ebe93dd6a386f77ba53fdedfd522d515720f5896b508264a9414",
       "sizeBytes": 37142,
-      "license": "MIT",
-      "licenseFile": "icons/BOXICONS-LICENSE.txt",
       "previews": [
         "previews/boxicons.jpg"
-      ]
+      ],
+      "license": "MIT",
+      "licenseFile": "icons/BOXICONS-LICENSE.txt"
     },
     {
       "id": "fontawesome",
@@ -199,11 +199,11 @@
       "path": "icons/fontawesome.wmicons",
       "sha256": "c500e3fc973bdd264b85aeb34a53a14db1047f58028841d657ded2973bd5b7b7",
       "sizeBytes": 42986,
-      "license": "CC-BY-4.0",
-      "licenseFile": "icons/FONTAWESOME-LICENSE.txt",
       "previews": [
         "previews/fontawesome.jpg"
-      ]
+      ],
+      "license": "CC-BY-4.0",
+      "licenseFile": "icons/FONTAWESOME-LICENSE.txt"
     },
     {
       "id": "inter",
@@ -222,16 +222,16 @@
       "path": "fonts/inter.ttf",
       "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
       "sizeBytes": 876576,
+      "previews": [
+        "previews/inter.jpg"
+      ],
       "langIds": [
         "en",
         "ru",
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt",
-      "previews": [
-        "previews/inter.jpg"
-      ]
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "jetbrains-mono",
@@ -249,16 +249,16 @@
       "path": "fonts/jetbrains-mono.ttf",
       "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
       "sizeBytes": 187208,
+      "previews": [
+        "previews/jetbrains-mono.jpg"
+      ],
       "langIds": [
         "en",
         "ru",
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt",
-      "previews": [
-        "previews/jetbrains-mono.jpg"
-      ]
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "caveat",
@@ -276,14 +276,14 @@
       "path": "fonts/caveat.ttf",
       "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
       "sizeBytes": 403648,
+      "previews": [
+        "previews/caveat.jpg"
+      ],
       "langIds": [
         "en"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt",
-      "previews": [
-        "previews/caveat.jpg"
-      ]
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "press-start-2p",
@@ -302,14 +302,14 @@
       "path": "fonts/press-start-2p.ttf",
       "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d",
       "sizeBytes": 118204,
+      "previews": [
+        "previews/press-start-2p.jpg"
+      ],
       "langIds": [
         "en"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/OFL-LICENSE.txt",
-      "previews": [
-        "previews/press-start-2p.jpg"
-      ]
+      "licenseFile": "fonts/OFL-LICENSE.txt"
     },
     {
       "id": "wm-font",
@@ -327,15 +327,15 @@
       "path": "fonts/wm-font.ttf",
       "sha256": "d7d9fe19785190e288f73ecf4e5cbdf9287a4a19b927d5892f1146f9f5d8d148",
       "sizeBytes": 58688,
+      "previews": [
+        "previews/wm_font.jpg"
+      ],
       "langIds": [
         "en",
         "el"
       ],
       "license": "OFL-1.1",
-      "licenseFile": "fonts/WM-FONT-LICENSE.txt",
-      "previews": [
-        "previews/wm_font.jpg"
-      ]
+      "licenseFile": "fonts/WM-FONT-LICENSE.txt"
     },
     {
       "id": "twemoji",
@@ -352,11 +352,12 @@
       "path": "fonts/twemoji.ttf",
       "sha256": "0a75e5744aba8ba9692bf814522d24f85b4846e9619d26bbacebc2af386d385a",
       "sizeBytes": 2064468,
-      "license": "CC-BY-4.0",
-      "licenseFile": "fonts/TWEMOJI-LICENSE.txt",
       "previews": [
+        "previews/twemoji-grid.jpg",
         "previews/twemoji.jpg"
-      ]
+      ],
+      "license": "CC-BY-4.0",
+      "licenseFile": "fonts/TWEMOJI-LICENSE.txt"
     },
     {
       "id": "openmoji-color",
@@ -374,11 +375,12 @@
       "path": "fonts/openmoji-color.ttf",
       "sha256": "a3cf6c344bcc87bcd91c4228512e1d417121239c071768c1e4781033430706ad",
       "sizeBytes": 11155208,
-      "license": "CC-BY-SA-4.0",
-      "licenseFile": "fonts/OPENMOJI-LICENSE.txt",
       "previews": [
+        "previews/openmoji-grid.jpg",
         "previews/openmoji.jpg"
-      ]
+      ],
+      "license": "CC-BY-SA-4.0",
+      "licenseFile": "fonts/OPENMOJI-LICENSE.txt"
     },
     {
       "id": "emojitwo",
@@ -396,11 +398,58 @@
       "path": "fonts/emojitwo.ttf",
       "sha256": "b5ba9f3a70f5d674f85d12f3f32e846f396965753aaed5b3d1e2ffee3fe94ef4",
       "sizeBytes": 1349544,
-      "license": "CC-BY-4.0",
-      "licenseFile": "fonts/EMOJITWO-LICENSE.txt",
       "previews": [
+        "previews/emojitwo-grid.jpg",
         "previews/emojitwo.jpg"
-      ]
+      ],
+      "license": "CC-BY-4.0",
+      "licenseFile": "fonts/EMOJITWO-LICENSE.txt"
+    },
+    {
+      "id": "blobmoji",
+      "type": "emoji_font",
+      "name": "Blobmoji",
+      "version": "17.0.0",
+      "author": "Google LLC, C1710, David Berdik, and contributors",
+      "description": "Google's classic blob emojis updated for modern Unicode standard. Based on Noto Emoji and C1710's Blobmoji.",
+      "tags": [
+        "emoji",
+        "colour",
+        "blobmoji",
+        "blob",
+        "google"
+      ],
+      "path": "fonts/blobmoji.ttf",
+      "sha256": "ffc75f156f65027d61ea976b7ef6327641403913c89812371a3d064fd15c67f2",
+      "sizeBytes": 9751052,
+      "previews": [
+        "previews/blobmoji.jpg"
+      ],
+      "license": "Apache-2.0",
+      "licenseFile": "fonts/BLOBMOJI-LICENSE.txt"
+    },
+    {
+      "id": "fluent-emoji",
+      "type": "emoji_font",
+      "name": "Fluent Emoji",
+      "version": "1.0.0",
+      "author": "Microsoft Corporation and tetunori",
+      "description": "Microsoft's modern, friendly 3D emoji collection as a colour font.",
+      "tags": [
+        "emoji",
+        "colour",
+        "fluent",
+        "microsoft",
+        "3d"
+      ],
+      "path": "fonts/fluent-emoji.ttf",
+      "sha256": "6292f3ff969d800d55486e01b293248ccd9ee71a17e4f9770b4abea13d9cad25",
+      "sizeBytes": 87758820,
+      "previews": [
+        "previews/fluent-emoji.jpg"
+      ],
+      "license": "MIT",
+      "licenseFile": "fonts/FLUENT-EMOJI-LICENSE.txt"
     },
     {
       "id": "undraw-illustrations",
@@ -526,11 +575,11 @@
       "path": "plugins/cipher-tool.wmplugin",
       "sha256": "81770a40147992c88df1a2260589367038270b6c5602386d71bd8843715b02e0",
       "sizeBytes": 1693,
-      "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt",
       "previews": [
         "previews/cipher-tool.jpg"
-      ]
+      ],
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     },
     {
       "id": "ui-kitchen-sink",
@@ -566,12 +615,12 @@
       "path": "plugins/todo-list.wmplugin",
       "sha256": "0912fefddc9e732043a4d5d4bbfd812f0fdba5294fea4ae09da575694896927f",
       "sizeBytes": 1612,
-      "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt",
       "previews": [
         "previews/todo-list-1.jpg",
         "previews/todo-list-2.jpg"
-      ]
+      ],
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     },
     {
       "id": "text-tools",
@@ -589,8 +638,6 @@
       "path": "plugins/text-tools.wmplugin",
       "sha256": "10953cc6b7a618079f17c2cc42697fe4178d21c64e832814c397c92b0319c9d7",
       "sizeBytes": 2209,
-      "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt",
       "previews": [
         "previews/text-tools-1.jpg",
         "previews/text-tools-2.jpg",
@@ -599,7 +646,9 @@
         "previews/text-tools-5.jpg",
         "previews/text-tools-6.jpg",
         "previews/text-tools-7.jpg"
-      ]
+      ],
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }
