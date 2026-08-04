@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-08-03"
+    "updatedAt": "2026-08-04"
   },
   "addons": [
     {
@@ -116,6 +116,44 @@
       "previews": [
         "previews/texting-shortcuts.png"
       ],
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "pattern-replies",
+      "type": "snippets",
+      "name": "Pattern Replies",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Snippets that expand around a name or a time: type \"hello John\" and get a full greeting, \"thanks Sarah\" and get a whole thank-you letter. Uses pattern triggers, so one snippet covers every name.",
+      "tags": [
+        "patterns",
+        "replies",
+        "email",
+        "greetings",
+        "productivity"
+      ],
+      "path": "snippets/pattern-replies.wmsnippets.json",
+      "sha256": "6ee68443f8a7b74fdaf53a1c1e7a4fbbb5cf81939338516a9d5ffb6afe8c4aa2",
+      "sizeBytes": 2460,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "pattern-formatters",
+      "type": "snippets",
+      "name": "Pattern Formatters",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Slash commands that reshape what you just typed: /up SHOUTS, /bold wraps for Markdown, /link makes a link out of two words, /gh turns a name into a GitHub URL. Every trigger starts with a slash, so none of them fire inside ordinary writing.",
+      "tags": [
+        "patterns",
+        "markdown",
+        "formatting",
+        "commands",
+        "productivity"
+      ],
+      "path": "snippets/pattern-formatters.wmsnippets.json",
+      "sha256": "331d79d4b8cbc6e2eb865013bec796ccae0ef4c748b9eaa58d5e17661e20a588",
+      "sizeBytes": 2590,
       "license": "CC0-1.0"
     },
     {

@@ -1,0 +1,118 @@
+{
+  "format": "wmkeyboard-snippets",
+  "version": 1,
+  "snippets": [
+    {
+      "id": 1,
+      "label": "Shout it",
+      "text": "${1:upper}",
+      "triggerPattern": "^/up (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 2,
+      "label": "Quieten it",
+      "text": "${1:lower}",
+      "triggerPattern": "^/low (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 3,
+      "label": "Title Case",
+      "text": "${1:title}",
+      "triggerPattern": "^/title (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 4,
+      "label": "Quote it",
+      "text": "\"$1\"",
+      "triggerPattern": "^/quote (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 5,
+      "label": "Bold (Markdown)",
+      "text": "**$1**",
+      "triggerPattern": "^/bold (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 6,
+      "label": "Italic (Markdown)",
+      "text": "_$1_",
+      "triggerPattern": "^/ital (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 7,
+      "label": "Inline code (Markdown)",
+      "text": "`$1`",
+      "triggerPattern": "^/code (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 8,
+      "label": "Strikethrough (Markdown)",
+      "text": "~~$1~~",
+      "triggerPattern": "^/strike (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 9,
+      "label": "Link (Markdown)",
+      "text": "[$1]($2)",
+      "triggerPattern": "^/link (.+) (\\S+)$",
+      "triggerWords": 5
+    },
+    {
+      "id": 10,
+      "label": "Heading (Markdown)",
+      "text": "# ${1:title}",
+      "triggerPattern": "^/h1 (.+)$",
+      "triggerWords": 5
+    },
+    {
+      "id": 11,
+      "label": "Task item (Markdown)",
+      "text": "- [ ] $1",
+      "triggerPattern": "^/todo (.+)$",
+      "triggerWords": 5
+    },
+    {
+      "id": 12,
+      "label": "Key and value",
+      "text": "$1: $2",
+      "triggerPattern": "^/kv (\\S+) (.+)$",
+      "triggerWords": 5
+    },
+    {
+      "id": 13,
+      "label": "GitHub repository link",
+      "text": "https://github.com/$1",
+      "triggerPattern": "^/gh (\\S+)$",
+      "triggerWords": 2
+    },
+    {
+      "id": 14,
+      "label": "YouTube video link",
+      "text": "https://www.youtube.com/watch?v=$1",
+      "triggerPattern": "^/yt (\\S+)$",
+      "triggerWords": 2
+    },
+    {
+      "id": 15,
+      "label": "Search the web",
+      "text": "https://duckduckgo.com/?q=$1",
+      "triggerPattern": "^/ddg (\\S+)$",
+      "triggerWords": 2
+    },
+    {
+      "id": 16,
+      "label": "Dated note",
+      "text": "{isodate} — $1",
+      "triggerPattern": "^/note (.+)$",
+      "triggerWords": 5
+    }
+  ]
+}

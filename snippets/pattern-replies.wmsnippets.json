@@ -1,0 +1,90 @@
+{
+  "format": "wmkeyboard-snippets",
+  "version": 1,
+  "snippets": [
+    {
+      "id": 1,
+      "label": "Greet someone by name",
+      "text": "Hello, $1! Nice to meet you.",
+      "triggerPattern": "^hello (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 2,
+      "label": "Casual hello",
+      "text": "Hi $1, hope you're doing well!",
+      "triggerPattern": "^hi (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 3,
+      "label": "Thank-you letter",
+      "text": "Dear $1,\n\nThank you for your message. I appreciate your time and will get back to you shortly.\n\nBest regards,",
+      "triggerPattern": "^thanks (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 4,
+      "label": "Birthday wish",
+      "text": "Happy birthday, ${1:title}! Have a wonderful one.",
+      "triggerPattern": "^bday (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 5,
+      "label": "Running late",
+      "text": "Sorry, running a bit late. I'll be there in about $1.",
+      "triggerPattern": "^eta (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 6,
+      "label": "Ask to call",
+      "text": "Are you free for a quick call at $1?",
+      "triggerPattern": "^call (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 7,
+      "label": "Propose a meeting",
+      "text": "Would $1 at $2 work for you?",
+      "triggerPattern": "^meet (.+) (.+)$",
+      "triggerWords": 4
+    },
+    {
+      "id": 8,
+      "label": "Introduce yourself",
+      "text": "Hi $1, my name is {cursor} and I'm getting in touch about",
+      "triggerPattern": "^intro (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 9,
+      "label": "Reply to a no-show",
+      "text": "No problem at all, $1. Let me know when suits you better.",
+      "triggerPattern": "^np (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 10,
+      "label": "Congratulate",
+      "text": "Congratulations, ${1:title}! Really well deserved.",
+      "triggerPattern": "^congrats (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 11,
+      "label": "Follow up",
+      "text": "Hi $1, just following up on my last message. Let me know if you need anything else from me.",
+      "triggerPattern": "^followup (.+)$",
+      "triggerWords": 3
+    },
+    {
+      "id": 12,
+      "label": "Out of office",
+      "text": "Thanks for your message. I'm away until $1 and will reply when I'm back.",
+      "triggerPattern": "^ooo (.+)$",
+      "triggerWords": 4
+    }
+  ]
+}

@@ -231,6 +231,83 @@ def check_sticker_pack(ident: str, payload: Path, errors: list[str], warnings: l
         )
 
 
+def check_snippet_pack(ident: str, payload: Path, errors: list[str], warnings: list[str]) -> None:
+    """Check that a snippet pack parses and that every trigger pattern compiles.
+
+    A snippet whose ``triggerPattern`` will not compile is not refused by the
+    app — the pattern is dropped and the snippet stays, which is the right
+    behaviour on a phone and the wrong one for a publisher, who then ships a
+    pack whose triggers silently do nothing. Catch it here instead.
+
+    Python's ``re`` is not Java's, but the two agree on everything a snippet
+    pattern uses, so a failure here is a real failure. The nesting and
+    backreference screens mirror the app's own; see ``SnippetMatcher.validate``.
+    """
+    import re as _re
+
+    MAX_PATTERN_LENGTH = 200
+    MAX_WORDS = 8
+
+    try:
+        manifest = json.loads(payload.read_text(encoding="utf-8"))
+    except Exception as e:
+        errors.append(f"{ident}: cannot read the snippet pack — {e}")
+        return
+
+    if manifest.get("format") != "wmkeyboard-snippets":
+        errors.append(f"{ident}: format is not wmkeyboard-snippets")
+        return
+
+    snippets = manifest.get("snippets") or []
+    if not snippets:
+        errors.append(f"{ident}: the pack lists no snippets — the app refuses an empty one")
+        return
+
+    for snippet in snippets:
+        name = snippet.get("label") or snippet.get("id") or "?"
+        if not (snippet.get("text") or "").strip():
+            errors.append(f"{ident}: snippet {name!r} has no text, so the app drops it")
+        pattern = (snippet.get("triggerPattern") or "").strip()
+        words = snippet.get("triggerWords", 0)
+        if not isinstance(words, int) or not 0 <= words <= MAX_WORDS:
+            warnings.append(
+                f"{ident}: snippet {name!r} asks for triggerWords={words}; "
+                f"the app clamps it to 0..{MAX_WORDS}"
+            )
+        if not pattern:
+            continue
+        if snippet.get("trigger"):
+            warnings.append(
+                f"{ident}: snippet {name!r} has both trigger and triggerPattern; "
+                f"the app keeps the word and ignores the pattern"
+            )
+        if len(pattern) > MAX_PATTERN_LENGTH:
+            errors.append(
+                f"{ident}: snippet {name!r} has a {len(pattern)}-character pattern; "
+                f"the app drops anything over {MAX_PATTERN_LENGTH}"
+            )
+            continue
+        try:
+            _re.compile(pattern)
+        except _re.error as e:
+            errors.append(f"{ident}: snippet {name!r} has a pattern that will not compile — {e}")
+            continue
+        if _re.search(r"\\[1-9]|\\k<", pattern):
+            errors.append(
+                f"{ident}: snippet {name!r} uses a backreference; the app refuses those"
+            )
+        if _re.search(r"\([^()]*[*+?][^()]*\)[*+?{]", pattern):
+            errors.append(
+                f"{ident}: snippet {name!r} quantifies a group that is already quantified "
+                f"(the (a+)+ shape); the app refuses those"
+            )
+        if not _re.match(r"\^?(?:\(\?[idmsuxU-]+\)\^?)?[\w/@#.-]{2,}", pattern):
+            warnings.append(
+                f"{ident}: snippet {name!r} has no plain word at the start of its pattern, "
+                f"so the keyboard tries it after every word the user types"
+            )
+
+
 def check_emoji_font(ident: str, payload: Path, errors: list[str], warnings: list[str]) -> None:
     """Check GSUB ZWJ ligature coverage in emoji fonts if fontTools is installed."""
     try:
@@ -332,6 +409,8 @@ def main() -> int:
                 check_icon_pack(ident, payload, errors, warnings)
             elif kind == "stickers":
                 check_sticker_pack(ident, payload, errors, warnings)
+            elif kind == "snippets":
+                check_snippet_pack(ident, payload, errors, warnings)
             elif kind == "emoji_font":
                 check_emoji_font(ident, payload, errors, warnings)
             elif kind == "plugin":
