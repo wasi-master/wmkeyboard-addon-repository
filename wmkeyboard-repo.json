@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-08-04"
+    "updatedAt": "2026-08-05"
   },
   "addons": [
     {
@@ -160,9 +160,9 @@
       "id": "lucide",
       "type": "icon_pack",
       "name": "Lucide",
-      "version": "1.27.0",
+      "version": "1.28.0",
       "author": "Lucide Icons and Contributors",
-      "description": "The complete keyboard icon set drawn in Lucide's 24px outline style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Stroke-only and uncoloured, so it follows your theme and the per-tool accent colours. ISC licensed — see icons/LUCIDE-LICENSE.txt.",
+      "description": "The complete keyboard icon set drawn in Lucide's 24px outline style: all 61 tools, every key glyph, the toolbar chrome and the emoji category tabs. Stroke-only and uncoloured, so it follows your theme and the per-tool accent colours. ISC licensed — see icons/LUCIDE-LICENSE.txt.",
       "tags": [
         "outline",
         "minimal",
@@ -170,8 +170,8 @@
         "complete"
       ],
       "path": "icons/lucide.wmicons",
-      "sha256": "d556f51079eadb6879cd35f023cda9a5f154606369ee2ad61e9c45e177a41628",
-      "sizeBytes": 35469,
+      "sha256": "a8864e91f028782af74dd0bb6945d2716ac4c75b3bfa8f42a227df4e1601f2f5",
+      "sizeBytes": 36714,
       "previews": [
         "previews/lucide.jpg"
       ],
@@ -182,17 +182,17 @@
       "id": "bootstrap-icons",
       "type": "icon_pack",
       "name": "Bootstrap Icons",
-      "version": "1.13.1",
+      "version": "1.14.0",
       "author": "The Bootstrap Authors",
-      "description": "The complete keyboard icon set drawn in Bootstrap Icons style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured fill/stroke SVG icons that follow your theme and per-tool accent colours. MIT licensed — see icons/BOOTSTRAP-LICENSE.txt.",
+      "description": "The complete keyboard icon set drawn in Bootstrap Icons style: all 61 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured fill/stroke SVG icons that follow your theme and per-tool accent colours. MIT licensed — see icons/BOOTSTRAP-LICENSE.txt.",
       "tags": [
         "bootstrap",
         "icons",
         "complete"
       ],
       "path": "icons/bootstrap-icons.wmicons",
-      "sha256": "2d0167f69868db0ddb1b5b3d93ff5d34d01f9bf2c1c2877f282fe604f62d95ea",
-      "sizeBytes": 44485,
+      "sha256": "9896b2ba893e42ec39c2a35c5c2bf1aca46d7d3099592269a19148a755b2ad32",
+      "sizeBytes": 46798,
       "previews": [
         "previews/bootstrap-icons.jpg"
       ],
@@ -203,9 +203,9 @@
       "id": "boxicons",
       "type": "icon_pack",
       "name": "Boxicons",
-      "version": "2.1.4",
+      "version": "2.2.0",
       "author": "Aniket Suvarna and Contributors",
-      "description": "The complete keyboard icon set drawn in Boxicons' 24px clean vector style: all 58 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured and adaptive, so it follows your theme and per-tool accent colours. MIT licensed — see icons/BOXICONS-LICENSE.txt.",
+      "description": "The complete keyboard icon set drawn in Boxicons' 24px clean vector style: all 61 tools, every key glyph, the toolbar chrome and the emoji category tabs. Uncoloured and adaptive, so it follows your theme and per-tool accent colours. MIT licensed — see icons/BOXICONS-LICENSE.txt.",
       "tags": [
         "boxicons",
         "clean",
@@ -213,8 +213,8 @@
         "complete"
       ],
       "path": "icons/boxicons.wmicons",
-      "sha256": "824416100045ebe93dd6a386f77ba53fdedfd522d515720f5896b508264a9414",
-      "sizeBytes": 37142,
+      "sha256": "97f0329be1cbca53b5d3bcca85daabc3d894e6fb40ffc9f9c54b6ba0c182255d",
+      "sizeBytes": 38341,
       "previews": [
         "previews/boxicons.jpg"
       ],
@@ -225,9 +225,9 @@
       "id": "fontawesome",
       "type": "icon_pack",
       "name": "Font Awesome",
-      "version": "6.6.0",
+      "version": "6.7.0",
       "author": "Fonticons, Inc. and Font Awesome Contributors",
-      "description": "The complete keyboard icon set drawn in Font Awesome's iconic solid style: all 58 tools, every key glyph, toolbar chrome and emoji category tabs. Theme-following SVG icons. CC BY 4.0 licensed — see icons/FONTAWESOME-LICENSE.txt.",
+      "description": "The complete keyboard icon set drawn in Font Awesome's iconic solid style: all 61 tools, every key glyph, toolbar chrome and emoji category tabs. Theme-following SVG icons. CC BY 4.0 licensed — see icons/FONTAWESOME-LICENSE.txt.",
       "tags": [
         "fontawesome",
         "solid",
@@ -235,8 +235,8 @@
         "complete"
       ],
       "path": "icons/fontawesome.wmicons",
-      "sha256": "c500e3fc973bdd264b85aeb34a53a14db1047f58028841d657ded2973bd5b7b7",
-      "sizeBytes": 42986,
+      "sha256": "4aa67742bf05ecb1e61f9e3cf4f416279ff2531fbdfc0f55ac66ff8da5102987",
+      "sizeBytes": 44498,
       "previews": [
         "previews/fontawesome.jpg"
       ],
