@@ -331,7 +331,132 @@ def generate_slang_preview():
     final_img.save("previews/en-slang.png", "PNG")
     print("Generated previews/en-slang.png")
 
+def generate_medical_preview():
+    scale = 2
+    w, h = 720 * scale, 633 * scale
+    
+    bg_colors = [
+        (4, 30, 26),        # Deep emerald slate base
+        (8, 48, 42),        # Dark teal emerald
+        (12, 64, 56),       # Deep clinical teal
+        (20, 184, 166, 50), # Teal glow top right
+        (52, 211, 153, 45)  # Emerald glow bottom left
+    ]
+    
+    canvas = create_gradient_background(w, h, bg_colors)
+    canvas = add_grid_pattern(canvas, grid_size=45 * scale, line_color=(45, 212, 191, 15))
+    
+    inter_bold = ImageFont.truetype("fonts/inter.ttf", 36 * scale)
+    inter_semi = ImageFont.truetype("fonts/inter.ttf", 18 * scale)
+    mono_bold = ImageFont.truetype("fonts/jetbrains-mono.ttf", 22 * scale)
+    mono_hero = ImageFont.truetype("fonts/jetbrains-mono.ttf", 28 * scale)
+    mono_small = ImageFont.truetype("fonts/jetbrains-mono.ttf", 15 * scale)
+    mono_bg = ImageFont.truetype("fonts/jetbrains-mono.ttf", 20 * scale)
+    
+    # -------------------------------------------------------------
+    # 1. HEADER SECTION
+    # -------------------------------------------------------------
+    header_box = Image.new("RGBA", (w - 80 * scale, 145 * scale), (0, 0, 0, 0))
+    h_draw = ImageDraw.Draw(header_box)
+    
+    h_draw.rounded_rectangle(
+        [0, 0, w - 80 * scale, 135 * scale],
+        radius=20 * scale,
+        fill=(6, 44, 38, 220),
+        outline=(45, 212, 191, 110),
+        width=2 * scale
+    )
+    
+    badge_img = make_word_pill(
+        "DICTIONARY  •  MEDICAL & CLINICAL", 
+        mono_small, 
+        text_color=(45, 212, 191, 255), 
+        fill_color=(20, 184, 166, 35), 
+        stroke_color=(45, 212, 191, 140), 
+        stroke_width=1 * scale,
+        padding=(14 * scale, 5 * scale),
+        radius=8 * scale
+    )
+    header_box.paste(badge_img, (30 * scale, 18 * scale), badge_img)
+    
+    title_text = "Medical & Clinical Dictionary"
+    h_draw.text((30 * scale, 52 * scale), title_text, fill=(240, 253, 250, 255), font=inter_bold)
+    
+    sub_text = "1,000+ generic drugs, brand pharma, rare diseases & equipment"
+    h_draw.text((30 * scale, 98 * scale), sub_text, fill=(153, 246, 228, 255), font=inter_semi)
+    
+    canvas.paste(header_box, (40 * scale, 35 * scale), header_box)
+    
+    # -------------------------------------------------------------
+    # 2. SCATTERED BACKGROUND WORDS
+    # -------------------------------------------------------------
+    bg_words = [
+        ("amoxicillin", 80, 215, -10, (153, 246, 228, 55)),
+        ("biopsy", 550, 210, 8, (153, 246, 228, 50)),
+        ("endocarditis", 320, 198, -5, (45, 212, 191, 45)),
+        ("metformin", 60, 360, 12, (153, 246, 228, 50)),
+        ("echocardiogram", 520, 340, -7, (167, 243, 208, 50)),
+        ("catheter", 240, 540, 5, (153, 246, 228, 40)),
+        ("myasthenia", 400, 535, -8, (52, 211, 153, 45)),
+        ("lisinopril", 580, 525, 10, (153, 246, 228, 45)),
+        ("bronchoscopy", 50, 530, -12, (153, 246, 228, 40)),
+        ("sarcoidosis", 350, 390, 6, (153, 246, 228, 40)),
+    ]
+    
+    for word, x_p, y_p, ang, col in bg_words:
+        pill = make_word_pill(
+            word, mono_bg, text_color=col, fill_color=None, stroke_color=None, angle=ang
+        )
+        canvas.paste(pill, (x_p * scale, y_p * scale), pill)
+
+    # -------------------------------------------------------------
+    # 3. MIDGROUND & FOREGROUND SCATTERED WORDS / PILLS
+    # -------------------------------------------------------------
+    hero_pills = [
+        ("acetaminophen", 50, 255, -5, mono_hero, (45, 212, 191, 255), (6, 44, 38, 240), (45, 212, 191, 220)),
+        ("pembrolizumab", 320, 250, 4, mono_hero, (52, 211, 153, 255), (6, 44, 38, 240), (52, 211, 153, 220)),
+        ("sarcoidosis", 520, 265, -4, mono_bold, (167, 243, 208, 255), (13, 78, 67, 240), (167, 243, 208, 200)),
+        ("hydrochlorothiazide", 110, 325, 4, mono_hero, (45, 212, 191, 255), (15, 118, 110, 210), (45, 212, 191, 255)),
+        ("cholecystectomy", 380, 315, -4, mono_bold, (251, 211, 115, 255), (6, 44, 38, 240), (251, 211, 115, 200)),
+        ("atorvastatin", 550, 365, 6, mono_bold, (244, 114, 182, 255), (6, 44, 38, 240), (244, 114, 182, 200)),
+        ("sphygmomanometer", 40, 405, -4, mono_hero, (52, 211, 153, 255), (4, 47, 46, 220), (52, 211, 153, 255)),
+        ("levothyroxine", 280, 395, 3, mono_bold, (45, 212, 191, 255), (6, 44, 38, 240), (45, 212, 191, 180)),
+        ("dysdiadochokinesia", 450, 435, -5, mono_hero, (167, 243, 208, 255), (15, 118, 110, 220), (167, 243, 208, 255)),
+        ("endocarditis", 80, 480, 5, mono_bold, (251, 211, 115, 255), (6, 44, 38, 240), (251, 211, 115, 180)),
+        ("omeprazole", 290, 470, -3, mono_bold, (52, 211, 153, 255), (6, 44, 38, 240), (52, 211, 153, 180)),
+        ("echocardiogram", 470, 495, 5, mono_bold, (45, 212, 191, 255), (6, 44, 38, 240), (45, 212, 191, 180)),
+        ("zolgensma", 220, 535, -5, mono_bold, (244, 114, 182, 255), (6, 44, 38, 240), (244, 114, 182, 180)),
+    ]
+    
+    for text, x, y, ang, font, txt_col, bg_col, brd_col in hero_pills:
+        pill = make_word_pill(
+            text, 
+            font, 
+            text_color=txt_col, 
+            fill_color=bg_col, 
+            stroke_color=brd_col,
+            stroke_width=2 * scale,
+            padding=(20 * scale, 10 * scale),
+            radius=14 * scale,
+            angle=ang
+        )
+        canvas.paste(pill, (x * scale, y * scale), pill)
+
+    # -------------------------------------------------------------
+    # 4. FOOTER TAGLINE
+    # -------------------------------------------------------------
+    footer_draw = ImageDraw.Draw(canvas)
+    footer_text = "Accurate medical terms, drugs & obscure syndromes for WM Keyboard"
+    f_w = footer_draw.textlength(footer_text, font=inter_semi)
+    footer_draw.text(((w - f_w) // 2, h - 40 * scale), footer_text, fill=(153, 246, 228, 255), font=inter_semi)
+
+    final_img = canvas.resize((720, 633), Image.Resampling.LANCZOS).convert("RGB")
+    final_img.save("previews/en-medical.png", "PNG")
+    print("Generated previews/en-medical.png")
+
 if __name__ == "__main__":
     os.makedirs("previews", exist_ok=True)
     generate_developer_preview()
     generate_slang_preview()
+    generate_medical_preview()
+

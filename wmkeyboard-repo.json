@@ -232,6 +232,30 @@
       "license": "CC0-1.0"
     },
     {
+      "id": "en-medical",
+      "type": "dictionary",
+      "name": "Medical & Clinical Dictionary",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "An exhaustive medical and clinical dictionary covering drug generic and chemical compound names, brand pharmaceuticals, diseases, rare syndromes, surgical procedures, diagnostic equipment, and medical terminology.",
+      "tags": [
+        "medical",
+        "clinical",
+        "pharma",
+        "medicine",
+        "anatomy",
+        "english"
+      ],
+      "path": "dictionaries/en-medical.txt",
+      "sha256": "312455b44ad703cae5b983edb3ce77c99549773b3bff7ebf45fb235378165c92",
+      "sizeBytes": 15426,
+      "previews": [
+        "previews/en-medical.png"
+      ],
+      "langId": "en",
+      "license": "CC0-1.0"
+    },
+    {
       "id": "texting-shortcuts",
       "type": "snippets",
       "name": "Texting Shortcuts",
