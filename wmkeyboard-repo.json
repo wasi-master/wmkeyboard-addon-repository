@@ -256,6 +256,30 @@
       "license": "CC0-1.0"
     },
     {
+      "id": "en-legal",
+      "type": "dictionary",
+      "name": "Legal & Jurisprudence Dictionary",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "An exhaustive legal and jurisprudence dictionary covering Latin legal maxims, constitutional law, contract terminology, torts, civil procedure, criminal law, corporate law, intellectual property, and courtroom terminology.",
+      "tags": [
+        "legal",
+        "jurisprudence",
+        "law",
+        "court",
+        "contracts",
+        "english"
+      ],
+      "path": "dictionaries/en-legal.txt",
+      "sha256": "f92259fbbe51f9fbe51b7c82d60f5139f2924bbd44947620705bc8d47be291dc",
+      "sizeBytes": 7684,
+      "previews": [
+        "previews/en-legal.png"
+      ],
+      "langId": "en",
+      "license": "CC0-1.0"
+    },
+    {
       "id": "texting-shortcuts",
       "type": "snippets",
       "name": "Texting Shortcuts",

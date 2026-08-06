@@ -454,9 +454,134 @@ def generate_medical_preview():
     final_img.save("previews/en-medical.png", "PNG")
     print("Generated previews/en-medical.png")
 
+def generate_legal_preview():
+    scale = 2
+    w, h = 720 * scale, 633 * scale
+    
+    bg_colors = [
+        (28, 20, 12),       # Warm deep dark slate brown
+        (48, 34, 18),       # Dark mahogany amber
+        (68, 48, 24),       # Deep rich legal gold/bronze
+        (245, 158, 11, 45), # Gold glow top right
+        (217, 119, 6, 40)   # Amber glow bottom left
+    ]
+    
+    canvas = create_gradient_background(w, h, bg_colors)
+    canvas = add_grid_pattern(canvas, grid_size=45 * scale, line_color=(251, 191, 36, 15))
+    
+    inter_bold = ImageFont.truetype("fonts/inter.ttf", 36 * scale)
+    inter_semi = ImageFont.truetype("fonts/inter.ttf", 18 * scale)
+    mono_bold = ImageFont.truetype("fonts/jetbrains-mono.ttf", 22 * scale)
+    mono_hero = ImageFont.truetype("fonts/jetbrains-mono.ttf", 28 * scale)
+    mono_small = ImageFont.truetype("fonts/jetbrains-mono.ttf", 15 * scale)
+    mono_bg = ImageFont.truetype("fonts/jetbrains-mono.ttf", 20 * scale)
+    
+    # -------------------------------------------------------------
+    # 1. HEADER SECTION
+    # -------------------------------------------------------------
+    header_box = Image.new("RGBA", (w - 80 * scale, 145 * scale), (0, 0, 0, 0))
+    h_draw = ImageDraw.Draw(header_box)
+    
+    h_draw.rounded_rectangle(
+        [0, 0, w - 80 * scale, 135 * scale],
+        radius=20 * scale,
+        fill=(42, 28, 14, 220),
+        outline=(251, 191, 36, 110),
+        width=2 * scale
+    )
+    
+    badge_img = make_word_pill(
+        "DICTIONARY  •  LEGAL & JURISPRUDENCE", 
+        mono_small, 
+        text_color=(251, 191, 36, 255), 
+        fill_color=(245, 158, 11, 35), 
+        stroke_color=(251, 191, 36, 140), 
+        stroke_width=1 * scale,
+        padding=(14 * scale, 5 * scale),
+        radius=8 * scale
+    )
+    header_box.paste(badge_img, (30 * scale, 18 * scale), badge_img)
+    
+    title_text = "Legal & Jurisprudence Dictionary"
+    h_draw.text((30 * scale, 52 * scale), title_text, fill=(254, 243, 199, 255), font=inter_bold)
+    
+    sub_text = "1,000+ Latin legal maxims, contracts, statutory law & court jargon"
+    h_draw.text((30 * scale, 98 * scale), sub_text, fill=(253, 230, 138, 255), font=inter_semi)
+    
+    canvas.paste(header_box, (40 * scale, 35 * scale), header_box)
+    
+    # -------------------------------------------------------------
+    # 2. SCATTERED BACKGROUND WORDS
+    # -------------------------------------------------------------
+    bg_words = [
+        ("habeas corpus", 80, 215, -10, (253, 230, 138, 55)),
+        ("affidavit", 550, 210, 8, (253, 230, 138, 50)),
+        ("certiorari", 320, 198, -5, (251, 191, 36, 45)),
+        ("mens rea", 60, 360, 12, (253, 230, 138, 50)),
+        ("indemnification", 520, 340, -7, (254, 243, 199, 50)),
+        ("subpoena", 240, 540, 5, (253, 230, 138, 40)),
+        ("jurisprudence", 400, 535, -8, (245, 158, 11, 45)),
+        ("stare decisis", 580, 525, 10, (253, 230, 138, 45)),
+        ("prima facie", 50, 530, -12, (253, 230, 138, 40)),
+        ("estoppel", 350, 390, 6, (253, 230, 138, 40)),
+    ]
+    
+    for word, x_p, y_p, ang, col in bg_words:
+        pill = make_word_pill(
+            word, mono_bg, text_color=col, fill_color=None, stroke_color=None, angle=ang
+        )
+        canvas.paste(pill, (x_p * scale, y_p * scale), pill)
+
+    # -------------------------------------------------------------
+    # 3. MIDGROUND & FOREGROUND SCATTERED WORDS / PILLS
+    # -------------------------------------------------------------
+    hero_pills = [
+        ("habeas corpus", 50, 255, -5, mono_hero, (251, 191, 36, 255), (42, 28, 14, 240), (251, 191, 36, 220)),
+        ("stare decisis", 320, 250, 4, mono_hero, (245, 158, 11, 255), (42, 28, 14, 240), (245, 158, 11, 220)),
+        ("prima facie", 520, 265, -4, mono_bold, (254, 243, 199, 255), (68, 48, 24, 240), (254, 243, 199, 200)),
+        ("indemnification", 110, 325, 4, mono_hero, (251, 191, 36, 255), (120, 53, 15, 210), (251, 191, 36, 255)),
+        ("subpoena", 380, 315, -4, mono_bold, (252, 211, 77, 255), (42, 28, 14, 240), (252, 211, 77, 200)),
+        ("res judicata", 550, 365, 6, mono_bold, (244, 114, 182, 255), (42, 28, 14, 240), (244, 114, 182, 200)),
+        ("voir dire", 40, 405, -4, mono_hero, (245, 158, 11, 255), (48, 34, 18, 220), (245, 158, 11, 255)),
+        ("certiorari", 280, 395, 3, mono_bold, (251, 191, 36, 255), (42, 28, 14, 240), (251, 191, 36, 180)),
+        ("quantum meruit", 450, 435, -5, mono_hero, (254, 243, 199, 255), (120, 53, 15, 220), (254, 243, 199, 255)),
+        ("pro bono", 80, 480, 5, mono_bold, (252, 211, 77, 255), (42, 28, 14, 240), (252, 211, 77, 180)),
+        ("nolo contendere", 290, 470, -3, mono_bold, (245, 158, 11, 255), (42, 28, 14, 240), (245, 158, 11, 180)),
+        ("inter alia", 470, 495, 5, mono_bold, (251, 191, 36, 255), (42, 28, 14, 240), (251, 191, 36, 180)),
+        ("caveat emptor", 220, 535, -5, mono_bold, (252, 211, 77, 255), (42, 28, 14, 240), (252, 211, 77, 180)),
+    ]
+    
+    for text, x, y, ang, font, txt_col, bg_col, brd_col in hero_pills:
+        pill = make_word_pill(
+            text, 
+            font, 
+            text_color=txt_col, 
+            fill_color=bg_col, 
+            stroke_color=brd_col,
+            stroke_width=2 * scale,
+            padding=(20 * scale, 10 * scale),
+            radius=14 * scale,
+            angle=ang
+        )
+        canvas.paste(pill, (x * scale, y * scale), pill)
+
+    # -------------------------------------------------------------
+    # 4. FOOTER TAGLINE
+    # -------------------------------------------------------------
+    footer_draw = ImageDraw.Draw(canvas)
+    footer_text = "Accurate Latin maxims, contract terms & legal jargon for WM Keyboard"
+    f_w = footer_draw.textlength(footer_text, font=inter_semi)
+    footer_draw.text(((w - f_w) // 2, h - 40 * scale), footer_text, fill=(253, 230, 138, 255), font=inter_semi)
+
+    final_img = canvas.resize((720, 633), Image.Resampling.LANCZOS).convert("RGB")
+    final_img.save("previews/en-legal.png", "PNG")
+    print("Generated previews/en-legal.png")
+
 if __name__ == "__main__":
     os.makedirs("previews", exist_ok=True)
     generate_developer_preview()
     generate_slang_preview()
     generate_medical_preview()
+    generate_legal_preview()
+
 
