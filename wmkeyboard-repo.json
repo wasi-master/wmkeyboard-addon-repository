@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-08-05"
+    "updatedAt": "2026-08-06"
   },
   "addons": [
     {
@@ -123,9 +123,9 @@
       "id": "pattern-replies",
       "type": "snippets",
       "name": "Pattern Replies",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
-      "description": "Snippets that expand around a name or a time: type \"hello John\" and get a full greeting, \"thanks Sarah\" and get a whole thank-you letter. Uses pattern triggers, so one snippet covers every name.",
+      "description": "Snippets that expand around a name or a time: type \"hello John\" and get a full greeting, \"thanks Sarah\" and get a whole thank-you letter. Uses pattern triggers, so one snippet covers every name. Each one waits on the suggestion bar for a tap, so nothing rewrites what you typed on its own.",
       "tags": [
         "patterns",
         "replies",
@@ -134,8 +134,8 @@
         "productivity"
       ],
       "path": "snippets/pattern-replies.wmsnippets.json",
-      "sha256": "6ee68443f8a7b74fdaf53a1c1e7a4fbbb5cf81939338516a9d5ffb6afe8c4aa2",
-      "sizeBytes": 2460,
+      "sha256": "682de666d93395b4d9097f8ebff8e11599b13fce91dc9bf7beff79b8decbed20",
+      "sizeBytes": 2736,
       "license": "CC0-1.0"
     },
     {
