@@ -1,0 +1,70 @@
+{
+ "id": "arcade-cabinet",
+ "name": "Arcade Cabinet",
+ "dark": true,
+ "boardBackground": 4278848020,
+ "boardGradient": {
+  "colors": [
+   2351169596,
+   2348817724,
+   2352742450,
+   2351169596
+  ],
+  "type": "SWEEP",
+  "angleDeg": 90.0
+ },
+ "keyShape": "SHARP",
+ "keyBackground": 4279242788,
+ "keyText": 4278255516,
+ "modifierKeyBackground": 4278979612,
+ "modifierKeyText": 4288348122,
+ "enterKeyBackground": 4294912373,
+ "enterKeyText": 4279500810,
+ "keyBorderColor": 4278248959,
+ "keyBorderWidthDp": 1.0,
+ "accent": 4294959174,
+ "gestureTrailColor": 4278255516,
+ "popupBackground": 4279769140,
+ "popupText": 4278255516,
+ "popupShape": "SHARP",
+ "toolShape": "SHARP",
+ "toolbarIcon": 4278248959,
+ "toolCircleBackground": 4279242794,
+ "toolBorderColor": 4278248959,
+ "toolBorderWidthDp": 1.0,
+ "keyTextureScale": "TILE",
+ "keyTextureOpacity": 0.55,
+ "fontScale": 0.72,
+ "animation": "HUE_CYCLE",
+ "animationSpeed": 0.6,
+ "fontId": "google:Press Start 2P",
+ "soundStyle": "CUSTOM",
+ "soundCustomId": "Blip",
+ "keyEffect": "CUSTOM_IMAGE",
+ "keyEffectIntensity": 1.2,
+ "keyOverrides": {
+  "w": {
+   "background": 4280295498,
+   "text": 4278248959
+  },
+  "a": {
+   "background": 4280295498,
+   "text": 4278248959
+  },
+  "s": {
+   "background": 4280295498,
+   "text": 4278248959
+  },
+  "d": {
+   "background": 4280295498,
+   "text": 4278248959
+  }
+ },
+ "assets": {
+  "keyTexture": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAA5ElEQVR4nO3SsQ2AMBAEQUBU4WLovxJKcEwF1mZAMJN+clr9Psa1sXZ8PeDvBAoCBYGCQEGgIFA4V4c57zd3/JYPCgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoCBQECgIFgYJAQaAgUBAoPBNiBAblq0+yAAAAAElFTkSuQmCC",
+  "keyTexturePressed": "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAA5ElEQVR4nO3SMQ2AQBBFwYMgAh8E/2rQAQourwOKmXabn5ddxnUP5tavB/ydQEGgIFAQKAgUBArb7LAf55s7fssHBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUBAoCBYGCQEGgIFAQKAgUHmgEAybO4evkAAAAAElFTkSuQmCC",
+  "effectImage:0": "iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAr0lEQVR4nO3awQ2CQBBGYdbYh5ZiWZRgWZailWAHzGHyR9/kfVcS2Jc9TBZYW9jxfhxn19f9tZLPvyRv/g8MpDOQzkC69gyq5lxXd06O30ED6QykM5BupefYdnueX//s0ceP30ED6QykM5DuWp234nOyqVr/+B00kM5AOgPpfC9KZyCdgXQG0pUzpjvn0udNz4O/XkCagXQG0o0PLL8Ppv/n7KrWP34HDaQzkM5Aui+0FSWLMQVtBQAAAABJRU5ErkJggg==",
+  "effectImage:1": "iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAArUlEQVR4nO3ZsQ3DIBQGYYg8WFbILumt9NklK2QzZwP+giD7nu5rjRAniieL3oLj/jrSmpH+3fuZ+99mNicwkM5AOgPp+uwcurryN2ggnYF0BtJtccXzMf7+/vzpKGuUv0ED6QykM5DO/0E6A+kMpDOQbvi21tr8+91qvg+efYDVDKQzkK58YJyDyeo5meZcUv4GDaQzkM5Auuk5mKQ5OTvnkvI3aCCdgXQG0v0Aq4Ab6z1NnTQAAAAASUVORK5CYII=",
+  "effectImage:2": "iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAAzUlEQVR4nO2auw0CMRAFbXQlUMRVgriMigioiAxEJS6CHqAB5BfsWeatZlKfP6MNnnzeWoI8bsdPdI0e2/VdI/MPex3kX0HQHQTdQdCdRX2gcu58Wvc7za/9S+vur3IyfQURdAdBdxB0pw7PufXSH2/30PLPV+uOp68ggu4g6A6C7sj7oETlXHR+MCfTVxBBdxB0B0F34jmocmpwzinSVxBBdxB0B0F3ZA/K7PdB9d+T98HZBxgNgu4g6E56wVAvZin0i04HQXcQdAdBd76WzCQDFExp9wAAAABJRU5ErkJggg=="
+ }
+}

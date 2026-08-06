@@ -1,191 +1,198 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-addon-repository/main/docs/addons/wmkeyboard-repo.schema.json",
-  "title": "WM Keyboard addon repository manifest",
-  "description": "Schema for wmkeyboard-repo.json, the root index of a WM Keyboard addon repository.",
-  "type": "object",
-  "required": [
-    "format",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-addon-repository/main/docs/addons/wmkeyboard-repo.schema.json",
+ "title": "WM Keyboard addon repository manifest",
+ "description": "Schema for wmkeyboard-repo.json, the root index of a WM Keyboard addon repository.",
+ "type": "object",
+ "required": [
+  "format",
+  "version",
+  "repo",
+  "addons"
+ ],
+ "additionalProperties": true,
+ "properties": {
+  "format": {
+   "const": "wmkeyboard-repo",
+   "description": "Magic tag. Must be exactly \"wmkeyboard-repo\"; the client rejects anything else."
+  },
+  "version": {
+   "type": "integer",
+   "minimum": 1,
+   "description": "Manifest schema version. Currently 1."
+  },
+  "repo": {
+   "$ref": "#/$defs/repoInfo"
+  },
+  "addons": {
+   "type": "array",
+   "items": {
+    "$ref": "#/$defs/addon"
+   }
+  }
+ },
+ "$defs": {
+  "repoInfo": {
+   "type": "object",
+   "required": [
+    "id",
+    "name"
+   ],
+   "additionalProperties": true,
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "Stable repository id (reverse-DNS recommended, e.g. com.example.coolpack). Used to namespace installed addons.",
+     "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "name": {
+     "type": "string",
+     "description": "Human-readable repository name."
+    },
+    "description": {
+     "type": "string"
+    },
+    "author": {
+     "type": "string"
+    },
+    "homepage": {
+     "type": "string",
+     "format": "uri"
+    },
+    "icon": {
+     "type": "string",
+     "description": "Repository icon: a path relative to this manifest, or an absolute https URL."
+    },
+    "updatedAt": {
+     "type": "string",
+     "description": "ISO-8601 date (YYYY-MM-DD) the repo was last updated."
+    }
+   }
+  },
+  "addon": {
+   "type": "object",
+   "required": [
+    "id",
+    "type",
+    "name",
     "version",
-    "repo",
-    "addons"
-  ],
-  "additionalProperties": true,
-  "properties": {
-    "format": {
-      "const": "wmkeyboard-repo",
-      "description": "Magic tag. Must be exactly \"wmkeyboard-repo\"; the client rejects anything else."
+    "path"
+   ],
+   "additionalProperties": true,
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "Addon id, unique within this repository.",
+     "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "type": {
+     "enum": [
+      "theme",
+      "layout",
+      "dictionary",
+      "snippets",
+      "stickers",
+      "icon_pack",
+      "font",
+      "emoji_font",
+      "sound",
+      "plugin"
+     ],
+     "description": "Addon kind. Determines which native import path installs it."
+    },
+    "name": {
+     "type": "string"
     },
     "version": {
-      "type": "integer",
-      "minimum": 1,
-      "description": "Manifest schema version. Currently 1."
+     "type": "string",
+     "description": "Semver version string. Drives update detection.",
+     "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+].+)?$"
     },
-    "repo": {
-      "$ref": "#/$defs/repoInfo"
+    "author": {
+     "type": "string"
     },
-    "addons": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/addon"
-      }
+    "description": {
+     "type": "string"
+    },
+    "tags": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "path": {
+     "type": "string",
+     "description": "Payload location: a path relative to this manifest's directory, or an absolute https URL (hybrid model)."
+    },
+    "sha256": {
+     "type": "string",
+     "description": "Optional lowercase hex SHA-256 of the payload file. Verified before install when present; an addon without one installs normally and is shown as unverified.",
+     "pattern": "^[a-f0-9]{64}$"
+    },
+    "sizeBytes": {
+     "type": "integer",
+     "minimum": 0,
+     "description": "Optional payload size, used for the UI and a pre-download guard. The client caps every download regardless."
+    },
+    "previews": {
+     "type": "array",
+     "description": "Optional screenshot/preview images (relative paths or absolute https URLs).",
+     "items": {
+      "type": "string"
+     }
+    },
+    "minAppVersion": {
+     "type": "integer",
+     "minimum": 0,
+     "description": "Optional minimum app versionCode required to install."
+    },
+    "langId": {
+     "type": "string",
+     "description": "Language id from the app's LanguageRegistry. REQUIRED for type=dictionary; optional grouping hint for type=layout. Must be an already-registered id."
+    },
+    "langIds": {
+     "type": "array",
+     "description": "Languages this addon covers, when one id is not enough. Mainly for fonts: a face that declares its languages is only offered in the pickers for those scripts, so a Latin-only display font is not offered for Bengali. Omit to make no claim, which offers it everywhere.",
+     "items": {
+      "type": "string"
+     }
+    },
+    "license": {
+     "type": "string",
+     "description": "Licence identifier — an SPDX id where one fits (MIT, OFL-1.1, CC0-1.0, CC-BY-4.0), otherwise any short name. Shown on the addon's page."
+    },
+    "licenseText": {
+     "type": "string",
+     "description": "Full licence text inline. Use for a licence with no identifier worth quoting; prefer licenseFile for anything long."
+    },
+    "licenseFile": {
+     "type": "string",
+     "description": "Licence text as a file: a path relative to this manifest, or an absolute https URL. Fetched on demand when the user opens the licence."
+    },
+    "requires": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "Ids of other entries in this same manifest the addon was designed with (a theme naming its font and sound). Soft dependencies: the install screen offers to download them together, and skipping them still installs a working addon that falls back to the user's global choices. Unresolvable ids are ignored."
     }
-  },
-  "$defs": {
-    "repoInfo": {
-      "type": "object",
-      "required": [
-        "id",
-        "name"
-      ],
-      "additionalProperties": true,
+   },
+   "allOf": [
+    {
+     "if": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Stable repository id (reverse-DNS recommended, e.g. com.example.coolpack). Used to namespace installed addons.",
-          "pattern": "^[A-Za-z0-9._-]+$"
-        },
-        "name": {
-          "type": "string",
-          "description": "Human-readable repository name."
-        },
-        "description": {
-          "type": "string"
-        },
-        "author": {
-          "type": "string"
-        },
-        "homepage": {
-          "type": "string",
-          "format": "uri"
-        },
-        "icon": {
-          "type": "string",
-          "description": "Repository icon: a path relative to this manifest, or an absolute https URL."
-        },
-        "updatedAt": {
-          "type": "string",
-          "description": "ISO-8601 date (YYYY-MM-DD) the repo was last updated."
-        }
+       "type": {
+        "const": "dictionary"
+       }
       }
-    },
-    "addon": {
-      "type": "object",
+     },
+     "then": {
       "required": [
-        "id",
-        "type",
-        "name",
-        "version",
-        "path"
-      ],
-      "additionalProperties": true,
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Addon id, unique within this repository.",
-          "pattern": "^[A-Za-z0-9._-]+$"
-        },
-        "type": {
-          "enum": [
-            "theme",
-            "layout",
-            "dictionary",
-            "snippets",
-            "stickers",
-            "icon_pack",
-            "font",
-            "emoji_font",
-            "sound",
-            "plugin"
-          ],
-          "description": "Addon kind. Determines which native import path installs it."
-        },
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string",
-          "description": "Semver version string. Drives update detection.",
-          "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+].+)?$"
-        },
-        "author": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "path": {
-          "type": "string",
-          "description": "Payload location: a path relative to this manifest's directory, or an absolute https URL (hybrid model)."
-        },
-        "sha256": {
-          "type": "string",
-          "description": "Optional lowercase hex SHA-256 of the payload file. Verified before install when present; an addon without one installs normally and is shown as unverified.",
-          "pattern": "^[a-f0-9]{64}$"
-        },
-        "sizeBytes": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Optional payload size, used for the UI and a pre-download guard. The client caps every download regardless."
-        },
-        "previews": {
-          "type": "array",
-          "description": "Optional screenshot/preview images (relative paths or absolute https URLs).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "minAppVersion": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Optional minimum app versionCode required to install."
-        },
-        "langId": {
-          "type": "string",
-          "description": "Language id from the app's LanguageRegistry. REQUIRED for type=dictionary; optional grouping hint for type=layout. Must be an already-registered id."
-        },
-        "langIds": {
-          "type": "array",
-          "description": "Languages this addon covers, when one id is not enough. Mainly for fonts: a face that declares its languages is only offered in the pickers for those scripts, so a Latin-only display font is not offered for Bengali. Omit to make no claim, which offers it everywhere.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "license": {
-          "type": "string",
-          "description": "Licence identifier — an SPDX id where one fits (MIT, OFL-1.1, CC0-1.0, CC-BY-4.0), otherwise any short name. Shown on the addon's page."
-        },
-        "licenseText": {
-          "type": "string",
-          "description": "Full licence text inline. Use for a licence with no identifier worth quoting; prefer licenseFile for anything long."
-        },
-        "licenseFile": {
-          "type": "string",
-          "description": "Licence text as a file: a path relative to this manifest, or an absolute https URL. Fetched on demand when the user opens the licence."
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "type": {
-                "const": "dictionary"
-              }
-            }
-          },
-          "then": {
-            "required": [
-              "langId"
-            ]
-          }
-        }
+       "langId"
       ]
+     }
     }
+   ]
   }
+ }
 }

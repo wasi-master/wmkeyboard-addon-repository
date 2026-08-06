@@ -84,7 +84,8 @@ Unknown fields are ignored, so future versions can add fields without breaking o
   "langId": "fr",
   "langIds": ["en", "ru", "el"],
   "license": "OFL-1.1",
-  "licenseFile": "fonts/OFL-LICENSE.txt"
+  "licenseFile": "fonts/OFL-LICENSE.txt",
+  "requires": ["some-font", "some-sound"]
 }
 ```
 
@@ -105,6 +106,7 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | `license` | | Licence identifier — SPDX where one fits (`MIT`, `OFL-1.1`, `CC0-1.0`, `CC-BY-4.0`), otherwise any short name. Shown on the addon's page. |
 | `licenseText` | | Full licence text, inline. |
 | `licenseFile` | | Licence text as a file, relative or absolute; fetched when the user opens it. |
+| `requires` | | Ids of other entries **in this same manifest** the addon was designed with — a theme naming its font and sound. Soft: the install screen offers to download them together, and skipping them still installs a working addon that falls back to the user's global choices. Unresolvable ids are ignored. |
 
 ### Licensing
 

@@ -9,28 +9,161 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-08-06"
+    "updatedAt": "2026-08-07"
   },
   "addons": [
     {
-      "id": "midnight",
+      "id": "arcade-cabinet",
       "type": "theme",
-      "name": "Midnight",
-      "version": "1.3.0",
+      "name": "Arcade Cabinet",
+      "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "Deep navy dark theme with a soft blue gradient, squircle keys and a matching toolbar.",
+      "description": "A CRT arcade board: pixel-grid key textures, a slow neon hue sweep, WASD picked out in cyan, and pixel coins, stars and hearts bursting under every press. Designed around the Press Start 2P font and the Blip key sound.",
+      "tags": [
+        "retro",
+        "arcade",
+        "pixel",
+        "neon",
+        "dark",
+        "effects"
+      ],
+      "path": "themes/arcade-cabinet.wmtheme.json",
+      "sha256": "33154a44e4461f5a50fbfb033a3d4227279a9adb7a5f9268356ce634da21aea2",
+      "sizeBytes": 3213,
+      "previews": [
+        "previews/arcade-cabinet.jpg"
+      ],
+      "minAppVersion": 3,
+      "license": "CC0-1.0",
+      "requires": [
+        "press-start-2p",
+        "blip"
+      ]
+    },
+    {
+      "id": "sakura-breeze",
+      "type": "theme",
+      "name": "Sakura Breeze",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A light spring theme: scalloped white keys over a flowing pink sky, a blossom branch leaning across the board, drifting petal stickers and blossom emoji bursting on each press. Designed around the Caveat font and the Marimba key sound.",
+      "tags": [
+        "light",
+        "pink",
+        "flowers",
+        "stickers",
+        "effects"
+      ],
+      "path": "themes/sakura-breeze.wmtheme.json",
+      "sha256": "87471417509f0be2a479f6b73f0596f1d7602196051efc58b71684dca0003014",
+      "sizeBytes": 61657,
+      "previews": [
+        "previews/sakura-breeze.jpg"
+      ],
+      "minAppVersion": 3,
+      "license": "CC0-1.0",
+      "requires": [
+        "caveat",
+        "marimba"
+      ]
+    },
+    {
+      "id": "synthwave-highway",
+      "type": "theme",
+      "name": "Synthwave Highway",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "An animated sunset grid rolling behind slanted, translucent neon keys, a cyan glide trail and sparkle bursts. The background is a real looping GIF — the first animated theme in this repository.",
       "tags": [
         "dark",
-        "blue",
-        "gradient"
+        "neon",
+        "animated",
+        "retro",
+        "effects"
       ],
-      "path": "themes/midnight.wmtheme.json",
-      "sha256": "9bf40f422eb8863c85220fe5a7c321de02e9650c0509dc9e4e7836aa142b9043",
-      "sizeBytes": 600,
+      "path": "themes/synthwave-highway.wmtheme.json",
+      "sha256": "2a357ca870003825df5f400361a0f4084919915e57508709a4fa935106c4444d",
+      "sizeBytes": 37253,
       "previews": [
-        "previews/midnight.jpg"
+        "previews/synthwave-highway.jpg"
       ],
+      "minAppVersion": 3,
       "license": "CC0-1.0"
+    },
+    {
+      "id": "blockland",
+      "type": "theme",
+      "name": "Blockland",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar, with little cubes crumbling off every press and a thock key sound. The E key is cut from emerald.",
+      "tags": [
+        "blocks",
+        "pixel",
+        "light",
+        "textures",
+        "effects"
+      ],
+      "path": "themes/blockland.wmtheme.json",
+      "sha256": "efe0de9cf52dc9b58de6ccf7ab9e01bbe7d03b26480cda76c3f49d9a592d6c53",
+      "sizeBytes": 9426,
+      "previews": [
+        "previews/blockland.jpg"
+      ],
+      "minAppVersion": 3,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "typewriter-noir",
+      "type": "theme",
+      "name": "Typewriter Noir",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Paper keys on a dark desk, ticket-shaped like worn typebars, a red carriage-return enter, and grain in the paper. Designed around the JetBrains Mono font and the Typewriter key sound.",
+      "tags": [
+        "dark",
+        "retro",
+        "mono",
+        "paper"
+      ],
+      "path": "themes/typewriter-noir.wmtheme.json",
+      "sha256": "0ddf72f2448ed031bce0e3494d3b41fc088b7a2305e8f065c1ea051452780611",
+      "sizeBytes": 5742,
+      "previews": [
+        "previews/typewriter-noir.jpg"
+      ],
+      "minAppVersion": 3,
+      "license": "CC0-1.0",
+      "requires": [
+        "jetbrains-mono",
+        "typewriter"
+      ]
+    },
+    {
+      "id": "deep-orbit",
+      "type": "theme",
+      "name": "Deep Orbit",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A nebula photo behind translucent pill keys, a ringed planet resting on the corner of the board, a galaxy strip across the space bar and star bursts under your fingers. Designed around the Droplet key sound.",
+      "tags": [
+        "dark",
+        "space",
+        "stickers",
+        "photo",
+        "effects"
+      ],
+      "path": "themes/deep-orbit.wmtheme.json",
+      "sha256": "873132103c382c329802e5b7c3f52e00fc5aeb2f293e33b8557586f987ed70da",
+      "sizeBytes": 76599,
+      "previews": [
+        "previews/deep-orbit.jpg"
+      ],
+      "minAppVersion": 3,
+      "license": "CC0-1.0",
+      "requires": [
+        "droplet"
+      ]
     },
     {
       "id": "braille",

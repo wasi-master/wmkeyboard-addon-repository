@@ -50,6 +50,7 @@ FIELD_ORDER = [
     "license",
     "licenseText",
     "licenseFile",
+    "requires",
 ]
 
 # Where each type's payloads conventionally live, used only to spot files that
