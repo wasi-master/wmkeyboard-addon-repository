@@ -48,6 +48,7 @@
       "sha256": "2f857c5863a412328b07f932462a0947720b89ddd4afc4322f1e18c4d81a0535",
       "sizeBytes": 7307,
       "previews": [
+        "previews/braille-grid.jpg",
         "previews/braille.jpg"
       ],
       "langId": "en",
@@ -265,6 +266,7 @@
       "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
       "sizeBytes": 876576,
       "previews": [
+        "previews/inter-grid.jpg",
         "previews/inter.jpg"
       ],
       "langIds": [
@@ -292,6 +294,7 @@
       "sha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
       "sizeBytes": 187208,
       "previews": [
+        "previews/jetbrains-mono-grid.jpg",
         "previews/jetbrains-mono.jpg"
       ],
       "langIds": [
@@ -319,6 +322,7 @@
       "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
       "sizeBytes": 403648,
       "previews": [
+        "previews/caveat-grid.jpg",
         "previews/caveat.jpg"
       ],
       "langIds": [
@@ -345,6 +349,7 @@
       "sha256": "034c77f1f05ec89421e4a63f0e3a4ca1ecf852cc6d2bf611f126f275728e017d",
       "sizeBytes": 118204,
       "previews": [
+        "previews/press-start-2p-grid.jpg",
         "previews/press-start-2p.jpg"
       ],
       "langIds": [
@@ -370,6 +375,7 @@
       "sha256": "d7d9fe19785190e288f73ecf4e5cbdf9287a4a19b927d5892f1146f9f5d8d148",
       "sizeBytes": 58688,
       "previews": [
+        "previews/wm_font-grid.jpg",
         "previews/wm_font.jpg"
       ],
       "langIds": [
