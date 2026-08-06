@@ -136,6 +136,9 @@
       "path": "snippets/pattern-replies.wmsnippets.json",
       "sha256": "682de666d93395b4d9097f8ebff8e11599b13fce91dc9bf7beff79b8decbed20",
       "sizeBytes": 2736,
+      "previews": [
+        "previews/pattern-replies.png"
+      ],
       "license": "CC0-1.0"
     },
     {
@@ -155,6 +158,9 @@
       "path": "snippets/pattern-formatters.wmsnippets.json",
       "sha256": "331d79d4b8cbc6e2eb865013bec796ccae0ef4c748b9eaa58d5e17661e20a588",
       "sizeBytes": 2590,
+      "previews": [
+        "previews/pattern-formatters.png"
+      ],
       "license": "CC0-1.0"
     },
     {

@@ -111,6 +111,10 @@ def main():
     img.save(output_path, "PNG")
     print(f"Successfully generated preview image: {output_path}")
 
+    # Generate pattern replies and pattern formatters previews
+    generate_pattern_replies_preview()
+    generate_pattern_formatters_preview()
+
     # Generate layout, font, plugin, dictionary, sticker and sound preview images
     try:
         from generate_layout_previews import main as generate_layout_previews_main
@@ -139,5 +143,210 @@ def main():
         generate_slang_preview()
         generate_sticker_preview()
 
+def generate_pattern_replies_preview():
+    width, height = 720, 633
+    img = Image.new("RGB", (width, height))
+    draw = ImageDraw.Draw(img)
+
+    # 1. Gradient Background (Deep Slate to Emerald accent)
+    start_color = (15, 23, 42)    # Slate 900
+    end_color = (6, 78, 59)       # Emerald 900
+    for y in range(height):
+        r = int(start_color[0] + (end_color[0] - start_color[0]) * y / height)
+        g = int(start_color[1] + (end_color[1] - start_color[1]) * y / height)
+        b = int(start_color[2] + (end_color[2] - start_color[2]) * y / height)
+        draw.line([(0, y), (width, y)], fill=(r, g, b))
+
+    font_dir = "fonts"
+    inter_path = os.path.join(font_dir, "inter.ttf")
+    mono_path = os.path.join(font_dir, "jetbrains-mono.ttf")
+
+    title_font = ImageFont.truetype(inter_path, 36)
+    subtitle_font = ImageFont.truetype(inter_path, 18)
+    label_font = ImageFont.truetype(inter_path, 16)
+    arrow_font = ImageFont.truetype(inter_path, 18)
+    trigger_font = ImageFont.truetype(mono_path, 15)
+    pattern_font = ImageFont.truetype(mono_path, 11)
+
+    title_text = "Pattern Replies"
+    title_w = draw.textlength(title_text, font=title_font)
+    draw.text(((width - title_w) // 2, 42), title_text, fill=(248, 250, 252), font=title_font)
+
+    subtitle_text = "Context-aware template responses triggered by regex patterns"
+    subtitle_w = draw.textlength(subtitle_text, font=subtitle_font)
+    draw.text(((width - subtitle_w) // 2, 92), subtitle_text, fill=(167, 243, 208), font=subtitle_font)
+
+    draw.line([(50, 130), (width - 50, 130)], fill=(51, 65, 85), width=1)
+
+    samples = [
+        ("hello John", "^hello (.+)$", "Hello, John! Nice to meet you."),
+        ("thanks Sarah", "^thanks (.+)$", "Dear Sarah,\nThank you for your message..."),
+        ("bday Alex", "^bday (.+)$", "Happy birthday, Alex! Have a great day."),
+        ("eta 15 mins", "^eta (.+)$", "Sorry, running late! Be there in 15 mins."),
+        ("meet tomorrow 3pm", "^meet (.+) (.+)$", "Would tomorrow at 3pm work for you?"),
+    ]
+
+    card_x_start = 40
+    card_x_end = width - 40
+    card_h = 75
+    spacing = 15
+    start_y = 152
+
+    for i, (typed, pattern, expansion) in enumerate(samples):
+        card_y_start = start_y + i * (card_h + spacing)
+        card_y_end = card_y_start + card_h
+
+        draw.rounded_rectangle(
+            [card_x_start, card_y_start, card_x_end, card_y_end],
+            radius=12,
+            fill=(30, 41, 59),
+            outline=(51, 65, 85),
+            width=1
+        )
+
+        pill_x_start = card_x_start + 12
+        pill_x_end = pill_x_start + 175
+        pill_y_start = card_y_start + 10
+        pill_y_end = card_y_end - 10
+
+        draw.rounded_rectangle(
+            [pill_x_start, pill_y_start, pill_x_end, pill_y_end],
+            radius=8,
+            fill=(15, 23, 42),
+            outline=(16, 185, 129),
+            width=1
+        )
+
+        trig_w = draw.textlength(typed, font=trigger_font)
+        trig_x = pill_x_start + (pill_x_end - pill_x_start - trig_w) / 2
+        trig_y = pill_y_start + 8
+        draw.text((trig_x, trig_y), typed, fill=(52, 211, 153), font=trigger_font)
+
+        pat_w = draw.textlength(pattern, font=pattern_font)
+        pat_x = pill_x_start + (pill_x_end - pill_x_start - pat_w) / 2
+        pat_y = pill_y_start + 30
+        draw.text((pat_x, pat_y), pattern, fill=(148, 163, 184), font=pattern_font)
+
+        arrow_text = "→"
+        arrow_w = draw.textlength(arrow_text, font=arrow_font)
+        arrow_x = pill_x_end + 12
+        arrow_y = card_y_start + 26
+        draw.text((arrow_x, arrow_y), arrow_text, fill=(100, 116, 139), font=arrow_font)
+
+        exp_x = arrow_x + arrow_w + 12
+        lines = expansion.split("\n")
+        if len(lines) == 1:
+            exp_y = card_y_start + 28
+            draw.text((exp_x, exp_y), lines[0], fill=(248, 250, 252), font=label_font)
+        else:
+            exp_y = card_y_start + 16
+            for j, line in enumerate(lines[:2]):
+                draw.text((exp_x, exp_y + j * 22), line, fill=(248, 250, 252), font=label_font)
+
+    os.makedirs("previews", exist_ok=True)
+    output_path = os.path.join("previews", "pattern-replies.png")
+    img.save(output_path, "PNG")
+    print(f"Successfully generated preview image: {output_path}")
+
+def generate_pattern_formatters_preview():
+    width, height = 720, 633
+    img = Image.new("RGB", (width, height))
+    draw = ImageDraw.Draw(img)
+
+    # 1. Gradient Background (Deep Slate to Purple accent)
+    start_color = (15, 23, 42)    # Slate 900
+    end_color = (88, 28, 135)     # Purple 900
+    for y in range(height):
+        r = int(start_color[0] + (end_color[0] - start_color[0]) * y / height)
+        g = int(start_color[1] + (end_color[1] - start_color[1]) * y / height)
+        b = int(start_color[2] + (end_color[2] - start_color[2]) * y / height)
+        draw.line([(0, y), (width, y)], fill=(r, g, b))
+
+    font_dir = "fonts"
+    inter_path = os.path.join(font_dir, "inter.ttf")
+    mono_path = os.path.join(font_dir, "jetbrains-mono.ttf")
+
+    title_font = ImageFont.truetype(inter_path, 36)
+    subtitle_font = ImageFont.truetype(inter_path, 18)
+    label_font = ImageFont.truetype(inter_path, 16)
+    arrow_font = ImageFont.truetype(inter_path, 18)
+    trigger_font = ImageFont.truetype(mono_path, 15)
+    pattern_font = ImageFont.truetype(mono_path, 11)
+
+    title_text = "Pattern Formatters"
+    title_w = draw.textlength(title_text, font=title_font)
+    draw.text(((width - title_w) // 2, 42), title_text, fill=(248, 250, 252), font=title_font)
+
+    subtitle_text = "Slash commands to format text, wrap Markdown & expand links"
+    subtitle_w = draw.textlength(subtitle_text, font=subtitle_font)
+    draw.text(((width - subtitle_w) // 2, 92), subtitle_text, fill=(233, 213, 255), font=subtitle_font)
+
+    draw.line([(50, 130), (width - 50, 130)], fill=(51, 65, 85), width=1)
+
+    samples = [
+        ("/up hello world", "^/up (.+)$", "HELLO WORLD"),
+        ("/bold important", "^/bold (.+)$", "**important**"),
+        ("/link Docs site.com", "^/link (.+) (\\S+)$", "[Docs](site.com)"),
+        ("/gh wasi-master", "^/gh (\\S+)$", "https://github.com/wasi-master"),
+        ("/todo Buy coffee", "^/todo (.+)$", "- [ ] Buy coffee"),
+    ]
+
+    card_x_start = 40
+    card_x_end = width - 40
+    card_h = 75
+    spacing = 15
+    start_y = 152
+
+    for i, (typed, pattern, expansion) in enumerate(samples):
+        card_y_start = start_y + i * (card_h + spacing)
+        card_y_end = card_y_start + card_h
+
+        draw.rounded_rectangle(
+            [card_x_start, card_y_start, card_x_end, card_y_end],
+            radius=12,
+            fill=(30, 41, 59),
+            outline=(51, 65, 85),
+            width=1
+        )
+
+        pill_x_start = card_x_start + 12
+        pill_x_end = pill_x_start + 195
+        pill_y_start = card_y_start + 10
+        pill_y_end = card_y_end - 10
+
+        draw.rounded_rectangle(
+            [pill_x_start, pill_y_start, pill_x_end, pill_y_end],
+            radius=8,
+            fill=(15, 23, 42),
+            outline=(168, 85, 247),
+            width=1
+        )
+
+        trig_w = draw.textlength(typed, font=trigger_font)
+        trig_x = pill_x_start + (pill_x_end - pill_x_start - trig_w) / 2
+        trig_y = pill_y_start + 8
+        draw.text((trig_x, trig_y), typed, fill=(216, 180, 254), font=trigger_font)
+
+        pat_w = draw.textlength(pattern, font=pattern_font)
+        pat_x = pill_x_start + (pill_x_end - pill_x_start - pat_w) / 2
+        pat_y = pill_y_start + 30
+        draw.text((pat_x, pat_y), pattern, fill=(148, 163, 184), font=pattern_font)
+
+        arrow_text = "→"
+        arrow_w = draw.textlength(arrow_text, font=arrow_font)
+        arrow_x = pill_x_end + 12
+        arrow_y = card_y_start + 26
+        draw.text((arrow_x, arrow_y), arrow_text, fill=(100, 116, 139), font=arrow_font)
+
+        exp_x = arrow_x + arrow_w + 12
+        exp_y = card_y_start + 28
+        draw.text((exp_x, exp_y), expansion, fill=(248, 250, 252), font=label_font)
+
+    os.makedirs("previews", exist_ok=True)
+    output_path = os.path.join("previews", "pattern-formatters.png")
+    img.save(output_path, "PNG")
+    print(f"Successfully generated preview image: {output_path}")
+
 if __name__ == "__main__":
     main()
+
