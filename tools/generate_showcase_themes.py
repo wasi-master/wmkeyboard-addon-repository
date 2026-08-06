@@ -399,6 +399,12 @@ def arcade_cabinet() -> dict:
         "toolCircleBackground": c(0xFF10102A),
         "toolBorderColor": c(0xFF00E5FF),
         "toolBorderWidthDp": 1.0,
+        "chipShape": "SHARP",
+        "chipCornerRadiusDp": 0,
+        "chipBorderColor": c(0xFF00E5FF),
+        "chipBorderWidthDp": 1.0,
+        "chipActiveBackground": c(0xFF20204A),
+        "chipActiveText": c(0xFF00E5FF),
         "keyTextureScale": "TILE",
         "keyTextureOpacity": 0.55,
         "fontScale": 0.72,
@@ -501,13 +507,17 @@ def synthwave_highway() -> dict:
         "popupBackground": c(0xFF1E1440),
         "popupText": c(0xFFFFD5F2),
         "popupHeightDp": 64,
+        # The bubble is a key: same slant, same neon border, floating clear of
+        # the finger instead of growing out of the key.
+        "popupShape": "SLANT",
+        "popupPlacement": "float",
+        "popupBorderColor": c(0xFFFF2DAF),
+        "popupBorderWidthDp": 1.0,
         "toolShape": "PILL",
         "toolWidthDp": 52,
         "toolCircleRadiusDp": 12,
         "toolbarIcon": c(0xFF9AE8FF),
         "toolCircleBackground": c(0x66150F2E),
-        "keyEffect": "SPARKLE",
-        "keyEffectIntensity": 1.4,
         "assets": {},
         "backgroundImageBase64": b64_gif(synthwave_gif(), 80),
     }
@@ -536,9 +546,19 @@ def blockland() -> dict:
         "accent": c(0xFF58A03E),
         "popupBackground": c(0xFF6B4F35),
         "popupText": c(0xFFFFFFFF),
+        # A block of planks: dead-square, plank-textured, chunky dark rim —
+        # the popup is one more block set on top of the board.
+        "popupShape": "SHARP",
+        "popupCornerRadiusDp": 0,
+        "popupBorderColor": c(0xFF3A2E1E),
+        "popupBorderWidthDp": 2.0,
         "suggestionText": c(0xFF2E2418),
         "toolbarIcon": c(0xFF3A2E1E),
         "toolCircleBackground": c(0x8CFFFFFF),
+        "chipShape": "SHARP",
+        "chipCornerRadiusDp": 0,
+        "chipBorderColor": c(0x66000000),
+        "chipBorderWidthDp": 1.5,
         "keyTextureScale": "TILE",
         "keyTextureOpacity": 1.0,
         "boldKeyLabels": True,
@@ -555,6 +575,7 @@ def blockland() -> dict:
             "keyTextureModifier": b64(stone_tile()),
             "keyTextureEnter": b64(grass_tile()),
             "keyTextureSpace": b64(plank_tile()),
+            "popupTexture": b64(plank_tile()),
             **{f"effectImage:{i}": b64(img) for i, img in enumerate(cubes)},
         },
     }
@@ -566,8 +587,10 @@ def typewriter_noir() -> dict:
         "name": "Typewriter Noir",
         "dark": True,
         "boardBackground": c(0xFF17130E),
-        "keyShape": "TICKET",
-        "keyCornerRadiusDp": 10,
+        # Round caps with a metal rim — the typewriter everyone pictures.
+        # The wide keys (space, enter) keep a stadium; a circle alone in the
+        # middle of a spacebar reads as a hole.
+        "keyShape": "CIRCLE",
         "keyBackground": c(0xFFF3EAD8),
         "keyText": c(0xFF241F19),
         "modifierKeyBackground": c(0xFFD9CDB4),
@@ -575,16 +598,22 @@ def typewriter_noir() -> dict:
         "enterKeyBackground": c(0xFFB3282D),
         "enterKeyText": c(0xFFF8F2E4),
         "pressedKeyBackground": c(0xFFCBBFa4 & 0xFFFFFFFF),
-        "keyBorderColor": c(0xFF5A4E3C),
-        "keyBorderWidthDp": 1.0,
+        "keyBorderColor": c(0xFF6E614A),
+        "keyBorderWidthDp": 2.0,
         "accent": c(0xFFB3282D),
         "popupBackground": c(0xFFF3EAD8),
         "popupText": c(0xFF241F19),
-        "popupShape": "TICKET",
+        "popupShape": "CIRCLE",
+        "popupBorderColor": c(0xFF6E614A),
+        "popupBorderWidthDp": 2.0,
         "toolbarIcon": c(0xFFC8B890),
         "toolCircleBackground": c(0xFF2A2318),
         "toolCircleActiveBackground": c(0xFF4A3F2A),
         "chipBackground": c(0xFF241E15),
+        "chipText": c(0xFFE8DFC8),
+        "chipActiveBackground": c(0xFFB3282D),
+        "chipActiveText": c(0xFFF8F2E4),
+        "chipShape": "PILL",
         "suggestionText": c(0xFFE8DFC8),
         "keyTextureScale": "CROP",
         "keyTextureOpacity": 0.5,
@@ -626,6 +655,15 @@ def deep_orbit() -> dict:
         "gestureTrailColor": c(0xFFB69CFF),
         "popupBackground": c(0xF01E1838),
         "popupText": c(0xFFE8E4FF),
+        # Bubbles: pill popups floating free above the keys, ringed like the
+        # hexagon tools are.
+        "popupShape": "PILL",
+        "popupPlacement": "float",
+        "popupBorderColor": c(0xFF7C5CFF),
+        "popupBorderWidthDp": 1.0,
+        "chipShape": "PILL",
+        "chipBorderColor": c(0x807C5CFF),
+        "chipBorderWidthDp": 1.0,
         "toolShape": "HEXAGON",
         "toolbarIcon": c(0xFFB8B0E8),
         "toolCircleBackground": c(0x66241E48),
@@ -702,6 +740,7 @@ def preview(theme: dict, subtitle: str) -> Image.Image:
     border = theme.get("keyBorderColor")
     border = argb_to_rgba(border) if border else None
     radius = 6 if theme["keyShape"] in ("SHARP",) else 16
+    circle = theme["keyShape"] == "CIRCLE"
 
     # Key texture wash, if the theme carries one.
     tex = theme.get("assets", {}).get("keyTexture")
@@ -721,21 +760,37 @@ def preview(theme: dict, subtitle: str) -> Image.Image:
             box = [x0, y0, x0 + key_w - 8, y0 + key_h]
             is_mod = r == 2 and i in (0, count - 1)
             fill = mod if is_mod else key
-            rounded(draw, box, radius, fill, border, 2)
+            if circle:
+                # The round typewriter cap, inscribed in the key box.
+                d = min(box[2] - box[0], box[3] - box[1])
+                ckx, cky = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+                cap = [ckx - d / 2, cky - d / 2, ckx + d / 2, cky + d / 2]
+                draw.ellipse(cap, fill=fill, outline=border, width=2)
+            else:
+                rounded(draw, box, radius, fill, border, 2)
             if tex_img is not None and not is_mod:
                 tile = tex_img.resize((key_w - 8, key_h))
                 alpha = int(255 * theme.get("keyTextureOpacity", 1.0))
                 tile.putalpha(tile.split()[3].point(lambda a: a * alpha // 255))
                 mask = Image.new("L", tile.size, 0)
-                ImageDraw.Draw(mask).rounded_rectangle(
-                    [0, 0, tile.width, tile.height], radius=radius, fill=255
-                )
+                if circle:
+                    d = min(tile.width, tile.height)
+                    mx, my = tile.width / 2, tile.height / 2
+                    ImageDraw.Draw(mask).ellipse(
+                        [mx - d / 2, my - d / 2, mx + d / 2, my + d / 2], fill=255
+                    )
+                else:
+                    ImageDraw.Draw(mask).rounded_rectangle(
+                        [0, 0, tile.width, tile.height], radius=radius, fill=255
+                    )
                 tile.putalpha(Image.composite(tile.split()[3], mask, mask))
                 overlay.alpha_composite(tile, (x0, y0))
-    # Space row with enter.
+    # Space row with enter. Circle themes keep a stadium on the wide keys,
+    # matching what the keyboard itself draws for them.
     y0 = top + 3 * (key_h + 12)
-    rounded(draw, [150, y0, w - 190, y0 + key_h], radius, key, border, 2)
-    rounded(draw, [w - 180, y0, w - 30, y0 + key_h], radius, enter, border, 2)
+    wide_radius = key_h // 2 if circle else radius
+    rounded(draw, [150, y0, w - 190, y0 + key_h], wide_radius, key, border, 2)
+    rounded(draw, [w - 180, y0, w - 30, y0 + key_h], wide_radius, enter, border, 2)
 
     composed = Image.alpha_composite(img.convert("RGBA"), overlay)
 

@@ -28,8 +28,8 @@
         "effects"
       ],
       "path": "themes/arcade-cabinet.wmtheme.json",
-      "sha256": "33154a44e4461f5a50fbfb033a3d4227279a9adb7a5f9268356ce634da21aea2",
-      "sizeBytes": 3213,
+      "sha256": "e7bbbe55e564e90d6e99da6177b75f1e215ec22a5557b189d2e2f0ac3c91639e",
+      "sizeBytes": 3389,
       "previews": [
         "previews/arcade-cabinet.jpg"
       ],
@@ -73,7 +73,7 @@
       "name": "Synthwave Highway",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "An animated sunset grid rolling behind slanted, translucent neon keys, a cyan glide trail and sparkle bursts. The background is a real looping GIF — the first animated theme in this repository.",
+      "description": "An animated sunset grid rolling behind slanted, translucent neon keys and a cyan glide trail. The background is a real looping GIF, and the key-preview bubble is a slanted neon key of its own, floating above the finger.",
       "tags": [
         "dark",
         "neon",
@@ -82,8 +82,8 @@
         "effects"
       ],
       "path": "themes/synthwave-highway.wmtheme.json",
-      "sha256": "2a357ca870003825df5f400361a0f4084919915e57508709a4fa935106c4444d",
-      "sizeBytes": 37253,
+      "sha256": "210d22c1928e1491afb0772ac780759d76390337c0a5e7a865153bb8a0bc1382",
+      "sizeBytes": 37313,
       "previews": [
         "previews/synthwave-highway.jpg"
       ],
@@ -96,7 +96,7 @@
       "name": "Blockland",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar, with little cubes crumbling off every press and a thock key sound. The E key is cut from emerald.",
+      "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar, with little cubes crumbling off every press and a thock key sound. The E key is cut from emerald, and the key popup is a dead-square plank block with a chunky rim.",
       "tags": [
         "blocks",
         "pixel",
@@ -105,8 +105,8 @@
         "effects"
       ],
       "path": "themes/blockland.wmtheme.json",
-      "sha256": "efe0de9cf52dc9b58de6ccf7ab9e01bbe7d03b26480cda76c3f49d9a592d6c53",
-      "sizeBytes": 9426,
+      "sha256": "6d9b1861752b292019b836e13fc1bf45cda227494a72fff000be5f414d36a12e",
+      "sizeBytes": 10908,
       "previews": [
         "previews/blockland.jpg"
       ],
@@ -119,7 +119,7 @@
       "name": "Typewriter Noir",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "Paper keys on a dark desk, ticket-shaped like worn typebars, a red carriage-return enter, and grain in the paper. Designed around the JetBrains Mono font and the Typewriter key sound.",
+      "description": "Paper keys on a dark desk — round typewriter caps rimmed in metal — a red carriage-return enter, and grain in the paper. The key popup is a round cap too. Designed around the JetBrains Mono font and the Typewriter key sound.",
       "tags": [
         "dark",
         "retro",
@@ -127,12 +127,12 @@
         "paper"
       ],
       "path": "themes/typewriter-noir.wmtheme.json",
-      "sha256": "0ddf72f2448ed031bce0e3494d3b41fc088b7a2305e8f065c1ea051452780611",
-      "sizeBytes": 5742,
+      "sha256": "ee1d1af9aef4cdf3bee014a2b663d1efca302537c4120403bc8083857310c425",
+      "sizeBytes": 5884,
       "previews": [
         "previews/typewriter-noir.jpg"
       ],
-      "minAppVersion": 3,
+      "minAppVersion": 4,
       "license": "CC0-1.0",
       "requires": [
         "jetbrains-mono",
@@ -145,7 +145,7 @@
       "name": "Deep Orbit",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "A nebula photo behind translucent pill keys, a ringed planet resting on the corner of the board, a galaxy strip across the space bar and star bursts under your fingers. Designed around the Droplet key sound.",
+      "description": "A nebula photo behind translucent pill keys, a ringed planet resting on the corner of the board, a galaxy strip across the space bar and star bursts under your fingers. Key popups float free above the keys like ringed bubbles. Designed around the Droplet key sound.",
       "tags": [
         "dark",
         "space",
@@ -154,8 +154,8 @@
         "effects"
       ],
       "path": "themes/deep-orbit.wmtheme.json",
-      "sha256": "873132103c382c329802e5b7c3f52e00fc5aeb2f293e33b8557586f987ed70da",
-      "sizeBytes": 76599,
+      "sha256": "5d23f4efc0d8035bbc0c208a07664014893a39ab159c6dda67344aeca740171c",
+      "sizeBytes": 78500,
       "previews": [
         "previews/deep-orbit.jpg"
       ],
