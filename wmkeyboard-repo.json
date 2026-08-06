@@ -624,6 +624,7 @@
       "sha256": "81770a40147992c88df1a2260589367038270b6c5602386d71bd8843715b02e0",
       "sizeBytes": 1693,
       "previews": [
+        "previews/cipher-tool-grid.jpg",
         "previews/cipher-tool.jpg"
       ],
       "license": "MIT",
@@ -644,6 +645,9 @@
       "path": "plugins/ui-kitchen-sink.wmplugin",
       "sha256": "73ee31df75cab7c7f0e6891b91cb85d300c63e8d822c3d375e3620a523ba8a0e",
       "sizeBytes": 1739,
+      "previews": [
+        "previews/ui-kitchen-sink-grid.jpg"
+      ],
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -664,6 +668,7 @@
       "sha256": "0912fefddc9e732043a4d5d4bbfd812f0fdba5294fea4ae09da575694896927f",
       "sizeBytes": 1612,
       "previews": [
+        "previews/todo-list-grid.jpg",
         "previews/todo-list-1.jpg",
         "previews/todo-list-2.jpg"
       ],
@@ -687,6 +692,7 @@
       "sha256": "10953cc6b7a618079f17c2cc42697fe4178d21c64e832814c397c92b0319c9d7",
       "sizeBytes": 2209,
       "previews": [
+        "previews/text-tools-grid.jpg",
         "previews/text-tools-1.jpg",
         "previews/text-tools-2.jpg",
         "previews/text-tools-3.jpg",

@@ -39,10 +39,10 @@ To add this repository in **WM Keyboard**, open **Settings → Addons → Add re
 | **Marimba** | `sound` | Soft wooden mallet: a warm fundamental with its ringing fourth harmonic. CC0 — see sounds/SOUNDS-LICENSE.txt. | <img src="previews/marimba.png" width="120" alt="Marimba Preview" /> | [`sounds/marimba.mp3`](sounds/marimba.mp3) |
 | **Droplet** | `sound` | Water drop: a fast upward pitch bend, no transient at all. CC0 — see sounds/SOUNDS-LICENSE.txt. | <img src="previews/droplet.png" width="120" alt="Droplet Preview" /> | [`sounds/droplet.mp3`](sounds/droplet.mp3) |
 | **Blip** | `sound` | Retro square-wave blip with an 8-bit handheld flavour. CC0 — see sounds/SOUNDS-LICENSE.txt. | <img src="previews/blip.png" width="120" alt="Blip Preview" /> | [`sounds/blip.mp3`](sounds/blip.mp3) |
-| **Cipher Tool** | `plugin` | Caesar and Vigenere ciphers, encode and decode. The plugin the getting-started guide builds. | <img src="previews/cipher-tool.jpg" width="120" alt="Cipher Tool Preview" /> | [`plugins/cipher-tool.wmplugin`](plugins/cipher-tool.wmplugin) |
-| **UI Kitchen Sink** | `plugin` | Every plugin widget and event in one place, to look at and copy from. | — | [`plugins/ui-kitchen-sink.wmplugin`](plugins/ui-kitchen-sink.wmplugin) |
-| **Todo List** | `plugin` | A checklist that remembers itself. Shows how plugin storage works. | <img src="previews/todo-list-1.jpg" width="120" alt="Todo List Preview" /> | [`plugins/todo-list.wmplugin`](plugins/todo-list.wmplugin) |
-| **Text Tools** | `plugin` | Change case, encode as base64/hex/URL, and count words. | <img src="previews/text-tools-1.jpg" width="120" alt="Text Tools Preview" /> | [`plugins/text-tools.wmplugin`](plugins/text-tools.wmplugin) |
+| **Cipher Tool** | `plugin` | Caesar and Vigenere ciphers, encode and decode. The plugin the getting-started guide builds. | <img src="previews/cipher-tool-grid.jpg" width="120" alt="Cipher Tool Preview" /> | [`plugins/cipher-tool.wmplugin`](plugins/cipher-tool.wmplugin) |
+| **UI Kitchen Sink** | `plugin` | Every plugin widget and event in one place, to look at and copy from. | <img src="previews/ui-kitchen-sink-grid.jpg" width="120" alt="UI Kitchen Sink Preview" /> | [`plugins/ui-kitchen-sink.wmplugin`](plugins/ui-kitchen-sink.wmplugin) |
+| **Todo List** | `plugin` | A checklist that remembers itself. Shows how plugin storage works. | <img src="previews/todo-list-grid.jpg" width="120" alt="Todo List Preview" /> | [`plugins/todo-list.wmplugin`](plugins/todo-list.wmplugin) |
+| **Text Tools** | `plugin` | Change case, encode as base64/hex/URL, and count words. | <img src="previews/text-tools-grid.jpg" width="120" alt="Text Tools Preview" /> | [`plugins/text-tools.wmplugin`](plugins/text-tools.wmplugin) |
 
 Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the repository root.
 

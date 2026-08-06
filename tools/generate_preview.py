@@ -111,14 +111,16 @@ def main():
     img.save(output_path, "PNG")
     print(f"Successfully generated preview image: {output_path}")
 
-    # Generate layout, font, dictionary, sticker and sound preview images
+    # Generate layout, font, plugin, dictionary, sticker and sound preview images
     try:
         from generate_layout_previews import main as generate_layout_previews_main
         from generate_font_previews import main as generate_font_previews_main
+        from generate_plugin_previews import main as generate_plugin_previews_main
         from generate_dictionary_previews import generate_developer_preview, generate_slang_preview
         from generate_sound_and_sticker_previews import generate_sticker_preview
         generate_layout_previews_main()
         generate_font_previews_main()
+        generate_plugin_previews_main()
         generate_developer_preview()
         generate_slang_preview()
         generate_sticker_preview()
@@ -127,10 +129,12 @@ def main():
         sys.path.append(os.path.dirname(__file__))
         from generate_layout_previews import main as generate_layout_previews_main
         from generate_font_previews import main as generate_font_previews_main
+        from generate_plugin_previews import main as generate_plugin_previews_main
         from generate_dictionary_previews import generate_developer_preview, generate_slang_preview
         from generate_sound_and_sticker_previews import generate_sticker_preview
         generate_layout_previews_main()
         generate_font_previews_main()
+        generate_plugin_previews_main()
         generate_developer_preview()
         generate_slang_preview()
         generate_sticker_preview()
