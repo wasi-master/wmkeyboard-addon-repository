@@ -20,6 +20,7 @@
  "popupBorderColor": 4285423946,
  "popupBorderWidthDp": 2.0,
  "toolbarIcon": 4291344528,
+ "toolShape": "CIRCLE",
  "toolCircleBackground": 4280951576,
  "toolCircleActiveBackground": 4283055914,
  "chipBackground": 4280557077,

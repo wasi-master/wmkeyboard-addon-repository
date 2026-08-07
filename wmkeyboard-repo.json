@@ -44,7 +44,7 @@
       "id": "sakura-breeze",
       "type": "theme",
       "name": "Sakura Breeze",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
       "description": "A light spring theme: scalloped white keys over a flowing pink sky, a blossom branch leaning across the board, drifting petal stickers and blossom emoji bursting on each press. Designed around the Caveat font and the Marimba key sound.",
       "tags": [
@@ -55,8 +55,8 @@
         "effects"
       ],
       "path": "themes/sakura-breeze.wmtheme.json",
-      "sha256": "87471417509f0be2a479f6b73f0596f1d7602196051efc58b71684dca0003014",
-      "sizeBytes": 61657,
+      "sha256": "d860e4fe27eb603eb84b9f79c843c0b1be606795d2440475adb51b41a7015944",
+      "sizeBytes": 61853,
       "previews": [
         "previews/sakura-breeze.jpg"
       ],
@@ -71,7 +71,7 @@
       "id": "synthwave-highway",
       "type": "theme",
       "name": "Synthwave Highway",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
       "description": "An animated sunset grid rolling behind slanted, translucent neon keys and a cyan glide trail. The background is a real looping GIF, and the key-preview bubble is a slanted neon key of its own, floating above the finger.",
       "tags": [
@@ -82,8 +82,8 @@
         "effects"
       ],
       "path": "themes/synthwave-highway.wmtheme.json",
-      "sha256": "210d22c1928e1491afb0772ac780759d76390337c0a5e7a865153bb8a0bc1382",
-      "sizeBytes": 37313,
+      "sha256": "f1dffd7941bcf423dbe4f8d94a6218f72d3391ddaa5f15ac6ea2bdde90b4c6ed",
+      "sizeBytes": 37464,
       "previews": [
         "previews/synthwave-highway.jpg"
       ],
@@ -94,7 +94,7 @@
       "id": "blockland",
       "type": "theme",
       "name": "Blockland",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Wasi Master",
       "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar under a drifting pixel-cloud sky — a real looping GIF — with a thock key sound. The E key is cut from emerald, and the key popup is a dead-square plank block with a chunky rim.",
       "tags": [
@@ -105,8 +105,8 @@
         "animated"
       ],
       "path": "themes/blockland.wmtheme.json",
-      "sha256": "1f219cfaf05ee236c0b1b35adca259949261d708d68dc44e10ec4ee3195e423c",
-      "sizeBytes": 89132,
+      "sha256": "dc317495ce6f973d86967b5dcbdda52b28156212b1003baba449c82a9d99813f",
+      "sizeBytes": 89155,
       "previews": [
         "previews/blockland.jpg"
       ],
@@ -117,7 +117,7 @@
       "id": "typewriter-noir",
       "type": "theme",
       "name": "Typewriter Noir",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
       "description": "Paper keys on a dark desk — round typewriter caps rimmed in metal — a red carriage-return enter, and grain in the paper. The key popup is a round cap too. Designed around the JetBrains Mono font and the Typewriter key sound.",
       "tags": [
@@ -127,8 +127,8 @@
         "paper"
       ],
       "path": "themes/typewriter-noir.wmtheme.json",
-      "sha256": "0f420aed09e8b7df308d44797f1aa41a88607f4af1c8585a58129a789d87ad0a",
-      "sizeBytes": 5904,
+      "sha256": "e2f7e124351d0772a0d9f08a195662332283e7799433bc321059e31bc0613189",
+      "sizeBytes": 5928,
       "previews": [
         "previews/typewriter-noir.jpg"
       ],
