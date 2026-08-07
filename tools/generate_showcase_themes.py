@@ -681,10 +681,9 @@ def deep_orbit() -> dict:
 # The Michil prep-community site's design language: chunky pixel-art UI in an
 # exact palette (their CSS custom properties, transcribed below), parchment
 # cards edged in brown, deep-green quest buttons outlined in light green, gold
-# coins everywhere, and a blocky sky-and-grass hero. The board is that hero as
-# a still pixel sky (the drifting-cloud loop belongs to Blockland); the keys
-# are the parchment cards; enter is the STUDENT button; space is the grass
-# block; presses pay out Michilcoins.
+# coins everywhere. The board is the site's flat cream page background — the
+# blocky sky-and-grass hero belongs to Blockland — the keys are the parchment
+# cards; enter is the STUDENT button; presses pay out Michilcoins.
 
 MICHIL_LIGHT_GREEN = (0x6E, 0xA2, 0x4A)  # --color-tathir-light-green
 MICHIL_DARK_GREEN = (0x3E, 0x5E, 0x3E)  # --color-tathir-dark-green
@@ -696,7 +695,7 @@ MICHIL_MAROON = (0x5A, 0x3A, 0x2B)  # --color-tathir-maroon
 MICHIL_GOLD = (0xFF, 0xD7, 0x00)  # --color-tathir-gold
 MICHIL_BRONZE = (0xCD, 0x7F, 0x32)  # --color-tathir-bronze
 MICHIL_SUCCESS = (0x86, 0xC0, 0x6C)  # --color-tathir-success
-MICHIL_INFO = (0x7C, 0xB8, 0xFF)  # --color-tathir-info
+MICHIL_WARNING = (0xE6, 0xB3, 0x5E)  # --color-tathir-warning
 
 
 def bevel_tile(base: tuple, jitter: int, top: tuple, bottom: tuple, speckles=()) -> Image.Image:
@@ -724,23 +723,8 @@ def michil_button_tile() -> Image.Image:
 
 
 def michil_pressed_tile() -> Image.Image:
-    """The parchment pushed in: bevel inverted, a shade darker."""
-    return bevel_tile(MICHIL_BEIGE, 4, shade(MICHIL_BEIGE, -24), shade(MICHIL_BEIGE, 12))
-
-
-def michil_grass_space() -> Image.Image:
-    """The hero ground as a wide strip: grass crown over dirt."""
-    img = Image.new("RGB", (64, 16))
-    px = img.load()
-    for y in range(16):
-        for x in range(64):
-            if y < 5:
-                base = MICHIL_SUCCESS if y == 0 or rng.random() < 0.18 else MICHIL_LIGHT_GREEN
-                px[x, y] = shade(base, rng.randint(-10, 10))
-            else:
-                base = MICHIL_MAROON if rng.random() < 0.16 else MICHIL_BROWN
-                px[x, y] = shade(base, rng.randint(-10, 10))
-    return upscale(img, 8)
+    """The card pushed in: the site's warning gold, bevel inverted."""
+    return bevel_tile(MICHIL_WARNING, 4, shade(MICHIL_WARNING, -24), shade(MICHIL_WARNING, 12))
 
 
 MICHIL_COIN = sprite_from_rows(
@@ -815,11 +799,9 @@ def _pixel_sky_scene(
     grass_hi: tuple,
     dirt: tuple,
     dirt_dark: tuple,
-    coin: tuple | None,
 ) -> tuple[Image.Image, list]:
     """The hero scene's fixed parts: the patched-sky-and-ground plate and the
-    cloud layers (sprite, y, laps per cycle, phase). Shared by the animated
-    (Blockland) and the still (Michil) renders."""
+    cloud layers (sprite, y, laps per cycle, phase)."""
     lw, lh = 120, 68
     grass_top, dirt_top = 56, 61
     plate = Image.new("RGB", (lw, lh), sky)
@@ -838,8 +820,6 @@ def _pixel_sky_scene(
             else:
                 base = dirt_dark if rng.random() < 0.16 else dirt
             px[x, y] = shade(base, rng.randint(-8, 8))
-    if coin is not None:
-        ImageDraw.Draw(plate).rectangle([92, 57, 93, 58], fill=coin)
     clouds = [
         # (sprite, y, laps per cycle, phase): far clouds drift once per
         # cycle, near ones twice — whole laps keep the loop seamless.
@@ -870,7 +850,6 @@ def blockland_sky_gif() -> list[Image.Image]:
         grass_hi=(121, 189, 92),
         dirt=(121, 85, 58),
         dirt_dark=(96, 66, 44),
-        coin=None,
     )
     steps = 30
     return [
@@ -879,20 +858,6 @@ def blockland_sky_gif() -> list[Image.Image]:
         .convert("P")
         for f in range(steps)
     ]
-
-
-def michil_sky_still() -> Image.Image:
-    """The Michil hero as a still: same scene, clouds parked, coin resting
-    in the grass."""
-    plate, clouds = _pixel_sky_scene(
-        sky=MICHIL_INFO,
-        grass=MICHIL_LIGHT_GREEN,
-        grass_hi=MICHIL_SUCCESS,
-        dirt=MICHIL_BROWN,
-        dirt_dark=MICHIL_MAROON,
-        coin=MICHIL_GOLD,
-    )
-    return upscale(_compose_sky_frame(plate, clouds, 0.0), 4)
 
 
 def michil() -> dict:
@@ -904,17 +869,16 @@ def michil() -> dict:
         "id": "michil",
         "name": "Michil",
         "dark": False,
-        "boardBackground": c(0x00000000),
-        "backgroundImageOpacity": 1.0,
-        "backgroundImageBlur": 0.0,
+        # The site's flat cream page background; the cards sit right on it.
+        "boardBackground": argb(MICHIL_CREAM),
         "keyShape": "SHARP",
         "keyBackground": argb(MICHIL_CREAM_LIGHT),
         "keyText": argb(MICHIL_MAROON),
-        "modifierKeyBackground": argb(MICHIL_CREAM),
+        "modifierKeyBackground": argb(MICHIL_BEIGE),
         "modifierKeyText": argb(MICHIL_MAROON),
         "enterKeyBackground": argb(MICHIL_DARK_GREEN),
         "enterKeyText": argb(MICHIL_BEIGE),
-        "pressedKeyBackground": argb(MICHIL_BEIGE),
+        "pressedKeyBackground": argb(MICHIL_WARNING),
         "keyBorderColor": argb(MICHIL_BROWN),
         "keyBorderWidthDp": 2.0,
         "accent": argb(MICHIL_LIGHT_GREEN),
@@ -966,22 +930,14 @@ def michil() -> dict:
                 "popupText": argb(MICHIL_BEIGE),
             },
         },
-        "decals": [
-            {"id": "cloud_l", "x": 0.11, "y": 0.08, "scale": 0.13, "rotationDeg": 0.0, "opacity": 0.55},
-            {"id": "cloud_r", "x": 0.87, "y": 0.14, "scale": 0.09, "rotationDeg": 0.0, "opacity": 0.5},
-        ],
         "assets": {
             "keyTexture": b64(michil_parchment(MICHIL_CREAM_LIGHT)),
-            "keyTextureModifier": b64(michil_parchment(MICHIL_CREAM)),
+            "keyTextureModifier": b64(michil_parchment(MICHIL_BEIGE)),
             "keyTextureEnter": b64(michil_button_tile()),
-            "keyTextureSpace": b64(michil_grass_space()),
             "keyTexturePressed": b64(michil_pressed_tile()),
             "popupTexture": b64(michil_parchment(MICHIL_BEIGE)),
-            "decal:cloud_l": b64(michil_cloud(30)),
-            "decal:cloud_r": b64(michil_cloud(22)),
             **{f"effectImage:{i}": b64(img) for i, img in enumerate(fx)},
         },
-        "backgroundImageBase64": b64(michil_sky_still()),
     }
 
 
@@ -1136,7 +1092,7 @@ SUBTITLES = {
     "blockland": "Tiled block textures under a drifting pixel sky",
     "typewriter-noir": "Paper keys, mono type, a red carriage return",
     "deep-orbit": "A nebula photo, a ringed planet, star bursts",
-    "michil": "Parchment keys over a still pixel sky, coin bursts",
+    "michil": "Parchment cards on the site's cream board, coin bursts",
 }
 
 

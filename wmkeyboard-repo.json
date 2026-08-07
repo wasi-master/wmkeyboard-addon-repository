@@ -171,7 +171,7 @@
       "name": "Michil",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "A pixel study-hall in the Michil community's exact palette: parchment keys edged in brown over a still pixel sky, a grass-block space bar, a deep-green quest-button enter outlined in light green, a gold Michilcoin on the M key, and coins, stars and trophies bursting from every press. Designed around the Bloxat font and the Blip key sound.",
+      "description": "The Michil community's dashboard as a keyboard, in its exact palette: parchment card keys edged in brown on the site's flat cream background, a deep-green quest-button enter outlined in light green, a gold Michilcoin on the M key, a warning-gold press flash, and coins, stars and trophies bursting from every press. Designed around the Bloxat font and the Blip key sound.",
       "tags": [
         "pixel",
         "retro",
@@ -180,8 +180,8 @@
         "effects"
       ],
       "path": "themes/michil.wmtheme.json",
-      "sha256": "439c3330f20ae90a2e97ea816bbd52ea4dc4eb483b08ed21d5ff323c81867b23",
-      "sizeBytes": 21881,
+      "sha256": "cb84b0c989288cdabd30087624d58e1cefa84cb07fbc766e66f01d50bc23353b",
+      "sizeBytes": 8879,
       "previews": [
         "previews/michil.jpg"
       ],
