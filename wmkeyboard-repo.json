@@ -166,6 +166,34 @@
       ]
     },
     {
+      "id": "michil",
+      "type": "theme",
+      "name": "Michil",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A pixel study-hall in the Michil community's exact palette: parchment keys edged in brown under a drifting pixel sky, a grass-block space bar, a deep-green quest-button enter outlined in light green, a gold Michilcoin on the M key, and coins, stars and trophies bursting from every press. Designed around the Bloxat font and the Blip key sound.",
+      "tags": [
+        "pixel",
+        "retro",
+        "light",
+        "green",
+        "animated",
+        "effects"
+      ],
+      "path": "themes/michil.wmtheme.json",
+      "sha256": "e3506b8816928b63f2ef3442d05526c90fff435c50c40906b6d4fd036b7e74a0",
+      "sizeBytes": 87798,
+      "previews": [
+        "previews/michil.jpg"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "requires": [
+        "bloxat",
+        "blip"
+      ]
+    },
+    {
       "id": "braille",
       "type": "layout",
       "name": "Braille (Unicode)",
@@ -571,6 +599,32 @@
       ],
       "license": "OFL-1.1",
       "licenseFile": "fonts/WM-FONT-LICENSE.txt"
+    },
+    {
+      "id": "bloxat",
+      "type": "font",
+      "name": "Bloxat",
+      "version": "1.0.0",
+      "author": "ghoss85",
+      "description": "A chunky pixel display face in the classic block-game style — the Michil theme's key font. Covers upper and lower case letters and digits; punctuation falls back to the system font. Free for personal use only — see fonts/BLOXAT-LICENSE.txt.",
+      "tags": [
+        "pixel",
+        "retro",
+        "display",
+        "blocky",
+        "font"
+      ],
+      "path": "fonts/bloxat.ttf",
+      "sha256": "9f4134717d357568aee8042abea87137abf7f0ff5953a926483bd228bf4f0dee",
+      "sizeBytes": 12908,
+      "previews": [
+        "previews/bloxat-grid.jpg"
+      ],
+      "langIds": [
+        "en"
+      ],
+      "license": "Freeware (personal use only)",
+      "licenseFile": "fonts/BLOXAT-LICENSE.txt"
     },
     {
       "id": "twemoji",

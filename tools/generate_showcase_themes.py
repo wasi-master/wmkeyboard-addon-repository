@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-"""Generate the six showcase themes and their preview images.
+"""Generate the seven showcase themes and their preview images.
 
 Every asset — key textures, sticker decals, particle sprites, the animated
-synthwave background, the nebula photo — is drawn here with Pillow, from a
-fixed seed, so the whole set regenerates byte-for-byte and nothing in it has
-an unclear licence. The output is:
+synthwave and Michil backgrounds, the nebula photo — is drawn here with
+Pillow, from a fixed seed, so the whole set regenerates byte-for-byte and
+nothing in it has an unclear licence. The output is:
 
     themes/<id>.wmtheme.json   the theme with every image embedded as base64
     previews/<id>.png          a mock keyboard render for the catalogue card
 
-The six themes together exercise every theme surface the app has: gradients
+The seven themes together exercise every theme surface the app has: gradients
 (linear/radial/sweep), FLOW and HUE_CYCLE animation, a static and an animated
 image background, per-class key textures in all three fit modes, single-key
 overrides, sticker decals, every press-effect kind including custom images,
-per-theme fonts (Google ids) and sounds (built-in style and installed-by-name),
-layout overrides, and the popup/tool shape and outline fields.
+per-theme fonts (Google ids and installed-by-name) and sounds (built-in style
+and installed-by-name), layout overrides, and the popup/tool shape and outline
+fields.
 
     python3 tools/generate_showcase_themes.py
 
@@ -365,7 +366,7 @@ def synthwave_gif() -> list[Image.Image]:
     return frames
 
 
-# --- the six themes ---------------------------------------------------------
+# --- the seven themes -------------------------------------------------------
 
 
 def arcade_cabinet() -> dict:
@@ -690,6 +691,279 @@ def deep_orbit() -> dict:
     }
 
 
+# --- michil -----------------------------------------------------------------
+#
+# The Michil prep-community site's design language: chunky pixel-art UI in an
+# exact palette (their CSS custom properties, transcribed below), parchment
+# cards edged in brown, deep-green quest buttons outlined in light green, gold
+# coins everywhere, and a blocky sky-and-grass hero. The board is that hero as
+# a slowly drifting pixel sky; the keys are the parchment cards; enter is the
+# STUDENT button; space is the grass block; presses pay out Michilcoins.
+
+MICHIL_LIGHT_GREEN = (0x6E, 0xA2, 0x4A)  # --color-tathir-light-green
+MICHIL_DARK_GREEN = (0x3E, 0x5E, 0x3E)  # --color-tathir-dark-green
+MICHIL_BEIGE = (0xD6, 0xCC, 0xB1)  # --color-tathir-beige
+MICHIL_CREAM = (0xC2, 0xA4, 0x7E)  # --color-tathir-cream
+MICHIL_CREAM_LIGHT = (0xE0, 0xD0, 0xB5)  # --color-tathir-cream-light
+MICHIL_BROWN = (0x7A, 0x4F, 0x3A)  # --color-tathir-brown
+MICHIL_MAROON = (0x5A, 0x3A, 0x2B)  # --color-tathir-maroon
+MICHIL_GOLD = (0xFF, 0xD7, 0x00)  # --color-tathir-gold
+MICHIL_BRONZE = (0xCD, 0x7F, 0x32)  # --color-tathir-bronze
+MICHIL_SUCCESS = (0x86, 0xC0, 0x6C)  # --color-tathir-success
+MICHIL_INFO = (0x7C, 0xB8, 0xFF)  # --color-tathir-info
+
+
+def bevel_tile(base: tuple, jitter: int, top: tuple, bottom: tuple, speckles=()) -> Image.Image:
+    """A 16px noisy tile with a one-pixel bevel: lit top edge, shaded bottom."""
+    img = noisy_tile(16, base, jitter, list(speckles))
+    px = img.load()
+    for x in range(16):
+        px[x, 0] = top
+        px[x, 15] = bottom
+    return upscale(img, 8)
+
+
+def shade(colour: tuple, delta: int) -> tuple:
+    return tuple(max(0, min(255, ch + delta)) for ch in colour)
+
+
+def michil_parchment(base: tuple) -> Image.Image:
+    """A parchment card face in [base], bevelled like the site's cards."""
+    return bevel_tile(base, 4, shade(base, 16), shade(base, -22), [shade(base, -10)])
+
+
+def michil_button_tile() -> Image.Image:
+    """The deep-green quest button: lit crown, dark footing."""
+    return bevel_tile(MICHIL_DARK_GREEN, 5, MICHIL_LIGHT_GREEN, shade(MICHIL_DARK_GREEN, -18))
+
+
+def michil_pressed_tile() -> Image.Image:
+    """The parchment pushed in: bevel inverted, a shade darker."""
+    return bevel_tile(MICHIL_BEIGE, 4, shade(MICHIL_BEIGE, -24), shade(MICHIL_BEIGE, 12))
+
+
+def michil_grass_space() -> Image.Image:
+    """The hero ground as a wide strip: grass crown over dirt."""
+    img = Image.new("RGB", (64, 16))
+    px = img.load()
+    for y in range(16):
+        for x in range(64):
+            if y < 5:
+                base = MICHIL_SUCCESS if y == 0 or rng.random() < 0.18 else MICHIL_LIGHT_GREEN
+                px[x, y] = shade(base, rng.randint(-10, 10))
+            else:
+                base = MICHIL_MAROON if rng.random() < 0.16 else MICHIL_BROWN
+                px[x, y] = shade(base, rng.randint(-10, 10))
+    return upscale(img, 8)
+
+
+MICHIL_COIN = sprite_from_rows(
+    [
+        "..XXXX..",
+        ".XYYYYX.",
+        "XYWYYZYX",
+        "XYYZZZYX",
+        "XYYZZZYX",
+        "XYZZZZYX",
+        ".XYYYYX.",
+        "..XXXX..",
+    ],
+    {"X": MICHIL_BRONZE, "Y": MICHIL_GOLD, "Z": (255, 240, 150), "W": (255, 255, 220)},
+)
+
+MICHIL_STAR = sprite_from_rows(
+    [
+        "...X...",
+        "..XYX..",
+        "XXXYXXX",
+        ".XYYYX.",
+        "..XYX..",
+        ".XX.XX.",
+        "X.....X",
+    ],
+    {"X": MICHIL_GOLD, "Y": (255, 245, 190)},
+)
+
+MICHIL_TROPHY = sprite_from_rows(
+    [
+        "XYYYYYX",
+        "XYYYYYX",
+        ".XYYYX.",
+        "..XYX..",
+        "...Y...",
+        "..YYY..",
+        ".ZZZZZ.",
+    ],
+    {"X": MICHIL_BRONZE, "Y": MICHIL_GOLD, "Z": MICHIL_BROWN},
+)
+
+MICHIL_GEM = sprite_from_rows(
+    [
+        "..XX..",
+        ".XZWX.",
+        "XZZZZX",
+        ".XZZX.",
+        "..XX..",
+    ],
+    {"X": MICHIL_DARK_GREEN, "Z": MICHIL_LIGHT_GREEN, "W": MICHIL_SUCCESS},
+)
+
+
+def michil_cloud(width: int = 26) -> Image.Image:
+    """A blocky white cloud, flat-bottomed like the site's hero clouds."""
+    h = 12
+    img = Image.new("RGBA", (width, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    body = (255, 255, 255, 255)
+    under = (222, 234, 252, 255)
+    draw.rectangle([2, 5, width - 3, 9], fill=body)
+    draw.rectangle([int(width * 0.22), 2, int(width * 0.68), 5], fill=body)
+    draw.rectangle([int(width * 0.38), 0, int(width * 0.55), 2], fill=body)
+    draw.rectangle([2, 9, width - 3, 10], fill=under)
+    return upscale(img, 8)
+
+
+def michil_sky_gif() -> list[Image.Image]:
+    """The hero loop: pixel-patched sky, parallax clouds, grass over dirt,
+    and a coin glinting in the grass. Cloud speeds are whole multiples of
+    the width per cycle, so the loop is seamless."""
+    lw, lh = 120, 68
+    grass_top, dirt_top = 56, 61
+    steps = 30
+    # The static plate: sky patches and the ground, drawn once.
+    plate = Image.new("RGB", (lw, lh), MICHIL_INFO)
+    px = plate.load()
+    for _ in range(46):
+        bx, by = rng.randrange(0, lw, 4), rng.randrange(0, grass_top - 10, 4)
+        bw, bh = rng.choice([8, 12, 16]), rng.choice([4, 8])
+        patch = shade(MICHIL_INFO, rng.choice([-24, -12, 14, 24]))
+        for y in range(by, min(by + bh, grass_top)):
+            for x in range(bx, min(bx + bw, lw)):
+                px[x, y] = patch
+    for y in range(grass_top, lh):
+        for x in range(lw):
+            if y < dirt_top:
+                base = MICHIL_SUCCESS if y == grass_top or rng.random() < 0.15 else MICHIL_LIGHT_GREEN
+            else:
+                base = MICHIL_MAROON if rng.random() < 0.16 else MICHIL_BROWN
+            px[x, y] = shade(base, rng.randint(-8, 8))
+    clouds = [
+        # (sprite, y, laps per cycle): far clouds drift once, near ones twice.
+        (michil_cloud(30).resize((30, 12), Image.NEAREST), 6, 1, 0),
+        (michil_cloud(22).resize((22, 9), Image.NEAREST), 16, 1, 60),
+        (michil_cloud(26).resize((26, 10), Image.NEAREST), 26, 2, 30),
+        (michil_cloud(18).resize((18, 7), Image.NEAREST), 38, 2, 90),
+    ]
+    frames = []
+    for f in range(steps):
+        frame = plate.copy().convert("RGBA")
+        for sprite, y, laps, x0 in clouds:
+            dx = (x0 + round(lw * laps * f / steps)) % lw
+            frame.alpha_composite(sprite, (dx, y))
+            if dx + sprite.width > lw:
+                frame.alpha_composite(sprite, (dx - lw, y))
+        # The coin in the grass, glinting mid-cycle.
+        draw = ImageDraw.Draw(frame)
+        draw.rectangle([92, 57, 93, 58], fill=MICHIL_GOLD)
+        if 12 <= f < 16:
+            draw.point((92, 56), fill=(255, 255, 220))
+        frames.append(
+            upscale(frame.convert("RGB"), 4).quantize(colors=64, dither=Image.NONE).convert("P")
+        )
+    return frames
+
+
+def michil() -> dict:
+    def argb(rgb: tuple, alpha: int = 0xFF) -> int:
+        return c((alpha << 24) | (rgb[0] << 16) | (rgb[1] << 8) | rgb[2])
+
+    fx = [MICHIL_COIN, MICHIL_STAR, MICHIL_TROPHY, MICHIL_GEM]
+    return {
+        "id": "michil",
+        "name": "Michil",
+        "dark": False,
+        "boardBackground": c(0x00000000),
+        "backgroundAnimated": True,
+        "backgroundImageOpacity": 1.0,
+        "backgroundImageBlur": 0.0,
+        "keyShape": "SHARP",
+        "keyBackground": argb(MICHIL_CREAM_LIGHT),
+        "keyText": argb(MICHIL_MAROON),
+        "modifierKeyBackground": argb(MICHIL_CREAM),
+        "modifierKeyText": argb(MICHIL_MAROON),
+        "enterKeyBackground": argb(MICHIL_DARK_GREEN),
+        "enterKeyText": argb(MICHIL_BEIGE),
+        "pressedKeyBackground": argb(MICHIL_BEIGE),
+        "keyBorderColor": argb(MICHIL_BROWN),
+        "keyBorderWidthDp": 2.0,
+        "accent": argb(MICHIL_LIGHT_GREEN),
+        "gestureTrailColor": argb(MICHIL_GOLD),
+        "popupBackground": argb(MICHIL_BEIGE),
+        "popupText": argb(MICHIL_MAROON),
+        # One more parchment card set on the board: dead-square, brown rim.
+        "popupShape": "SHARP",
+        "popupCornerRadiusDp": 0,
+        "popupBorderColor": argb(MICHIL_BROWN),
+        "popupBorderWidthDp": 2.0,
+        "suggestionText": argb(MICHIL_MAROON),
+        "toolbarIcon": argb(MICHIL_DARK_GREEN),
+        "toolCircleBackground": argb(MICHIL_CREAM_LIGHT, 0xB3),
+        "toolShape": "SHARP",
+        "toolBorderColor": argb(MICHIL_BROWN),
+        "toolBorderWidthDp": 1.0,
+        "chipBackground": argb(MICHIL_BEIGE, 0xCC),
+        "chipText": argb(MICHIL_MAROON),
+        "chipActiveBackground": argb(MICHIL_MAROON),
+        "chipActiveText": argb(MICHIL_BEIGE),
+        "chipShape": "SHARP",
+        "chipCornerRadiusDp": 0,
+        "chipBorderColor": argb(MICHIL_BROWN),
+        "chipBorderWidthDp": 1.5,
+        "keyTextureScale": "STRETCH",
+        "keyTextureOpacity": 1.0,
+        "fontScale": 0.9,
+        "boldKeyLabels": False,
+        "hintFontScale": 0.9,
+        # Bloxat is not on Google Fonts, so it rides as its own addon and the
+        # theme names it the way a theme names a sound: by catalogue name.
+        "fontId": "installed:Bloxat",
+        "soundStyle": "CUSTOM",
+        "soundCustomId": "Blip",
+        "keyEffect": "CUSTOM_IMAGE",
+        "keyEffectIntensity": 1.4,
+        "keyOverrides": {
+            # The Michilcoin key.
+            "m": {
+                "background": argb(MICHIL_GOLD),
+                "text": argb(MICHIL_MAROON),
+                "border": argb(MICHIL_BRONZE),
+            },
+            # Enter is the STUDENT button: light-green outline, green popup.
+            "ENTER": {
+                "border": argb(MICHIL_LIGHT_GREEN),
+                "popupBackground": argb(MICHIL_DARK_GREEN),
+                "popupText": argb(MICHIL_BEIGE),
+            },
+        },
+        "decals": [
+            {"id": "cloud_l", "x": 0.11, "y": 0.08, "scale": 0.13, "rotationDeg": 0.0, "opacity": 0.55},
+            {"id": "cloud_r", "x": 0.87, "y": 0.14, "scale": 0.09, "rotationDeg": 0.0, "opacity": 0.5},
+        ],
+        "assets": {
+            "keyTexture": b64(michil_parchment(MICHIL_CREAM_LIGHT)),
+            "keyTextureModifier": b64(michil_parchment(MICHIL_CREAM)),
+            "keyTextureEnter": b64(michil_button_tile()),
+            "keyTextureSpace": b64(michil_grass_space()),
+            "keyTexturePressed": b64(michil_pressed_tile()),
+            "popupTexture": b64(michil_parchment(MICHIL_BEIGE)),
+            "decal:cloud_l": b64(michil_cloud(30)),
+            "decal:cloud_r": b64(michil_cloud(22)),
+            **{f"effectImage:{i}": b64(img) for i, img in enumerate(fx)},
+        },
+        "backgroundImageBase64": b64_gif(michil_sky_gif(), 200),
+    }
+
+
 # --- preview renders --------------------------------------------------------
 
 
@@ -841,6 +1115,7 @@ SUBTITLES = {
     "blockland": "Tiled block textures with crumbling cube bursts",
     "typewriter-noir": "Paper keys, mono type, a red carriage return",
     "deep-orbit": "A nebula photo, a ringed planet, star bursts",
+    "michil": "Parchment keys under a drifting pixel sky, coin bursts",
 }
 
 
@@ -854,6 +1129,7 @@ def main() -> None:
         blockland,
         typewriter_noir,
         deep_orbit,
+        michil,
     ]
     for build in builders:
         theme = build()

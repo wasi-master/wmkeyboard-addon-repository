@@ -1,0 +1,15 @@
+BLOXAT
+Copyright (c) 2018, egypt (published on FontSpace by ghoss85)
+
+Licence: Freeware, personal use only.
+
+The designer distributes BLOXAT free of charge for personal,
+non-commercial use. Any commercial use requires a separate licence from
+the designer — contact them through the font's FontSpace page:
+
+    https://www.fontspace.com/bloxat-font-f31181
+
+The font file is redistributed here unmodified, solely so the Michil
+keyboard theme can offer it as its companion key-label font. If you are
+the designer and would like it removed or the terms stated differently,
+open an issue on this repository and it will be handled promptly.

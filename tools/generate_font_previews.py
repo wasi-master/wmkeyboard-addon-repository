@@ -4,6 +4,7 @@
 import json
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
 PREVIEWS_DIR = ROOT / "previews"
@@ -83,6 +84,24 @@ FONT_CONFIGS = [
         "chars_font_size": 14,
     },
     {
+        "id": "bloxat",
+        "name": "Bloxat",
+        "subtitle": "Chunky block-game pixel display face — the Michil theme's key font",
+        "font_path": FONTS_DIR / "bloxat.ttf",
+        "output_path": PREVIEWS_DIR / "bloxat-grid.jpg",
+        "sample_text": "LEVEL UP YOUR PREP GAME",
+        "specimen_chars": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789",
+        "bg_start": (0x3E, 0x5E, 0x3E),
+        "bg_end": (0x5A, 0x3A, 0x2B),
+        "accent_color": (0xFF, 0xD7, 0x00),
+        "footer_text": "Freeware, personal use only • Blocky Pixel Display • The Michil companion font",
+        "main_key_size": 40,
+        "hint_key_size": 16,
+        "space_key_size": 18,
+        "sample_font_size": 40,
+        "chars_font_size": 20,
+    },
+    {
         "id": "wm-font",
         "name": "WM Font",
         "subtitle": "Handwriting script with Latin, Greek, math symbols & fractions",
@@ -101,6 +120,16 @@ FONT_CONFIGS = [
         "chars_font_size": 22,
     },
 ]
+
+def covered_codepoints(font_path) -> set | None:
+    """The codepoints a face actually maps, or None when unreadable. Lets a
+    display font with no punctuation (Bloxat) borrow Inter for the labels it
+    cannot draw, instead of rendering tofu boxes."""
+    try:
+        return set(TTFont(str(font_path)).getBestCmap().keys())
+    except Exception:
+        return None
+
 
 # Standard QWERTY keyboard layout rows for rendering font in-keyboard mockups
 QWERTY_ROWS = [
@@ -198,6 +227,7 @@ def render_keyboard_font_mockup(
     main_key_size: int,
     hint_key_size: int,
     space_key_size: int,
+    covered: set | None = None,
 ):
     """Render a full QWERTY keyboard mockup with HUGE legible key labels matching actual screenshots."""
     pad_x = 18
@@ -234,6 +264,12 @@ def render_keyboard_font_mockup(
 
     inter_action_font = ImageFont.truetype(inter_font_path, 28)
     inter_hint_font = ImageFont.truetype(inter_font_path, 16)
+    inter_main_font = ImageFont.truetype(inter_font_path, main_key_size)
+    inter_space_font = ImageFont.truetype(inter_font_path, space_key_size)
+
+    def lacks(text: str) -> bool:
+        """True when the target face has no glyph for part of [text]."""
+        return covered is not None and any(ord(c) not in covered for c in text if c != " ")
 
     usable_w = kb_w - (pad_x * 2)
     start_y = top_y + toolbar_h + pad_y
@@ -286,7 +322,11 @@ def render_keyboard_font_mockup(
 
             # 1. Long press corner hint
             if hint:
-                use_hint_font = inter_hint_font if any(ord(c) > 127 for c in hint) else target_hint_font
+                use_hint_font = (
+                    inter_hint_font
+                    if any(ord(c) > 127 for c in hint) or lacks(hint)
+                    else target_hint_font
+                )
                 hw = draw.textlength(hint, font=use_hint_font)
                 hx = curr_x + kw - hw - 8
                 hy = curr_y + 6
@@ -303,15 +343,17 @@ def render_keyboard_font_mockup(
             elif action == "space" or label == " ":
                 prefix, suffix = "<   ", "   >"
                 full_space_text = f"{prefix}{font_id}{suffix}"
-                stw = draw.textlength(full_space_text, font=target_space_font)
+                use_space_font = inter_space_font if lacks(full_space_text) else target_space_font
+                stw = draw.textlength(full_space_text, font=use_space_font)
                 stx = curr_x + (kw - stw) / 2
                 sty = curr_y + (kh - 20) / 2
-                draw.text((stx, sty), full_space_text, fill=(148, 163, 184), font=target_space_font)
+                draw.text((stx, sty), full_space_text, fill=(148, 163, 184), font=use_space_font)
             else:
-                lw = draw.textlength(label, font=target_main_font)
+                use_main_font = inter_main_font if lacks(label) else target_main_font
+                lw = draw.textlength(label, font=use_main_font)
                 lx = curr_x + (kw - lw) / 2
                 ly = curr_y + (kh - (20 if font_id == "press-start-2p" else 42)) / 2
-                draw.text((lx, ly), label, fill=text_color, font=target_main_font)
+                draw.text((lx, ly), label, fill=text_color, font=use_main_font)
 
             curr_x += kw + gap_x
 
@@ -362,31 +404,52 @@ def generate_font_preview(cfg: dict):
 
     max_text_w = spec_w - 48  # 952px max width inside specimen box
 
+    # A display face with no space glyph (Bloxat) would render every word gap
+    # as a tofu box, so those lines are laid out word by word instead.
+    covered = covered_codepoints(font_path)
+    space_missing = covered is not None and 0x20 not in covered
+
+    def line_width(text: str, font: ImageFont.FreeTypeFont, size: int) -> float:
+        if not space_missing:
+            return draw.textlength(text, font=font)
+        words = text.split(" ")
+        gap = size * 0.55
+        return sum(draw.textlength(w, font=font) for w in words) + gap * (len(words) - 1)
+
+    def draw_line(text: str, font: ImageFont.FreeTypeFont, size: int, x: float, y: float, fill):
+        if not space_missing:
+            draw.text((x, y), text, fill=fill, font=font)
+            return
+        gap = size * 0.55
+        for w in text.split(" "):
+            draw.text((x, y), w, fill=fill, font=font)
+            x += draw.textlength(w, font=font) + gap
+
     # Dynamic scaling for Line 1 (Sample Text) to guarantee ZERO overflow
     sample_text = cfg["sample_text"]
     sample_size = cfg["sample_font_size"]
     specimen_font = ImageFont.truetype(str(font_path), sample_size)
-    while draw.textlength(sample_text, font=specimen_font) > max_text_w and sample_size > 14:
+    while line_width(sample_text, specimen_font, sample_size) > max_text_w and sample_size > 14:
         sample_size -= 1
         specimen_font = ImageFont.truetype(str(font_path), sample_size)
 
-    stw = draw.textlength(sample_text, font=specimen_font)
+    stw = line_width(sample_text, specimen_font, sample_size)
     stx = spec_x + (spec_w - stw) / 2
     sty = spec_y + 26
-    draw.text((stx, sty), sample_text, fill=accent_color, font=specimen_font)
+    draw_line(sample_text, specimen_font, sample_size, stx, sty, accent_color)
 
     # Dynamic scaling for Line 2 (Alphabet & Numbers) to guarantee ZERO overflow
     specimen_chars = cfg["specimen_chars"]
     chars_size = cfg["chars_font_size"]
     chars_font = ImageFont.truetype(str(font_path), chars_size)
-    while draw.textlength(specimen_chars, font=chars_font) > max_text_w and chars_size > 10:
+    while line_width(specimen_chars, chars_font, chars_size) > max_text_w and chars_size > 10:
         chars_size -= 1
         chars_font = ImageFont.truetype(str(font_path), chars_size)
 
-    alw = draw.textlength(specimen_chars, font=chars_font)
+    alw = line_width(specimen_chars, chars_font, chars_size)
     alx = spec_x + (spec_w - alw) / 2
     aly = spec_y + 84
-    draw.text((alx, aly), specimen_chars, fill=(241, 245, 249), font=chars_font)
+    draw_line(specimen_chars, chars_font, chars_size, alx, aly, (241, 245, 249))
 
     # 5. Render Full Keyboard UI Mockup
     kb_w = 1000
@@ -405,6 +468,7 @@ def generate_font_preview(cfg: dict):
         main_key_size=cfg["main_key_size"],
         hint_key_size=cfg["hint_key_size"],
         space_key_size=cfg["space_key_size"],
+        covered=covered,
     )
 
     # 6. Footer Bar
