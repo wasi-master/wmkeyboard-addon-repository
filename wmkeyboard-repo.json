@@ -94,19 +94,19 @@
       "id": "blockland",
       "type": "theme",
       "name": "Blockland",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
-      "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar, with little cubes crumbling off every press and a thock key sound. The E key is cut from emerald, and the key popup is a dead-square plank block with a chunky rim.",
+      "description": "A blocky sandbox look: tiled dirt letter keys, stone modifiers, a grass enter and a plank space bar under a drifting pixel-cloud sky — a real looping GIF — with a thock key sound. The E key is cut from emerald, and the key popup is a dead-square plank block with a chunky rim.",
       "tags": [
         "blocks",
         "pixel",
         "light",
         "textures",
-        "effects"
+        "animated"
       ],
       "path": "themes/blockland.wmtheme.json",
-      "sha256": "6d9b1861752b292019b836e13fc1bf45cda227494a72fff000be5f414d36a12e",
-      "sizeBytes": 10908,
+      "sha256": "1f219cfaf05ee236c0b1b35adca259949261d708d68dc44e10ec4ee3195e423c",
+      "sizeBytes": 89132,
       "previews": [
         "previews/blockland.jpg"
       ],
@@ -127,8 +127,8 @@
         "paper"
       ],
       "path": "themes/typewriter-noir.wmtheme.json",
-      "sha256": "ee1d1af9aef4cdf3bee014a2b663d1efca302537c4120403bc8083857310c425",
-      "sizeBytes": 5884,
+      "sha256": "0f420aed09e8b7df308d44797f1aa41a88607f4af1c8585a58129a789d87ad0a",
+      "sizeBytes": 5904,
       "previews": [
         "previews/typewriter-noir.jpg"
       ],
@@ -154,8 +154,8 @@
         "effects"
       ],
       "path": "themes/deep-orbit.wmtheme.json",
-      "sha256": "5d23f4efc0d8035bbc0c208a07664014893a39ab159c6dda67344aeca740171c",
-      "sizeBytes": 78500,
+      "sha256": "d4e7daaa5fe2d3bd8b05e2c67c500f30867c897584c28288b58d1c6d33c7bfdd",
+      "sizeBytes": 77264,
       "previews": [
         "previews/deep-orbit.jpg"
       ],
@@ -171,18 +171,17 @@
       "name": "Michil",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "A pixel study-hall in the Michil community's exact palette: parchment keys edged in brown under a drifting pixel sky, a grass-block space bar, a deep-green quest-button enter outlined in light green, a gold Michilcoin on the M key, and coins, stars and trophies bursting from every press. Designed around the Bloxat font and the Blip key sound.",
+      "description": "A pixel study-hall in the Michil community's exact palette: parchment keys edged in brown over a still pixel sky, a grass-block space bar, a deep-green quest-button enter outlined in light green, a gold Michilcoin on the M key, and coins, stars and trophies bursting from every press. Designed around the Bloxat font and the Blip key sound.",
       "tags": [
         "pixel",
         "retro",
         "light",
         "green",
-        "animated",
         "effects"
       ],
       "path": "themes/michil.wmtheme.json",
-      "sha256": "e3506b8816928b63f2ef3442d05526c90fff435c50c40906b6d4fd036b7e74a0",
-      "sizeBytes": 87798,
+      "sha256": "439c3330f20ae90a2e97ea816bbd52ea4dc4eb483b08ed21d5ff323c81867b23",
+      "sizeBytes": 21881,
       "previews": [
         "previews/michil.jpg"
       ],

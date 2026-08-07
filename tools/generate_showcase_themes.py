@@ -188,18 +188,6 @@ PIXEL_COIN = sprite_from_rows(
 )
 
 
-def cube_sprite(top: tuple, side: tuple, front: tuple) -> Image.Image:
-    """A little isometric cube, the block-chunk particle."""
-    s = 64
-    img = Image.new("RGBA", (s, s), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
-    mid, quarter = s // 2, s // 4
-    draw.polygon([(mid, 2), (s - 4, quarter + 2), (mid, mid + 2), (4, quarter + 2)], fill=top)
-    draw.polygon([(4, quarter + 2), (mid, mid + 2), (mid, s - 4), (4, 3 * quarter)], fill=front)
-    draw.polygon([(s - 4, quarter + 2), (mid, mid + 2), (mid, s - 4), (s - 4, 3 * quarter)], fill=side)
-    return img
-
-
 def petal(colour: tuple, size: int = 72) -> Image.Image:
     """One cherry petal: a soft teardrop ellipse with a notched tip."""
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
@@ -525,16 +513,15 @@ def synthwave_highway() -> dict:
 
 
 def blockland() -> dict:
-    cubes = [
-        cube_sprite((121, 189, 92), (95, 66, 44), (121, 85, 58)),
-        cube_sprite((150, 150, 154), (100, 100, 104), (127, 127, 130)),
-        cube_sprite((190, 152, 100), (132, 100, 60), (168, 132, 84)),
-    ]
     return {
         "id": "blockland",
         "name": "Blockland",
         "dark": False,
-        "boardBackground": c(0xFF87CEEB),
+        # The sky is a real drifting-cloud loop now; no scrim over it.
+        "boardBackground": c(0x00000000),
+        "backgroundAnimated": True,
+        "backgroundImageOpacity": 1.0,
+        "backgroundImageBlur": 0.0,
         "keyShape": "SHARP",
         "keyBackground": c(0xFF9B7653),
         "keyText": c(0xFFFFFFFF),
@@ -565,8 +552,6 @@ def blockland() -> dict:
         "boldKeyLabels": True,
         "hintFontScale": 1.1,
         "soundStyle": "THOCK",
-        "keyEffect": "CUSTOM_IMAGE",
-        "keyEffectIntensity": 1.6,
         "keyOverrides": {
             "e": {"background": c(0xFF2EBD6B), "text": c(0xFFFFFFFF)},
             "ENTER": {"popupBackground": c(0xFFFFD24A), "popupText": c(0xFF3A2E00)},
@@ -577,8 +562,8 @@ def blockland() -> dict:
             "keyTextureEnter": b64(grass_tile()),
             "keyTextureSpace": b64(plank_tile()),
             "popupTexture": b64(plank_tile()),
-            **{f"effectImage:{i}": b64(img) for i, img in enumerate(cubes)},
         },
+        "backgroundImageBase64": b64_gif(blockland_sky_gif(), 200),
     }
 
 
@@ -697,8 +682,9 @@ def deep_orbit() -> dict:
 # exact palette (their CSS custom properties, transcribed below), parchment
 # cards edged in brown, deep-green quest buttons outlined in light green, gold
 # coins everywhere, and a blocky sky-and-grass hero. The board is that hero as
-# a slowly drifting pixel sky; the keys are the parchment cards; enter is the
-# STUDENT button; space is the grass block; presses pay out Michilcoins.
+# a still pixel sky (the drifting-cloud loop belongs to Blockland); the keys
+# are the parchment cards; enter is the STUDENT button; space is the grass
+# block; presses pay out Michilcoins.
 
 MICHIL_LIGHT_GREEN = (0x6E, 0xA2, 0x4A)  # --color-tathir-light-green
 MICHIL_DARK_GREEN = (0x3E, 0x5E, 0x3E)  # --color-tathir-dark-green
@@ -823,54 +809,90 @@ def michil_cloud(width: int = 26) -> Image.Image:
     return upscale(img, 8)
 
 
-def michil_sky_gif() -> list[Image.Image]:
-    """The hero loop: pixel-patched sky, parallax clouds, grass over dirt,
-    and a coin glinting in the grass. Cloud speeds are whole multiples of
-    the width per cycle, so the loop is seamless."""
+def _pixel_sky_scene(
+    sky: tuple,
+    grass: tuple,
+    grass_hi: tuple,
+    dirt: tuple,
+    dirt_dark: tuple,
+    coin: tuple | None,
+) -> tuple[Image.Image, list]:
+    """The hero scene's fixed parts: the patched-sky-and-ground plate and the
+    cloud layers (sprite, y, laps per cycle, phase). Shared by the animated
+    (Blockland) and the still (Michil) renders."""
     lw, lh = 120, 68
     grass_top, dirt_top = 56, 61
-    steps = 30
-    # The static plate: sky patches and the ground, drawn once.
-    plate = Image.new("RGB", (lw, lh), MICHIL_INFO)
+    plate = Image.new("RGB", (lw, lh), sky)
     px = plate.load()
     for _ in range(46):
         bx, by = rng.randrange(0, lw, 4), rng.randrange(0, grass_top - 10, 4)
         bw, bh = rng.choice([8, 12, 16]), rng.choice([4, 8])
-        patch = shade(MICHIL_INFO, rng.choice([-24, -12, 14, 24]))
+        patch = shade(sky, rng.choice([-24, -12, 14, 24]))
         for y in range(by, min(by + bh, grass_top)):
             for x in range(bx, min(bx + bw, lw)):
                 px[x, y] = patch
     for y in range(grass_top, lh):
         for x in range(lw):
             if y < dirt_top:
-                base = MICHIL_SUCCESS if y == grass_top or rng.random() < 0.15 else MICHIL_LIGHT_GREEN
+                base = grass_hi if y == grass_top or rng.random() < 0.15 else grass
             else:
-                base = MICHIL_MAROON if rng.random() < 0.16 else MICHIL_BROWN
+                base = dirt_dark if rng.random() < 0.16 else dirt
             px[x, y] = shade(base, rng.randint(-8, 8))
+    if coin is not None:
+        ImageDraw.Draw(plate).rectangle([92, 57, 93, 58], fill=coin)
     clouds = [
-        # (sprite, y, laps per cycle): far clouds drift once, near ones twice.
+        # (sprite, y, laps per cycle, phase): far clouds drift once per
+        # cycle, near ones twice — whole laps keep the loop seamless.
         (michil_cloud(30).resize((30, 12), Image.NEAREST), 6, 1, 0),
         (michil_cloud(22).resize((22, 9), Image.NEAREST), 16, 1, 60),
         (michil_cloud(26).resize((26, 10), Image.NEAREST), 26, 2, 30),
         (michil_cloud(18).resize((18, 7), Image.NEAREST), 38, 2, 90),
     ]
-    frames = []
-    for f in range(steps):
-        frame = plate.copy().convert("RGBA")
-        for sprite, y, laps, x0 in clouds:
-            dx = (x0 + round(lw * laps * f / steps)) % lw
-            frame.alpha_composite(sprite, (dx, y))
-            if dx + sprite.width > lw:
-                frame.alpha_composite(sprite, (dx - lw, y))
-        # The coin in the grass, glinting mid-cycle.
-        draw = ImageDraw.Draw(frame)
-        draw.rectangle([92, 57, 93, 58], fill=MICHIL_GOLD)
-        if 12 <= f < 16:
-            draw.point((92, 56), fill=(255, 255, 220))
-        frames.append(
-            upscale(frame.convert("RGB"), 4).quantize(colors=64, dither=Image.NONE).convert("P")
-        )
-    return frames
+    return plate, clouds
+
+
+def _compose_sky_frame(plate: Image.Image, clouds: list, offset_fraction: float) -> Image.Image:
+    lw = plate.width
+    frame = plate.copy().convert("RGBA")
+    for sprite, y, laps, x0 in clouds:
+        dx = (x0 + round(lw * laps * offset_fraction)) % lw
+        frame.alpha_composite(sprite, (dx, y))
+        if dx + sprite.width > lw:
+            frame.alpha_composite(sprite, (dx - lw, y))
+    return frame.convert("RGB")
+
+
+def blockland_sky_gif() -> list[Image.Image]:
+    """Blockland's own sky as the drifting hero loop, in its block palette."""
+    plate, clouds = _pixel_sky_scene(
+        sky=(135, 206, 235),
+        grass=(88, 160, 70),
+        grass_hi=(121, 189, 92),
+        dirt=(121, 85, 58),
+        dirt_dark=(96, 66, 44),
+        coin=None,
+    )
+    steps = 30
+    return [
+        upscale(_compose_sky_frame(plate, clouds, f / steps), 4)
+        .quantize(colors=64, dither=Image.NONE)
+        .convert("P")
+        for f in range(steps)
+    ]
+
+
+def michil_sky_still() -> Image.Image:
+    """The Michil hero as a still: same scene, clouds parked, coin resting
+    in the grass."""
+    plate, clouds = _pixel_sky_scene(
+        sky=MICHIL_INFO,
+        grass=MICHIL_LIGHT_GREEN,
+        grass_hi=MICHIL_SUCCESS,
+        dirt=MICHIL_BROWN,
+        dirt_dark=MICHIL_MAROON,
+        coin=MICHIL_GOLD,
+    )
+    return upscale(_compose_sky_frame(plate, clouds, 0.0), 4)
 
 
 def michil() -> dict:
@@ -883,7 +905,6 @@ def michil() -> dict:
         "name": "Michil",
         "dark": False,
         "boardBackground": c(0x00000000),
-        "backgroundAnimated": True,
         "backgroundImageOpacity": 1.0,
         "backgroundImageBlur": 0.0,
         "keyShape": "SHARP",
@@ -960,7 +981,7 @@ def michil() -> dict:
             "decal:cloud_r": b64(michil_cloud(22)),
             **{f"effectImage:{i}": b64(img) for i, img in enumerate(fx)},
         },
-        "backgroundImageBase64": b64_gif(michil_sky_gif(), 200),
+        "backgroundImageBase64": b64(michil_sky_still()),
     }
 
 
@@ -1112,10 +1133,10 @@ SUBTITLES = {
     "arcade-cabinet": "Pixel font, blip sounds, coin bursts, neon sweep",
     "sakura-breeze": "Blossom stickers, petal bursts, a flowing pink sky",
     "synthwave-highway": "An animated sunset grid behind slanted neon keys",
-    "blockland": "Tiled block textures with crumbling cube bursts",
+    "blockland": "Tiled block textures under a drifting pixel sky",
     "typewriter-noir": "Paper keys, mono type, a red carriage return",
     "deep-orbit": "A nebula photo, a ringed planet, star bursts",
-    "michil": "Parchment keys under a drifting pixel sky, coin bursts",
+    "michil": "Parchment keys over a still pixel sky, coin bursts",
 }
 
 
