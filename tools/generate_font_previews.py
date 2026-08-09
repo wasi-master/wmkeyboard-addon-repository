@@ -119,6 +119,29 @@ FONT_CONFIGS = [
         "sample_font_size": 38,
         "chars_font_size": 22,
     },
+    {
+        "id": "pixelborno",
+        "name": "Pixelborno",
+        "subtitle": "Bengali and Latin redrawn on a 20-pixel grid — conjuncts intact",
+        "font_path": FONTS_DIR / "pixelborno.ttf",
+        "output_path": PREVIEWS_DIR / "pixelborno-grid.jpg",
+        "sample_text": "আমি বাংলায় গান গাই — ami bhalo achi",
+        "specimen_chars": "কখগঘঙ চছজঝঞ টঠডঢণ তথদধন পফবভম যরলশষসহ • ক্ষ জ্ঞ ন্ত র্ক • ০১২৩৪৫৬৭৮৯",
+        "bg_start": (17, 31, 24),
+        "bg_end": (39, 63, 42),
+        "accent_color": (0x8B, 0xE0, 0x6A),
+        "footer_text": "SIL Open Font License • Pixel Bengali & Latin • Full conjunct shaping",
+        # Every size is a multiple of the face's 20-pixel em, so the preview
+        # shows whole pixels. An in-between size resamples the grid and the
+        # preview reads as a blurry font rather than a pixel one.
+        "main_key_size": 40,
+        "hint_key_size": 20,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 20,
+        # A Bengali face on a QWERTY board would preview none of itself.
+        "key_rows": "probhat",
+    },
 ]
 
 def covered_codepoints(font_path) -> set | None:
@@ -164,6 +187,47 @@ QWERTY_ROWS = [
         {"label": "⏎", "width": 1.5, "action": "enter"}
     ]
 ]
+
+# প্রভাত (Probhat), the fixed Bengali layout the app ships, with its shift labels
+# as key hints and Bengali digits on the number row. Copied from the keyboard's
+# own BuiltInLayouts.probhatRows so the mock-up is the board a Bengali user
+# actually sees, rather than a plausible-looking arrangement.
+PROBHAT_ROWS = [
+    [
+        {"label": "১", "hint": "1"}, {"label": "২", "hint": "2"}, {"label": "৩", "hint": "3"},
+        {"label": "৪", "hint": "4"}, {"label": "৫", "hint": "5"}, {"label": "৬", "hint": "6"},
+        {"label": "৭", "hint": "7"}, {"label": "৮", "hint": "8"}, {"label": "৯", "hint": "9"},
+        {"label": "০", "hint": "0"}
+    ],
+    [
+        {"label": "দ", "hint": "ধ"}, {"label": "ূ", "hint": "ঊ"}, {"label": "ী", "hint": "ঈ"},
+        {"label": "র", "hint": "ড়"}, {"label": "ট", "hint": "ঠ"}, {"label": "এ", "hint": "ঐ"},
+        {"label": "ু", "hint": "উ"}, {"label": "ি", "hint": "ই"}, {"label": "ও", "hint": "ঔ"},
+        {"label": "প", "hint": "ফ"}
+    ],
+    [
+        {"label": "া", "hint": "অ"}, {"label": "স", "hint": "ষ"}, {"label": "ড", "hint": "ঢ"},
+        {"label": "ত", "hint": "থ"}, {"label": "গ", "hint": "ঘ"}, {"label": "হ", "hint": "ঃ"},
+        {"label": "জ", "hint": "ঝ"}, {"label": "ক", "hint": "খ"}, {"label": "ল", "hint": "ং"},
+        {"label": "ে", "hint": "ো"}
+    ],
+    [
+        {"label": "⇧", "width": 1.4, "action": "shift"},
+        {"label": "য়", "hint": "য"}, {"label": "শ", "hint": "ঢ়"}, {"label": "চ", "hint": "ছ"},
+        {"label": "আ", "hint": "ঋ"}, {"label": "ব", "hint": "ভ"}, {"label": "ন", "hint": "ণ"},
+        {"label": "ম", "hint": "ঙ"}, {"label": "্", "hint": "।"},
+        {"label": "⌫", "width": 1.4, "action": "delete"}
+    ],
+    [
+        {"label": "?১২৩", "width": 1.5, "action": "symbols"},
+        {"label": "🌐", "width": 1.0, "action": "language_switch"},
+        {"label": " ", "width": 4.5, "action": "space"},
+        {"label": "।", "width": 1.0},
+        {"label": "⏎", "width": 1.5, "action": "enter"}
+    ]
+]
+
+KEY_ROW_SETS = {"probhat": PROBHAT_ROWS}
 
 
 def draw_toolbar_icons(draw: ImageDraw.ImageDraw, top_x: int, top_y: int, kb_w: int):
@@ -228,15 +292,21 @@ def render_keyboard_font_mockup(
     hint_key_size: int,
     space_key_size: int,
     covered: set | None = None,
+    key_rows: list | None = None,
 ):
-    """Render a full QWERTY keyboard mockup with HUGE legible key labels matching actual screenshots."""
+    """Render a full QWERTY keyboard mockup with HUGE legible key labels matching actual screenshots.
+
+    [key_rows] lets a face that isn't about Latin show the board it is actually
+    for. A Bengali font on a QWERTY mock-up previews none of itself.
+    """
+    rows = key_rows or QWERTY_ROWS
     pad_x = 18
     pad_y = 16
     gap_x = 8
     gap_y = 10
     toolbar_h = 52
 
-    num_rows = len(QWERTY_ROWS)
+    num_rows = len(rows)
     key_h = 88
     kb_h = toolbar_h + pad_y * 2 + num_rows * key_h + (num_rows - 1) * gap_y
 
@@ -274,7 +344,7 @@ def render_keyboard_font_mockup(
     usable_w = kb_w - (pad_x * 2)
     start_y = top_y + toolbar_h + pad_y
 
-    for r_idx, row in enumerate(QWERTY_ROWS):
+    for r_idx, row in enumerate(rows):
         curr_y = start_y + r_idx * (key_h + gap_y)
 
         total_units = sum(k.get("width", 1.0) for k in row)
@@ -469,6 +539,7 @@ def generate_font_preview(cfg: dict):
         hint_key_size=cfg["hint_key_size"],
         space_key_size=cfg["space_key_size"],
         covered=covered,
+        key_rows=KEY_ROW_SETS.get(cfg.get("key_rows")),
     )
 
     # 6. Footer Bar

@@ -12,6 +12,18 @@ Version 1.1. The copyright holders differ per font:
                       (https://github.com/googlefonts/caveat)
   press-start-2p.ttf  Copyright 2012 The Press Start 2P Project Authors
                       (cody@zone38.net), with Reserved Font Name "Press Start 2P".
+  pixelborno.ttf      Copyright 2026 Wasi Master, and a Modified Version under
+                      clause 3 below of two fonts also licensed under this
+                      licence: its Bengali, digits and punctuation come from
+                      Noto Sans Bengali, Copyright 2017 Google Inc.
+                      (https://github.com/notofonts/bengali), and its Latin from
+                      Inter, Copyright 2020 The Inter Project Authors
+                      (https://github.com/rsms/inter). Every outline was redrawn
+                      on a pixel grid; the shaping tables are Noto Sans
+                      Bengali's, unaltered. Neither original carries a Reserved
+                      Font Name, and "Pixelborno" is not a name either of them
+                      uses. Built from https://github.com/wasi-master/pixelborno
+                      — the sources and the build live there, not here.
 
 The shared licence text follows.
 

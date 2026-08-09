@@ -41,6 +41,9 @@
  "boldKeyLabels": false,
  "hintFontScale": 0.9,
  "fontId": "installed:Bloxat",
+ "scriptFontIds": {
+  "BENGALI": "installed:Pixelborno"
+ },
  "soundStyle": "CUSTOM",
  "soundCustomId": "Blip",
  "keyEffect": "CUSTOM_IMAGE",

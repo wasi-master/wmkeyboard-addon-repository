@@ -34,6 +34,9 @@
  "keyTextureOpacity": 1.0,
  "boldKeyLabels": true,
  "hintFontScale": 1.1,
+ "scriptFontIds": {
+  "BENGALI": "installed:Pixelborno"
+ },
  "soundStyle": "THOCK",
  "keyOverrides": {
   "e": {

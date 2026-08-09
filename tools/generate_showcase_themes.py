@@ -569,6 +569,11 @@ def blockland() -> dict:
         "keyTextureOpacity": 1.0,
         "boldKeyLabels": True,
         "hintFontScale": 1.1,
+        # No fontId: the plank keys read as blocky on their own, and the system
+        # face is what the labels want against them. Bengali is the exception —
+        # its automatic Noto face would beat any theme font anyway, so the theme
+        # has to name one per script to keep the look on a Bengali board.
+        "scriptFontIds": {"BENGALI": "installed:Pixelborno"},
         "soundStyle": "THOCK",
         "keyOverrides": {
             "e": {"background": c(0xFF2EBD6B), "text": c(0xFFFFFFFF)},
@@ -930,7 +935,10 @@ def michil() -> dict:
         "hintFontScale": 0.9,
         # Bloxat is not on Google Fonts, so it rides as its own addon and the
         # theme names it the way a theme names a sound: by catalogue name.
+        # Bloxat has no Bengali, and a theme font loses to a script's automatic
+        # face regardless — so Bengali gets its own pixel face by name too.
         "fontId": "installed:Bloxat",
+        "scriptFontIds": {"BENGALI": "installed:Pixelborno"},
         "soundStyle": "CUSTOM",
         "soundCustomId": "Blip",
         "keyEffect": "CUSTOM_IMAGE",
