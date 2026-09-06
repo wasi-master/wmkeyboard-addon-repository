@@ -527,6 +527,78 @@ def generate_text_tools_preview():
     print(f"Generated {out_file.relative_to(ROOT)}")
 
 
+# Math glyphs the preview fonts lack. Inter and JetBrains Mono stop short of
+# ∈ ∀ ∃ ∇ ℝ, so the Math Mode preview draws character by character and takes
+# each glyph from the first font that has it. fontTools is optional: without
+# it, non-ASCII runs simply go to the first math font that exists.
+MATH_FONT_CANDIDATES = [
+    FONTS_DIR / "noto-sans-math.ttf",
+    Path("/System/Library/Fonts/Supplemental/STIXTwoMath.otf"),
+    Path("/System/Library/Fonts/Supplemental/Arial Unicode.ttf"),
+    Path("/usr/share/fonts/truetype/noto/NotoSansMath-Regular.ttf"),
+    Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
+]
+
+_CMAPS: dict = {}
+
+
+def _cmap(path):
+    if path in _CMAPS:
+        return _CMAPS[path]
+    try:
+        from fontTools.ttLib import TTFont  # type: ignore
+
+        _CMAPS[path] = set((TTFont(str(path), lazy=True).getBestCmap() or {}).keys())
+    except Exception:  # noqa: BLE001 - fontTools missing or font unreadable
+        _CMAPS[path] = None
+    return _CMAPS[path]
+
+
+def math_fonts(size):
+    """Font objects, in preference order, for glyphs Inter cannot draw."""
+    fonts = []
+    for path in MATH_FONT_CANDIDATES:
+        if path.exists():
+            fonts.append((path, ImageFont.truetype(str(path), size)))
+    return fonts
+
+
+def draw_math_text(draw, xy, text, primary, primary_path, size, fill):
+    """Draws text with per-glyph font fallback; returns the width drawn."""
+    x, y = xy
+    fallbacks = math_fonts(size)
+    for ch in text:
+        font = primary
+        if ord(ch) > 0x7F:
+            have = _cmap(primary_path)
+            if have is None or ord(ch) not in have:
+                for path, candidate in fallbacks:
+                    cmap = _cmap(path)
+                    if cmap is None or ord(ch) in cmap:
+                        font = candidate
+                        break
+        draw.text((x, y), ch, fill=fill, font=font)
+        x += draw.textlength(ch, font=font)
+    return x - xy[0]
+
+
+def math_text_width(draw, text, primary, primary_path, size):
+    x = 0
+    fallbacks = math_fonts(size)
+    for ch in text:
+        font = primary
+        if ord(ch) > 0x7F:
+            have = _cmap(primary_path)
+            if have is None or ord(ch) not in have:
+                for path, candidate in fallbacks:
+                    cmap = _cmap(path)
+                    if cmap is None or ord(ch) in cmap:
+                        font = candidate
+                        break
+        x += draw.textlength(ch, font=font)
+    return x
+
+
 def generate_math_mode_preview():
     w, h = 1080, 900
     bg_colors = [
@@ -582,7 +654,7 @@ def generate_math_mode_preview():
     res_y = in_y + 90
     draw.rounded_rectangle([card_x + 20, res_y, card_x + card_w - 20, res_y + 96], radius=14, fill=(10, 18, 34), outline=(129, 140, 248, 150), width=2)
     draw.text((card_x + 36, res_y + 14), "RESULT", fill=accent, font=font_badge)
-    draw.text((card_x + 36, res_y + 40), "x² + √2 = π⁄4", fill=(248, 250, 252), font=font_result)
+    draw_math_text(draw, (card_x + 36, res_y + 40), "x² + √2 = π⁄4", font_result, INTER_PATH, 30, (248, 250, 252))
     draw.rounded_rectangle([card_x + card_w - 150, res_y + 30, card_x + card_w - 36, res_y + 74], radius=8, fill=(79, 70, 229), outline=None)
     draw.text((card_x + card_w - 116, res_y + 41), "Insert", fill=(255, 255, 255), font=font_label)
 
@@ -614,9 +686,8 @@ def generate_math_mode_preview():
             gx = card_x + 20 + c * (cell + gap)
             gy = pal_y + r * (46 + gap)
             draw.rounded_rectangle([gx, gy, gx + cell, gy + 46], radius=10, fill=(30, 41, 59), outline=(51, 65, 85))
-            bbox = draw.textbbox((0, 0), glyph, font=font_glyph)
-            gw = bbox[2] - bbox[0]
-            draw.text((gx + (cell - gw) / 2 - bbox[0], gy + 9), glyph, fill=(248, 250, 252), font=font_glyph)
+            gw = math_text_width(draw, glyph, font_glyph, INTER_PATH, 22)
+            draw_math_text(draw, (gx + (cell - gw) / 2, gy + 9), glyph, font_glyph, INTER_PATH, 22, (248, 250, 252))
 
     # Examples
     ex_y = pal_y + 3 * 52 + 14
@@ -636,7 +707,7 @@ def generate_math_mode_preview():
         ey = ex_y + row * 78
         draw.rounded_rectangle([ex, ey, ex + col_w, ey + 68], radius=12, fill=(24, 33, 52), outline=(51, 65, 85))
         draw.text((ex + 14, ey + 10), src, fill=(148, 163, 184), font=font_mono)
-        draw.text((ex + 14, ey + 36), out, fill=(248, 250, 252), font=font_body)
+        draw_math_text(draw, (ex + 14, ey + 36), out, font_body, INTER_PATH, 18, (248, 250, 252))
 
     out_file = PREVIEWS_DIR / "math-mode-grid.jpg"
     canvas.convert("RGB").save(out_file, "JPEG", quality=95)
