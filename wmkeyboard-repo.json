@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-08-09"
+    "updatedAt": "2026-09-07"
   },
   "addons": [
     {
@@ -993,6 +993,46 @@
         "previews/text-tools-5.jpg",
         "previews/text-tools-6.jpg",
         "previews/text-tools-7.jpg"
+      ],
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "en-writing-words",
+      "type": "vocabulary",
+      "name": "Sharper Writing",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "A dozen everyday upgrades for plain words — clear → lucid, big → immense, start → commence — as a vocabulary pack: the keyboard offers the stronger word when you type the plain one, and each has a card with pronunciation, examples and related words.",
+      "tags": [
+        "vocabulary",
+        "writing",
+        "english"
+      ],
+      "path": "vocabulary/en-writing-words.wmvocab.json",
+      "sha256": "e86c25a05ab610231b618e95434122f410cd563b3758df0773b6fe9019b297b5",
+      "sizeBytes": 6430,
+      "langId": "en",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "math-mode",
+      "type": "plugin",
+      "name": "Math Mode",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹. Symbol palette, fractions, Greek, calculus, sets, chemistry and LaTeX.",
+      "tags": [
+        "math",
+        "unicode",
+        "students",
+        "plugin"
+      ],
+      "path": "plugins/math-mode.wmplugin",
+      "sha256": "5b8e77a6c91041bff494754c45caca40eaa397b6744b70167ad528da117c103c",
+      "sizeBytes": 18360,
+      "previews": [
+        "previews/math-mode-grid.jpg"
       ],
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"

@@ -20,6 +20,7 @@ README.md                 ← optional but recommended
 themes/       *.wmtheme.json
 layouts/      *.wmlayout.json
 dictionaries/ <langId>.txt
+vocabulary/   *.wmvocab.json
 snippets/     *.wmsnippets.json
 stickers/     *.wmstickers
 icons/        *.wmicons
@@ -92,7 +93,7 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | Field | Req | Notes |
 |---|---|---|
 | `id` | ✔ | Unique within the repo. |
-| `type` | ✔ | `theme` \| `layout` \| `dictionary` \| `snippets` \| `stickers` \| `icon_pack` \| `font` \| `emoji_font` \| `sound`. |
+| `type` | ✔ | `theme` \| `layout` \| `dictionary` \| `snippets` \| `stickers` \| `icon_pack` \| `font` \| `emoji_font` \| `sound` \| `sound_pack` \| `plugin` \| `vocabulary`. |
 | `name` | ✔ | Display name. |
 | `version` | ✔ | **Semver** string. Bump it to offer an update. |
 | `path` | ✔ | Payload location — relative to the manifest, or an absolute `https` URL (§4). |
@@ -101,7 +102,7 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | `sizeBytes` | | Payload size, for the UI and a pre-download guard. Optional; the client caps every download regardless. |
 | `previews` | | Screenshot images (relative or absolute). |
 | `minAppVersion` | | App `versionCode` floor; older apps hide/disable the addon. |
-| `langId` | *dict* | **Required for `dictionary`**, optional hint for `layout`. Must be a registered language id (§5). |
+| `langId` | *dict* | **Required for `dictionary` and `vocabulary`**, optional hint for `layout`. Must be a registered language id (§5). |
 | `langIds` | | Languages this addon covers, when one id isn't enough. See [Language coverage](#language-coverage). |
 | `license` | | Licence identifier — SPDX where one fits (`MIT`, `OFL-1.1`, `CC0-1.0`, `CC-BY-4.0`), otherwise any short name. Shown on the addon's page. |
 | `licenseText` | | Full licence text, inline. |
@@ -147,8 +148,8 @@ and Greek), `bn` the Bengali one. **Omitting `langIds` makes no claim**, and the
 font is offered everywhere — the right default for a face with broad coverage,
 and what every font published before this field existed gets.
 
-Dictionaries use the singular `langId` instead, and must: a word list has exactly
-one language. `langIds` is ignored for them.
+Dictionaries and vocabulary packs use the singular `langId` instead, and must: a word
+list has exactly one language. `langIds` is ignored for them.
 
 ## 4. Path & URL resolution (hybrid model)
 
@@ -182,6 +183,7 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
 | `sound` | `*.mp3` | A single short key-press sound. Keep it under ~300 ms and a few tens of KB: it is loaded into a `SoundPool` and replayed on every keystroke. |
 | `plugin` | `*.wmplugin` | ZIP archive containing a `plugin.json` manifest (`"format":"wmkeyboard-plugin"`) and a Lua script. **The only payload that is code rather than data** — see [Plugins](#plugins). |
+| `vocabulary` | `*.wmvocab.json` (may be gzipped as `.wmvocab.json.gz`) | Envelope `{ "format":"wmkeyboard-vocab", "version":1, "pack": { "id", "name", "langId", … }, "words": [ { "word", "pos", "ipa", "senses", "synonyms", "antonyms", "triggers", … } ] }` — the app's own vocabulary-pack format, the same file it writes when you export a list you made in the app. **`langId` is required**, like a dictionary. The full record shape is documented in the [wmkeyboard-data repository](https://github.com/wasi-master/wmkeyboard-data/tree/main/vocab). |
 
 To make a theme/layout/snippet/sticker/icon payload, just **export it from the app** and drop the file into your repo — the exported files already match these formats.
 

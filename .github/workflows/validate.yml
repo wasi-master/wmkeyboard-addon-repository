@@ -18,6 +18,13 @@ jobs:
 
       - run: pip install jsonschema
 
+      # Plugin tests run on luaj, the interpreter the keyboard ships, so the
+      # runner needs a JVM.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
       # Schema pass, plus the things a schema can't express: every path,
       # preview and icon resolves to a file that is actually in the repo, ids
       # are unique, and any checksum present is correct.
@@ -28,3 +35,11 @@ jobs:
       # one — the app would refuse an install that is actually fine.
       - name: Check checksums are current
         run: python3 tools/build_index.py --check
+
+      # The archives people install must be built from the sources people read.
+      - name: Check plugin archives are current
+        run: python3 tools/build_plugins.py --check
+
+      # Every plugin with a test.lua runs it on luaj 3.0.1.
+      - name: Run plugin tests
+        run: python3 tools/test_plugins.py

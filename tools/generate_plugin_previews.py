@@ -527,12 +527,129 @@ def generate_text_tools_preview():
     print(f"Generated {out_file.relative_to(ROOT)}")
 
 
+def generate_math_mode_preview():
+    w, h = 1080, 900
+    bg_colors = [
+        (15, 23, 42),       # Dark slate
+        (49, 46, 129),      # Indigo
+        (129, 140, 248, 45),  # Periwinkle top-right glow
+        (250, 204, 21, 30),   # Amber bottom-left glow
+    ]
+    canvas = create_gradient_background(w, h, bg_colors)
+    draw = ImageDraw.Draw(canvas)
+
+    font_title = ImageFont.truetype(INTER_PATH, 42)
+    font_sub = ImageFont.truetype(INTER_PATH, 19)
+    font_badge = ImageFont.truetype(INTER_PATH, 14)
+    font_label = ImageFont.truetype(INTER_PATH, 17)
+    font_body = ImageFont.truetype(INTER_PATH, 18)
+    font_mono = ImageFont.truetype(MONO_PATH, 18)
+    font_result = ImageFont.truetype(INTER_PATH, 30)
+    font_glyph = ImageFont.truetype(INTER_PATH, 22)
+
+    accent = (129, 140, 248)
+
+    # Header
+    badge = make_badge_pill(
+        "LUA PLUGIN  •  MATH INPUT",
+        font_badge,
+        accent,
+        (15, 23, 42, 230),
+        (129, 140, 248, 120),
+    )
+    canvas.paste(badge, (60, 45), badge)
+
+    draw.text((60, 95), "Math Mode", fill=(248, 250, 252), font=font_title)
+    draw.text((60, 150), "Type math the way you say it. Get real Unicode, ready to insert.", fill=(148, 163, 184), font=font_sub)
+
+    # Main card
+    card_x, card_y, card_w, card_h = 60, 195, 960, 655
+    draw.rounded_rectangle(
+        [card_x, card_y, card_x + card_w, card_y + card_h],
+        radius=20,
+        fill=(15, 23, 42, 235),
+        outline=(51, 65, 85),
+        width=2,
+    )
+
+    # Input box
+    in_y = card_y + 20
+    draw.text((card_x + 25, in_y), "Math", fill=(148, 163, 184), font=font_badge)
+    draw.rounded_rectangle([card_x + 20, in_y + 24, card_x + card_w - 20, in_y + 70], radius=12, fill=(30, 41, 59), outline=(129, 140, 248, 180), width=2)
+    draw.text((card_x + 36, in_y + 35), "x^2 + sqrt(2) = pi/4", fill=(248, 250, 252), font=font_mono)
+
+    # Result block with Insert
+    res_y = in_y + 90
+    draw.rounded_rectangle([card_x + 20, res_y, card_x + card_w - 20, res_y + 96], radius=14, fill=(10, 18, 34), outline=(129, 140, 248, 150), width=2)
+    draw.text((card_x + 36, res_y + 14), "RESULT", fill=accent, font=font_badge)
+    draw.text((card_x + 36, res_y + 40), "x² + √2 = π⁄4", fill=(248, 250, 252), font=font_result)
+    draw.rounded_rectangle([card_x + card_w - 150, res_y + 30, card_x + card_w - 36, res_y + 74], radius=8, fill=(79, 70, 229), outline=None)
+    draw.text((card_x + card_w - 116, res_y + 41), "Insert", fill=(255, 255, 255), font=font_label)
+
+    # Tabs
+    tab_y = res_y + 112
+    tabs = [("Symbols", True), ("Options", False), ("Help", False)]
+    tx = card_x + 20
+    for name, is_active in tabs:
+        tw = 160
+        if is_active:
+            draw.rounded_rectangle([tx, tab_y, tx + tw, tab_y + 40], radius=10, fill=(79, 70, 229), outline=None)
+            draw.text((tx + 42, tab_y + 9), name, fill=(255, 255, 255), font=font_label)
+        else:
+            draw.rounded_rectangle([tx, tab_y, tx + tw, tab_y + 40], radius=10, fill=(30, 41, 59), outline=(51, 65, 85))
+            draw.text((tx + 46, tab_y + 9), name, fill=(148, 163, 184), font=font_label)
+        tx += tw + 15
+
+    # Symbol palette
+    pal_y = tab_y + 56
+    rows = [
+        ["α", "β", "γ", "δ", "θ", "π", "λ", "μ", "σ", "ω", "Δ", "Σ"],
+        ["±", "×", "÷", "√", "∞", "≤", "≥", "≠", "≈", "→", "⇒", "∴"],
+        ["∫", "∑", "∏", "∂", "∇", "∈", "∉", "⊂", "∪", "∩", "∀", "∃"],
+    ]
+    cell = 74
+    gap = 6
+    for r, row in enumerate(rows):
+        for c, glyph in enumerate(row):
+            gx = card_x + 20 + c * (cell + gap)
+            gy = pal_y + r * (46 + gap)
+            draw.rounded_rectangle([gx, gy, gx + cell, gy + 46], radius=10, fill=(30, 41, 59), outline=(51, 65, 85))
+            bbox = draw.textbbox((0, 0), glyph, font=font_glyph)
+            gw = bbox[2] - bbox[0]
+            draw.text((gx + (cell - gw) / 2 - bbox[0], gy + 9), glyph, fill=(248, 250, 252), font=font_glyph)
+
+    # Examples
+    ex_y = pal_y + 3 * 52 + 14
+    examples = [
+        ("sum_(i=1)^n", "∑ᵢ₌₁ⁿ"),
+        ("int_0^1 x^2 dx", "∫₀¹ x² dx"),
+        ("x in RR", "x ∈ ℝ"),
+        ("1/2 + 1/3", "½ + ⅓"),
+        ("f'(x) = 2x", "f′(x) = 2x"),
+        ("H_2O", "H₂O"),
+    ]
+    col_w = 302
+    for n, (src, out) in enumerate(examples):
+        col = n % 3
+        row = n // 3
+        ex = card_x + 20 + col * (col_w + 12)
+        ey = ex_y + row * 78
+        draw.rounded_rectangle([ex, ey, ex + col_w, ey + 68], radius=12, fill=(24, 33, 52), outline=(51, 65, 85))
+        draw.text((ex + 14, ey + 10), src, fill=(148, 163, 184), font=font_mono)
+        draw.text((ex + 14, ey + 36), out, fill=(248, 250, 252), font=font_body)
+
+    out_file = PREVIEWS_DIR / "math-mode-grid.jpg"
+    canvas.convert("RGB").save(out_file, "JPEG", quality=95)
+    print(f"Generated {out_file.relative_to(ROOT)}")
+
+
 def main():
     PREVIEWS_DIR.mkdir(exist_ok=True)
     generate_cipher_tool_preview()
     generate_ui_kitchen_sink_preview()
     generate_todo_list_preview()
     generate_text_tools_preview()
+    generate_math_mode_preview()
 
 
 if __name__ == "__main__":

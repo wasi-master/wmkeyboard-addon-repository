@@ -41,6 +41,7 @@ EXPECTED_SUFFIX = {
     "emoji_font": (".ttf", ".otf"),
     "sound": ".mp3",
     "plugin": ".wmplugin",
+    "vocabulary": (".wmvocab.json", ".wmvocab.json.gz"),
 }
 
 # Types whose payload is executable code rather than data. The rules are
@@ -432,7 +433,7 @@ def main() -> int:
         if licence_file:
             check_asset(f"{ident}.licenseFile", licence_file, errors, warnings)
 
-        if kind == "dictionary" and not entry.get("langId"):
+        if kind in ("dictionary", "vocabulary") and not entry.get("langId"):
             errors.append(f"{ident}: dictionaries must declare a langId")
 
         # Not required, but an addon whose licence nobody can find is one

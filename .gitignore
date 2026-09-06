@@ -4,3 +4,6 @@ __pycache__/
 
 # Intermediates from tools/make_sounds.py; only the .mp3 files are committed.
 sounds/*.wav
+
+# tools/test_plugins.py keeps the luaj jar here when it is not in the Gradle cache.
+.cache/

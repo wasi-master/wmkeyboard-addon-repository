@@ -1,0 +1,734 @@
+# Math Mode golden corpus. One case per line: input <TAB> expected.
+# Escapes: ␊ = newline, ␍ = carriage return, ␉ = tab (control pictures, so LaTeX
+# backslashes stay literal). A leading "@opt,opt<TAB>" field flips options off
+# their defaults: chem nominus dot words rootline italic noprime nofrac nosmall.
+# Run by plugins-src/math-mode/test.lua (luaj CLI) and MathModePluginTest (app).
+
+# ---- Greek and constants ----
+alpha	α
+alpha beta gamma	α β γ
+Gamma Delta Theta Lambda Xi Pi Sigma Phi Psi Omega	Γ Δ Θ Λ Ξ Π Σ Φ Ψ Ω
+Alpha	Α
+epsilon	ε
+varepsilon	ε
+phi	φ
+vartheta varpi varrho varsigma	ϑ ϖ ϱ ς
+pi	π
+2pi	2π
+2 pi r	2 π r
+pixel	pixel
+pi2	π2
+pir	pir
+Pi	Π
+PI	PI
+oo	∞
+-oo	−∞
+infty	∞
+infinity	∞
+inf	inf
+foo zoo too	foo zoo too
+hbar ell nabla partial emptyset aleph	ℏ ℓ ∇ ∂ ∅ ℵ
+del	∂
+grad	∇
+RR NN ZZ QQ CC HH PP FF	ℝ ℕ ℤ ℚ ℂ ℍ ℙ 𝔽
+RR^n	ℝⁿ
+RR^2	ℝ²
+ZZ_2	ℤ₂
+ZZ/nZZ	ℤ⁄nℤ
+RR^(n x m)	ℝⁿˣᵐ
+RR^(n times m)	ℝ^(n × m)
+mu0	μ0
+epsilon_0	ε₀
+DeltaH	ΔH
+Deltax	Deltax
+
+# ---- superscript / subscript ----
+x^2	x²
+x^23	x²³
+x^10	x¹⁰
+x^-1	x⁻¹
+10^-3	10⁻³
+10^(-3)	10⁻³
+x^(n+1)	xⁿ⁺¹
+x^(n-1)	xⁿ⁻¹
+x^(2n)	x²ⁿ
+x^(a b)	xᵃᵇ
+x^n-1	xⁿ−1
+x^2y	x²y
+x^2y^2	x²y²
+e^x	eˣ
+e^-x	e⁻ˣ
+e^(-x)	e⁻ˣ
+e^(2x)	e²ˣ
+e^(-kt)	e⁻ᵏᵗ
+e^(x+y)	eˣ⁺ʸ
+e^(i theta)	eⁱᶿ
+x^beta x^gamma x^delta x^chi	xᵝ xᵞ xᵟ xᵡ
+A^T	Aᵀ
+A^-1	A⁻¹
+A^c	Aᶜ
+2^A	2ᴬ
+x^(2)	x²
+f^((n))(x)	f⁽ⁿ⁾(x)
+f^(-1)(x)	f⁻¹(x)
+sin^2(x)	sin²(x)
+sin^-1(x)	sin⁻¹(x)
+(x+1)^2	(x+1)²
+(-1)^n	(−1)ⁿ
+(1+1/x)^x	(1+1⁄x)ˣ
+1^st 2^nd 3^rd 4^th	1ˢᵗ 2ⁿᵈ 3ʳᵈ 4ᵗʰ
+x^max	xᵐᵃˣ
+x_1	x₁
+x_12	x₁₂
+x_n	xₙ
+x_(n+1)	xₙ₊₁
+x_(t-1)	xₜ₋₁
+x_ij	xᵢⱼ
+x_(i j)	xᵢⱼ
+x_max	xₘₐₓ
+x_min	xₘᵢₙ
+v_rms	vᵣₘₛ
+x_0^2	x₀²
+x_1^2	x₁²
+x^2_1	x²₁
+a_i^2	aᵢ²
+x_beta x_gamma x_rho x_phi x_chi	xᵦ xᵧ xᵨ xᵩ xᵪ
+mu_0	μ₀
+H_0: mu = 0	H₀: μ = 0
+x_1, x_2, ..., x_n	x₁, x₂, …, xₙ
+a_n = a_(n-1) + a_(n-2)	aₙ = aₙ₋₁ + aₙ₋₂
+log_2(8) = 3	log₂(8) = 3
+log_10 x	log₁₀ x
+x^ 2	x²
+x ^ 2	x²
+2**10	2¹⁰
+x -> 0^+	x → 0⁺
+H^+	H⁺
+OH^-	OH⁻
+a_i_j	aᵢⱼ
+|x|^2	|x|²
+
+# ---- sup/sub fallbacks ----
+x^q	x^q
+x^Q x^C x^F x^S x^X x^Y x^Z	x^Q x^C x^F x^S x^X x^Y x^Z
+x^alpha	x^α
+e^pi	e^π
+e^(i pi)	e^(i π)
+e^(pi)	e^π
+x^(1/2)	x^(1⁄2)
+x^2.5	x^2.5
+x^(0.5)	x^0.5
+x^(1,2)	x^(1,2)
+x^(3*4)	x^(3×4)
+2^10^2	2^(10²)
+e^x^2	e^(x²)
+a^b^c	a^(bᶜ)
+e^(-x^2)	e^(−x²)
+e^(-x^2/2)	e^(−x²⁄2)
+e^(-(x-mu)^2/(2sigma^2))	e^(−(x−μ)²⁄(2σ²))
+e^ln(x)	e^ln(x)
+x_b x_c x_d x_f x_g x_q x_w x_y x_z	x_b x_c x_d x_f x_g x_q x_w x_y x_z
+k_B N_A E_F T_c	k_B N_A E_F T_c
+x_avg	x_avg
+x_alpha	x_α
+T_(mu nu)	T_(μ ν)
+a_(i,j)	a_(i,j)
+x_{i,j}	x_{i,j}
+a_b_c	a_b_c
+lim_(x->0)	lim_(x→0)
+int_(-oo)^oo	∫_(−∞)^∞
+sum_(i in S)	∑_(i ∈ S)
+oint_C	∮_C
+t_(1/2)	t_(1⁄2)
+x^	x^
+x^(	x^(
+x^(2	x^(2
+x^(2+	x^(2+
+x_	x_
+x_(	x_(
+^2	^2
++^2	+^2
+x^^2	x^^2
+x^2^	x²^
+x^²	x²
+
+# ---- roots ----
+sqrt(2)	√2
+sqrt(x)	√x
+sqrt(pi)	√π
+sqrt(x_1)	√x₁
+sqrt(x^2)	√(x²)
+sqrt(2x)	√(2x)
+sqrt(x+1)	√(x+1)
+sqrt(-1)	√(−1)
+sqrt(1/2)	√(½)
+sqrt(b^2-4ac)	√(b²−4ac)
+sqrt(a^2 + b^2)	√(a² + b²)
+sqrt(2)/2	√2⁄2
+1/sqrt(2)	1⁄√2
+sqrt(2)^2	(√2)²
+sqrt 2	√2
+sqrt x	√x
+sqrt 2x	√2x
+sqrt2	√2
+sqrtx	sqrtx
+sqrt	√
+sqrt(	√(
+sqrt(2	√(2
+sqrt()	√()
+sqrt(sqrt(x))	√√x
+cbrt(27)	∛27
+cbrt(x+1)	∛(x+1)
+root(3)(8)	∛8
+root(4)(16)	∜16
+root(n)(x)	ⁿ√x
+root(5)(32)	⁵√32
+root(n+1)(x)	ⁿ⁺¹√x
+root(q)(x)	root(q)(x)
+root(4)	root(4)
+root(4)(	root(4)(
+\sqrt{2}	√2
+\sqrt[3]{8}	∛8
+\sqrt[n]{x}	ⁿ√x
+\sqrt{x^2+y^2}	√(x²+y²)
+\sqrt{	√{
+@rootline	sqrt(x+1)	√x̅+̅1̅
+
+# ---- fractions ----
+1/2	½
+1/3 2/3 1/4 3/4	⅓ ⅔ ¼ ¾
+1/5 2/5 3/5 4/5	⅕ ⅖ ⅗ ⅘
+1/6 5/6 1/7 1/9 1/10	⅙ ⅚ ⅐ ⅑ ⅒
+1/8 3/8 5/8 7/8	⅛ ⅜ ⅝ ⅞
+2/4	²⁄₄
+22/7	²²⁄₇
+355/113	³⁵⁵⁄₁₁₃
+1/100	¹⁄₁₀₀
+1/2 + 1/3 = 5/6	½ + ⅓ = ⅚
+1 1/2	1 ½
+2 3/4 cups	2 ¾ cups
+3.5/2	3.5⁄2
+1/2.5	1⁄2.5
+1 / 2	1 / 2
+1/ 2	1/ 2
+a/b	a⁄b
+x/2	x⁄2
+2/x	2⁄x
+(a+b)/(c+d)	(a+b)⁄(c+d)
+(a+b)/2	(a+b)⁄2
+a+b/c	a+b⁄c
+1/(2pi)	1⁄(2π)
+1/2pi	½π
+1/2x	½x
+2x/3	2x⁄3
+x^2/2	x²⁄2
+1/x^2	1⁄x²
+1/2^3	1⁄2³
+2^3/4	2³⁄4
+pi/2	π⁄2
+3pi/2	3π⁄2
+pi^2/6	π²⁄6
+sqrt(pi)/2	√π⁄2
+√2/2	√2⁄2
+d/dx	d⁄dx
+dy/dx	dy⁄dx
+d^2y/dx^2	d²y⁄dx²
+n!/k!	n!⁄k!
+n!/(k!(n-k)!)	n!⁄(k!(n−k)!)
+a/b/c	a/b/c
+1/2/3/4/5	1/2/3/4/5
+12/25/2024	12/25/2024
+1/2/	1/2/
+a/b/c + 1/2	a/b/c + ½
+1/-2	1⁄−2
+m/s	m⁄s
+9.8 m/s^2	9.8 m⁄s²
+|x|/2	|x|⁄2
+http://x.com/a/b	http://x.com/a/b
+@nosmall	1/2	1⁄2
+@nofrac	a/b	a/b
+@nofrac,nosmall	1/2	1/2
+@nofrac	22/7	²²⁄₇
+
+# ---- operators, relations, arrows ----
+a*b	a×b
+@dot	a*b	a⋅b
+5 * 3	5 × 3
+2*3*4	2×3×4
+**	**
+***	***
+a - b	a − b
+-5	−5
+5-3	5−3
+x-1	x−1
+1-x	1−x
+x-y	x−y
+a-b	a−b
+f(x)-g(x)	f(x)−g(x)
+x^2-1	x²−1
+-	−
+x-	x−
+--	−−
+@nominus	a - b	a - b
+<=	≤
+>=	≥
+x<=-1	x≤−1
+!=	≠
+=/=	≠
+<>	≠
+n!=5	n≠5
+n! = 5	n! = 5
+==	==
+===	≡
+~~	≈
+~=	≅
+~	~
+X ~ N(0,1)	X ~ N(0,1)
+->	→
+x->y	x→y
+-->	⟶
+<-	←
+x <- y	x ← y
+x<-1	x<−1
+<->	↔
+=>	⇒
+<=>	⇔
+==>	⇒
+<==	⇐
+<==>	⇔
+<--	⟵
+<-->	⟷
+|->	↦
+f: x |-> x^2	f: x ↦ x²
++-	±
+-+	∓
+a +- b	a ± b
++/-	±
+5 +/- 0.1	5 ± 0.1
+x+-1	x±1
+...	…
+x_1,...,x_n	x₁,…,xₙ
+1..n	1..n
+....	....
+||v||	‖v‖
+||v||_2	‖v‖₂
+|x|	|x|
+|x| < 1	|x| < 1
+:=	≔
+=:	≕
+<<	≪
+>>	≫
+2 x 3	2 × 3
+5 x 3 = 15	5 × 3 = 15
+2x3	2x3
+2 x	2 x
+2 x y	2 x y
+a x b	a x b
+1.6 x 10^-19	1.6 × 10⁻¹⁹
+6.022*10^23	6.022×10²³
+1e-5	1e-5
+1.5e-3 2E10	1.5e-3 2E10
+50%	50%
+5 % 3	5 % 3
+<=>=<=	⇔=≤
+->->	→→
++-+-+-	±±±
+xx	×
+-:	÷
+a div b	a ÷ b
+p |-- q	p ⊢ q
+p |== q	p ⊨ q
+|-1|	|−1|
+
+# ---- sets and logic ----
+x in RR	x ∈ ℝ
+x in A	x ∈ A
+x in {1,2,3}	x ∈ {1,2,3}
+x in (0,1)	x ∈ (0,1)
+x in the set	x in the set
+for all x in X	for all x ∈ X
+x notin A	x ∉ A
+x !in A	x ∉ A
+x not in A	x ∉ A
+p and q	p and q
+@words	p and q	p ∧ q
+@words	P(A and B)	P(A ∧ B)
+@words	p or q	p ∨ q
+@words	not p	¬ p
+@words	not(p and q)	¬(p ∧ q)
+@words	x to 0	x → 0
+@words	one-to-one	one-to-one
+p implies q	p ⇒ q
+p iff q	p ⇔ q
+p xor q	p ⊻ q
+p nand q	p ⊼ q
+neg p	¬ p
+forall x exists y	∀ x ∃ y
+forall epsilon > 0 exists delta > 0	∀ ε > 0 ∃ δ > 0
+exists! x	∃! x
+nexists	∄
+therefore x = 2	∴ x = 2
+because	∵
+A subset B	A ⊂ B
+A subseteq B	A ⊆ B
+A supset B	A ⊃ B
+A union B	A ∪ B
+A cup B	A ∪ B
+A intersect B	A ∩ B
+A cap B	A ∩ B
+A setminus B	A ∖ B
+A \ B	A \ B
+emptyset	∅
+{}	{}
+A times B	A × B
+AA x in RR	∀ x ∈ ℝ
+EE x	∃ x
+top bot	⊤ ⊥
+
+# ---- calculus ----
+sum_(i=1)^n i	∑ᵢ₌₁ⁿ i
+sum_(i=1)^n	∑ᵢ₌₁ⁿ
+sum_(n=1)^oo 1/n^2 = pi^2/6	∑ₙ₌₁^∞ 1⁄n² = π²⁄6
+sum_(k=0)^oo x^k/k!	∑ₖ₌₀^∞ xᵏ⁄k!
+sum x_i / n	∑ xᵢ / n
+prod_(i=1)^n a_i	∏ᵢ₌₁ⁿ aᵢ
+int_0^1 x^2 dx	∫₀¹ x² dx
+int_a^b f(x) dx	∫ₐᵇ f(x) dx
+int_0^(pi/2) sin x dx	∫₀^(π⁄2) sin x dx
+int_0^oo e^(-x^2) dx = sqrt(pi)/2	∫₀^∞ e^(−x²) dx = √π⁄2
+int f(x) dx	∫ f(x) dx
+integral	∫
+iint_D f dA	∬_D f dA
+lim_(x->0) sin(x)/x = 1	lim_(x→0) sin(x)⁄x = 1
+lim_(x->oo) (1+1/x)^x = e	lim_(x→∞) (1+1⁄x)ˣ = e
+lim_(h->0) (f(x+h)-f(x))/h	lim_(h→0) (f(x+h)−f(x))⁄h
+lim_(x->0^+) 1/x = oo	lim_(x→0⁺) 1⁄x = ∞
+d/dx x^2 = 2x	d⁄dx x² = 2x
+partial f/partial x	∂ f⁄∂ x
+partial^2 f/partial x^2	∂² f⁄∂ x²
+nabla^2 phi = 0	∇² φ = 0
+nabla cdot E = rho/epsilon_0	∇ ⋅ E = ρ⁄ε₀
+bigcup_(i=1)^n A_i	⋃ᵢ₌₁ⁿ Aᵢ
+n -> oo	n → ∞
+
+# ---- functions, primes, accents ----
+f'(x) = 2x	f′(x) = 2x
+f''(x)	f″(x)
+f'''(x)	f‴(x)
+f''''	f⁗
+y'' + y = 0	y″ + y = 0
+(f+g)'	(f+g)′
+f_1'	f₁′
+f'	f′
+it's	it's
+x's	x's
+'hello'	'hello'
+@noprime	f'(x)	f'(x)
+abs(x)	|x|
+abs(x-y)	|x−y|
+abs(	abs(
+abs(x	abs(x
+norm(v)	‖v‖
+norm(v)_2	‖v‖₂
+floor(3.7)	⌊3.7⌋
+ceil(x)	⌈x⌉
+floor(x/2)	⌊x⁄2⌋
+vec(v)	v⃗
+hat(x)	x̂
+hat(theta)	θ̂
+bar(x)	x̄
+dot(x)	ẋ
+ddot(x)	ẍ
+tilde(x)	x̃
+overline(AB)	A̅B̅
+underline(x)	x̲
+hat(x+y)	hat(x+y)
+bar(x)^2	x̄²
+hat(beta)_1	β̂₁
+hat(y) = hat(beta)_0 + hat(beta)_1 x	ŷ = β̂₀ + β̂₁ x
+conj(z)	z̄
+z^* = conj(z)	z* = z̄
+|z|^2 = z z^*	|z|² = z z*
+hat(x)'	x̂′
+abs(x)'	|x|′
+sqrt(x)!	√x!
+a dot b	a ⋅ b
+a cdot b	a ⋅ b
+a cross b	a × b
+vec(a) cdot vec(b)	a⃗ ⋅ b⃗
+f circ g	f ∘ g
+sin(x)	sin(x)
+sin^2(x) + cos^2(x) = 1	sin²(x) + cos²(x) = 1
+cos(2 theta)	cos(2 θ)
+n!	n!
+(n+1)!	(n+1)!
+(n choose k)	(ⁿₖ)
+binom(n,k)	(ⁿₖ)
+max(a,b)	max(a,b)
+deg(f)	deg(f)
+30 deg	30°
+90deg	90°
+45 degrees	45°
+30 deg C	30 °C
+30 degC	30 °C
+angle in deg	angle in deg
+angle ABC = 90 deg	∠ ABC = 90°
+AB perp CD	AB ⊥ CD
+AB parallel CD	AB ∥ CD
+5 permil	5 ‰
+
+# ---- styles (astral: CESU-8 on the wire) ----
+bb(A)	𝐀
+bb(x)	𝐱
+bb(ABC)	𝐀𝐁𝐂
+bb(0)	𝟎
+bb(x+y)	𝐱+𝐲
+bb(alpha)	𝛂
+bb(pi)	𝛑
+bbb(R)	ℝ
+bbb(C) bbb(H) bbb(N) bbb(P) bbb(Q) bbb(Z)	ℂ ℍ ℕ ℙ ℚ ℤ
+bbb(A)	𝔸
+bbb(k)	𝕜
+bbb(1)	𝟙
+bbb(RR)	ℝ
+bbb(R)^n	ℝⁿ
+cc(L)	ℒ
+cc(B) cc(E) cc(F) cc(H) cc(I) cc(M) cc(R)	ℬ ℰ ℱ ℋ ℐ ℳ ℛ
+cc(e) cc(g) cc(o)	ℯ ℊ ℴ
+cc(A)	𝒜
+cc(P)	𝒫
+cc(1)	1
+fr(C) fr(H) fr(I) fr(R) fr(Z)	ℭ ℌ ℑ ℜ ℨ
+fr(A)	𝔄
+fr(g)	𝔤
+sf(A)	𝖠
+sf(1)	𝟣
+tt(x)	𝚡
+tt(0)	𝟶
+it(h)	ℎ
+it(x)	𝑥
+it(1)	1
+bb(	bb(
+bb(A	bb(A
+bb()	bb()
+\mathbb{R}	ℝ
+\mathbb{R}^n	ℝⁿ
+\mathbf{v}	𝐯
+\mathcal{O}(n)	𝒪(n)
+\mathfrak{sl}_2	𝔰𝔩₂
+\mathrm{d}x	dx
+@italic	E = mc^2	𝐸 = 𝑚𝑐²
+@italic	sin x	sin 𝑥
+@italic	h	ℎ
+@italic	dx	dx
+
+# ---- chemistry ----
+H2O	H2O
+@chem	H2O	H₂O
+@chem	CO2	CO₂
+@chem	C6H12O6	C₆H₁₂O₆
+@chem	H2SO4	H₂SO₄
+@chem	NaCl	NaCl
+@chem	Ca(OH)2	Ca(OH)₂
+@chem	Mg(NO3)2	Mg(NO₃)₂
+@chem	SO4^(2-)	SO₄²⁻
+@chem	SO4^2-	SO₄²⁻
+SO4^(2-)	SO4²⁻
+@chem	Fe^(3+)	Fe³⁺
+@chem	Fe^3+	Fe³⁺
+@chem	NH4^+	NH₄⁺
+@chem	e^-	e⁻
+@chem	2H2 + O2 -> 2H2O	2H₂ + O₂ → 2H₂O
+@chem	CH4 + 2O2 -> CO2 + 2H2O	CH₄ + 2O₂ → CO₂ + 2H₂O
+@chem	N2 + 3H2 <=> 2NH3	N₂ + 3H₂ ⇌ 2NH₃
+@chem	H2O(l)	H₂O(l)
+CO_2	CO₂
+C_6H_12O_6	C₆H₁₂O₆
+2H_2 + O_2 -> 2H_2O	2H₂ + O₂ → 2H₂O
+@chem	x2	x2
+@chem	E2 A1	E2 A1
+@chem	pH	pH
+@chem	Delta H = -285.8 kJ/mol	Δ H = −285.8 kJ⁄mol
+
+# ---- LaTeX ----
+\alpha	α
+\alpha + \beta	α + β
+\alpha\beta	αβ
+\alpha_1	α₁
+\theta^2	θ²
+\alphabet	\alphabet
+\Omega	Ω
+\mu	μ
+\epsilon	ϵ
+\phi	ϕ
+\varepsilon	ε
+\varphi	φ
+\frac{1}{2}	½
+\frac{22}{7}	²²⁄₇
+\frac{a}{b}	a⁄b
+\frac{x+1}{2}	(x+1)⁄2
+\frac{1}{x+1}	1⁄(x+1)
+\frac{\pi}{2}	π⁄2
+\frac{1}{x^2}	1⁄x²
+\frac{d}{dx}	d⁄dx
+\frac{n(n+1)}{2}	n(n+1)⁄2
+\frac{\partial f}{\partial x}	∂ f⁄∂ x
+\dfrac{1}{2}	½
+\frac12	\frac12
+\sum_{n=1}^{\infty} \frac{1}{n^2}	∑ₙ₌₁^∞ 1⁄n²
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}	∑ᵢ₌₁ⁿ i = n(n+1)⁄2
+\int_0^\infty	∫₀^∞
+\int_0^1 x^2\,dx	∫₀¹ x² dx
+\lim_{x\to 0}	lim_{x→ 0}
+x^{2}	x²
+x^{10}	x¹⁰
+x_{n+1}	xₙ₊₁
+e^{i\pi}	e^{iπ}
+90^\circ	90°
+90^{\circ}	90°
+\degree	°
+\text{for all } x	for all  x
+\left( x \right)	( x )
+\langle x,y\rangle	⟨ x,y⟩
+\lfloor x\rfloor	⌊ x⌋
+\hat{x} \vec{v} \bar{x} \dot{x} \ddot{x} \tilde{x}	x̂ v⃗ x̄ ẋ ẍ x̃
+\overline{AB}	A̅B̅
+\cdot \times \div	⋅ × ÷
+\le \ge \ne	≤ ≥ ≠
+\to \rightarrow \Rightarrow \iff \mapsto	→ → ⇒ ⇔ ↦
+\ldots \cdots	… ⋯
+\in \forall \exists \emptyset \varnothing	∈ ∀ ∃ ∅ ∅
+\pm \circ \prime	± ∘ ′
+f^\prime	f′
+A^\dagger	A^†
+\{1,2\}	{1,2}
+\% \$ \_	% $ _
+\*	*
+\\	\\
+\	\
+\ x	\ x
+\fra	\fra
+\frac	\frac
+\frac{	\frac{
+\frac{1	\frac{1
+\frac{1}	\frac{1}
+\frac{1}{	\frac{1}{
+\frac{1}{2	\frac{1}{2
+$x^2$	$x²$
+\binom{n}{k}	(ⁿₖ)
+\operatorname{sin}	sin
+
+# ---- hyphen vs minus ----
+x-axis	x-axis
+y-intercept	y-intercept
+t-test k-means p-value z-score	t-test k-means p-value z-score
+n-th	n-th
+chi-square	χ-square
+sigma-algebra	σ-algebra
+non-negative	non-negative
+alpha-beta	α−β
+ab-cd	ab-cd
+2019-01-05	2019−01−05
+- item	- item
+a->b	a→b
+x->-y	x→−y
+
+# ---- half-typed input ----
+x^-	x⁻
+lim_	lim_
+lim_(x->	lim_(x→
+sum_(i=1)^	∑ᵢ₌₁^
+int_0^	∫₀^
+e^(i pi	e^(i π
+30 de	30 de
+x -	x −
+x ->	x →
+x in	x in
+x in R	x ∈ R
+f'(	f′(
+10^	10^
+10^-	10⁻
+\fr	\fr
+"unterminated x^2	"unterminated x^2
+"x^2" + y^2	x^2 + y²
+(x+1	(x+1
+(x+1)^	(x+1)^
+((((((	((((((
+)	)
+
+# ---- already-Unicode input (astral rows are CESU-8 on the wire) ----
+π^2	π²
+x² + y²	x² + y²
+α+β	α+β
+x̂^2	x̂²
+ℝ^n	ℝⁿ
+∑_(i=1)^n	∑ᵢ₌₁ⁿ
+∫_0^1	∫₀¹
+θ_0	θ₀
+½ + ½	½ + ½
+a × b	a × b
+µm	µm
+25 °C	25 °C
+😀	😀
+😀^2	😀²
+𝔸	𝔸
+𝔸^2	𝔸²
+数学 x^2	数学 x²
+x^π	x^π
+
+# ---- adversarial (the 8 KB ones are generated by the runners) ----
+^^^^	^^^^
+___	___
+__init__	__init__
+////	////
+a^b^c^d^e	a^(b^(c^(dᵉ)))
+**********	**********
+''''''	''''''
+x^2␊y^2	x²␊y²
+x^2␍␊y^2	x²␍␊y²
+␉x^2␉	␉x²␉
+  x^2  y	  x²  y
+x^\n2	x^\n2
+(x+1␊)^2	(x+1␊)²
+sqrt(sqrt(sqrt(x)))	√√√x
+<=>=<=>=<=>	⇔=⇔=⇔
+x<-y->z	x←y→z
+
+# ---- real-world lines ----
+x = (-b +- sqrt(b^2 - 4ac)) / (2a)	x = (−b ± √(b² − 4ac)) / (2a)
+x=(-b+-sqrt(b^2-4ac))/(2a)	x=(−b±√(b²−4ac))⁄(2a)
+e^(i pi) + 1 = 0	e^(i π) + 1 = 0
+a^2 + b^2 = c^2	a² + b² = c²
+c = sqrt(a^2 + b^2)	c = √(a² + b²)
+A = pi r^2	A = π r²
+E = mc^2	E = mc²
+F = G m_1 m_2 / r^2	F = G m₁ m₂ / r²
+F = G m_1 m_2/r^2	F = G m₁ m₂⁄r²
+Delta x >= hbar / (2 Delta p)	Δ x ≥ ℏ / (2 Δ p)
+s = ut + 1/2 at^2	s = ut + ½ at²
+KE = 1/2 mv^2	KE = ½ mv²
+lambda = h/p	λ = h⁄p
+T = 2pi sqrt(L/g)	T = 2π √(L⁄g)
+1/(4 pi epsilon_0)	1⁄(4 π ε₀)
+hbar^2/(2m)	ℏ²⁄(2m)
+3 x 10^8 m/s	3 × 10⁸ m⁄s
+theta = 45 deg	θ = 45°
+N(mu, sigma^2)	N(μ, σ²)
+P(X <= x)	P(X ≤ x)
+bar(x) = 1/n sum_(i=1)^n x_i	x̄ = 1⁄n ∑ᵢ₌₁ⁿ xᵢ
+sigma = sqrt(1/N sum (x_i - mu)^2)	σ = √(1⁄N ∑ (xᵢ − μ)²)
+chi^2	χ²
+alpha = 0.05	α = 0.05
+a equiv b (mod n)	a ≡ b (mod n)
+4/3 pi r^3	⁴⁄₃ π r³
+A = 1/2 b h	A = ½ b h
+i^2 = -1	i² = −1
+z = r e^(i phi)	z = r eⁱᵠ
+GL_n(RR)	GLₙ(ℝ)
+g(x) := x^2	g(x) ≔ x²
+10 cm^3	10 cm³
+s^-1	s⁻¹
+J/(mol K)	J⁄(mol K)
+kg*m/s^2	kg×m⁄s²
+sin(30 deg) = 1/2	sin(30°) = ½
+3x + 2 = 8	3x + 2 = 8

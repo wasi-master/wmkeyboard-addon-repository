@@ -1,0 +1,12 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.mathmode",
+  "name": "Math Mode",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹.",
+  "apiVersion": 1,
+  "entry": "main.lua",
+  "permissions": ["storage"]
+}

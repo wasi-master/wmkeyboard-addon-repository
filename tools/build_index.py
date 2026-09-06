@@ -66,6 +66,7 @@ PAYLOAD_DIRS = {
     "fonts": "*.[to]tf",
     "sounds": "*.mp3",
     "plugins": "*.wmplugin",
+    "vocabulary": "*.wmvocab.json*",
 }
 
 
