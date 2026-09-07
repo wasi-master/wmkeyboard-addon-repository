@@ -998,22 +998,25 @@
       "licenseFile": "plugins/LICENSE.txt"
     },
     {
-      "id": "en-writing-words",
+      "id": "magoosh-1000",
       "type": "vocabulary",
-      "name": "Sharper Writing",
+      "name": "Magoosh GRE 1000",
       "version": "1.0.0",
       "author": "Wasi Master",
-      "description": "A dozen everyday upgrades for plain words — clear → lucid, big → immense, start → commence — as a vocabulary pack: the keyboard offers the stronger word when you type the plain one, and each has a card with pronunciation, examples and related words.",
+      "description": "The Magoosh GRE word list, 1000 words, as a full vocabulary pack: each word with its part of speech, pronunciation in both accents, senses with examples and quotations, synonyms and antonyms, the word family, etymology and a mnemonic, plus the plainer words that make the keyboard offer it while you type. Translations into your keyboard's languages download beside it.",
       "tags": [
         "vocabulary",
-        "writing",
-        "english"
+        "gre",
+        "english",
+        "study"
       ],
-      "path": "vocabulary/en-writing-words.wmvocab.json",
-      "sha256": "e86c25a05ab610231b618e95434122f410cd563b3758df0773b6fe9019b297b5",
-      "sizeBytes": 6430,
+      "path": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-data/HEAD/vocab/en/mg1000.wmvocab.json.gz",
+      "sha256": "c9d398665c9291ac301923e06c9a871ab4c5fd3ed2f1770717391eadff5d5fbd",
+      "sizeBytes": 705666,
+      "minAppVersion": 15,
       "langId": "en",
-      "license": "CC0-1.0"
+      "license": "CC-BY-SA-3.0",
+      "licenseText": "Definitions, pronunciations, examples and quotations are Wiktionary's (CC BY-SA 3.0, via kaikki.org), with WordNet 3.0 filling gaps. The word list names the study guide it was compiled from; only the words themselves are taken."
     },
     {
       "id": "math-mode",
