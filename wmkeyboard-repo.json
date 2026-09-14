@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-09-07"
+    "updatedAt": "2026-09-15"
   },
   "addons": [
     {
@@ -217,6 +217,82 @@
       ],
       "langId": "en",
       "license": "CC0-1.0"
+    },
+    {
+      "id": "clearflow",
+      "type": "layout",
+      "name": "ClearFlow",
+      "version": "1.0.0",
+      "author": "ClearFlow Authors (Xiaojun Bi et al.), ported by cinnabar777",
+      "description": "A layout built for glide typing: letters placed so common swipe paths stay apart, with shift and delete as tall keys down the sides and space on both edges for either thumb. Public domain, designed by the ClearFlow authors; ported to WM Keyboard by cinnabar777 from FUTO Keyboard's version.",
+      "tags": [
+        "glide",
+        "swipe",
+        "alternative",
+        "english"
+      ],
+      "path": "layouts/clearflow.wmlayout.json",
+      "sha256": "d9cdd4a7b7986333a0deac9c7928b3e0cadc0d278c5c894eb8ad46bc3317619b",
+      "sizeBytes": 17195,
+      "previews": [
+        "previews/clearflow.jpg",
+        "previews/clearflow-symbols.jpg"
+      ],
+      "minAppVersion": 18,
+      "langId": "en",
+      "license": "Public domain",
+      "licenseFile": "layouts/CLEARFLOW-LICENSE.txt"
+    },
+    {
+      "id": "kasroz",
+      "type": "layout",
+      "name": "KASROZ",
+      "version": "1.0.0",
+      "author": "FUTO, ported by cinnabar777",
+      "description": "FUTO Keyboard's swipe-optimised layout, named for its second row. Same frame as ClearFlow (tall shift and delete at the sides, space on both edges) with a different letter arrangement tuned for glide accuracy. Apache-2.0, by FUTO; ported to WM Keyboard by cinnabar777.",
+      "tags": [
+        "glide",
+        "swipe",
+        "alternative",
+        "english"
+      ],
+      "path": "layouts/kasroz.wmlayout.json",
+      "sha256": "b8a9171d949e551b9c5be69ae8a37f32122f37422191fc0e4be108f86d09d729",
+      "sizeBytes": 19196,
+      "previews": [
+        "previews/kasroz.jpg",
+        "previews/kasroz-symbols.jpg"
+      ],
+      "minAppVersion": 18,
+      "langId": "en",
+      "license": "Apache-2.0",
+      "licenseFile": "layouts/KASROZ-LICENSE.txt"
+    },
+    {
+      "id": "vowel-vortex-clarity",
+      "type": "layout",
+      "name": "Vowel Vortex Clarity",
+      "version": "1.0.0",
+      "author": "cinnabar777",
+      "description": "A QWERTY-like layout for glide typing that pulls the vowels A E U I O into a row of their own, with comma, !, ? and period as narrow keys between them. Numbers and symbols sit on long-press of the letters. Designed by cinnabar777; free for personal, non-commercial use (see the licence).",
+      "tags": [
+        "glide",
+        "swipe",
+        "qwerty",
+        "vowels",
+        "english"
+      ],
+      "path": "layouts/vowel-vortex-clarity.wmlayout.json",
+      "sha256": "499d64c2ee3e3a60c24b7bdfb052eaf1ba0afb871f8d13d0328ff8addb0accb3",
+      "sizeBytes": 28396,
+      "previews": [
+        "previews/vowel-vortex-clarity.jpg",
+        "previews/vowel-vortex-clarity-symbols.jpg"
+      ],
+      "minAppVersion": 18,
+      "langId": "en",
+      "license": "Vowel Vortex License",
+      "licenseText": "Copyright & License\n\nI retain my right to hold a common law copyright on the Vowel Vortex Keyboard Layouts, this applies to all variations though they are not posted here, as my intellectual property. This applies to the specific idea of using the vowels in their own row while maintaining similarity with the QWERTY layout, such minor changes such as moving a constant is infringing. \n\nUse is hereby granted, free to use, to the following open source Keyboard projects: HeliBoard and forks of it, FUTO Keyboard and forks of it, FlorisBoard and forks of it. Any other open source Keyboard projects that want to use these layouts please contact me. \n\nProhibited from using: any publicly traded company must gain written permission prior to use, anyone using these layouts for a commercial product must gain written permission prior to use. \n\nFree use: anyone using it for personal private non-commercial use is free to use the layouts. \n\nGeneral Prohibitions: no person may charge for any of these layouts, except the creator of these layouts. \n\nMay 17, 2026\n\nSource: https://github.com/cinnabar777/Vowel-Vortex-Keyboard-Layouts"
     },
     {
       "id": "en-developer",

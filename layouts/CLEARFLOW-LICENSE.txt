@@ -1,0 +1,13 @@
+ClearFlow layout
+Copyright (c) 2024-2026 ClearFlow Authors (Xiaojun Bi et al.)
+https://clearflowkeyboard.github.io/
+
+The ClearFlow layout is public information and not subject to any
+intellectual property restrictions. Please feel free to implement it.
+
+ClearFlow is in the public domain and is available for free adoption and
+implementation by any keyboard.
+
+WM Keyboard port contributed by cinnabar777
+(https://github.com/wasi-master/wmkeyboard/issues/188), adapted from the
+FUTO Keyboard implementation.

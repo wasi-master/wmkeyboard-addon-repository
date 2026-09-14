@@ -59,6 +59,8 @@ Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the r
 
 **Braille.** A layout that types Unicode braille cells (⠁⠃⠉⠙) from QWERTY key positions, with the Latin letter on long-press and shown as the corner hint.
 
+**Glide layouts.** Three English layouts arranged for glide typing, each contributed by [cinnabar777](https://github.com/cinnabar777). **ClearFlow** is the public-domain layout by the [ClearFlow authors](https://clearflowkeyboard.github.io/) (Xiaojun Bi et al.) — [`layouts/CLEARFLOW-LICENSE.txt`](layouts/CLEARFLOW-LICENSE.txt). **KASROZ** is [FUTO Keyboard](https://keyboard.futo.org/)'s layout from [futo-keyboard-layouts](https://github.com/futo-org/futo-keyboard-layouts), Apache 2.0 — [`layouts/KASROZ-LICENSE.txt`](layouts/KASROZ-LICENSE.txt). **Vowel Vortex Clarity** is cinnabar777's own design from [Vowel Vortex Keyboard Layouts](https://github.com/cinnabar777/Vowel-Vortex-Keyboard-Layouts), free for personal, non-commercial use under its author's licence.
+
 **Sounds.** Four key-press sounds synthesised by [`tools/make_sounds.py`](tools/make_sounds.py) and released CC0 ([`sounds/SOUNDS-LICENSE.txt`](sounds/SOUNDS-LICENSE.txt)).
 
 ---
