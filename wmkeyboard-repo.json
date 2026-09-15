@@ -737,7 +737,7 @@
       "id": "noto-color-emoji",
       "type": "emoji_font",
       "name": "Noto Color Emoji",
-      "version": "2.051",
+      "version": "2.51.0",
       "author": "Google",
       "description": "The standard Android emoji set, current release. Newer than the copy most devices ship, so the emoji a device draws as an empty box appear properly.",
       "tags": [
@@ -849,9 +849,9 @@
       "id": "fluent-emoji",
       "type": "emoji_font",
       "name": "Fluent Emoji",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Microsoft Corporation and tetunori",
-      "description": "Microsoft's modern, friendly 3D emoji collection as a colour font.",
+      "description": "Microsoft's modern, friendly 3D emoji collection as a colour font. Built as a bitmap (CBDT) face so it draws on every Android version, and slimmed to fit the 32 MB emoji-font cap.",
       "tags": [
         "emoji",
         "colour",
@@ -860,8 +860,8 @@
         "3d"
       ],
       "path": "fonts/fluent-emoji.ttf",
-      "sha256": "6292f3ff969d800d55486e01b293248ccd9ee71a17e4f9770b4abea13d9cad25",
-      "sizeBytes": 87758820,
+      "sha256": "92fa8afa61db3d73cfba98441f1a723dbc7eec3adeda755bd2ea17a9d804ea6b",
+      "sizeBytes": 30784276,
       "previews": [
         "previews/fluent-emoji.jpg"
       ],
