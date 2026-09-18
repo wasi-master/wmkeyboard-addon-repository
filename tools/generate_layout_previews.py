@@ -2,6 +2,7 @@
 """Standardized generator script for Layout showcase preview images (renders full keyboard UI mockup)."""
 
 import json
+import math
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -116,11 +117,14 @@ def render_keyboard_mockup(
     inter_font_path: str,
     mono_font_path: str,
     accent_color: tuple = (14, 165, 233),
+    layer_key: str = "letters",
+    space_text: str = "◄  English (Braille (Unicode))  ►",
+    show_number_row: bool = True,
 ):
     """Render a full on-screen keyboard mockup directly onto the canvas."""
-    layer = layout_data["layout"]["layers"]["letters"]
+    layer = layout_data["layout"]["layers"][layer_key]
     rows = layer["rows"]
-    number_row = layer.get("numberRow", [])
+    number_row = layer.get("numberRow", []) if show_number_row else []
 
     pad_x = 18
     pad_y = 18
@@ -128,7 +132,7 @@ def render_keyboard_mockup(
     gap_y = 10
     toolbar_h = 60
 
-    all_rows = [number_row] + rows
+    all_rows = ([number_row] if number_row else []) + rows
     num_rows = len(all_rows)
 
     key_h = 74
@@ -182,8 +186,14 @@ def render_keyboard_mockup(
             kh = key_h
             label = k.get("label", "")
             action = k.get("action", {}).get("type")
+            if action == "none":
+                curr_x += k.get("width", 1.0) * unit_w + gap_x
+                continue
+            # Keys the app draws from an icon slot carry no label of their own.
+            if not label:
+                label = {"shift": "⇧", "enter": "⏎", "delete": "⌫", "tool": "⚙"}.get(action, label)
             long_press = k.get("longPress", [])
-            hint = long_press[0] if long_press else ""
+            hint = long_press[0] if long_press and not k.get("hideHint") else ""
 
             # Keycap colors
             if action == "enter":
@@ -234,10 +244,21 @@ def render_keyboard_mockup(
                     active_color=(255, 255, 255),
                     inactive_color=(60, 75, 100),
                 )
+            elif label == "⚙":
+                # Inter has no gear, so draw one: a ring with eight teeth.
+                cx, cy, r = curr_x + kw / 2, curr_y + kh / 2, 11
+                for i in range(8):
+                    a = i * math.pi / 4
+                    draw.line(
+                        [(cx + r * 0.6 * math.cos(a), cy + r * 0.6 * math.sin(a)),
+                         (cx + (r + 4) * math.cos(a), cy + (r + 4) * math.sin(a))],
+                        fill=text_color, width=4,
+                    )
+                draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=text_color, width=4)
+                draw.ellipse([cx - 4, cy - 4, cx + 4, cy + 4], outline=text_color, width=2)
             elif action == "language_switch" or label == "🌐":
                 draw_globe_icon(draw, curr_x + kw / 2, curr_y + kh / 2, text_color)
             elif action == "space" or label == " ":
-                space_text = "◄  English (Braille (Unicode))  ►"
                 stw = draw.textlength(space_text, font=space_font)
                 stx = curr_x + (kw - stw) / 2
                 sty = curr_y + (kh - 18) / 2
@@ -260,6 +281,9 @@ def generate_layout_preview(
     bg_end: tuple,
     accent_color: tuple,
     footer_text: str,
+    layer_key: str = "letters",
+    space_text: str = "◄  English (Braille (Unicode))  ►",
+    show_number_row: bool = True,
 ):
     """Generate 1080x900 showcase preview image rendering the full keyboard layout UI."""
     layout_data = json.loads(layout_file.read_text(encoding="utf-8"))
@@ -307,6 +331,9 @@ def generate_layout_preview(
         inter_font_path=str(inter_path),
         mono_font_path=str(mono_path),
         accent_color=accent_color,
+        layer_key=layer_key,
+        space_text=space_text,
+        show_number_row=show_number_row,
     )
 
     # 6. Footer Bar
@@ -328,7 +355,31 @@ LAYOUT_CONFIGS = [
         "bg_end": (12, 74, 110),       # Sky/Navy gradient
         "accent_color": (56, 189, 248), # Sky 400
         "footer_text": "Unicode Braille Patterns • Standard QWERTY Mapping • Full Keyboard Layout Spec",
-    }
+    },
+    {
+        "layout_file": LAYOUTS_DIR / "full-pc.wmlayout.json",
+        "output_grid": PREVIEWS_DIR / "full-pc.jpg",
+        "title": "Full PC",
+        "subtitle": "Every key of a desktop keyboard, in the style of Hacker's Keyboard",
+        "bg_start": (15, 23, 42),
+        "bg_end": (20, 83, 45),
+        "accent_color": (74, 222, 128),
+        "footer_text": "Digits and symbols on the board • Ctrl, Alt, Esc, Tab and arrows • Hold the settings key for ?123 and emoji",
+        "space_text": "English (Full PC)",
+        "show_number_row": False,
+    },
+    {
+        "layout_file": LAYOUTS_DIR / "full-pc.wmlayout.json",
+        "output_grid": PREVIEWS_DIR / "full-pc-fn.jpg",
+        "title": "Full PC: Fn layer",
+        "subtitle": "F1 to F12, Insert, Home, End, Page Up and Page Down",
+        "bg_start": (15, 23, 42),
+        "bg_end": (20, 83, 45),
+        "accent_color": (74, 222, 128),
+        "footer_text": "Fn springs back after one key • Tap Fn twice to keep it",
+        "layer_key": "fn",
+        "space_text": "English (Full PC)",
+    },
 ]
 
 
@@ -345,6 +396,9 @@ def main():
                 bg_end=cfg["bg_end"],
                 accent_color=cfg["accent_color"],
                 footer_text=cfg["footer_text"],
+                layer_key=cfg.get("layer_key", "letters"),
+                space_text=cfg.get("space_text", "◄  English (Braille (Unicode))  ►"),
+                show_number_row=cfg.get("show_number_row", True),
             )
 
 

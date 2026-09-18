@@ -61,6 +61,8 @@ Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the r
 
 **Glide layouts.** Three English layouts arranged for glide typing, each contributed by [cinnabar777](https://github.com/cinnabar777). **ClearFlow** is the public-domain layout by the [ClearFlow authors](https://clearflowkeyboard.github.io/) (Xiaojun Bi et al.) — [`layouts/CLEARFLOW-LICENSE.txt`](layouts/CLEARFLOW-LICENSE.txt). **KASROZ** is [FUTO Keyboard](https://keyboard.futo.org/)'s layout from [futo-keyboard-layouts](https://github.com/futo-org/futo-keyboard-layouts), Apache 2.0 — [`layouts/KASROZ-LICENSE.txt`](layouts/KASROZ-LICENSE.txt). **Vowel Vortex Clarity** is cinnabar777's own design from [Vowel Vortex Keyboard Layouts](https://github.com/cinnabar777/Vowel-Vortex-Keyboard-Layouts), free for personal, non-commercial use under its author's licence.
 
+**Full PC.** A five-row desktop keyboard after [Hacker's Keyboard](https://github.com/klausw/hackerskeyboard): digits with their shifted symbols, Tab, Ctrl, Alt, Meta, Esc and arrows on the board, and an Fn layer with F1 to F12 and the navigation block. For terminals, SSH clients and remote desktops.
+
 **Sounds.** Four key-press sounds synthesised by [`tools/make_sounds.py`](tools/make_sounds.py) and released CC0 ([`sounds/SOUNDS-LICENSE.txt`](sounds/SOUNDS-LICENSE.txt)).
 
 ---

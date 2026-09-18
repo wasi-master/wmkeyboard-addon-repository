@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-09-15"
+    "updatedAt": "2026-09-18"
   },
   "addons": [
     {
@@ -293,6 +293,33 @@
       "langId": "en",
       "license": "Vowel Vortex License",
       "licenseText": "Copyright & License\n\nI retain my right to hold a common law copyright on the Vowel Vortex Keyboard Layouts, this applies to all variations though they are not posted here, as my intellectual property. This applies to the specific idea of using the vowels in their own row while maintaining similarity with the QWERTY layout, such minor changes such as moving a constant is infringing. \n\nUse is hereby granted, free to use, to the following open source Keyboard projects: HeliBoard and forks of it, FUTO Keyboard and forks of it, FlorisBoard and forks of it. Any other open source Keyboard projects that want to use these layouts please contact me. \n\nProhibited from using: any publicly traded company must gain written permission prior to use, anyone using these layouts for a commercial product must gain written permission prior to use. \n\nFree use: anyone using it for personal private non-commercial use is free to use the layouts. \n\nGeneral Prohibitions: no person may charge for any of these layouts, except the creator of these layouts. \n\nMay 17, 2026\n\nSource: https://github.com/cinnabar777/Vowel-Vortex-Keyboard-Layouts"
+    },
+    {
+      "id": "full-pc",
+      "type": "layout",
+      "name": "Full PC (Hacker's style)",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Every key of a desktop keyboard on one screen, laid out the way Hacker's Keyboard does it: the digit row with its shifted symbols, Tab, Ctrl, Alt, Meta, Esc and the arrow keys, with an Fn layer for F1 to F12, Insert, Home, End, Page Up and Page Down. Made for SSH clients, terminals and remote desktops. Hold the settings key for the symbols page, emoji, voice and the clipboard. Best in landscape or on a tablet; with the number row turned on, it becomes a row of function keys.",
+      "tags": [
+        "pc",
+        "terminal",
+        "ssh",
+        "programming",
+        "ctrl",
+        "function-keys",
+        "english"
+      ],
+      "path": "layouts/full-pc.wmlayout.json",
+      "sha256": "5b3f671f2a07c89e08120cc71777436d8fa24d2e5a3dd785ea9bd86f5ef8fe8e",
+      "sizeBytes": 22210,
+      "previews": [
+        "previews/full-pc.jpg",
+        "previews/full-pc-fn.jpg"
+      ],
+      "minAppVersion": 18,
+      "langId": "en",
+      "license": "CC0-1.0"
     },
     {
       "id": "en-developer",

@@ -1,0 +1,976 @@
+{
+  "format": "wmkeyboard-layout",
+  "version": 1,
+  "layout": {
+    "id": "full_pc_en",
+    "name": "Full PC (Hacker's style)",
+    "langId": "en",
+    "version": 2,
+    "tabletExpand": false,
+    "layers": {
+      "letters": {
+        "rows": [
+          [
+            {
+              "label": "`",
+              "shiftLabel": "~",
+              "longPress": [
+                "~"
+              ]
+            },
+            {
+              "label": "1",
+              "shiftLabel": "!",
+              "longPress": [
+                "!",
+                "¹",
+                "½",
+                "⅓",
+                "¼"
+              ]
+            },
+            {
+              "label": "2",
+              "shiftLabel": "@",
+              "longPress": [
+                "@",
+                "²",
+                "⅔"
+              ]
+            },
+            {
+              "label": "3",
+              "shiftLabel": "#",
+              "longPress": [
+                "#",
+                "³",
+                "¾"
+              ]
+            },
+            {
+              "label": "4",
+              "shiftLabel": "$",
+              "longPress": [
+                "$",
+                "⁴",
+                "€",
+                "£",
+                "¥",
+                "¢"
+              ]
+            },
+            {
+              "label": "5",
+              "shiftLabel": "%",
+              "longPress": [
+                "%",
+                "‰"
+              ]
+            },
+            {
+              "label": "6",
+              "shiftLabel": "^",
+              "longPress": [
+                "^"
+              ]
+            },
+            {
+              "label": "7",
+              "shiftLabel": "&",
+              "longPress": [
+                "&"
+              ]
+            },
+            {
+              "label": "8",
+              "shiftLabel": "*",
+              "longPress": [
+                "*",
+                "•"
+              ]
+            },
+            {
+              "label": "9",
+              "shiftLabel": "(",
+              "longPress": [
+                "(",
+                "["
+              ]
+            },
+            {
+              "label": "0",
+              "shiftLabel": ")",
+              "longPress": [
+                ")",
+                "]",
+                "∅"
+              ]
+            },
+            {
+              "label": "-",
+              "shiftLabel": "_",
+              "longPress": [
+                "_",
+                "–",
+                "—"
+              ]
+            },
+            {
+              "label": "=",
+              "shiftLabel": "+",
+              "longPress": [
+                "+",
+                "±",
+                "≠"
+              ]
+            },
+            {
+              "label": "⌫",
+              "action": {
+                "type": "delete"
+              },
+              "width": 2.0
+            }
+          ],
+          [
+            {
+              "label": "⇥",
+              "action": {
+                "type": "send_key",
+                "keyCode": 61
+              },
+              "width": 1.5
+            },
+            {
+              "label": "q"
+            },
+            {
+              "label": "w"
+            },
+            {
+              "label": "e",
+              "longPress": [
+                "é",
+                "è",
+                "ê",
+                "ë",
+                "ē"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "r"
+            },
+            {
+              "label": "t",
+              "longPress": [
+                "þ"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "y",
+              "longPress": [
+                "ý",
+                "ÿ"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "u",
+              "longPress": [
+                "ú",
+                "ù",
+                "û",
+                "ü",
+                "ū"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "i",
+              "longPress": [
+                "í",
+                "ì",
+                "î",
+                "ï",
+                "ī"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "o",
+              "longPress": [
+                "ó",
+                "ò",
+                "ô",
+                "ö",
+                "õ",
+                "ø",
+                "œ"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "p"
+            },
+            {
+              "label": "[",
+              "shiftLabel": "{",
+              "longPress": [
+                "{"
+              ]
+            },
+            {
+              "label": "]",
+              "shiftLabel": "}",
+              "longPress": [
+                "}"
+              ]
+            },
+            {
+              "label": "\\",
+              "shiftLabel": "|",
+              "longPress": [
+                "|"
+              ],
+              "width": 1.5
+            }
+          ],
+          [
+            {
+              "label": "Ctrl",
+              "action": {
+                "type": "mod",
+                "key": "CTRL"
+              },
+              "width": 1.75
+            },
+            {
+              "label": "a",
+              "longPress": [
+                "á",
+                "à",
+                "â",
+                "ä",
+                "ã",
+                "å",
+                "æ"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "s",
+              "longPress": [
+                "ß",
+                "ś",
+                "š"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "d",
+              "longPress": [
+                "ð"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "f"
+            },
+            {
+              "label": "g",
+              "longPress": [
+                "ğ"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "h"
+            },
+            {
+              "label": "j"
+            },
+            {
+              "label": "k"
+            },
+            {
+              "label": "l",
+              "longPress": [
+                "ł"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": ";",
+              "shiftLabel": ":",
+              "longPress": [
+                ":"
+              ]
+            },
+            {
+              "label": "'",
+              "shiftLabel": "\"",
+              "longPress": [
+                "\"",
+                "‘",
+                "’"
+              ]
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "enter"
+              },
+              "width": 2.25
+            }
+          ],
+          [
+            {
+              "label": "",
+              "action": {
+                "type": "shift"
+              },
+              "width": 2.25
+            },
+            {
+              "label": "z",
+              "longPress": [
+                "ž",
+                "ź",
+                "ż"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "x"
+            },
+            {
+              "label": "c",
+              "longPress": [
+                "ç",
+                "ć",
+                "č"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "v"
+            },
+            {
+              "label": "b"
+            },
+            {
+              "label": "n",
+              "longPress": [
+                "ñ",
+                "ń"
+              ],
+              "hideHint": true
+            },
+            {
+              "label": "m"
+            },
+            {
+              "label": ",",
+              "shiftLabel": "<",
+              "longPress": [
+                "<"
+              ]
+            },
+            {
+              "label": ".",
+              "shiftLabel": ">",
+              "longPress": [
+                ">",
+                "…"
+              ]
+            },
+            {
+              "label": "/",
+              "shiftLabel": "?",
+              "longPress": [
+                "?",
+                "¿"
+              ]
+            },
+            {
+              "label": "↑",
+              "action": {
+                "type": "send_key",
+                "keyCode": 19
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "shift"
+              },
+              "width": 1.75
+            }
+          ],
+          [
+            {
+              "label": "Esc",
+              "action": {
+                "type": "send_key",
+                "keyCode": 111
+              },
+              "width": 1.25
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "tool",
+                "tool": "SETTINGS"
+              },
+              "actionAlternates": [
+                {
+                  "action": {
+                    "type": "symbols"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "emoji"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "tool",
+                    "tool": "VOICE"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "tool",
+                    "tool": "CLIPBOARD"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "language_switch"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "input_method_picker"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Alt",
+              "action": {
+                "type": "mod",
+                "key": "ALT"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "❖",
+              "action": {
+                "type": "mod",
+                "key": "META"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "space"
+              },
+              "width": 6.0
+            },
+            {
+              "label": "Fn",
+              "action": {
+                "type": "fn"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "←",
+              "action": {
+                "type": "send_key",
+                "keyCode": 21
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "↓",
+              "action": {
+                "type": "send_key",
+                "keyCode": 20
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "→",
+              "action": {
+                "type": "send_key",
+                "keyCode": 22
+              },
+              "repeatOnHold": true
+            }
+          ]
+        ],
+        "numberRow": [
+          {
+            "label": "Esc",
+            "action": {
+              "type": "send_key",
+              "keyCode": 111
+            }
+          },
+          {
+            "label": "F1",
+            "action": {
+              "type": "send_key",
+              "keyCode": 131
+            }
+          },
+          {
+            "label": "F2",
+            "action": {
+              "type": "send_key",
+              "keyCode": 132
+            }
+          },
+          {
+            "label": "F3",
+            "action": {
+              "type": "send_key",
+              "keyCode": 133
+            }
+          },
+          {
+            "label": "F4",
+            "action": {
+              "type": "send_key",
+              "keyCode": 134
+            }
+          },
+          {
+            "label": "F5",
+            "action": {
+              "type": "send_key",
+              "keyCode": 135
+            }
+          },
+          {
+            "label": "F6",
+            "action": {
+              "type": "send_key",
+              "keyCode": 136
+            }
+          },
+          {
+            "label": "F7",
+            "action": {
+              "type": "send_key",
+              "keyCode": 137
+            }
+          },
+          {
+            "label": "F8",
+            "action": {
+              "type": "send_key",
+              "keyCode": 138
+            }
+          },
+          {
+            "label": "F9",
+            "action": {
+              "type": "send_key",
+              "keyCode": 139
+            }
+          },
+          {
+            "label": "F10",
+            "action": {
+              "type": "send_key",
+              "keyCode": 140
+            }
+          },
+          {
+            "label": "F11",
+            "action": {
+              "type": "send_key",
+              "keyCode": 141
+            }
+          },
+          {
+            "label": "F12",
+            "action": {
+              "type": "send_key",
+              "keyCode": 142
+            }
+          },
+          {
+            "label": "⌦",
+            "action": {
+              "type": "forward_delete"
+            },
+            "width": 2.0
+          }
+        ]
+      },
+      "fn": {
+        "rows": [
+          [
+            {
+              "label": "Esc",
+              "action": {
+                "type": "send_key",
+                "keyCode": 111
+              }
+            },
+            {
+              "label": "F1",
+              "action": {
+                "type": "send_key",
+                "keyCode": 131
+              }
+            },
+            {
+              "label": "F2",
+              "action": {
+                "type": "send_key",
+                "keyCode": 132
+              }
+            },
+            {
+              "label": "F3",
+              "action": {
+                "type": "send_key",
+                "keyCode": 133
+              }
+            },
+            {
+              "label": "F4",
+              "action": {
+                "type": "send_key",
+                "keyCode": 134
+              }
+            },
+            {
+              "label": "F5",
+              "action": {
+                "type": "send_key",
+                "keyCode": 135
+              }
+            },
+            {
+              "label": "F6",
+              "action": {
+                "type": "send_key",
+                "keyCode": 136
+              }
+            },
+            {
+              "label": "F7",
+              "action": {
+                "type": "send_key",
+                "keyCode": 137
+              }
+            },
+            {
+              "label": "F8",
+              "action": {
+                "type": "send_key",
+                "keyCode": 138
+              }
+            },
+            {
+              "label": "F9",
+              "action": {
+                "type": "send_key",
+                "keyCode": 139
+              }
+            },
+            {
+              "label": "F10",
+              "action": {
+                "type": "send_key",
+                "keyCode": 140
+              }
+            },
+            {
+              "label": "F11",
+              "action": {
+                "type": "send_key",
+                "keyCode": 141
+              }
+            },
+            {
+              "label": "F12",
+              "action": {
+                "type": "send_key",
+                "keyCode": 142
+              }
+            },
+            {
+              "label": "⌫",
+              "action": {
+                "type": "delete"
+              },
+              "width": 2.0
+            }
+          ],
+          [
+            {
+              "label": "⇥",
+              "action": {
+                "type": "send_key",
+                "keyCode": 61
+              },
+              "width": 1.5
+            },
+            {
+              "label": "Ins",
+              "action": {
+                "type": "send_key",
+                "keyCode": 124
+              },
+              "width": 1.5
+            },
+            {
+              "label": "Home",
+              "action": {
+                "type": "send_key",
+                "keyCode": 122
+              },
+              "width": 1.5
+            },
+            {
+              "label": "PgUp",
+              "action": {
+                "type": "send_key",
+                "keyCode": 92
+              },
+              "width": 1.5,
+              "repeatOnHold": true
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "none"
+              },
+              "width": 3.0
+            },
+            {
+              "label": "PrtSc",
+              "action": {
+                "type": "send_key",
+                "keyCode": 120
+              },
+              "width": 2.0
+            },
+            {
+              "label": "ScrLk",
+              "action": {
+                "type": "send_key",
+                "keyCode": 116
+              },
+              "width": 2.0
+            },
+            {
+              "label": "Pause",
+              "action": {
+                "type": "send_key",
+                "keyCode": 121
+              },
+              "width": 2.0
+            }
+          ],
+          [
+            {
+              "label": "Ctrl",
+              "action": {
+                "type": "mod",
+                "key": "CTRL"
+              },
+              "width": 1.75
+            },
+            {
+              "label": "⌦",
+              "action": {
+                "type": "forward_delete"
+              },
+              "width": 1.5
+            },
+            {
+              "label": "End",
+              "action": {
+                "type": "send_key",
+                "keyCode": 123
+              },
+              "width": 1.5
+            },
+            {
+              "label": "PgDn",
+              "action": {
+                "type": "send_key",
+                "keyCode": 93
+              },
+              "width": 1.5,
+              "repeatOnHold": true
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "none"
+              },
+              "width": 6.5
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "enter"
+              },
+              "width": 2.25
+            }
+          ],
+          [
+            {
+              "label": "",
+              "action": {
+                "type": "shift"
+              },
+              "width": 2.25
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "none"
+              },
+              "width": 10.0
+            },
+            {
+              "label": "↑",
+              "action": {
+                "type": "send_key",
+                "keyCode": 19
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "shift"
+              },
+              "width": 1.75
+            }
+          ],
+          [
+            {
+              "label": "Esc",
+              "action": {
+                "type": "send_key",
+                "keyCode": 111
+              },
+              "width": 1.25
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "tool",
+                "tool": "SETTINGS"
+              },
+              "actionAlternates": [
+                {
+                  "action": {
+                    "type": "symbols"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "emoji"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "tool",
+                    "tool": "VOICE"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "tool",
+                    "tool": "CLIPBOARD"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "language_switch"
+                  }
+                },
+                {
+                  "action": {
+                    "type": "input_method_picker"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Alt",
+              "action": {
+                "type": "mod",
+                "key": "ALT"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "❖",
+              "action": {
+                "type": "mod",
+                "key": "META"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "",
+              "action": {
+                "type": "space"
+              },
+              "width": 6.0
+            },
+            {
+              "label": "Fn",
+              "action": {
+                "type": "letters"
+              },
+              "width": 1.25
+            },
+            {
+              "label": "←",
+              "action": {
+                "type": "send_key",
+                "keyCode": 21
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "↓",
+              "action": {
+                "type": "send_key",
+                "keyCode": 20
+              },
+              "repeatOnHold": true
+            },
+            {
+              "label": "→",
+              "action": {
+                "type": "send_key",
+                "keyCode": 22
+              },
+              "repeatOnHold": true
+            }
+          ]
+        ]
+      }
+    }
+  }
+}
