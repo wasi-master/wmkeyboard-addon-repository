@@ -325,7 +325,7 @@
       "id": "edit-row-qwerty",
       "type": "layout",
       "name": "QWERTY with flick edit row",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "Wasi Master",
       "description": "English QWERTY with a row of five flick keys on top. Tap 1 or 6, or flick them for 2 to 5 and 7 to 0. Tap Copy to copy, flick it up to select all, down to paste, or sideways to jump a word. Select turns on selection and its four flicks move the caret. Tap Cut to cut, flick it sideways to delete either way, up to select the word or down to select the line.",
       "tags": [
@@ -337,8 +337,8 @@
         "english"
       ],
       "path": "layouts/edit-row-qwerty.wmlayout.json",
-      "sha256": "a5099a4dc65814eae0b9b90a36da1eec91955fae7d1557de8926b1c944e7cf64",
-      "sizeBytes": 6984,
+      "sha256": "550542d9ef4d591ab2472aba7869fcf3854030726bc73170f34e5d9dcc8928bb",
+      "sizeBytes": 9339,
       "previews": [
         "previews/edit-row-qwerty.jpg"
       ],

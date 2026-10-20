@@ -5,7 +5,7 @@
     "id": "edit_row_qwerty_en",
     "name": "QWERTY with flick edit row",
     "langId": "en",
-    "version": 2,
+    "version": 3,
     "layers": {
       "letters": {
         "rows": [
@@ -149,63 +149,143 @@
           ],
           [
             {
-              "label": "q"
+              "label": "q",
+              "longPress": [
+                "1"
+              ]
             },
             {
-              "label": "w"
+              "label": "w",
+              "longPress": [
+                "2"
+              ]
             },
             {
-              "label": "e"
+              "label": "e",
+              "longPress": [
+                "3",
+                "è",
+                "é",
+                "ê",
+                "ë"
+              ]
             },
             {
-              "label": "r"
+              "label": "r",
+              "longPress": [
+                "4"
+              ]
             },
             {
-              "label": "t"
+              "label": "t",
+              "longPress": [
+                "5"
+              ]
             },
             {
-              "label": "y"
+              "label": "y",
+              "longPress": [
+                "6"
+              ]
             },
             {
-              "label": "u"
+              "label": "u",
+              "longPress": [
+                "7",
+                "ù",
+                "ú",
+                "û",
+                "ü"
+              ]
             },
             {
-              "label": "i"
+              "label": "i",
+              "longPress": [
+                "8",
+                "ì",
+                "í",
+                "î",
+                "ï"
+              ]
             },
             {
-              "label": "o"
+              "label": "o",
+              "longPress": [
+                "9",
+                "ò",
+                "ó",
+                "ô",
+                "ö"
+              ]
             },
             {
-              "label": "p"
+              "label": "p",
+              "longPress": [
+                "0"
+              ]
             }
           ],
           [
             {
-              "label": "a"
+              "label": "a",
+              "longPress": [
+                "@",
+                "à",
+                "á",
+                "â",
+                "ä",
+                "å"
+              ]
             },
             {
-              "label": "s"
+              "label": "s",
+              "longPress": [
+                "#",
+                "ß",
+                "ś"
+              ]
             },
             {
-              "label": "d"
+              "label": "d",
+              "longPress": [
+                "$"
+              ]
             },
             {
-              "label": "f"
+              "label": "f",
+              "longPress": [
+                "_"
+              ]
             },
             {
-              "label": "g"
+              "label": "g",
+              "longPress": [
+                "&"
+              ]
             },
             {
-              "label": "h"
+              "label": "h",
+              "longPress": [
+                "-"
+              ]
             },
             {
-              "label": "j"
+              "label": "j",
+              "longPress": [
+                "+"
+              ]
             },
             {
-              "label": "k"
+              "label": "k",
+              "longPress": [
+                "("
+              ]
             },
             {
-              "label": "l"
+              "label": "l",
+              "longPress": [
+                ")"
+              ]
             }
           ],
           [
@@ -217,25 +297,52 @@
               "width": 1.5
             },
             {
-              "label": "z"
+              "label": "z",
+              "longPress": [
+                "*",
+                "ż",
+                "ź"
+              ]
             },
             {
-              "label": "x"
+              "label": "x",
+              "longPress": [
+                "\""
+              ]
             },
             {
-              "label": "c"
+              "label": "c",
+              "longPress": [
+                "'",
+                "ç",
+                "ć"
+              ]
             },
             {
-              "label": "v"
+              "label": "v",
+              "longPress": [
+                ":"
+              ]
             },
             {
-              "label": "b"
+              "label": "b",
+              "longPress": [
+                ";"
+              ]
             },
             {
-              "label": "n"
+              "label": "n",
+              "longPress": [
+                "!",
+                "ñ",
+                "ń"
+              ]
             },
             {
-              "label": "m"
+              "label": "m",
+              "longPress": [
+                "?"
+              ]
             },
             {
               "label": "⌫",
