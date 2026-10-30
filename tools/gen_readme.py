@@ -67,6 +67,8 @@ Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the r
 
 **Sounds.** Four key-press sounds synthesised by [`tools/make_sounds.py`](tools/make_sounds.py) and released CC0 ([`sounds/SOUNDS-LICENSE.txt`](sounds/SOUNDS-LICENSE.txt)).
 
+**LeanType sound packs.** 22 synthesised packs from [LeanType-SoundPacks](https://github.com/LeanBitLab/LeanType-SoundPacks), CC0 ([`sound_packs/LEANTYPE-SOUNDS-LICENSE.txt`](sound_packs/LEANTYPE-SOUNDS-LICENSE.txt)). The audio is unchanged; [`tools/import_leantype_sounds.py`](tools/import_leantype_sounds.py) only rewrites the manifest.
+
 ---
 
 ## Make Your Own Repository

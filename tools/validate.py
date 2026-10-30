@@ -41,6 +41,7 @@ EXPECTED_SUFFIX = {
     "font": (".ttf", ".otf"),
     "emoji_font": (".ttf", ".otf"),
     "sound": ".mp3",
+    "sound_pack": ".wmsoundpack",
     "plugin": ".wmplugin",
     "vocabulary": (".wmvocab.json", ".wmvocab.json.gz"),
 }

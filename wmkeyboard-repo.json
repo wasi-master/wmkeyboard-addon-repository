@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-10-19"
+    "updatedAt": "2026-10-31"
   },
   "addons": [
     {
@@ -1036,6 +1036,495 @@
       ],
       "license": "CC0-1.0",
       "licenseFile": "sounds/SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-acoustic-pluck",
+      "type": "sound_pack",
+      "name": "Acoustic Pluck",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Plucked nylon string tone. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "guitar",
+        "strings",
+        "pluck"
+      ],
+      "path": "sound_packs/leantype-acoustic-pluck.wmsoundpack",
+      "sha256": "4d4adc5446814107d227b9b4894fba23d9769ce61d51e214d8c80460a8d1a265",
+      "sizeBytes": 31605,
+      "previews": [
+        "previews/leantype-acoustic-pluck.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-bubble",
+      "type": "sound_pack",
+      "name": "Bubble Pop",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Soft liquid droplet burst. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "liquid",
+        "bubble",
+        "soft"
+      ],
+      "path": "sound_packs/leantype-bubble.wmsoundpack",
+      "sha256": "5ee94a4bdc1424f6bc5fc1261291404e0bf2b1994a49b4a65627d51818ff725f",
+      "sizeBytes": 28220,
+      "previews": [
+        "previews/leantype-bubble.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-chiptune",
+      "type": "sound_pack",
+      "name": "8-Bit Chiptune",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Retro square-wave arcade blips. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "retro",
+        "chiptune",
+        "8-bit"
+      ],
+      "path": "sound_packs/leantype-chiptune.wmsoundpack",
+      "sha256": "034cf295698cd1012fa79f9e7c8ee1c1899fd75307ea8f5e5683f4e5e0f1b83f",
+      "sizeBytes": 31473,
+      "previews": [
+        "previews/leantype-chiptune.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-clicky",
+      "type": "sound_pack",
+      "name": "Crisp Click",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "High-pitched sharp click. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "clicky",
+        "tactile",
+        "bright"
+      ],
+      "path": "sound_packs/leantype-clicky.wmsoundpack",
+      "sha256": "0e0987c425092d7f2da8ebd4c37244d04474c622f23797740a91d20b4de9ef86",
+      "sizeBytes": 30358,
+      "previews": [
+        "previews/leantype-clicky.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-cork-tap",
+      "type": "sound_pack",
+      "name": "Cork Tap",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Earthy, dry tap on soft wood or cork. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "soft",
+        "custom",
+        "procedural",
+        "organic"
+      ],
+      "path": "sound_packs/leantype-cork-tap.wmsoundpack",
+      "sha256": "6c764b0e5d44296f2b8f128d183d822b6f9e32f38651231095f1bb664bba92bf",
+      "sizeBytes": 17675,
+      "previews": [
+        "previews/leantype-cork-tap.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-creamy",
+      "type": "sound_pack",
+      "name": "Creamy Linear",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Soft dampened linear tap. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "linear",
+        "muted",
+        "soft"
+      ],
+      "path": "sound_packs/leantype-creamy.wmsoundpack",
+      "sha256": "ce00ab1b51999ff8b657ae68c76e477a4e3692fefbac08b4498e78ff8f2aaf6c",
+      "sizeBytes": 27597,
+      "previews": [
+        "previews/leantype-creamy.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-felted-thock",
+      "type": "sound_pack",
+      "name": "Felted Thock",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Classic dampened enthusiast keyboard sound. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "soft",
+        "custom",
+        "procedural",
+        "thock"
+      ],
+      "path": "sound_packs/leantype-felted-thock.wmsoundpack",
+      "sha256": "e56d7a0f68de75d029daf844836dbc49183c5023d8259a150daba227a58d8783",
+      "sizeBytes": 17938,
+      "previews": [
+        "previews/leantype-felted-thock.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-folk-drum",
+      "type": "sound_pack",
+      "name": "Folk Drum",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "High-tension rim and drum hit. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "percussion",
+        "ethnic",
+        "drum"
+      ],
+      "path": "sound_packs/leantype-folk-drum.wmsoundpack",
+      "sha256": "bbb0099d42d11785cd9b1dbbae2192f3cba4d77fc98a8b1e7e65a617372a6b29",
+      "sizeBytes": 29878,
+      "previews": [
+        "previews/leantype-folk-drum.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-glass",
+      "type": "sound_pack",
+      "name": "Glass Marble",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Polished mineral tap. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "minimal",
+        "glass",
+        "clean"
+      ],
+      "path": "sound_packs/leantype-glass.wmsoundpack",
+      "sha256": "ea840a1b92621aa2b618cf4c5164551643323f1ee5b40d419485e6ff7b25ba4a",
+      "sizeBytes": 28786,
+      "previews": [
+        "previews/leantype-glass.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-kalimba",
+      "type": "sound_pack",
+      "name": "Kalimba",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Plucked metal tines. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "kalimba",
+        "metal",
+        "tines"
+      ],
+      "path": "sound_packs/leantype-kalimba.wmsoundpack",
+      "sha256": "1081a055c8a01cdbbe65e3dcfbdc9461f45be19f2c86d998a415bd46b2222244",
+      "sizeBytes": 30196,
+      "previews": [
+        "previews/leantype-kalimba.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-mechanical",
+      "type": "sound_pack",
+      "name": "Mechanical Click",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Retro mechanical spring click. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "mechanical",
+        "retro",
+        "click"
+      ],
+      "path": "sound_packs/leantype-mechanical.wmsoundpack",
+      "sha256": "48ea7f70611c31ba028b9ade4cc0132a781730d17b764c0b45182ffed91a1816",
+      "sizeBytes": 31823,
+      "previews": [
+        "previews/leantype-mechanical.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-membrane-squish",
+      "type": "sound_pack",
+      "name": "Membrane Squish",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Retro rubber dome office keyboard feel. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "soft",
+        "custom",
+        "procedural",
+        "retro"
+      ],
+      "path": "sound_packs/leantype-membrane-squish.wmsoundpack",
+      "sha256": "e4164760ad5f105f04353233f492b54e7ab3a67458e626c512ce77639c54e7d0",
+      "sizeBytes": 17031,
+      "previews": [
+        "previews/leantype-membrane-squish.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-muted-marshmallow",
+      "type": "sound_pack",
+      "name": "Muted Marshmallow",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Ultra-dead, heavy sub-bass thud. Extremely soft. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "soft",
+        "custom",
+        "procedural",
+        "thud"
+      ],
+      "path": "sound_packs/leantype-muted-marshmallow.wmsoundpack",
+      "sha256": "ec352935df888bca7557ff330f45fba105709f3fa6155101e75ba32dda66f98d",
+      "sizeBytes": 16802,
+      "previews": [
+        "previews/leantype-muted-marshmallow.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-piano",
+      "type": "sound_pack",
+      "name": "Piano",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Warm harmonic key strike. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "piano",
+        "acoustic",
+        "keys"
+      ],
+      "path": "sound_packs/leantype-piano.wmsoundpack",
+      "sha256": "dd4267bdd5e1e48f374a1bf9898c98046adccc3e68fb005850d1ca946598e50c",
+      "sizeBytes": 29943,
+      "previews": [
+        "previews/leantype-piano.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-pizzicato",
+      "type": "sound_pack",
+      "name": "Pizzicato",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Short finger-plucked string. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "strings",
+        "pizzicato",
+        "acoustic"
+      ],
+      "path": "sound_packs/leantype-pizzicato.wmsoundpack",
+      "sha256": "6e8ed296727aaaa4c4057a9c09c4f0708970f00c63d64518751c29b54d340d58",
+      "sizeBytes": 30417,
+      "previews": [
+        "previews/leantype-pizzicato.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-resonant-drum",
+      "type": "sound_pack",
+      "name": "Resonant Drum",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Deep pitch-bending drum tap. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "percussion",
+        "classical",
+        "drum"
+      ],
+      "path": "sound_packs/leantype-resonant-drum.wmsoundpack",
+      "sha256": "ccd15ccd25d589be8a0d24a25017276f995aa8e53920c6924305be46616aed5c",
+      "sizeBytes": 29448,
+      "previews": [
+        "previews/leantype-resonant-drum.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-soft-pudding-synth",
+      "type": "sound_pack",
+      "name": "Soft Pudding (Synth)",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Procedurally recreated soft dampened tap from v4.1.8. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "custom",
+        "procedural",
+        "restored",
+        "soft"
+      ],
+      "path": "sound_packs/leantype-soft-pudding-synth.wmsoundpack",
+      "sha256": "a067d1565b5a2fa35b9952b3025f50d5adf5a86e50e4c9cf943167e0c7eaa83d",
+      "sizeBytes": 16937,
+      "previews": [
+        "previews/leantype-soft-pudding-synth.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-tactile",
+      "type": "sound_pack",
+      "name": "Tactile Pop",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Snappy tactile bump and pop. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "tactile",
+        "snappy"
+      ],
+      "path": "sound_packs/leantype-tactile.wmsoundpack",
+      "sha256": "35c0bdeffaed120c0be0a0b5c599fb85b8736c2fc18e764c451850fe5132c1db",
+      "sizeBytes": 30325,
+      "previews": [
+        "previews/leantype-tactile.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-thock",
+      "type": "sound_pack",
+      "name": "Deep Thock",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Deep lubricated switch clack. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "mechanical",
+        "thock",
+        "deep"
+      ],
+      "path": "sound_packs/leantype-thock.wmsoundpack",
+      "sha256": "dba4a7eeccfe795cfbbba981460653b7a94a2cde7b9389e964a14b12345cb9bf",
+      "sizeBytes": 29776,
+      "previews": [
+        "previews/leantype-thock.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-typewriter",
+      "type": "sound_pack",
+      "name": "Typewriter",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Vintage carriage and chime. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "typewriter",
+        "vintage",
+        "chime"
+      ],
+      "path": "sound_packs/leantype-typewriter.wmsoundpack",
+      "sha256": "3f34d5c2fd443c6cc5784f52a171db33e4f53e88a2c174282d92faaa33598166",
+      "sizeBytes": 30798,
+      "previews": [
+        "previews/leantype-typewriter.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-velvet-whisper",
+      "type": "sound_pack",
+      "name": "Velvet Whisper",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Airy, ASMR-style quiet tap with smooth release. Synthesised, with its own sounds for space, enter and delete. From LeanType's sound pack collection.",
+      "tags": [
+        "soft",
+        "custom",
+        "procedural",
+        "asmr"
+      ],
+      "path": "sound_packs/leantype-velvet-whisper.wmsoundpack",
+      "sha256": "97a78b887d0d789900cfc465417d02a7ec7b463f6dbdcc2e0f50151b7dd01817",
+      "sizeBytes": 17838,
+      "previews": [
+        "previews/leantype-velvet-whisper.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
+    },
+    {
+      "id": "leantype-woodblock",
+      "type": "sound_pack",
+      "name": "Woodblock",
+      "version": "1.0.0",
+      "author": "LeanType Sound Lab",
+      "description": "Acoustic wooden mallet tap. Synthesised, with its own sounds for space, enter, delete and shift. From LeanType's sound pack collection.",
+      "tags": [
+        "wood",
+        "percussion",
+        "acoustic"
+      ],
+      "path": "sound_packs/leantype-woodblock.wmsoundpack",
+      "sha256": "b542e0d2d3de921907d72d0e9f09f9c2ecc4bdcf10d65dd6df5e7420d37c1de1",
+      "sizeBytes": 30008,
+      "previews": [
+        "previews/leantype-woodblock.png"
+      ],
+      "minAppVersion": 4,
+      "license": "CC0-1.0",
+      "licenseFile": "sound_packs/LEANTYPE-SOUNDS-LICENSE.txt"
     },
     {
       "id": "cipher-tool",
