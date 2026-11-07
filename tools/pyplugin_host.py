@@ -19,7 +19,9 @@ CPython is not PyMini. The differences that matter for plugins:
 * PyMini strings are sequences of grapheme clusters, CPython's of code points.
   `len`, indexing, slicing and iteration differ for text with combining marks,
   emoji sequences or "\\r\\n" (one cluster). `ord()` refuses a cluster of more
-  than one code point.
+  than one code point; `s.encode()` gives the bytes ("utf-8", "utf-16-le",
+  "utf-16-be"), and `bytes` has len, indexing, iteration, slicing, `+`,
+  `.hex()`, `bytes.fromhex()` and `.decode(errors="strict"|"replace")`.
 * PyMini compares strings by canonical equivalence (NFC): "e\\u0301" == "é".
 * `int("3.5")` is 3 in PyMini and a ValueError in CPython.
 * `type(x)` returns a string in PyMini.
@@ -53,11 +55,12 @@ BUILTINS = {
     "min", "max", "sum", "range", "sorted", "reversed", "list", "dict", "set",
     "tuple", "enumerate", "zip", "ord", "chr", "any", "all", "type",
     "map", "filter", "divmod", "pow", "hex", "bin", "oct", "format",
-    "isinstance", "callable",
+    "isinstance", "callable", "bytes",
 }
 EXCEPTIONS = {
     "Exception", "ValueError", "TypeError", "KeyError", "IndexError",
     "NameError", "ZeroDivisionError", "AttributeError", "RuntimeError", "StopIteration",
+    "UnicodeDecodeError",
 }
 EXCEPT_CLAUSES = EXCEPTIONS | {"LookupError", "ArithmeticError"}
 KWARG_BUILTINS = {"sorted", "min", "max", "round"}
@@ -88,7 +91,9 @@ METHODS = {
     "rstrip", "replace", "split", "rsplit", "splitlines", "join", "startswith", "endswith",
     "find", "rfind", "index", "rindex", "count", "partition", "rpartition", "zfill",
     "ljust", "rjust", "center", "isdigit", "isnumeric", "isalpha", "isalnum", "isspace",
-    "isupper", "islower", "istitle", "removeprefix", "removesuffix", "format",
+    "isupper", "islower", "istitle", "removeprefix", "removesuffix", "format", "encode",
+    # bytes: encode() gives one; bytes(list) and bytes.fromhex() make one
+    "decode", "hex", "fromhex",
     # list
     "append", "extend", "pop", "insert", "remove", "sort", "reverse", "clear", "copy",
     # dict

@@ -16,95 +16,13 @@ HEX = "0123456789abcdefABCDEF"
 
 # ------------------------------------------------------------------ bytes ---
 #
-# Base64, hex and URL encoding work on the UTF-8 bytes of the text. Plugin
-# strings are made of characters as a person sees them (grapheme clusters):
-# "কি" is one character of two code points, and ord() only takes a
-# character that is a single code point. scalars() gets the code points of
-# any character, which is all UTF-8 needs.
+# Base64, hex and URL encoding work on the UTF-8 bytes of the text, which
+# s.encode() gives. Decoding goes back through bytes(...).decode(); a byte
+# that is not part of valid UTF-8 comes out as �.
 
 
-def code_point(index):
-    """The index-th Unicode scalar value: every code point but the surrogates."""
-    return index if index < 0xD800 else index + 0x800
-
-
-def scalars(ch):
-    """The code points of one character, in order."""
-    if ch in ALNUM:
-        return [ord(ch)]
-    try:
-        return [ord(ch)]
-    except TypeError:
-        pass
-    # Several code points in one character. Strings compare code point by
-    # code point, so each one can be found by bisection: the largest c for
-    # which what we have so far plus chr(c) still sorts at or before ch.
-    found = []
-    so_far = ""
-    while so_far != ch and len(found) < 64:
-        lo = 0
-        hi = 0x10FFFF - 0x800
-        while lo < hi:
-            mid = (lo + hi + 1) // 2
-            if so_far + chr(code_point(mid)) <= ch:
-                lo = mid
-            else:
-                hi = mid - 1
-        if lo == 0:
-            break
-        found.append(code_point(lo))
-        so_far = so_far + chr(code_point(lo))
-    return found
-
-
-def utf8(s):
-    """The UTF-8 bytes of s, as a list of numbers."""
-    out = []
-    for ch in s:
-        for cp in scalars(ch):
-            if cp < 0x80:
-                out.append(cp)
-            elif cp < 0x800:
-                out.extend([0xC0 + cp // 64, 0x80 + cp % 64])
-            elif cp < 0x10000:
-                out.extend([0xE0 + cp // 4096, 0x80 + cp // 64 % 64, 0x80 + cp % 64])
-            else:
-                out.extend([0xF0 + cp // 262144, 0x80 + cp // 4096 % 64, 0x80 + cp // 64 % 64, 0x80 + cp % 64])
-    return out
-
-
-def from_utf8(data):
-    """Text from UTF-8 bytes. A byte that is not part of valid UTF-8 becomes �."""
-    out = []
-    i = 0
-    n = len(data)
-    while i < n:
-        b = data[i]
-        if b < 0x80:
-            out.append(chr(b))
-            i += 1
-            continue
-        if 0xC2 <= b <= 0xDF:
-            need, cp, least = 1, b - 0xC0, 0x80
-        elif 0xE0 <= b <= 0xEF:
-            need, cp, least = 2, b - 0xE0, 0x800
-        elif 0xF0 <= b <= 0xF4:
-            need, cp, least = 3, b - 0xF0, 0x10000
-        else:
-            out.append("�")
-            i += 1
-            continue
-        j = i + 1
-        while j <= i + need and j < n and 0x80 <= data[j] <= 0xBF:
-            cp = cp * 64 + data[j] - 0x80
-            j += 1
-        if j != i + need + 1 or cp < least or cp > 0x10FFFF or 0xD800 <= cp <= 0xDFFF:
-            out.append("�")
-            i += 1
-            continue
-        out.append(chr(cp))
-        i = j
-    return "".join(out)
+def text_of(data):
+    return bytes(data).decode("utf-8", errors="replace")
 
 
 # ----------------------------------------------------------------- base64 ---
@@ -113,7 +31,7 @@ ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
 
 def base64_encode(s):
-    data = utf8(s)
+    data = s.encode("utf-8")
     out = []
     for i in range(0, len(data), 3):
         chunk = data[i:i + 3]
@@ -145,18 +63,18 @@ def base64_decode(s):
             data.append(bits // 2 ** count % 256)
             # Drop the bits just spent, so `bits` stays small.
             bits = bits % 2 ** count
-    return from_utf8(data)
+    return text_of(data)
 
 
 # -------------------------------------------------------------- hex & url ---
 
 
 def hex_encode(s):
-    return "".join("%02x" % b for b in utf8(s))
+    return s.encode("utf-8").hex()
 
 
 def hex_decode(s):
-    data = utf8("".join(s.split()))
+    data = "".join(s.split()).encode("utf-8")
     out = []
     i = 0
     while i < len(data):
@@ -166,12 +84,12 @@ def hex_decode(s):
         else:
             out.append(data[i])
             i += 1
-    return from_utf8(out)
+    return text_of(out)
 
 
 def url_encode(s):
     out = []
-    for b in utf8(s):
+    for b in s.encode("utf-8"):
         c = chr(b)
         if b < 0x80 and (c in ALNUM or c in "-._~"):
             out.append(c)
@@ -181,7 +99,7 @@ def url_encode(s):
 
 
 def url_decode(s):
-    data = utf8(s)
+    data = s.encode("utf-8")
     out = []
     i = 0
     while i < len(data):
@@ -191,7 +109,7 @@ def url_decode(s):
         else:
             out.append(data[i])
             i += 1
-    return from_utf8(out)
+    return text_of(out)
 
 
 # --------------------------------------------------------------- the rest ---

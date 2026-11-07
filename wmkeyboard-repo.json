@@ -1612,8 +1612,8 @@
         "plugin"
       ],
       "path": "plugins/text-tools.wmplugin",
-      "sha256": "09ee96936e2d54a0c9e0b4f206a6b69e6416d9659f9d54102722fe30290f94c5",
-      "sizeBytes": 3200,
+      "sha256": "0e178207a17f39a49f57744b5dd4bbbc502a5d8abcccdee61e3004cab5ed0b96",
+      "sizeBytes": 2424,
       "previews": [
         "previews/text-tools-grid.jpg",
         "previews/text-tools-1.jpg",
@@ -1663,8 +1663,8 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "951cb051004bbf94b2bf30078a4c198a04f14dd001b0ef169c288b19c242cfc1",
-      "sizeBytes": 18109,
+      "sha256": "742ec86f9236464dfe79b0026ff88b52d4e5a32de1fe1a7180dae621c4c258b2",
+      "sizeBytes": 17835,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],

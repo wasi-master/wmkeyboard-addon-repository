@@ -232,43 +232,11 @@ def is_combining(cp):
     return (0x300 <= cp <= 0x36F) or (0x20D0 <= cp <= 0x20FF)
 
 
-def scalar(index):
-    """The index-th Unicode scalar value: every code point but the surrogates."""
-    return index if index < 0xD800 else index + 0x800
-
-
-def cluster_scalars(c):
-    """The code points of a character made of several, found by bisection:
-    strings compare code point by code point."""
-    found = []
-    so_far = ""
-    while so_far != c and len(found) < 64:
-        lo = 0
-        hi = 0x10FFFF - 0x800
-        while lo < hi:
-            mid = (lo + hi + 1) // 2
-            if so_far + chr(scalar(mid)) <= c:
-                lo = mid
-            else:
-                hi = mid - 1
-        if lo == 0:
-            break
-        found.append(scalar(lo))
-        so_far = so_far + chr(scalar(lo))
-    return found
-
-
 def char_units(c):
     """UTF-16 units in one character, which is what every host limit counts."""
     if c in ASCII:
         return 1
-    cp = first_cp(c)
-    if cp >= 0:
-        return 2 if cp >= 0x10000 else 1
-    n = 0
-    for cp in cluster_scalars(c):
-        n += 2 if cp >= 0x10000 else 1
-    return max(n, 2)
+    return len(c.encode("utf-16-le")) // 2
 
 
 def at(cs, j):
