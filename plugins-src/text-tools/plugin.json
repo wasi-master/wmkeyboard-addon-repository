@@ -3,10 +3,11 @@
   "version": 1,
   "id": "com.wasimaster.texttools",
   "name": "Text Tools",
-  "pluginVersion": "1.0.0",
+  "pluginVersion": "2.0.0",
   "author": "Wasi Master",
   "description": "Change case, encode as base64/hex/URL, and count words.",
-  "apiVersion": 1,
-  "entry": "main.lua",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
   "permissions": []
 }

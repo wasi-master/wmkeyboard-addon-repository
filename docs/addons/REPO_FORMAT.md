@@ -232,7 +232,7 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. Declare `langIds` when the face only covers some scripts. |
 | `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
 | `sound` | `*.mp3` | A single short key-press sound. Keep it under ~300 ms and a few tens of KB: it is loaded into a `SoundPool` and replayed on every keystroke. |
-| `plugin` | `*.wmplugin` | ZIP archive containing a `plugin.json` manifest (`"format":"wmkeyboard-plugin"`) and a Lua script. **The only payload that is code rather than data** — see [Plugins](#plugins). |
+| `plugin` | `*.wmplugin` | ZIP archive containing a `plugin.json` manifest (`"format":"wmkeyboard-plugin"`) and a Python script. **The only payload that is code rather than data** — see [Plugins](#plugins). |
 | `vocabulary` | `*.wmvocab.json` (may be gzipped as `.wmvocab.json.gz`) | Envelope `{ "format":"wmkeyboard-vocab", "version":1, "pack": { "id", "name", "langId", … }, "words": [ { "word", "pos", "ipa", "senses", "synonyms", "antonyms", "triggers", … } ] }` — the app's own vocabulary-pack format, the same file it writes when you export a list you made in the app. **`langId` is required**, like a dictionary. The full record shape is documented in the [wmkeyboard-data repository](https://github.com/wasi-master/wmkeyboard-data/tree/main/vocab). |
 
 To make a theme/layout/snippet/sticker/icon payload, just **export it from the app** and drop the file into your repo — the exported files already match these formats.
@@ -243,7 +243,7 @@ To make a theme/layout/snippet/sticker/icon payload, just **export it from the a
 ```
 cipher.wmplugin
 ├── plugin.json
-└── main.lua
+└── main.py
 ```
 
 ```json
@@ -255,16 +255,24 @@ cipher.wmplugin
   "pluginVersion": "1.0.0",
   "author": "Example Author",
   "description": "Caesar and Vigenere ciphers.",
-  "apiVersion": 1,
-  "entry": "main.lua",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
   "permissions": []
 }
 ```
 
-A plugin is a Lua script that draws a small tool panel. It runs in a sandbox
-with no way to read what the user types, read the text field, read the
-clipboard, or use the network — see `docs/plugins/` in the app repository for
+A plugin is a Python script that draws a small tool panel, adds buttons to the
+selection bar, or both. It runs on WM Keyboard's own Python, a subset of the
+language (PyMini's), in a sandbox with no way to read what the user types, read
+the text field beyond a selection the user tapped an action on, read the
+clipboard, or use the network. See `docs/plugins/` in the app repository for
 the developer guide and the full security model.
+
+`apiVersion` is 4 and `language`, when present, must be `"python"`. Lua plugins
+(no `language` and `apiVersion` 3 or lower, or `"language": "lua"`) are refused
+by app version 43 and later, which no longer runs Lua, so give a Python plugin
+`minAppVersion: 43` in the repository entry.
 
 Three things differ from every other type, all because the payload is code:
 
@@ -278,9 +286,10 @@ Three things differ from every other type, all because the payload is code:
   app version safely declines a plugin built against a newer API: it does not
   install something whose capabilities it cannot describe to the user.
 
-The script must be plain source; precompiled Lua is refused. Build archives with
+The script must be plain UTF-8 source with a `.py` entry. Build archives with
 `tools/build_plugins.py`, which zips `plugins-src/<name>/` deterministically so
-rebuilds do not churn the index.
+rebuilds do not churn the index, and check them with `tools/test_plugins.py`,
+which runs each plugin's `test.py` on `wm-python-cli`.
 
 ### Sticker packs
 

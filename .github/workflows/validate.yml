@@ -6,6 +6,11 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  # TODO: replace with the WMKeyboard commit that ships wm-python-cli
+  # (native/wm-python-cli), before the first push of the Python plugins.
+  WM_PYTHON_REV: REPLACE_WITH_WMKEYBOARD_SHA
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -18,12 +23,20 @@ jobs:
 
       - run: pip install jsonschema
 
-      # Plugin tests run on luaj, the interpreter the keyboard ships, so the
-      # runner needs a JVM.
-      - uses: actions/setup-java@v4
+      # Plugin tests run on wm-python, the interpreter the keyboard ships (a
+      # Rust port of PyMini), through its command-line runner. Pin the rev to
+      # the WMKeyboard commit whose wm-python matches the app being released.
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: actions/cache@v4
         with:
-          distribution: temurin
-          java-version: "17"
+          path: ~/.cargo/bin
+          key: wm-python-cli-${{ env.WM_PYTHON_REV }}
+
+      - name: Install wm-python-cli
+        run: |
+          command -v wm-python-cli || cargo install \
+            --git https://github.com/wasi-master/WMKeyboard --rev "$WM_PYTHON_REV" wm-python-cli
 
       # Schema pass, plus the things a schema can't express: every path,
       # preview and icon resolves to a file that is actually in the repo, ids
@@ -40,6 +53,7 @@ jobs:
       - name: Check plugin archives are current
         run: python3 tools/build_plugins.py --check
 
-      # Every plugin with a test.lua runs it on luaj 3.0.1.
+      # Every plugin is linted for Python PyMini lacks and smoke-rendered
+      # against the widget caps; every test.py runs on wm-python-cli.
       - name: Run plugin tests
-        run: python3 tools/test_plugins.py
+        run: python3 tools/test_plugins.py --require-cli

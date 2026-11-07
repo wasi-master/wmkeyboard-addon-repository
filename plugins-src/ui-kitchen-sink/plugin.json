@@ -3,10 +3,11 @@
   "version": 1,
   "id": "com.wasimaster.kitchensink",
   "name": "UI Kitchen Sink",
-  "pluginVersion": "1.1.0",
+  "pluginVersion": "2.0.0",
   "author": "Wasi Master",
   "description": "Every plugin widget and event in one place, to copy from.",
-  "apiVersion": 2,
-  "entry": "main.lua",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
   "permissions": []
 }

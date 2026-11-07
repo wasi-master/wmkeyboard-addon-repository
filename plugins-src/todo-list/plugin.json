@@ -3,10 +3,11 @@
   "version": 1,
   "id": "com.wasimaster.todo",
   "name": "Todo List",
-  "pluginVersion": "2.0.0",
+  "pluginVersion": "3.0.0",
   "author": "Wasi Master",
   "description": "A checklist with due dates and reminders. Shows how plugin storage, reminders and the date widget work.",
-  "apiVersion": 2,
-  "entry": "main.lua",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
   "permissions": ["storage", "reminders"]
 }

@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-10-31"
+    "updatedAt": "2026-11-07"
   },
   "addons": [
     {
@@ -1530,7 +1530,7 @@
       "id": "cipher-tool",
       "type": "plugin",
       "name": "Cipher Tool",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "author": "Wasi Master",
       "description": "Caesar and Vigenere ciphers, encode and decode. The plugin the getting-started guide builds.",
       "tags": [
@@ -1540,12 +1540,13 @@
         "plugin"
       ],
       "path": "plugins/cipher-tool.wmplugin",
-      "sha256": "81770a40147992c88df1a2260589367038270b6c5602386d71bd8843715b02e0",
-      "sizeBytes": 1693,
+      "sha256": "21ca357046a0de13cc214e349dad3881850df1ac42a242b4ace894b0efb93b4f",
+      "sizeBytes": 1912,
       "previews": [
         "previews/cipher-tool-grid.jpg",
         "previews/cipher-tool.jpg"
       ],
+      "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1553,7 +1554,7 @@
       "id": "ui-kitchen-sink",
       "type": "plugin",
       "name": "UI Kitchen Sink",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "author": "Wasi Master",
       "description": "Every plugin widget and event in one place, to look at and copy from.",
       "tags": [
@@ -1562,12 +1563,12 @@
         "plugin"
       ],
       "path": "plugins/ui-kitchen-sink.wmplugin",
-      "sha256": "0ef47f251d58846a14e118ac9d08f4ddd3ff3ef1a293e48792ef352be5728abb",
-      "sizeBytes": 1990,
+      "sha256": "b4ff580028734ab117c9d04f04eedd4f1de402725c0fc50f9dfcf0e54d3f43f1",
+      "sizeBytes": 2081,
       "previews": [
         "previews/ui-kitchen-sink-grid.jpg"
       ],
-      "minAppVersion": 35,
+      "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1575,7 +1576,7 @@
       "id": "todo-list",
       "type": "plugin",
       "name": "Todo List",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "author": "Wasi Master",
       "description": "A checklist with due dates and reminders. Shows how plugin storage, reminders and the date widget work.",
       "tags": [
@@ -1586,14 +1587,14 @@
         "plugin"
       ],
       "path": "plugins/todo-list.wmplugin",
-      "sha256": "91a94a6948c4cc34a033fbf42e7645101a70224b9f658acc46efedbf311f93fa",
-      "sizeBytes": 3648,
+      "sha256": "5ba5917607a8e41e57411f906a4ead9210607976113368414a1e9e7bbfa3837c",
+      "sizeBytes": 3910,
       "previews": [
         "previews/todo-list-grid.jpg",
         "previews/todo-list-1.jpg",
         "previews/todo-list-2.jpg"
       ],
-      "minAppVersion": 35,
+      "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1601,7 +1602,7 @@
       "id": "text-tools",
       "type": "plugin",
       "name": "Text Tools",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "author": "Wasi Master",
       "description": "Change case, encode as base64/hex/URL, and count words.",
       "tags": [
@@ -1611,8 +1612,8 @@
         "plugin"
       ],
       "path": "plugins/text-tools.wmplugin",
-      "sha256": "10953cc6b7a618079f17c2cc42697fe4178d21c64e832814c397c92b0319c9d7",
-      "sizeBytes": 2209,
+      "sha256": "09ee96936e2d54a0c9e0b4f206a6b69e6416d9659f9d54102722fe30290f94c5",
+      "sizeBytes": 3200,
       "previews": [
         "previews/text-tools-grid.jpg",
         "previews/text-tools-1.jpg",
@@ -1623,6 +1624,7 @@
         "previews/text-tools-6.jpg",
         "previews/text-tools-7.jpg"
       ],
+      "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1651,7 +1653,7 @@
       "id": "math-mode",
       "type": "plugin",
       "name": "Math Mode",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "author": "Wasi Master",
       "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹. Symbol palette, fractions, Greek, calculus, sets, chemistry and LaTeX.",
       "tags": [
@@ -1661,11 +1663,12 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "5b8e77a6c91041bff494754c45caca40eaa397b6744b70167ad528da117c103c",
-      "sizeBytes": 18360,
+      "sha256": "951cb051004bbf94b2bf30078a4c198a04f14dd001b0ef169c288b19c242cfc1",
+      "sizeBytes": 18109,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
+      "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     }

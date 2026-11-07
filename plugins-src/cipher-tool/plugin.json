@@ -3,10 +3,11 @@
   "version": 1,
   "id": "com.wasimaster.cipher",
   "name": "Cipher Tool",
-  "pluginVersion": "1.0.0",
+  "pluginVersion": "2.0.0",
   "author": "Wasi Master",
   "description": "Caesar and Vigenere ciphers, encode and decode.",
-  "apiVersion": 1,
-  "entry": "main.lua",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
   "permissions": []
 }

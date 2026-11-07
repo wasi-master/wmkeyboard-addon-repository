@@ -1,0 +1,17 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.textactions",
+  "name": "Text Actions",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "ROT13 and Wrap in quotes on the selection bar, with the quote style picked in a panel.",
+  "apiVersion": 4,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": ["storage", "selection"],
+  "actions": [
+    { "id": "rot13", "name": "ROT13", "summary": "Shift each letter 13 places", "icon": "lock" },
+    { "id": "quote", "name": "Wrap in quotes", "summary": "Put quotes around the selection" }
+  ]
+}

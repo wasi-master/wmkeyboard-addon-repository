@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Zips plugins-src/<name>/ into plugins/<name>.wmplugin.
 
-A .wmplugin is just a ZIP holding plugin.json and main.lua, so this could be a
+A .wmplugin is just a ZIP holding plugin.json and main.py, so this could be a
 `zip` one-liner — but the sources are what people read and the archives are what
 they install, and the two drifting apart is the failure worth preventing. Run
 this before tools/build_index.py, which computes the checksums.
@@ -35,7 +35,10 @@ FORMAT = "wmkeyboard-plugin"
 
 # Mirrors PluginPermission.kt. A permission the app does not know refuses the
 # install outright, so publishing one would ship a plugin nobody can use.
-KNOWN_PERMISSIONS = {"storage", "reminders"}
+KNOWN_PERMISSIONS = {"storage", "reminders", "selection"}
+
+# Plugins are Python (API 4). The app refuses Lua outright.
+MAX_API_VERSION = 4
 
 
 def build(source: Path) -> tuple[bytes, list[str]]:
@@ -59,7 +62,14 @@ def build(source: Path) -> tuple[bytes, list[str]]:
         if permission not in KNOWN_PERMISSIONS:
             problems.append(f"{source.name}: unknown permission {permission!r}")
 
-    entry = manifest.get("entry", "main.lua")
+    if manifest.get("language", "python") != "python":
+        problems.append(f"{source.name}: language must be \"python\"")
+    api = manifest.get("apiVersion", 1)
+    if not isinstance(api, int) or not 4 <= api <= MAX_API_VERSION:
+        problems.append(f"{source.name}: apiVersion must be {MAX_API_VERSION} (Python plugins)")
+    entry = manifest.get("entry", "main.py")
+    if not entry.endswith(".py"):
+        problems.append(f"{source.name}: entry {entry} is not a .py file")
     script = source / entry
     if not script.is_file():
         problems.append(f"{source.name}: entry {entry} is missing")

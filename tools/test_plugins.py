@@ -1,102 +1,108 @@
 #!/usr/bin/env python3
-"""Runs every plugins-src/<name>/test.lua on the interpreter the keyboard ships.
+"""Checks every plugin in plugins-src/ and runs its tests.
 
-WM Keyboard runs plugins on luaj 3.0.1, which is not the Lua you get from
-Homebrew: strings are bytes, there is no utf8 library, and the UTF-8 codec
-only knows the Basic Multilingual Plane. Testing on PUC Lua would pass things
-that break on a phone, so this fetches the exact jar (or borrows it from the
-Gradle cache when the app has been built on this machine) and runs each
-plugin's tests under `java -cp luaj-jse-3.0.1.jar lua`.
+WM Keyboard runs plugins on wm-python, its Rust port of PyMini (the small
+Python Clink uses). PyMini is not CPython: strings are grapheme clusters,
+there are no classes or `with`, and only a few modules exist. So the real
+check is the real interpreter, through its command-line runner:
 
-A plugin opts in by having a test.lua next to its main.lua. The script is
-run with the plugin folder as its working directory and must exit non-zero
-on failure.
+    cargo install --git https://github.com/wasi-master/WMKeyboard --rev <sha> wm-python-cli
 
-    python3 tools/test_plugins.py            # every plugin with a test.lua
-    python3 tools/test_plugins.py math-mode  # just one
+For every plugin this script
+
+1. lints main.py (and test.py) for Python that PyMini does not have,
+2. renders it with stand-in `wm` and `ui` and touches every widget it shows,
+   checking each tree against the host's caps (CPython, tools/pyplugin_host.py),
+3. runs its test.py, if it has one, under `wm-python-cli test <folder>`.
+   Without the CLI on PATH, test.py runs on CPython with the same stand-ins
+   and a warning, which catches most mistakes but not the PyMini-only ones.
+
+A test.py imports `plugin_test`, which the runner provides: `read(name)`
+returns a file from the plugin's folder and `load(name, wm, ui)` runs a plugin
+file with the given `wm` and `ui` and returns its globals. A failing test
+raises; the run then exits non-zero.
+
+    python3 tools/test_plugins.py              # every plugin
+    python3 tools/test_plugins.py math-mode    # just one
+    python3 tools/test_plugins.py --cpython    # skip wm-python-cli even if installed
+    python3 tools/test_plugins.py --require-cli  # fail when wm-python-cli is missing (CI)
 """
 
 from __future__ import annotations
 
-import hashlib
-import os
+import argparse
+import json
 import shutil
 import subprocess
 import sys
-import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / "plugins-src"
-CACHE_DIR = ROOT / ".cache"
+CLI = "wm-python-cli"
 
-LUAJ_VERSION = "3.0.1"
-LUAJ_JAR = f"luaj-jse-{LUAJ_VERSION}.jar"
-LUAJ_URL = f"https://repo1.maven.org/maven2/org/luaj/luaj-jse/{LUAJ_VERSION}/{LUAJ_JAR}"
-LUAJ_SHA256 = "9b1f0a3e8f68427c6d74c2bf00ae0e6dbfce35994d3001fed4cef6ecda50be55"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import pyplugin_host  # noqa: E402
 
 
-def find_java() -> str:
-    java_home = os.environ.get("JAVA_HOME")
-    if java_home:
-        candidate = Path(java_home) / "bin" / "java"
-        if candidate.exists():
-            return str(candidate)
-    found = shutil.which("java")
-    if found:
-        return found
-    studio = Path("/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java")
-    if studio.exists():
-        return str(studio)
-    sys.exit("java not found: set JAVA_HOME or install a JDK")
-
-
-def find_jar() -> Path:
-    gradle = Path.home() / ".gradle" / "caches" / "modules-2" / "files-2.1" / "org.luaj" / "luaj-jse" / LUAJ_VERSION
-    if gradle.is_dir():
-        for hit in gradle.rglob(LUAJ_JAR):
-            return hit
-    cached = CACHE_DIR / LUAJ_JAR
-    if cached.exists():
-        return cached
-    CACHE_DIR.mkdir(exist_ok=True)
-    print(f"fetching {LUAJ_URL}")
-    with urllib.request.urlopen(LUAJ_URL, timeout=60) as response:
-        data = response.read()
-    digest = hashlib.sha256(data).hexdigest()
-    if digest != LUAJ_SHA256:
-        sys.exit(f"{LUAJ_JAR}: sha256 {digest} does not match the pinned {LUAJ_SHA256}")
-    cached.write_bytes(data)
-    return cached
+def entry_of(folder: Path) -> Path:
+    manifest = json.loads((folder / "plugin.json").read_text(encoding="utf-8"))
+    return folder / manifest.get("entry", "main.py")
 
 
 def main(argv: list[str]) -> int:
-    wanted = set(argv)
-    folders = sorted(p for p in SOURCE_DIR.iterdir() if p.is_dir() and (p / "test.lua").exists())
-    if wanted:
-        missing = wanted - {p.name for p in folders}
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("plugins", nargs="*", help="folder names under plugins-src/")
+    parser.add_argument("--cpython", action="store_true", help="run test.py on CPython even if the CLI is installed")
+    parser.add_argument("--require-cli", action="store_true", help=f"fail if {CLI} is not on PATH")
+    args = parser.parse_args(argv)
+
+    folders = sorted(p for p in SOURCE_DIR.iterdir() if p.is_dir() and (p / "plugin.json").exists())
+    if args.plugins:
+        missing = set(args.plugins) - {p.name for p in folders}
         if missing:
-            sys.exit(f"no test.lua for: {', '.join(sorted(missing))}")
-        folders = [p for p in folders if p.name in wanted]
-    if not folders:
-        print("no plugin has a test.lua")
-        return 0
-    java = find_java()
-    jar = find_jar()
+            sys.exit(f"no such plugin: {', '.join(sorted(missing))}")
+        folders = [p for p in folders if p.name in args.plugins]
+
+    cli = None if args.cpython else shutil.which(CLI)
+    if cli is None and args.require_cli:
+        sys.exit(f"{CLI} is not on PATH")
+    if cli is None and not args.cpython:
+        print(f"warning: {CLI} not found; running test.py on CPython stand-ins "
+              f"(install it with cargo, see this script's docstring)")
+
     failed = 0
     for folder in folders:
         print(f"== {folder.name}")
-        result = subprocess.run(
-            [java, "-cp", str(jar), "lua", "test.lua"],
-            cwd=folder,
-            text=True,
-            capture_output=True,
-        )
-        sys.stdout.write(result.stdout)
-        if result.returncode != 0:
-            sys.stdout.write(result.stderr)
+        problems: list[str] = []
+        entry = entry_of(folder)
+        if not entry.is_file():
+            problems.append(f"{entry.relative_to(ROOT)} is missing")
+        else:
+            problems += pyplugin_host.check_subset(entry)
+        test = folder / "test.py"
+        if test.is_file():
+            problems += pyplugin_host.check_subset(test, host_globals=False)
+        if not problems:
+            problems += pyplugin_host.smoke(folder)
+        for line in problems:
+            print(f"   {line}")
+
+        test_failed = False
+        if test.is_file() and not problems:
+            if cli:
+                result = subprocess.run([cli, "test", str(folder)], text=True, capture_output=True)
+                sys.stdout.write(result.stdout)
+                if result.returncode != 0:
+                    sys.stdout.write(result.stderr)
+                    test_failed = True
+            else:
+                test_failed = pyplugin_host.run_test(folder) != 0
+        if problems or test_failed:
             failed += 1
             print(f"   FAILED ({folder.name})")
+        elif not test.is_file():
+            print("   ok (lint and smoke; no test.py)")
     return 1 if failed else 0
 
 

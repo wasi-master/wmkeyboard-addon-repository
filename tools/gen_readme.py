@@ -29,7 +29,7 @@ table_md = "\n".join(rows)
 readme_content = f"""<div align="center">
   <img src="icon.png" width="128" height="128" alt="WM Keyboard Icon" />
   <h1>WM Keyboard Official Addons</h1>
-  <p>Official addon repository for WM Keyboard: themes, layouts, dictionaries, snippet packs, stickers, icon packs, fonts, emoji fonts, and key sounds.</p>
+  <p>Official addon repository for WM Keyboard: themes, layouts, dictionaries, snippet packs, stickers, icon packs, fonts, emoji fonts, key sounds and Python plugins.</p>
 </div>
 
 ---
@@ -64,6 +64,8 @@ Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the r
 **Full PC.** A five-row desktop keyboard after [Hacker's Keyboard](https://github.com/klausw/hackerskeyboard): digits with their shifted symbols, Tab, Ctrl, Alt, Meta, Esc and arrows on the board, and an Fn layer with F1 to F12 and the navigation block. For terminals, SSH clients and remote desktops.
 
 **QWERTY with flick edit row.** English QWERTY under five flick keys: 1 and 6 carry the other digits on their arms, and Copy, Select and Cut carry paste, select all, the caret moves and both deletes.
+
+**Plugins.** Small Python tools that draw a panel on the keyboard: **Cipher Tool** (the one the getting-started guide builds), **Text Tools**, **Todo List** (storage, due dates and reminders), **UI Kitchen Sink** (every widget and event) and **Math Mode**. They run on WM Keyboard's own Python, a subset of the language with no access to what you type, the clipboard or the network, and need app version 43 or later. Their sources are in [`plugins-src/`](plugins-src/); [`tools/build_plugins.py`](tools/build_plugins.py) packs them and [`tools/test_plugins.py`](tools/test_plugins.py) tests them. MIT ([`plugins/LICENSE.txt`](plugins/LICENSE.txt)).
 
 **Sounds.** Four key-press sounds synthesised by [`tools/make_sounds.py`](tools/make_sounds.py) and released CC0 ([`sounds/SOUNDS-LICENSE.txt`](sounds/SOUNDS-LICENSE.txt)).
 

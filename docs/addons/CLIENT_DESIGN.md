@@ -151,7 +151,7 @@ stored version → show **Update**. Re-running install overwrites in place.
 ## 7. Security & privacy
 
 Every addon type but one is **pure data — no code runs**. The exception is
-`plugin`, which ships Lua and is covered separately below. Residual surface +
+`plugin`, which ships Python and is covered separately below. Residual surface +
 mitigations:
 
 - **Transport:** `https` only. Size caps on manifest and every payload type (theme image cap,
@@ -178,7 +178,7 @@ mitigations:
 `plugin` is the one type whose payload is code, so the sentence above stops being
 true for it and a different set of guarantees takes over.
 
-A plugin's Lua runs in a sandbox with **no API for reading typed text, the text
+A plugin's Python runs in a sandbox with **no API for reading typed text, the text
 field, the clipboard, or the network** — not gated behind a permission, not
 prompted for at use: absent. It also cannot load code at runtime, reach Android,
 see other apps, or run while its panel is closed. The one thing it can declare is

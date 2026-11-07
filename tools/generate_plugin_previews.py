@@ -90,7 +90,7 @@ def generate_cipher_tool_preview():
 
     # Header
     badge = make_badge_pill(
-        "LUA PLUGIN  •  ENCRYPTION DEMO",
+        "PYTHON PLUGIN  •  ENCRYPTION DEMO",
         font_badge,
         (56, 189, 248),
         (15, 23, 42, 230),
@@ -171,7 +171,7 @@ def generate_cipher_tool_preview():
     draw.rounded_rectangle([card_x + b_w + 24, b_y, card_x + card_w, b_y + b_h], radius=16, fill=(15, 23, 42, 220), outline=(51, 65, 85))
     badge_a = make_badge_pill("ARCHITECTURE", font_badge, (56, 189, 248), (30, 41, 59), (56, 189, 248, 100))
     canvas.paste(badge_a, (card_x + b_w + 44, b_y + 20), badge_a)
-    draw.text((card_x + b_w + 44, b_y + 65), "Lua 5.4 Sandbox", fill=(248, 250, 252), font=font_body)
+    draw.text((card_x + b_w + 44, b_y + 65), "Python Sandbox", fill=(248, 250, 252), font=font_body)
     draw.text((card_x + b_w + 44, b_y + 98), "• Zero network permissions required", fill=(148, 163, 184), font=font_sub)
     draw.text((card_x + b_w + 44, b_y + 128), "• Direct 1-tap insert into any app", fill=(148, 163, 184), font=font_sub)
 
@@ -203,7 +203,7 @@ def generate_ui_kitchen_sink_preview():
 
     # Header
     badge = make_badge_pill(
-        "LUA PLUGIN  •  WIDGET GALLERY & REFERENCE",
+        "PYTHON PLUGIN  •  WIDGET GALLERY & REFERENCE",
         font_badge,
         (192, 132, 252),
         (15, 23, 42, 230),
@@ -331,7 +331,7 @@ def generate_todo_list_preview():
 
     # Header
     badge = make_badge_pill(
-        "LUA PLUGIN  •  PERSISTENT STORAGE DEMO",
+        "PYTHON PLUGIN  •  PERSISTENT STORAGE DEMO",
         font_badge,
         (45, 212, 191),
         (15, 23, 42, 230),
@@ -365,7 +365,7 @@ def generate_todo_list_preview():
 
     # Items Stack
     items = [
-        ("Finish WM Keyboard Lua plugin guide", True),
+        ("Finish WM Keyboard Python plugin guide", True),
         ("Test local storage quota limits", False),
         ("Export repo manifest with build_index.py", True),
         ("Publish plugin preview images to repository", False),
@@ -432,7 +432,7 @@ def generate_text_tools_preview():
 
     # Header
     badge = make_badge_pill(
-        "LUA PLUGIN  •  MULTI-FUNCTION TEXT UTILITY",
+        "PYTHON PLUGIN  •  MULTI-FUNCTION TEXT UTILITY",
         font_badge,
         (56, 189, 248),
         (15, 23, 42, 230),
@@ -623,7 +623,7 @@ def generate_math_mode_preview():
 
     # Header
     badge = make_badge_pill(
-        "LUA PLUGIN  •  MATH INPUT",
+        "PYTHON PLUGIN  •  MATH INPUT",
         font_badge,
         accent,
         (15, 23, 42, 230),

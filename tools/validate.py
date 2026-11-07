@@ -53,7 +53,11 @@ EXECUTABLE_TYPES = {"plugin"}
 
 # Mirrors PluginPermission.kt. A permission the app does not recognise makes
 # it refuse the install outright, so publishing one ships a dead plugin.
-KNOWN_PLUGIN_PERMISSIONS = {"storage", "reminders"}
+KNOWN_PLUGIN_PERMISSIONS = {"storage", "reminders", "selection"}
+
+# The app's PluginManifestCodec.API_VERSION. 4 is Python, which replaced Lua:
+# 2 added wm.reminders and ui.date, 3 selection actions, 4 the switch.
+PLUGIN_API_VERSION = 4
 
 # The types whose payload is in one language, and so can carry `localizations`.
 LOCALIZABLE_TYPES = {"dictionary", "emoji_keywords", "vocabulary"}
@@ -84,14 +88,21 @@ def check_plugin(ident, payload, errors, warnings):
                 errors.append(f"{ident}: no plugin.json in the archive")
                 return
             manifest = json.loads(archive.read("plugin.json"))
-            entry_name = manifest.get("entry", "main.lua")
+            entry_name = manifest.get("entry", "main.py")
             if entry_name not in names:
                 errors.append(f"{ident}: entry {entry_name} is missing from the archive")
+            elif not entry_name.endswith(".py"):
+                errors.append(
+                    f"{ident}: entry {entry_name} is not a .py file — plugins are "
+                    f"Python, and the app no longer runs Lua"
+                )
             else:
                 script = archive.read(entry_name)
-                if script[:1] == b"\x1b":
+                try:
+                    script.decode("utf-8")
+                except UnicodeDecodeError:
                     errors.append(
-                        f"{ident}: {entry_name} is compiled Lua — plugins must ship "
+                        f"{ident}: {entry_name} is not UTF-8 text — plugins must ship "
                         f"source so their code can be read before it runs"
                     )
     except (zipfile.BadZipFile, KeyError, ValueError) as error:
@@ -109,11 +120,18 @@ def check_plugin(ident, payload, errors, warnings):
             f"{ident}: plugin id {plugin_id!r} must be lowercase, 3-64 characters, "
             f"and only letters, numbers, dots, dashes and underscores"
         )
-    # The app's PluginManifestCodec.API_VERSION. 2 added wm.reminders, ui.date
-    # and os.time(table).
-    if manifest.get("apiVersion", 1) > 2:
+    language = manifest.get("language")
+    api_version = manifest.get("apiVersion", 1)
+    if language == "lua" or (language is None and isinstance(api_version, int) and api_version <= 3):
+        errors.append(
+            f"{ident}: written in Lua, which WM Keyboard no longer runs — "
+            f"port it to Python (apiVersion {PLUGIN_API_VERSION}, entry main.py)"
+        )
+    elif language not in (None, "python"):
+        errors.append(f"{ident}: unknown plugin language {language!r} — only \"python\"")
+    if not isinstance(api_version, int) or api_version > PLUGIN_API_VERSION:
         warnings.append(
-            f"{ident}: apiVersion {manifest['apiVersion']} is newer than this "
+            f"{ident}: apiVersion {api_version} is newer than this "
             f"validator knows — current app versions will refuse it"
         )
     for permission in manifest.get("permissions", []):
