@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-07"
+    "updatedAt": "2026-11-08"
   },
   "addons": [
     {
@@ -345,6 +345,53 @@
       "minAppVersion": 31,
       "langId": "en",
       "license": "CC0-1.0"
+    },
+    {
+      "id": "gboard-plus",
+      "type": "layout",
+      "name": "English QWERTY Gboard+",
+      "version": "1.0.0",
+      "author": "AsafMah",
+      "description": "English QWERTY whose long-press popups end in a tool: q scans a QR code, t translates, c opens the calculator, v the clipboard, n your notes, and most other letters have one too. Digits and accents are on long-press as well, and a flick down from each bottom-row letter types punctuation: z gives *, m gives ?.",
+      "tags": [
+        "qwerty",
+        "flick",
+        "tools",
+        "english"
+      ],
+      "path": "layouts/gboard-plus.wmlayout.json",
+      "sha256": "1853e88622dbc4a3227610821a4c3f60efadc68abf3dc619fe4e7cf9a526f679",
+      "sizeBytes": 10297,
+      "previews": [
+        "previews/gboard-plus.jpg"
+      ],
+      "minAppVersion": 36,
+      "langId": "en",
+      "license": "MIT"
+    },
+    {
+      "id": "gboard-plus-swipe-safe",
+      "type": "layout",
+      "name": "English QWERTY Gboard+ (swipe-safe)",
+      "version": "1.0.0",
+      "author": "AsafMah",
+      "description": "English QWERTY Gboard+ without the bottom-row flicks, so a glided word can never type punctuation by accident. The rest is the same: digits, accents and a tool in each letter's long-press popup.",
+      "tags": [
+        "qwerty",
+        "glide",
+        "swipe",
+        "tools",
+        "english"
+      ],
+      "path": "layouts/gboard-plus-swipe-safe.wmlayout.json",
+      "sha256": "0d0c524c03abf35a159a06f2ae84fb0435b939500e478a95eb7afde7ad8ddc21",
+      "sizeBytes": 9830,
+      "previews": [
+        "previews/gboard-plus-swipe-safe.jpg"
+      ],
+      "minAppVersion": 36,
+      "langId": "en",
+      "license": "MIT"
     },
     {
       "id": "en-developer",

@@ -421,6 +421,30 @@ LAYOUT_CONFIGS = [
         "space_text": "English (QWERTY)",
         "show_number_row": False,
     },
+    {
+        "layout_file": LAYOUTS_DIR / "gboard-plus.wmlayout.json",
+        "output_grid": PREVIEWS_DIR / "gboard-plus.jpg",
+        "title": "English QWERTY Gboard+",
+        "subtitle": "A tool in each letter's long-press, punctuation on bottom-row flicks",
+        "bg_start": (15, 23, 42),
+        "bg_end": (8, 51, 68),
+        "accent_color": (45, 212, 191),
+        "footer_text": "Hold q for QR scan, t to translate, v for the clipboard • Flick z down for *, m for ?",
+        "space_text": "English (Gboard+)",
+        "show_number_row": False,
+    },
+    {
+        "layout_file": LAYOUTS_DIR / "gboard-plus-swipe-safe.wmlayout.json",
+        "output_grid": PREVIEWS_DIR / "gboard-plus-swipe-safe.jpg",
+        "title": "English QWERTY Gboard+ (swipe-safe)",
+        "subtitle": "The same long-press tools, with no flicks to catch a glide",
+        "bg_start": (15, 23, 42),
+        "bg_end": (8, 51, 68),
+        "accent_color": (45, 212, 191),
+        "footer_text": "Hold q for QR scan, t to translate, v for the clipboard • No flicks on the bottom row",
+        "space_text": "English (Gboard+)",
+        "show_number_row": False,
+    },
 ]
 
 
