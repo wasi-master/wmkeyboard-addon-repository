@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-08"
+    "updatedAt": "2026-11-09"
   },
   "addons": [
     {
@@ -631,7 +631,7 @@
       "id": "fontawesome",
       "type": "icon_pack",
       "name": "Font Awesome",
-      "version": "6.8.0",
+      "version": "6.8.1",
       "author": "Fonticons, Inc. and Font Awesome Contributors",
       "description": "The complete keyboard icon set drawn in Font Awesome's iconic solid style: all 62 tools, every key glyph, toolbar chrome and emoji category tabs. Theme-following SVG icons. CC BY 4.0 licensed — see icons/FONTAWESOME-LICENSE.txt.",
       "tags": [
@@ -641,8 +641,8 @@
         "complete"
       ],
       "path": "icons/fontawesome.wmicons",
-      "sha256": "94d1686cf605b3d7472f2f257a2fdca0a142c01f2fac3c4063228bed76292e32",
-      "sizeBytes": 44907,
+      "sha256": "dfcfdb4eafa26eaf5b3d0d81225482d427dfd40ebc75b1bdbe51d76031d7872a",
+      "sizeBytes": 44949,
       "previews": [
         "previews/fontawesome-grid.jpg",
         "previews/fontawesome.jpg"
