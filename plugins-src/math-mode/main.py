@@ -165,6 +165,9 @@ VERBATIM_CMD = set(["text", "mathrm", "operatorname", "textrm", "mbox"])
 PREFIX = set(["root", "abs", "norm", "floor", "ceil", "binom", "frac", "dfrac", "tfrac", "sqrt", "cbrt"])
 PREFIX = PREFIX | set(ACCENT) | set(STYLE_NAME)
 ROOT_GLYPH = {"sqrt": "√", "cbrt": "∛"}
+# Every word on_word does more with than look up a symbol: the words its
+# special cases test for, the operator words and the prefixes.
+WORD_SPECIAL = set(["x", "in", "deg", "degree", "degrees", "degC", "degF", "angle", "dot"]) | set(WORD_OPS) | PREFIX
 ROOT_BY_INDEX = {"2": "√", "3": "∛", "4": "∜"}
 
 SUP = {
@@ -218,6 +221,25 @@ OPS = [
 OPS_BY_FIRST = {}
 for _key, _glyph in OPS:
     OPS_BY_FIRST.setdefault(_key[0], []).append((_key, _glyph, len(_key)))
+
+# The tokenizer's class for each character it treats specially; anything
+# missing is a run of non-ASCII. "." is a number only before a digit.
+CHAR_CLASS = {}
+for _c in ASCII:
+    CHAR_CLASS[_c] = "op"
+for _c in DIGIT:
+    CHAR_CLASS[_c] = "num"
+for _c in ALPHA:
+    CHAR_CLASS[_c] = "word"
+for _c in OPEN:
+    CHAR_CLASS[_c] = "open"
+for _c in CLOSE:
+    CHAR_CLASS[_c] = "close"
+for _c in SPACE:
+    CHAR_CLASS[_c] = "ws"
+CHAR_CLASS["\\"] = "cmd"
+CHAR_CLASS['"'] = "quote"
+CHAR_CLASS["."] = "."
 
 ELEMENTS = set("""H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn
   Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm
@@ -304,10 +326,29 @@ def tokenize(cs):
     Kinds: num word cmd quote verb op open close ws raw other."""
     toks = []
     n = len(cs)
+    # One "" past the end: every look-ahead below stays within n, so cs[j]
+    # reads "" there, as at() would, without a call and a bounds check.
+    cs = cs + [""]
     i = 0
     while i < n:
         c = cs[i]
-        if c in SPACE:
+        # One lookup instead of a run of set tests; commonest classes first.
+        cls = CHAR_CLASS.get(c, "raw")
+        if cls == ".":
+            cls = "num" if cs[i + 1] in DIGIT else "op"
+        if cls == "word":
+            j = i + 1
+            while cs[j] in ALNUM:
+                j += 1
+            word = "".join(cs[i:j])
+            cut = split_point(word)
+            if cut is not None:
+                token(toks, "word", word[:cut], i, i + cut - 1)
+                i += cut
+            else:
+                token(toks, "word", word, i, j - 1)
+                i = j
+        elif cls == "ws":
             j = i
             nl = False
             while j < n:
@@ -319,69 +360,56 @@ def tokenize(cs):
                 j += 1
             token(toks, "ws", "".join(cs[i:j]), i, j - 1)["nl"] = nl
             i = j
-        elif c in DIGIT or (c == "." and at(cs, i + 1) in DIGIT):
+        elif cls == "op":
+            matched = False
+            for key, glyph, size in OPS_BY_FIRST.get(c, ()):
+                if "".join(cs[i:i + size]) == key:
+                    j = i + size
+                    if key == "..." and cs[j] == ".":
+                        while cs[j] == ".":
+                            j += 1
+                        token(toks, "other", "".join(cs[i:j]), i, j - 1)
+                    elif key == "**" and cs[j] == "*":
+                        while cs[j] == "*":
+                            j += 1
+                        token(toks, "other", "".join(cs[i:j]), i, j - 1)
+                    elif key == "<-" and (cs[j] in DIGIT or cs[j] == "."):
+                        token(toks, "op", "<", i, i)
+                        j = i + 1
+                    else:
+                        token(toks, "op", key, i, j - 1)["glyph"] = glyph
+                    i = j
+                    matched = True
+                    break
+            if not matched:
+                token(toks, "op", c, i, i)
+                i += 1
+        elif cls == "num":
             j = i
-            while at(cs, j) in DIGIT:
+            while cs[j] in DIGIT:
                 j += 1
-            if at(cs, j) == "." and at(cs, j + 1) in DIGIT:
+            if cs[j] == "." and cs[j + 1] in DIGIT:
                 j += 1
-                while at(cs, j) in DIGIT:
+                while cs[j] in DIGIT:
                     j += 1
-            d = at(cs, j)
+            d = cs[j]
             if d == "e" or d == "E":
                 k = j + 1
-                if at(cs, k) == "+" or at(cs, k) == "-":
+                if cs[k] == "+" or cs[k] == "-":
                     k += 1
-                if at(cs, k) in DIGIT:
-                    while at(cs, k) in DIGIT:
+                if cs[k] in DIGIT:
+                    while cs[k] in DIGIT:
                         k += 1
                     j = k
             token(toks, "num", "".join(cs[i:j]), i, j - 1)
             i = j
-        elif c in ALPHA:
-            j = i + 1
-            while at(cs, j) in ALNUM:
-                j += 1
-            word = "".join(cs[i:j])
-            cut = split_point(word)
-            if cut is not None:
-                token(toks, "word", word[:cut], i, i + cut - 1)
-                i += cut
-            else:
-                token(toks, "word", word, i, j - 1)
-                i = j
-        elif c == "\\":
-            d = at(cs, i + 1)
-            if d in ALPHA:
-                j = i + 2
-                while at(cs, j) in ALPHA:
-                    j += 1
-                token(toks, "cmd", "".join(cs[i + 1:j]), i, j - 1)
-                i = j
-            elif d != "" and d != "\\" and d != " " and d in ASCII and d not in ALNUM and d not in SPACE:
-                token(toks, "cmd", d, i, i + 1)
-                i += 2
-            else:
-                token(toks, "other", "\\", i, i)
-                i += 1
-        elif c == '"':
-            # a "quoted" region is left exactly as typed
-            j = i + 1
-            while j < n and cs[j] != '"':
-                j += 1
-            if j < n:
-                token(toks, "quote", "".join(cs[i + 1:j]), i, j)
-                i = j + 1
-            else:
-                token(toks, "verb", "".join(cs[i:]), i, n - 1)
-                i = n
-        elif c in OPEN:
+        elif cls == "open":
             token(toks, "open", c, i, i)
             i += 1
-        elif c in CLOSE:
+        elif cls == "close":
             token(toks, "close", c, i, i)
             i += 1
-        elif c not in ASCII:
+        elif cls == "raw":
             j = i
             while j < n and cs[j] not in ASCII and cs[j] not in SPACE:
                 j += 1
@@ -395,30 +423,31 @@ def tokenize(cs):
             else:
                 token(toks, "raw", run, i, j - 1)
             i = j
-        else:
-            matched = False
-            for key, glyph, size in OPS_BY_FIRST.get(c, ()):
-                if "".join(cs[i:i + size]) == key:
-                    j = i + size
-                    if key == "..." and at(cs, j) == ".":
-                        while at(cs, j) == ".":
-                            j += 1
-                        token(toks, "other", "".join(cs[i:j]), i, j - 1)
-                    elif key == "**" and at(cs, j) == "*":
-                        while at(cs, j) == "*":
-                            j += 1
-                        token(toks, "other", "".join(cs[i:j]), i, j - 1)
-                    elif key == "<-" and (at(cs, j) in DIGIT or at(cs, j) == "."):
-                        token(toks, "op", "<", i, i)
-                        j = i + 1
-                    else:
-                        token(toks, "op", key, i, j - 1)["glyph"] = glyph
-                    i = j
-                    matched = True
-                    break
-            if not matched:
-                token(toks, "op", c, i, i)
+        elif cls == "cmd":
+            d = cs[i + 1]
+            if d in ALPHA:
+                j = i + 2
+                while cs[j] in ALPHA:
+                    j += 1
+                token(toks, "cmd", "".join(cs[i + 1:j]), i, j - 1)
+                i = j
+            elif d != "" and d != "\\" and d != " " and d in ASCII and d not in ALNUM and d not in SPACE:
+                token(toks, "cmd", d, i, i + 1)
+                i += 2
+            else:
+                token(toks, "other", "\\", i, i)
                 i += 1
+        elif cls == "quote":
+            # a "quoted" region is left exactly as typed
+            j = i + 1
+            while j < n and cs[j] != '"':
+                j += 1
+            if j < n:
+                token(toks, "quote", "".join(cs[i + 1:j]), i, j)
+                i = j + 1
+            else:
+                token(toks, "verb", "".join(cs[i:]), i, n - 1)
+                i = n
     return toks
 
 
@@ -427,6 +456,9 @@ def tokenize(cs):
 
 def scriptable(s, table):
     """Every character of s (spaces excepted) has a form in table."""
+    if len(s) == 1:
+        # Most atoms are one character; neither table has a space or a tab.
+        return s in table
     if s == "":
         return False
     seen = False
@@ -530,6 +562,7 @@ MAX_DEPTH = 32
 ATOM_START = set(["num", "word", "raw", "cmd", "open", "quote"])
 JUXT_AFTER = set(["num", "word", "raw", "close", "quote"])
 SCRIPTS = ("sup", "sub")
+BINDS_ATOM = set(["sup", "sub", "fn", "frac"])
 
 # The state of one conversion.
 _cs = []      # the text, one character per item
@@ -552,7 +585,9 @@ def piece(k):
 
 
 def tok(k):
-    return _toks[k] if 0 <= k < _nt else None
+    # _toks ends in two None sentinels (render_math), so one or two past
+    # either end reads None: k - 1 and k - 2 wrap around onto them.
+    return _toks[k]
 
 
 def peek(k):
@@ -561,11 +596,13 @@ def peek(k):
     j = k + 1
     ws = False
     nl = False
-    while j < _nt and _toks[j]["k"] == "ws":
+    t = _toks[j]
+    while t is not None and t["k"] == "ws":
         ws = True
-        nl = nl or _toks[j]["nl"]
+        nl = nl or t["nl"]
         j += 1
-    return tok(j), j, ws, nl
+        t = _toks[j]
+    return t, j, ws, nl
 
 
 def tok_is_atom_start(t):
@@ -573,7 +610,8 @@ def tok_is_atom_start(t):
 
 
 def is_base(p):
-    return p is not None and bool(p.get("atom") or p.get("bar")) and not p.get("pend")
+    # Only ever a condition, so any truthy value will do.
+    return p is not None and (p.get("atom") or p.get("bar")) and not p.get("pend")
 
 
 def literal(t, src=None):
@@ -812,8 +850,9 @@ def flush(lo):
     lo: attach what has an argument, spell out what does not."""
     k = len(_out) - 1
     while k >= lo:
-        p = piece(k)
-        if p is not None and p.get("pend"):
+        # Every pop below takes k and what is above it, so k stays in range.
+        p = _out[k]
+        if p.get("pend"):
             nxt = piece(k + 1)
             if p["pend"] == "open":
                 literalize(p)
@@ -845,6 +884,10 @@ def settle():
             return
         below = piece(k - 1)
         bp = below.get("pend") if below is not None else None
+        # Only these bind to the atom; with anything else below, every
+        # branch that follows returns, so skip the look-ahead.
+        if bp not in BINDS_ATOM:
+            return
         nxt, _j, ws, nl = peek(_i)
         if nxt is not None and nxt["k"] == "op" and (nxt["v"] == "'" or nxt["v"] == "!") and not ws:
             return
@@ -1056,7 +1099,15 @@ def on_word(v):
             push_atom(p)
             return
 
-    if (v == "x" and prev_ws and not prev.get("nl") and prev_tok is not None and prev_tok["k"] == "num"
+    if v not in WORD_SPECIAL:
+        # Most words: none of the cases below can apply, so go straight to
+        # a symbol or a plain word.
+        glyph = symbol_for(v, False)
+        if glyph is not None:
+            push_symbol(v, glyph)
+        else:
+            push_word(v, nxt, ws_after, nl_after, tp)
+    elif (v == "x" and prev_ws and not prev.get("nl") and prev_tok is not None and prev_tok["k"] == "num"
             and ws_after and not nl_after and nxt is not None and nxt["k"] == "num"):
         _out.append({"t": "×", "src": "x", "kind": "op"})
     elif (v == "in" and prev_ws and prev_tok is not None and prev_tok["k"] in ("num", "word", "raw", "close")
@@ -1120,17 +1171,22 @@ def on_word(v):
     elif symbol_for(v, False) is not None:
         push_symbol(v, symbol_for(v, False))
     else:
-        p = atom(v, v, "word")
-        if v in FUNCS:
-            nx = tok(_i + 1)
-            if ((nx is not None and nx["k"] == "open")
-                    or (v in STRICT_FUNCS and ws_after and not nl_after and tok_is_atom_start(nxt))):
-                p["guard"] = True
-        if (_o["italic"] and len(v) <= 2 and v not in FUNCS and not has_digit(v)
-                and not (len(v) == 2 and v[0] == "d")
-                and not (tp is not None and tp.get("pend") in SCRIPTS) and not in_arg_group()):
-            p["t"] = styled(v, "italic")
-        push_atom(p)
+        push_word(v, nxt, ws_after, nl_after, tp)
+
+
+def push_word(v, nxt, ws_after, nl_after, tp):
+    """A word that is no operator, unit, prefix or symbol: an atom."""
+    p = atom(v, v, "word")
+    if v in FUNCS:
+        nx = tok(_i + 1)
+        if ((nx is not None and nx["k"] == "open")
+                or (v in STRICT_FUNCS and ws_after and not nl_after and tok_is_atom_start(nxt))):
+            p["guard"] = True
+    if (_o["italic"] and len(v) <= 2 and v not in FUNCS and not has_digit(v)
+            and not (len(v) == 2 and v[0] == "d")
+            and not (tp is not None and tp.get("pend") in SCRIPTS) and not in_arg_group()):
+        p["t"] = styled(v, "italic")
+    push_atom(p)
 
 
 def on_cmd(v):
@@ -1217,7 +1273,8 @@ def on_op(tk, v):
         if tp is not None and tp.get("kind") == "ws" and not prev.get("nl") and is_base(piece(len(_out) - 2)):
             ws_before = tp["t"]
             base = piece(len(_out) - 2)
-        if is_base(base) and v != "_" and nx is not None and nx["k"] == "op" and nx["v"] == "*":
+        based = is_base(base)
+        if based and v != "_" and nx is not None and nx["k"] == "op" and nx["v"] == "*":
             if ws_before is not None:
                 _out.pop()
             base["t"] = base["t"] + "*"
@@ -1226,7 +1283,7 @@ def on_op(tk, v):
             base["supok"] = False
             base["subok"] = False
             _i += 1
-        elif is_base(base):
+        elif based:
             if ws_before is not None:
                 _out.pop()
             p = {"pend": "sub" if v == "_" else "sup", "t": v, "src": v, "ws_before": ws_before}
@@ -1335,6 +1392,8 @@ def render_math(text, o):
     _cs = list(text)
     _toks = tokenize(_cs)
     _nt = len(_toks)
+    _toks.append(None)
+    _toks.append(None)
     _out = []
     _opens = []
     _i = 0
@@ -1344,9 +1403,13 @@ def render_math(text, o):
         k = tk["k"]
         v = tk["v"]
 
+        # Commonest kinds first: the chain is tried top to bottom for every token.
         if k == "ws":
             _out.append({"t": v, "src": v, "kind": "ws", "supok": True, "subok": True})
-
+        elif k == "word":
+            on_word(v)
+        elif k == "op":
+            on_op(tk, v)
         elif k == "num":
             p = atom(v, v, "num")
             prev = tok(_i - 1)
@@ -1356,17 +1419,6 @@ def render_math(text, o):
                 p["supok"] = False
                 p["subok"] = False
             push_atom(p)
-
-        elif k == "raw" or k == "quote" or k == "verb":
-            if k == "quote" and v == "":
-                _out.append(literal('""'))
-            else:
-                p = atom(v, v, "raw" if k == "raw" else "quote")
-                if k != "raw":
-                    p["supok"] = False
-                    p["subok"] = False
-                push_atom(p)
-
         elif k == "open":
             if len(_opens) >= MAX_DEPTH:
                 _out.append(literal(v))
@@ -1377,7 +1429,6 @@ def render_math(text, o):
                     marker["arg"] = True
                 _out.append(marker)
                 _opens.append(len(_out) - 1)
-
         elif k == "close":
             m = _opens[-1] if _opens else None
             bracket = _out[m].get("bracket") if m is not None else None
@@ -1385,24 +1436,26 @@ def render_math(text, o):
                 close_group(m, v)
             else:
                 _out.append(literal(v))
-
-        elif k == "word":
-            on_word(v)
-
+        elif k == "raw" or k == "quote" or k == "verb":
+            if k == "quote" and v == "":
+                _out.append(literal('""'))
+            else:
+                p = atom(v, v, "raw" if k == "raw" else "quote")
+                if k != "raw":
+                    p["supok"] = False
+                    p["subok"] = False
+                push_atom(p)
         elif k == "cmd":
             on_cmd(v)
-
         elif k == "other":
             _out.append(literal(v))
 
-        elif k == "op":
-            on_op(tk, v)
-
         # chem: remember an atom that just took a superscript so a trailing
         # sign can join it
-        tp = top()
-        if tp is not None and tp.get("atom"):
-            tp["justsup"] = tp.get("mod") == "sup" and k in ("num", "word", "close", "raw")
+        if _o["chem"]:
+            tp = top()
+            if tp is not None and tp.get("atom"):
+                tp["justsup"] = tp.get("mod") == "sup" and k in ("num", "word", "close", "raw")
         _i += 1
 
     flush(0)
@@ -1429,31 +1482,52 @@ BREAKS = set(["\n", " ", "\r\n"])
 
 def chunk(s):
     """Splits s into pieces of at most OUTPUT_LIMIT UTF-16 units, cutting at a
-    newline or space where one is near."""
+    newline or space where one is near: the longest run from where the last
+    piece ended that fits, cut after the last break in it, or at its end when
+    it has none."""
+    if len(s.encode("utf-16-le")) <= 2 * OUTPUT_LIMIT:
+        return [s] if s else []
     pieces = []
     cs = list(s)
     n = len(cs)
     start = 0
-    count = 0
-    last_break = None
-    k = 0
-    while k < n:
-        c = cs[k]
-        u = char_units(c)
-        if count + u > OUTPUT_LIMIT:
-            cut = last_break if last_break is not None else k - 1
-            pieces.append("".join(cs[start:cut + 1]))
-            start = cut + 1
-            count = 0
-            last_break = None
-            k = start
+    while start < n:
+        end = start + OUTPUT_LIMIT
+        if end > n:
+            end = n
+        window = "".join(cs[start:end])
+        if len(window) == end - start and len(window.encode("utf-16-le")) == 2 * (end - start):
+            # One unit a character, the usual case: the whole window fits.
+            m = end - start
         else:
-            count += u
-            if c in BREAKS:
-                last_break = k
-            k += 1
-    if start < n:
-        pieces.append("".join(cs[start:]))
+            m = 0
+            count = 0
+            k = start
+            while k < n:
+                u = 1 if cs[k] in ASCII else char_units(cs[k])
+                if count + u > OUTPUT_LIMIT:
+                    break
+                count += u
+                k += 1
+            m = k - start
+            if m == 0:
+                m = 1
+        if start + m >= n:
+            pieces.append("".join(cs[start:]))
+            break
+        # Back from the end over the characters themselves: str.rfind counts
+        # code points, and "\r\n" is one character here.
+        cut = -1
+        b = m - 1
+        while b >= 0:
+            if cs[start + b] in BREAKS:
+                cut = b
+                break
+            b -= 1
+        if cut < 0:
+            cut = m - 1
+        pieces.append("".join(cs[start:start + cut + 1]))
+        start = start + cut + 1
     return pieces
 
 

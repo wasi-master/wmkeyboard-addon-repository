@@ -1710,8 +1710,8 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "5685c23faf7014c82f749fda2179db8c556a929f69eeb3880b49ce6b4746d13c",
-      "sizeBytes": 17961,
+      "sha256": "cb9a73399e89398718a79985a856025702006c7792d6cb3fe192fca87436aae9",
+      "sizeBytes": 19083,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
