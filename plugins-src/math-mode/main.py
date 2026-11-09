@@ -212,6 +212,13 @@ OPS = [
     ("||", "‖"), ("<<", "≪"), (">>", "≫"), (":=", "≔"), ("=:", "≕"), ("-:", "÷"),
 ]
 
+# OPS by first character, longest first as above. The tokenizer tries only
+# the ones that can match here: walking all of OPS for every ASCII symbol
+# was most of an 8 KB paste's budget.
+OPS_BY_FIRST = {}
+for _key, _glyph in OPS:
+    OPS_BY_FIRST.setdefault(_key[0], []).append((_key, _glyph, len(_key)))
+
 ELEMENTS = set("""H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn
   Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm
   Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U
@@ -390,9 +397,8 @@ def tokenize(cs):
             i = j
         else:
             matched = False
-            for key, glyph in OPS:
-                size = len(key)
-                if key[0] == c and "".join(cs[i:i + size]) == key:
+            for key, glyph, size in OPS_BY_FIRST.get(c, ()):
+                if "".join(cs[i:i + size]) == key:
                     j = i + size
                     if key == "..." and at(cs, j) == ".":
                         while at(cs, j) == ".":

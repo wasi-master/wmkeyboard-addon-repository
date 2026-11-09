@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-09"
+    "updatedAt": "2026-11-10"
   },
   "addons": [
     {
@@ -1710,8 +1710,8 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "742ec86f9236464dfe79b0026ff88b52d4e5a32de1fe1a7180dae621c4c258b2",
-      "sizeBytes": 17835,
+      "sha256": "5685c23faf7014c82f749fda2179db8c556a929f69eeb3880b49ce6b4746d13c",
+      "sizeBytes": 17961,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
