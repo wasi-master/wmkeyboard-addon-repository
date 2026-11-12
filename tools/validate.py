@@ -53,11 +53,41 @@ EXECUTABLE_TYPES = {"plugin"}
 
 # Mirrors PluginPermission.kt. A permission the app does not recognise makes
 # it refuse the install outright, so publishing one ships a dead plugin.
-KNOWN_PLUGIN_PERMISSIONS = {"storage", "reminders", "selection"}
+KNOWN_PLUGIN_PERMISSIONS = {
+    "storage", "reminders", "selection",
+    # API 5
+    "network", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
+    "location", "files", "sensors", "scan", "device", "share", "notifications",
+}
 
 # The app's PluginManifestCodec.API_VERSION. 4 is Python, which replaced Lua:
-# 2 added wm.reminders and ui.date, 3 selection actions, 4 the switch.
-PLUGIN_API_VERSION = 4
+# 2 added wm.reminders and ui.date, 3 selection actions, 4 the switch, 5 the
+# wm package, the host modules and their permissions.
+PLUGIN_API_VERSION = 5
+
+# The permissions API 5 added; a manifest below 5 may not declare them.
+API_5_PERMISSIONS = KNOWN_PLUGIN_PERMISSIONS - {"storage", "reminders", "selection"}
+
+# Mirrors PluginManifestCodec.isValidHost: a host name, optionally "*." first;
+# no scheme, port, path, IP address or localhost.
+HOST_PATTERN = re.compile(r"(\*\.)?([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}")
+
+
+def host_problems(manifest: dict, permissions: list) -> list[str]:
+    """What the app refuses about `hosts`, in its own terms."""
+    hosts = manifest.get("hosts", [])
+    out = []
+    if not isinstance(hosts, list):
+        return ["hosts must be a list"]
+    if len(hosts) > 16:
+        out.append(f"{len(hosts)} hosts; the app caps at 16")
+    for host in hosts:
+        if not isinstance(host, str) or not HOST_PATTERN.fullmatch(host.lower()) or host == "localhost":
+            out.append(f"host {host!r} is not a host name (no scheme, port, path or IP address)")
+    host_setting = any(isinstance(s, dict) and s.get("type") == "host" for s in manifest.get("settings", []))
+    if "network" in permissions and not hosts and not host_setting:
+        out.append("\"network\" needs \"hosts\" (or a \"host\" setting)")
+    return out
 
 # The types whose payload is in one language, and so can carry `localizations`.
 LOCALIZABLE_TYPES = {"dictionary", "emoji_keywords", "vocabulary"}
@@ -134,12 +164,16 @@ def check_plugin(ident, payload, errors, warnings):
             f"{ident}: apiVersion {api_version} is newer than this "
             f"validator knows — current app versions will refuse it"
         )
-    for permission in manifest.get("permissions", []):
+    permissions = manifest.get("permissions", [])
+    for permission in permissions:
         if permission not in KNOWN_PLUGIN_PERMISSIONS:
             errors.append(
                 f"{ident}: unknown permission {permission!r} — the app refuses to "
                 f"install a plugin whose capabilities it cannot explain"
             )
+        elif permission in API_5_PERMISSIONS and api_version != 5:
+            errors.append(f"{ident}: permission {permission!r} needs apiVersion 5")
+    errors.extend(f"{ident}: {problem}" for problem in host_problems(manifest, permissions))
 
 
 def is_remote(path: str) -> bool:
