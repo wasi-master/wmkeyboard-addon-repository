@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-10"
+    "updatedAt": "2026-11-13"
   },
   "addons": [
     {
@@ -1593,6 +1593,26 @@
         "previews/cipher-tool-grid.jpg",
         "previews/cipher-tool.jpg"
       ],
+      "minAppVersion": 43,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "lorem-ipsum",
+      "type": "plugin",
+      "name": "Lorem Ipsum",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Placeholder text: as many words, sentences or paragraphs of lorem ipsum as you need, ready to insert.",
+      "tags": [
+        "lorem ipsum",
+        "placeholder",
+        "text",
+        "plugin"
+      ],
+      "path": "plugins/lorem-ipsum.wmplugin",
+      "sha256": "2da2c0c181e23378ebdc641d783bcf4a5bbb2fea6820541f681101aa91c26d3c",
+      "sizeBytes": 2765,
       "minAppVersion": 43,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
