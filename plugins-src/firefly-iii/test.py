@@ -191,7 +191,7 @@ READS = [
     {"when": {"method": "DELETE", "url": B + "/transactions/7"}, "reply": {"status": 204, "text": "", "headers": {}}},
 ]
 STORED = {"when": {"method": "POST", "url": B + "/transactions"}, "reply": ok({"data": {"id": "9"}})}
-BASE_MOCK = {"secrets.get": "tok", "secrets.set": None, "secrets.remove": None, "ui.toast": None,
+BASE_MOCK = {"plugin.open_settings": None, "secrets.get": "tok", "secrets.set": None, "secrets.remove": None, "ui.toast": None,
              "ui.dialog": "Delete", "ai.available": True}
 
 
@@ -406,6 +406,8 @@ REFUSED = {"when": {"method": "GET"}, "reply": {"error": {"kind": "PermissionErr
            "message": "the user has not turned on 'network.local' for this plugin, which 192.168.1.20 needs"}}}
 s, r = start(merged(BASE_MOCK, {"http.request": [REFUSED]}))
 assert "home network" in text(r), text(r)
+r = ev(s, "click", "error_settings")
+assert any(c["op"] == "plugin.open_settings" for c in s["calls"]())
 
 # Nothing set up yet.
 s, r = start(BASE_MOCK, merged(SETTINGS, {"server": ""}))
@@ -417,5 +419,11 @@ assert not [c for c in s["calls"]() if c["op"] == "http.request"]
 s, r = start(merged(BASE_MOCK, {"secrets.get": "Bearer  abc ", "http.request": [STORED] + READS}))
 assert "€1234.50" in text(r)
 assert all(c["args"]["headers"]["Authorization"] == "Bearer abc" for c in s["calls"]() if c["op"] == "http.request")
+# Changed on the settings page while the panel is open: read again and loaded at once.
+before = len([c for c in s["calls"]() if c["op"] == "secrets.get"])
+seen(s["event"]({"type": "setting", "key": "token", "value": "abc"}))
+r = seen(s["settle"]())
+assert len([c for c in s["calls"]() if c["op"] == "secrets.get"]) == before + 1
+assert "€1234.50" in text(r)
 
 print("firefly-iii: all tests passed")

@@ -1776,8 +1776,8 @@
         "plugin"
       ],
       "path": "plugins/firefly-iii.wmplugin",
-      "sha256": "589555b50437f5203ca17dc563635bd602046d848efa4d0d24f5c64786b0803a",
-      "sizeBytes": 16924,
+      "sha256": "57c104a5e476495ffe0f570642b2c0c7dbe9b94525bb451194276bbeba722603",
+      "sizeBytes": 17062,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"

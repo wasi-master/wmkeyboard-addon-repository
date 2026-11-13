@@ -178,6 +178,18 @@ def refresh_all():
     refresh(lists=True)
 
 
+@plugin.setting_changed("token")
+def token_changed(value):
+    state.token = None
+    refresh(lists=True)
+
+
+@plugin.setting_changed("server")
+def server_changed(value):
+    state.token = None
+    refresh(lists=True)
+
+
 @plugin.command("Scan a receipt", icon="document_scanner")
 def scan_command():
     start_scan()
@@ -635,7 +647,7 @@ def render():
         if not firefly.base_url(server()):
             ui.empty("Type your Firefly III address on this plugin's settings page. "
                      "It can be an https address, or a server on your home network like http://192.168.1.20:8080.",
-                     icon="dns")
+                     icon="dns", action="Open settings", on_click=open_settings)
             return
         if not token():
             setup()
@@ -645,6 +657,8 @@ def render():
                   value=state.view, on_change=set_view, style="segmented", key="view")
         if state.error:
             ui.label(state.error, color="danger")
+            if "settings" in state.error:
+                ui.button("Open settings", icon="settings", on_click=open_settings, key="error_settings")
         if state.busy or state.sending:
             ui.progress()
         if saved.draft is not None:
@@ -658,13 +672,22 @@ def render():
             overview()
 
 
+def open_settings():
+    """The plugin's page in the keyboard's settings (a newer keyboard's call)."""
+    opener = getattr(plugin, "open_settings", None)
+    if opener is not None:
+        opener()
+
+
 def setup():
     with ui.card(title="Connect to Firefly III"):
         ui.markdown("In Firefly III, open **Options → Profile → OAuth**, and under "
                     "**Personal Access Tokens** press **Create new token**. Copy the whole token "
                     "and paste it into **Personal Access Token** on this plugin's settings page.")
         ui.caption("It is kept encrypted on this phone, and sent only to " + firefly.host_of(server()) + ".")
-        ui.button("I have pasted it", icon="refresh", on_click=refresh_all, key="recheck")
+        with ui.row():
+            ui.button("Open settings", icon="settings", primary=True, on_click=open_settings, key="settings")
+            ui.button("Check again", icon="refresh", on_click=refresh_all, key="recheck")
 
 
 def overview():
