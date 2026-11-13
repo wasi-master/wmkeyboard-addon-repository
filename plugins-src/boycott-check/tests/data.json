@@ -1,0 +1,281 @@
+{
+ "brands": {
+  "24s": {
+   "id": "24s",
+   "name": "24S",
+   "status": "avoid",
+   "description": "**24S** is owned by **LVMH**.\n\nBernard Arnault, the chairman and **CEO** of **LMVH** Moet Hennessy-Louis Vuitton, and the world's richest man according to Forbes, has **invested** in cybersecurity firm, **Wiz**, the **Israeli** maker of cloud security solutions for enterprises.[^1]\n\n[^1]: https://www.timesofisrael.com/luxury-goods-magnate-bernard-arnault-invests-in-israeli-cybersecurity-firm-wiz/",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [],
+   "stakeholders": [
+    {
+     "id": "lvmh",
+     "type": "owner"
+    }
+   ]
+  },
+  "dove": {
+   "id": "dove",
+   "name": "Dove",
+   "status": "avoid",
+   "description": "Owned by **Unilever**.\n\n**Persil** and Ben & Jerry's are owned by **Unilever**. When Ben & Jerry's decided to stop selling its products in Israel, **Unilever** sold off the Israeli distribution rights to Avi Zinger to circumvent their decision and to force Ben & Jerry's brand name to continue selling in Israel.[^1]\n\n[^1]: https://www.unilever.com/news/press-and-media/press-releases/2022/unilever-reaches-new-business-arrangement-for-ben-jerrys-in-israel/",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [],
+   "stakeholders": [
+    {
+     "id": "unilever",
+     "type": "owner"
+    }
+   ]
+  },
+  "dovemars": {
+   "id": "dovemars",
+   "name": "Dove (Mars)",
+   "status": "avoid",
+   "description": "Owned by **Mars Inc**.\n\n**Mars** will support Israeli start-ups and the formation of companies, and will work together with leading Israeli academic institutions, such as the Hebrew University, the Weizmann Institute, the Technion, Migall and Tel Hai College, among others, to further Foodtech innovations.[^1]\n\n[^1]: https://www.foodmanufacturing.com/home/news/13251464/mars-incorporated-partners-with-jerusalem-venture-partners-to-foster-foodtech-solutions-in-israel",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [
+    "ulker"
+   ],
+   "stakeholders": [
+    {
+     "id": "mars-inc",
+     "type": "owner"
+    }
+   ]
+  },
+  "cocacola": {
+   "id": "cocacola",
+   "name": "Coca Cola",
+   "status": "avoid",
+   "description": "Owned by **The Coca-Cola Company**.\n\n**Coca-Cola Israel** owns dairy farms in the illegal Israeli settlements of Shadmot Mechola in the Jordan Valley and a plant in the industrial zone of Katzerin in the occupied Golan Heights.[^1]\n\n[^1]: http://www.inminds.com/boycott-coca-cola.html",
+   "reasons": [
+    "operations_in_settlements"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [
+    "meysu"
+   ],
+   "stakeholders": [
+    {
+     "id": "the-coca-cola-company",
+     "type": "owner"
+    }
+   ]
+  },
+  "bodyarmor": {
+   "id": "bodyarmor",
+   "name": "BodyArmor",
+   "status": "avoid",
+   "description": "Owned by **The Coca-Cola Company**.\n\n**Coca-Cola Israel** owns dairy farms in the illegal Israeli settlements of Shadmot Mechola in the Jordan Valley and a plant in the industrial zone of Katzerin in the occupied Golan Heights.[^1]\n\n[^1]: http://www.inminds.com/boycott-coca-cola.html",
+   "reasons": [
+    "operations_in_settlements"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [],
+   "stakeholders": [
+    {
+     "id": "the-coca-cola-company",
+     "type": "owner"
+    }
+   ]
+  },
+  "ulker": {
+   "id": "ulker",
+   "name": "ulker",
+   "status": "support",
+   "countries": [],
+   "categories": [],
+   "description": "ulker"
+  },
+  "kitkat": {
+   "id": "kitkat",
+   "name": "KitKat",
+   "status": "avoid",
+   "description": "Owned by **Nestle**.\n\n**Nestle** is 100% owned by swiss. **Nestle** began investing in Israel in 1995 by buying 10% of Israeli food maker Osem Investments, increasing its ownership to 50.1% two years later giving it the controlling share and now owns a 53.8 percent stake in Osem Swiss food giant **Nestle** will set up a global research and development centre for snack foods in Sderot, a town in Israel's Negev desert, the Maariv newspaper reported on Sunday. [^1]\n\n[^1]: https://www.just-food.com/news/israel-nestle-to-up-stake-in-osem/?cf-view",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [
+    "ulker"
+   ],
+   "stakeholders": [
+    {
+     "id": "nestle",
+     "type": "owner"
+    }
+   ]
+  },
+  "nescafe": {
+   "id": "nescafe",
+   "name": "Nescafe",
+   "status": "avoid",
+   "description": "Owned by **Nestle**.\n\n**Nestle** is 100% owned by swiss. **Nestle** began investing in Israel in 1995 by buying 10% of Israeli food maker Osem Investments, increasing its ownership to 50.1% two years later giving it the controlling share and now owns a 53.8 percent stake in Osem Swiss food giant **Nestle** will set up a global research and development centre for snack foods in Sderot, a town in Israel's Negev desert, the Maariv newspaper reported on Sunday. [^1]\n\n[^1]: https://www.just-food.com/news/israel-nestle-to-up-stake-in-osem/?cf-view",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [],
+   "alternatives": [],
+   "stakeholders": [
+    {
+     "id": "nestle",
+     "type": "owner"
+    }
+   ]
+  },
+  "nestle": {
+   "id": "nestle",
+   "name": "Nestle",
+   "status": "avoid",
+   "description": "Osem is an israeli food manufacturer which operates in Occupied Palestine. Nestle owns a controlling stake in Osem.[^1]\n\nAvoid Nestle products until they divest all operations in Occupied Palestine.\nEspecially avoid any Osem brands such as Sabra Salads and others which can be found via the wikipedia page in the source.\n[^1]: https://en.wikipedia.org/wiki/Osem_(company)",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [
+    "food",
+    "drinks"
+   ],
+   "alternatives_text": "Supermarket own brand options.\nFor water, look for Saka or non-Nestle/Coca-Cola/Pepsico brands"
+  },
+  "intel": {
+   "id": "intel",
+   "name": "Intel",
+   "status": "avoid",
+   "description": "Intel Invests heavily in israel including in towns stolen from Palestinians[^1]\n\nDon't use Intel products\nDon't work for Intel\nIf you are a company decision maker, find alternatives to Intel products\n[^1]: https://www.intel.com/content/www/us/en/corporate-responsibility/intel-in-israel.html",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [
+    "technology"
+   ],
+   "alternatives_text": "AMD"
+  },
+  "lorealloreal": {
+   "id": "lorealloreal",
+   "name": "Loreal / L'oreal",
+   "status": "avoid",
+   "description": "L'Oreal is a 'warm friend of Israel'. After sending a letter to the Arab League with information helping the boycott, they paid a $1.4m fine and issued an apology, before fostering a new relationship with Israel, with heavy investment and even operating a factory in Occupied Palestine.[^1]\n\nDon't buy L'Oreal products\nDon't sell L'Oreal products\nDon't work for L'Oreal Groupe\n[^1]: https://bdsmovement.net/news/l%E2%80%99oreal-makeup-israeli-apartheid",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [
+    "cosmetics"
+   ],
+   "alternatives_text": "Lush cosmetics"
+  },
+  "sabra": {
+   "id": "sabra",
+   "name": "Sabra",
+   "status": "avoid",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "categories": [
+    "food"
+   ],
+   "website": "https://sabra.com/",
+   "description": "Sabra was an Isareli hummus company, and is now a joint venture between Pepsi and Strauss.  Strauss is an Israeli food company.",
+   "alternatives_text": "Most hummus is not Israeli.  Any non-Israeli hummus at your local grocery store is preferred over Sabra.",
+   "stakeholders": [
+    {
+     "id": "pepsico",
+     "type": "owner",
+     "percent": 50
+    },
+    {
+     "id": "strauss-group",
+     "type": "owner",
+     "percent": 50
+    }
+   ]
+  },
+  "starbucks": {
+   "id": "starbucks",
+   "name": "Starbucks",
+   "status": "avoid",
+   "description": "Howard Shultz is the largest private owner of Starbucks shares and is a staunch zionist who invests heavily in Israels economy including a recent $1.7 Billion investment in cybersecurity startup Wiz.[^1]\n\nDon't buy Starbucks.\nDon't sell Starbucks On the Go.\nDon't work for Starbucks.\n[^1]: https://fortune.com/2021/04/07/wiz-howard-schultz-investment-fundraising-cybersecurity-startups-starbucks-ceo/",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [
+    "coffee",
+    "drinks"
+   ],
+   "alternatives_text": "Caffe Nero"
+  },
+  "mcdonalds": {
+   "id": "mcdonalds",
+   "name": "McDonalds",
+   "status": "avoid",
+   "description": "McDonalds Israel supports IDF by providing free food and drinks to Israeli militants. See tweet (click translate) for reference.[^1]\n\nDon't eat at McDonald's.\nDon't work for McDonald's.\n[^1]: https://twitter.com/McDonaldsIL/status/1715047104895230153",
+   "reasons": [
+    "operations_in_israel"
+   ],
+   "countries": [
+    "global"
+   ],
+   "categories": [
+    "food",
+    "drinks"
+   ],
+   "alternatives_text": "Local family owned restaurants"
+  }
+ },
+ "companies": {
+  "nestle": {
+   "id": "nestle",
+   "name": "Nestle",
+   "status": "avoid",
+   "description": "**Nestle** is 100% owned by swiss. **Nestle** began investing in Israel in 1995 by buying 10% of Israeli food maker Osem Investments, increasing its ownership to 50.1% two years later giving it the controlling share and now owns a 53.8 percent stake in Osem Swiss food giant **Nestle** will set up a global research and development centre for snack foods in Sderot, a town in Israel's Negev desert, the Maariv newspaper reported on Sunday. [^1]\n\n[^1]: https://www.just-food.com/news/israel-nestle-to-up-stake-in-osem/?cf-view"
+  },
+  "adidas": {
+   "id": "adidas",
+   "name": "Adidas",
+   "status": "avoid",
+   "description": "**Adidas Underwear Partnership**\n\n**Adidas Underwear** has partnered with **Delta Galil Industries**, Ltd. (DELT/Tel Aviv Stock Exchange), the global manufacturer and marketer of branded and private label apparel products for men, women, and children. **Delta Galil Industries** is an **Israeli** textile firm headquartered in **Tel Aviv**, with plants around the world.[^1]\n\n[^1]: https://adidasunderwear.com/pages/adidas-underwear-partnership"
+  }
+ }
+}

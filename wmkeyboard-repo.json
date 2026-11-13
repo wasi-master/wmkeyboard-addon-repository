@@ -1740,6 +1740,28 @@
       "licenseFile": "plugins/LICENSE.txt"
     },
     {
+      "id": "boycott-check",
+      "type": "plugin",
+      "name": "Boycott Check",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Scan a product's barcode, read its label or type a brand to see whether Tech for Palestine's boycott dataset or the BDS movement's own target list names it, with each entry's reasons, source links and alternatives. Brands and owners come from Open Food Facts. The dataset downloads once (about 0.8 MB) and then works offline. Photos are read as text, so a logo without a printed name can't be recognised.",
+      "tags": [
+        "boycott",
+        "bds",
+        "palestine",
+        "barcode",
+        "shopping",
+        "plugin"
+      ],
+      "path": "plugins/boycott-check.wmplugin",
+      "sha256": "828450dd3851667aa73727bfe9552c4edac69bbcc49b2bc3293c602b9ff56145",
+      "sizeBytes": 14242,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
       "id": "firefly-iii",
       "type": "plugin",
       "name": "Firefly III",

@@ -1,0 +1,18 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.boycottcheck",
+  "name": "Boycott Check",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Scan a barcode, read a label or type a brand to see whether it is on Tech for Palestine's boycott list or the BDS movement's targets, with the reasons, source links and alternatives.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": ["network", "storage", "scan", "share"],
+  "hosts": ["api.github.com", "raw.githubusercontent.com", "world.openfoodfacts.org"],
+  "tool": {"icon": "remove_shopping_cart", "tile": true, "keyword": "boycott", "chip": true},
+  "settings": [
+    {"key": "auto_update", "type": "switch", "label": "Check for a newer list once a week", "default": true}
+  ]
+}
