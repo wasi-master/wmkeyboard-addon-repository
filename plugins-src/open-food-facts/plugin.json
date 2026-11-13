@@ -1,0 +1,19 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.openfoodfacts",
+  "name": "Open Food Facts",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Scan a barcode, or type one or a name, to see a product's Nutri-Score, NOVA group, Green-Score, ingredients, allergens, vegan, vegetarian and palm oil status, and labels such as halal, organic and fair trade. Looks in Open Beauty Facts, Open Pet Food Facts and Open Products Facts too. Signed in, add missing products, ingredients read with the camera, and photos.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": ["network", "storage", "scan", "share", "files"],
+  "hosts": ["*.openfoodfacts.org", "*.openbeautyfacts.org", "*.openpetfoodfacts.org", "*.openproductsfacts.org", "*.openfoodfacts.net"],
+  "tool": {"icon": "barcode_scanner", "tile": true, "float": true, "keyword": "food", "chip": true},
+  "settings": [
+    {"key": "everywhere", "type": "switch", "label": "Look beyond food", "summary": "When a barcode is not in Open Food Facts, try Open Beauty Facts, Open Pet Food Facts and Open Products Facts", "default": "true"},
+    {"key": "history", "type": "number", "label": "Products to remember", "summary": "How many looked-up products stay in the list, to open again without the internet", "default": "50"},
+    {"key": "test_server", "type": "switch", "label": "Send edits to the test server", "summary": "world.openfoodfacts.net, which has its own accounts, for trying out adding products", "default": "false"}
+  ]
+}

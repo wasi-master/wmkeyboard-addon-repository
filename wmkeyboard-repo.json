@@ -1781,6 +1781,27 @@
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "open-food-facts",
+      "type": "plugin",
+      "name": "Open Food Facts",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Scan a barcode, or type one or a product's name, for its Nutri-Score, NOVA group, Green-Score, ingredients, allergens, vegan, vegetarian and palm oil status, and labels such as halal, organic and fair trade. Falls through to Open Beauty Facts, Open Pet Food Facts and Open Products Facts. Signed in to Open Food Facts, add missing products, ingredients read with the camera, and photos. Data from Open Food Facts (ODbL).",
+      "tags": [
+        "food",
+        "nutrition",
+        "barcode",
+        "scanner",
+        "plugin"
+      ],
+      "path": "plugins/open-food-facts.wmplugin",
+      "sha256": "a5f9217dd0eb29e7ea53543a708e9a23dac62b919456ed162c7a68119f3088d5",
+      "sizeBytes": 14313,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }

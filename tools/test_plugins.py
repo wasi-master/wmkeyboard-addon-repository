@@ -17,6 +17,9 @@ For every plugin this script
    Without the CLI on PATH, test.py runs on CPython with the same stand-ins
    and a warning, which catches most mistakes but not the PyMini-only ones.
 
+An API 5 plugin (the `wm` package) skips steps 1 and 2: the stand-ins model
+API 4 only. It must have a test.py, and it needs the CLI.
+
 A test.py imports `plugin_test`, which the runner provides: `read(name)`
 returns a file from the plugin's folder and `load(name, wm, ui)` runs a plugin
 file with the given `wm` and `ui` and returns its globals. A failing test
@@ -50,6 +53,11 @@ def entry_of(folder: Path) -> Path:
     return folder / manifest.get("entry", "main.py")
 
 
+def api_of(folder: Path) -> int:
+    manifest = json.loads((folder / "plugin.json").read_text(encoding="utf-8"))
+    return manifest.get("apiVersion", 4)
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("plugins", nargs="*", help="folder names under plugins-src/")
@@ -76,15 +84,24 @@ def main(argv: list[str]) -> int:
         print(f"== {folder.name}")
         problems: list[str] = []
         entry = entry_of(folder)
+        # API 5 (the wm package: classes, `with`, several modules) is past
+        # what the CPython stand-ins model, so only the real interpreter
+        # checks it.
+        api5 = api_of(folder) == 5
+        test = folder / "test.py"
         if not entry.is_file():
             problems.append(f"{entry.relative_to(ROOT)} is missing")
+        elif api5:
+            if not test.is_file():
+                problems.append("an API 5 plugin needs a test.py, run under wm-python-cli")
+            elif cli is None:
+                problems.append(f"an API 5 plugin is tested only under {CLI}, which is not on PATH")
         else:
             problems += pyplugin_host.check_subset(entry)
-        test = folder / "test.py"
-        if test.is_file():
-            problems += pyplugin_host.check_subset(test, host_globals=False)
-        if not problems:
-            problems += pyplugin_host.smoke(folder)
+            if test.is_file():
+                problems += pyplugin_host.check_subset(test, host_globals=False)
+            if not problems:
+                problems += pyplugin_host.smoke(folder)
         for line in problems:
             print(f"   {line}")
 

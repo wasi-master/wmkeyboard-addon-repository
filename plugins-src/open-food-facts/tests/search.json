@@ -1,0 +1,39 @@
+{
+ "hits": [
+  {
+   "code": "0009800800049",
+   "brands": [
+    "Nutella"
+   ],
+   "nutriscore_grade": "e",
+   "product_name": "Nutella & go! hazelnut spread + breadsticks"
+  },
+  {
+   "code": "0098008952506",
+   "brands": [
+    "Nutella"
+   ],
+   "nutriscore_grade": "unknown",
+   "product_name": "Nutella"
+  },
+  {
+   "code": "0613460834124",
+   "brands": [
+    "Nutella"
+   ],
+   "nutriscore_grade": "e",
+   "product_name": "nutella"
+  }
+ ],
+ "aggregations": null,
+ "facets": {},
+ "charts": {},
+ "page": 1,
+ "page_size": 3,
+ "page_count": 211,
+ "took": 4,
+ "timed_out": false,
+ "count": 631,
+ "is_count_exact": true,
+ "warnings": null
+}
