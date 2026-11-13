@@ -6,7 +6,7 @@
       "id": 1,
       "label": "Greet someone by name",
       "text": "Hello, $1! Nice to meet you.",
-      "triggerPattern": "^hello (.+)$",
+      "triggerPattern": "^hello (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -14,7 +14,7 @@
       "id": 2,
       "label": "Casual hello",
       "text": "Hi $1, hope you're doing well!",
-      "triggerPattern": "^hi (.+)$",
+      "triggerPattern": "^hi (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -22,7 +22,7 @@
       "id": 3,
       "label": "Thank-you letter",
       "text": "Dear $1,\n\nThank you for your message. I appreciate your time and will get back to you shortly.\n\nBest regards,",
-      "triggerPattern": "^thanks (.+)$",
+      "triggerPattern": "^thanks (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -30,7 +30,7 @@
       "id": 4,
       "label": "Birthday wish",
       "text": "Happy birthday, ${1:title}! Have a wonderful one.",
-      "triggerPattern": "^bday (.+)$",
+      "triggerPattern": "^bday (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -62,7 +62,7 @@
       "id": 8,
       "label": "Introduce yourself",
       "text": "Hi $1, my name is {cursor} and I'm getting in touch about",
-      "triggerPattern": "^intro (.+)$",
+      "triggerPattern": "^intro (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -70,7 +70,7 @@
       "id": 9,
       "label": "Reply to a no-show",
       "text": "No problem at all, $1. Let me know when suits you better.",
-      "triggerPattern": "^np (.+)$",
+      "triggerPattern": "^np (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -78,7 +78,7 @@
       "id": 10,
       "label": "Congratulate",
       "text": "Congratulations, ${1:title}! Really well deserved.",
-      "triggerPattern": "^congrats (.+)$",
+      "triggerPattern": "^congrats (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },
@@ -86,7 +86,7 @@
       "id": 11,
       "label": "Follow up",
       "text": "Hi $1, just following up on my last message. Let me know if you need anything else from me.",
-      "triggerPattern": "^followup (.+)$",
+      "triggerPattern": "^followup (?<name>.+)$",
       "triggerWords": 3,
       "confirm": true
     },

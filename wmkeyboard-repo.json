@@ -519,9 +519,9 @@
       "id": "pattern-replies",
       "type": "snippets",
       "name": "Pattern Replies",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Wasi Master",
-      "description": "Snippets that expand around a name or a time: type \"hello John\" and get a full greeting, \"thanks Sarah\" and get a whole thank-you letter. Uses pattern triggers, so one snippet covers every name. Each one waits on the suggestion bar for a tap, so nothing rewrites what you typed on its own.",
+      "description": "Snippets that expand around a name or a time: type \"hello John\" and get a full greeting, \"thanks Sarah\" and get a whole thank-you letter. Uses pattern triggers, so one snippet covers every name. Each one waits on the suggestion bar for a tap, so nothing rewrites what you typed on its own. The greetings only offer themselves when the word after them reads as a name, so \"hello am\" stays as typed.",
       "tags": [
         "patterns",
         "replies",
@@ -530,8 +530,8 @@
         "productivity"
       ],
       "path": "snippets/pattern-replies.wmsnippets.json",
-      "sha256": "682de666d93395b4d9097f8ebff8e11599b13fce91dc9bf7beff79b8decbed20",
-      "sizeBytes": 2736,
+      "sha256": "201e53ffb27e7d303eb81cebd7db62500fde1ead0855248db1d676ad642e821b",
+      "sizeBytes": 2792,
       "previews": [
         "previews/pattern-replies.png"
       ],

@@ -431,7 +431,9 @@ def check_snippet_pack(ident: str, payload: Path, errors: list[str], warnings: l
             )
             continue
         try:
-            _re.compile(pattern)
+            # Java spells a named group (?<name>…), Python (?P<name>…). A group
+            # called "name" only takes words that read as a name in the app.
+            _re.compile(_re.sub(r"\(\?<(?=[A-Za-z])", "(?P<", pattern))
         except _re.error as e:
             errors.append(f"{ident}: snippet {name!r} has a pattern that will not compile — {e}")
             continue
