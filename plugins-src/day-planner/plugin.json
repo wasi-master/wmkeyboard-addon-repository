@@ -1,0 +1,21 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.dayplanner",
+  "name": "Day Planner",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Time blocking for your day: blocks on a timeline you drag to move or resize, tasks with steps, tags, a board for today, tomorrow and later, a week of time per tag, and reminders. Shows your calendar's events and shares tasks with the To-do list once you allow it.",
+  "apiVersion": 5,
+  "entry": "main.py",
+  "permissions": ["storage", "reminders", "calendar", "todo"],
+  "tool": {"icon": "view_timeline", "tile": true, "float": true, "keyword": "plan", "chip": true},
+  "settings": [
+    {"key": "hours", "type": "choice", "label": "Hours shown at once", "default": "6", "options": ["4", "6", "8", "12"]},
+    {"key": "block_minutes", "type": "choice", "label": "Length of a new block, in minutes", "default": "30", "options": ["15", "30", "45", "60", "90"]},
+    {"key": "remind", "type": "choice", "label": "Remind me", "summary": "Before each block starts", "default": "5 minutes before", "options": ["Off", "When it starts", "5 minutes before", "10 minutes before", "15 minutes before", "30 minutes before"]},
+    {"key": "clock", "type": "choice", "label": "Clock", "default": "24-hour", "options": ["24-hour", "12-hour"]},
+    {"key": "roll_over", "type": "switch", "label": "Move unfinished tasks to today", "summary": "Tasks left on past days come along to today", "default": "true"},
+    {"key": "show_events", "type": "switch", "label": "Show calendar events", "summary": "Needs the calendar permission", "default": "true"},
+    {"key": "todo_sync", "type": "switch", "label": "Share tasks with the To-do list", "summary": "Needs the To-do permission", "default": "false"}
+  ]
+}

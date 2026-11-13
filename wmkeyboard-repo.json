@@ -1802,6 +1802,28 @@
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "day-planner",
+      "type": "plugin",
+      "name": "Day Planner",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Time blocking: blocks on a day timeline you hold and drag to move or resize in 15-minute steps, tasks with steps, coloured tags, a board for today, tomorrow and later, hours per tag for the week, and reminders before each block. Shows your calendar's events and shares tasks with the To-do list once you allow it.",
+      "tags": [
+        "planner",
+        "time-blocking",
+        "tasks",
+        "calendar",
+        "productivity",
+        "plugin"
+      ],
+      "path": "plugins/day-planner.wmplugin",
+      "sha256": "929c8e515a8ca6839559ff2c0484f36e06ce7f6ba1f4306262acf98ed642b1a9",
+      "sizeBytes": 11619,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }
