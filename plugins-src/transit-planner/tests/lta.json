@@ -1,0 +1,5 @@
+{"odata.metadata":"https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival","BusStopCode":"28009","Services":[
+{"ServiceNo":"98","Operator":"SBST","NextBus":{"OriginCode":"28009","DestinationCode":"28009","EstimatedArrival":"ARR1","Monitored":1,"Latitude":"1.33","Longitude":"103.74","VisitNumber":"1","Load":"SEA","Feature":"WAB","Type":"DD"},"NextBus2":{"OriginCode":"28009","DestinationCode":"28009","EstimatedArrival":"ARR2","Monitored":0,"Latitude":"0","Longitude":"0","VisitNumber":"1","Load":"SDA","Feature":"WAB","Type":"SD"},"NextBus3":{"OriginCode":"","DestinationCode":"","EstimatedArrival":"","Monitored":0,"Latitude":"","Longitude":"","VisitNumber":"","Load":"","Feature":"","Type":""}},
+{"ServiceNo":"143M","Operator":"SMRT","NextBus":{"OriginCode":"28009","DestinationCode":"28009","EstimatedArrival":"ARR3","Monitored":1,"Latitude":"1.33","Longitude":"103.74","VisitNumber":"1","Load":"LSD","Feature":"","Type":"BD"},"NextBus2":{"EstimatedArrival":""},"NextBus3":{"EstimatedArrival":""}},
+{"ServiceNo":"51","Operator":"GAS","NextBus":{"EstimatedArrival":""},"NextBus2":{"EstimatedArrival":""},"NextBus3":{"EstimatedArrival":""}}
+]}

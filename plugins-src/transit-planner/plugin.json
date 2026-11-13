@@ -1,0 +1,23 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.transit",
+  "name": "Transit Planner",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Plan trips by train, metro, bus and ferry, see what leaves a station next, pin a trip and get a reminder, alarm or timer before you leave or arrive. Timetables from Transitous (Japan, Singapore and hundreds of other places), Singapore live bus arrivals with your own LTA key, and Dhaka Metro offline.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": ["network", "storage", "reminders", "clock", "share", "location"],
+  "hosts": ["api.transitous.org", "datamall2.mytransport.sg"],
+  "tool": {"icon": "directions_transit", "tile": true, "float": true, "keyword": "transit", "chip": true},
+  "settings": [
+    {"key": "time_format", "type": "choice", "label": "Time format", "default": "24h", "options": ["24h", "12h"]},
+    {"key": "lead", "type": "number", "label": "Minutes before", "summary": "How early reminders, alarms and timers go off", "default": "10"},
+    {"key": "results", "type": "number", "label": "Trips per search", "summary": "1 to 8", "default": "5"},
+    {"key": "sg_bus", "type": "switch", "label": "Singapore bus arrivals tab", "default": "true"},
+    {"key": "lta_key", "type": "secret", "label": "LTA DataMall AccountKey", "summary": "For Singapore bus arrivals; free from LTA"},
+    {"key": "dhaka_metro", "type": "switch", "label": "Dhaka Metro tab", "default": "true"}
+  ]
+}

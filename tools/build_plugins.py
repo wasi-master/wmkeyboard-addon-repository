@@ -40,7 +40,7 @@ KNOWN_PERMISSIONS = {
     "storage", "reminders", "selection",
     # API 5
     "network", "network.local", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
-    "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo",
+    "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo", "clock",
 }
 
 # Plugins are Python: API 4 (the wm and ui globals) or API 5 (the wm

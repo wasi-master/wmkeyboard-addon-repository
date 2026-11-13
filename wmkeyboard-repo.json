@@ -1870,6 +1870,30 @@
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "transit-planner",
+      "type": "plugin",
+      "name": "Transit Planner",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Plan trips by train, metro, bus and ferry from the keyboard: fastest, fewest changes, least walking or cheapest where fares are known, with platforms, stops and live delays. See a station's next departures, other trains on the same route, and the first and last trip of the day. Pin a trip, get a reminder, alarm or timer before you leave or arrive, and insert or share a summary. Timetables from Transitous, which covers Japan's railways, Singapore and hundreds of other places; Singapore bus arrivals with your own LTA DataMall key; Dhaka Metro Line 6 offline.",
+      "tags": [
+        "transit",
+        "train",
+        "bus",
+        "timetable",
+        "japan",
+        "singapore",
+        "dhaka",
+        "plugin"
+      ],
+      "path": "plugins/transit-planner.wmplugin",
+      "sha256": "a1666ae6cdf5537e051800e3d429dd80b2165bdf7aaead6ef48564894126091a",
+      "sizeBytes": 25431,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }

@@ -57,7 +57,7 @@ KNOWN_PLUGIN_PERMISSIONS = {
     "storage", "reminders", "selection",
     # API 5
     "network", "network.local", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
-    "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo",
+    "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo", "clock",
 }
 
 # The app's PluginManifestCodec.API_VERSION. 4 is Python, which replaced Lua:
