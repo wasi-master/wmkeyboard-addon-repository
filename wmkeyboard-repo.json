@@ -1824,6 +1824,30 @@
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "grocy",
+      "type": "plugin",
+      "name": "Grocy",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Your own Grocy server from the keyboard: the shopping list to tick off and add to, stock that is low, due soon, overdue or expired, and the chores that are due. Scan a barcode to buy, use or open something, or link a new barcode to a product. Scan a receipt and its lines become purchases after you check them, matched by name or by your AI model. Works with servers on your home network.",
+      "tags": [
+        "grocy",
+        "pantry",
+        "shopping list",
+        "chores",
+        "barcode",
+        "receipts",
+        "self-hosted",
+        "plugin"
+      ],
+      "path": "plugins/grocy.wmplugin",
+      "sha256": "17a638801bc229cf2a8d7a1dfe0de5ef907318bfd4da1550dc00e581845fb97d",
+      "sizeBytes": 18592,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }

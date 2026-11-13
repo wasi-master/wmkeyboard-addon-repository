@@ -1,0 +1,20 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.grocy",
+  "name": "Grocy",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Your Grocy server's shopping list, stock and chores. Scan a barcode to buy, use or open something, or scan a receipt to put a whole shop into stock.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": ["network", "network.local", "storage", "scan", "ai"],
+  "hosts": [],
+  "tool": {"icon": "kitchen", "tile": true, "float": true, "keyword": "grocy", "chip": true},
+  "settings": [
+    {"key": "server", "type": "host", "label": "Grocy server", "summary": "Its address, such as grocy.example.com or 192.168.1.20:9283"},
+    {"key": "ai_receipts", "type": "switch", "label": "Match receipts with AI", "summary": "Uses your AI model, when allowed, to find which product each receipt line is", "default": "true"},
+    {"key": "due_soon_days", "type": "number", "label": "Due soon means within", "summary": "Days, for the Due soon filter", "default": "5"}
+  ]
+}
