@@ -33,7 +33,7 @@ def request(acct, method, path, json=None, take=None, ok=()):
     return out
 
 
-HELP = _("In Nextcloud, open **Personal settings › Security**, make a new app password under **Devices & sessions**, and type your login name and that password here.")
+HELP = _("Or make an app password in Nextcloud under **Personal settings › Security › Devices & sessions**, and type your login name and that app password on the plugin's settings page.")
 
 
 # MARK: - signing in (shared by both apps)
@@ -89,6 +89,7 @@ class Forms:
         "browser": True,
         "deadline": True,
         "close": True,
+        "secret": "app_password",
         "help": HELP,
     }
 
@@ -200,6 +201,7 @@ class Polls:
         "browser": True,
         "deadline": True,
         "close": True,
+        "secret": "app_password",
         "help": HELP,
     }
 

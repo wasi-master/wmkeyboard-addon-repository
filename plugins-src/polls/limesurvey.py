@@ -168,8 +168,8 @@ class LimeSurvey:
         "browser": False,
         "deadline": True,
         "close": True,
-        "secret": _("Password"),
-        "help": _("Sign in with your LimeSurvey user name and password. The server's admin must turn on the JSON-RPC interface under **Configuration › Global settings › Interfaces**."),
+        "secret": "app_password",
+        "help": _("Type your LimeSurvey user name and password on the plugin's settings page. The server's admin must turn on the JSON-RPC interface under **Configuration › Global settings › Interfaces**."),
     }
 
     @staticmethod

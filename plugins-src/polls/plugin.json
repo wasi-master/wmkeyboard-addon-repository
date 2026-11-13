@@ -15,6 +15,12 @@
      "options": ["nextcloud_forms", "nextcloud_polls", "limesurvey", "strawpoll"],
      "summary": "Where your polls are made"},
     {"key": "server", "type": "host", "label": "Your server",
-     "summary": "For Nextcloud and LimeSurvey: like https://cloud.example.com or http://192.168.1.20:8080"}
+     "summary": "For Nextcloud and LimeSurvey: like https://cloud.example.com or http://192.168.1.20:8080"},
+    {"key": "user", "type": "text", "label": "User name",
+     "summary": "Your Nextcloud login name, or your LimeSurvey user name"},
+    {"key": "app_password", "type": "secret", "label": "Password",
+     "summary": "A Nextcloud app password (Personal settings › Security), or your LimeSurvey password"},
+    {"key": "api_key", "type": "secret", "label": "StrawPoll API key",
+     "summary": "From strawpoll.com › Settings › API keys"}
   ]
 }

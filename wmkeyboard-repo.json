@@ -1865,8 +1865,8 @@
         "plugin"
       ],
       "path": "plugins/polls.wmplugin",
-      "sha256": "de9119df4b5fa6dab1d5a7fc46b3c4852b96f189d91f452cc4e11e0a6845cfec",
-      "sizeBytes": 16859,
+      "sha256": "8085cfb4dd3da3e502d43259d82b57b455b0e76ded0be6eeaae514361709395a",
+      "sizeBytes": 17063,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"

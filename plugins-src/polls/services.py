@@ -12,10 +12,11 @@
 #   logout(acct)              revokes the sign-in on the server, if it can
 #   explain(status, said)     wording for a failed reply, or "" for the usual
 #
-# INFO: id, name, account (which saved sign-in it uses), server (needs the
+# INFO: id, name, account (which kind of sign-in it uses), server (needs the
 # server setting), base (the fixed address when it doesn't), user (asks for a
 # user name), browser (can sign in through the browser), deadline, close,
-# help (Markdown shown over the sign-in boxes), secret (that box's label).
+# help (Markdown on the sign-in card), secret (the settings key of its
+# password or API key, a secret row).
 
 import limesurvey
 import nextcloud

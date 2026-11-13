@@ -7,7 +7,7 @@
 # poll, read its answers, close it, delete it.
 
 import time
-from wm import plugin, ui, storage, secrets, share, _, ngettext
+from wm import plugin, ui, storage, share, _, ngettext
 import flow
 import services
 
@@ -18,7 +18,7 @@ REFRESH_SECONDS = 30
 draft = plugin.state(persist=True, key="draft", question="", options=["", ""], multi=False, closes=False, deadline=None)
 saved = plugin.state(persist=True, key="polls", polls=[], seq=0)
 pending = plugin.state(persist=True, key="signin", service="", token="", endpoint="", until=0)
-st = plugin.state(busy="", error="", made=None, open_id=None, loading=False, user="", password="", manual=False, qr=False)
+st = plugin.state(busy="", error="", made=None, open_id=None, loading=False, qr=False)
 
 
 # MARK: - the service and its account
@@ -40,12 +40,13 @@ def server_url():
 
 
 def account(svc=None):
+    """Where and as whom: the server, and the user name and password or key
+    from the settings page (the secret rows are kept in the plugin's secrets)."""
     svc = svc or service()
-    kind = svc.INFO["account"]
     return {
         "base": server_url() if svc.INFO["server"] else svc.INFO["base"],
-        "user": secrets.get(kind + ":user", ""),
-        "password": secrets.get(kind + ":password", ""),
+        "user": str(plugin.settings.get("user", "") or "").strip() if svc.INFO["user"] else "",
+        "password": str(plugin.settings.get(svc.INFO["secret"], "") or "").strip(),
     }
 
 
@@ -58,15 +59,14 @@ def signed_in(svc=None):
 
 
 def remember_login(svc, user, password):
-    kind = svc.INFO["account"]
-    secrets.set(kind + ":user", user)
-    secrets.set(kind + ":password", password)
+    """What Login Flow handed over, onto the settings page."""
+    if svc.INFO["user"]:
+        plugin.settings.set("user", user)
+    plugin.settings.set(svc.INFO["secret"], password)
 
 
 def forget_login(svc):
-    kind = svc.INFO["account"]
-    secrets.remove(kind + ":user")
-    secrets.remove(kind + ":password")
+    plugin.settings.reset(svc.INFO["secret"])
 
 
 # MARK: - wording errors
@@ -416,35 +416,29 @@ def check_sign_in(quiet=False):
     start(svc.login_poll(pending.endpoint, pending.token), {}, finished, svc, busy="" if quiet else _("Checking…"))
 
 
-def save_manual():
+@plugin.setting_changed("app_password")
+@plugin.setting_changed("api_key")
+def credentials_changed(value):
+    """A password or key typed on the settings page: try it at once, so a
+    wrong one is said here rather than at the first poll."""
     svc = service()
-    user, password = st.user.strip(), st.password.strip()
-    if (svc.INFO["user"] and not user) or not password:
-        st.error = _("Fill in both boxes.")
+    if not value or not signed_in(svc):
         return
 
     def ok(c):
-        remember_login(svc, user, password)
-        st.update(user="", password="", manual=False)
-        ui.toast(_("Signed in as {user}", user=user or svc.INFO["name"]))
+        st.error = ""
+        ui.toast(_("Signed in to {name}", name=svc.INFO["name"]))
 
-    acct = {"base": account(svc)["base"], "user": user, "password": password}
-    start(svc.check(acct), {}, ok, svc, busy=_("Checking…"))
+    start(svc.check(account(svc)), {}, ok, svc, busy=_("Checking…"))
 
 
 def sign_out():
     svc = service()
     acct = account(svc)
 
-    def done(c):
-        forget_login(svc)
-
-    def failed(e):
-        forget_login(svc)
-
-    # Revoke the app password on the server when the service can, then
+    # Revoke the app password on the server when the service can, and
     # forget it here either way.
-    flow.run(svc.logout(acct), {}, done, failed)
+    flow.run(svc.logout(acct), {}, lambda c: None, lambda e: None)
     forget_login(svc)
 
 
@@ -493,10 +487,12 @@ def account_card():
 
 
 def account_form(svc):
+    """How to sign in. Passwords and keys are typed on the settings page,
+    never in the panel; Nextcloud can also hand one over from the browser."""
     with ui.card(title=_("Sign in to {name}", name=svc.INFO["name"])):
         if svc.INFO["server"]:
             ui.caption(server_url())
-        if svc.INFO.get("browser") and not st.manual:
+        if svc.INFO.get("browser"):
             if pending.token:
                 ui.label(_("Finish signing in in the browser, then come back here."))
                 with ui.row():
@@ -504,17 +500,8 @@ def account_form(svc):
                     ui.button(_("Start again"), on_click=sign_in_browser, key="restart")
             else:
                 ui.button(_("Sign in with the browser"), on_click=sign_in_browser, primary=True, icon="open_in_new", key="browser")
-            ui.button(_("Use an app password instead"), on_click=lambda: st.update(manual=True), key="manual")
-            return
         ui.markdown(svc.INFO["help"])
-        if svc.INFO["user"]:
-            ui.input(label=_("User name"), value=st.user, on_change=lambda t: st.update(user=t), key="user")
-        ui.input(label=svc.INFO.get("secret", _("App password")), value=st.password, kind="password",
-                 on_change=lambda t: st.update(password=t), on_submit=save_manual, key="password")
-        with ui.row():
-            ui.button(_("Sign in"), on_click=save_manual, primary=True, key="sign_in")
-            if svc.INFO.get("browser"):
-                ui.button(_("Back"), on_click=lambda: st.update(manual=False), key="manual_back")
+        ui.button(_("Open settings"), on_click=plugin.open_settings, icon="settings", primary=not svc.INFO.get("browser"), key="settings")
 
 
 def compose():
@@ -626,9 +613,9 @@ def account_page():
             acct = account(svc)
             ui.item(acct["user"] or svc.INFO["name"], subtitle=svc.INFO["name"] + " · " + acct["base"].split("://")[-1], icon="account_circle")
             ui.button(_("Sign out"), on_click=sign_out, icon="logout", key="sign_out")
+            ui.button(_("Server and service settings"), on_click=plugin.open_settings, icon="settings", key="settings")
         else:
             account_form(svc)
-        ui.button(_("Server and service settings"), on_click=plugin.open_settings, icon="settings", key="settings")
 
 
 def render():

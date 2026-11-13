@@ -45,8 +45,8 @@ class StrawPoll:
         "browser": False,
         "deadline": True,
         "close": True,
-        "secret": _("API key"),
-        "help": _("No server needed. Sign in at **strawpoll.com**, make a key under **Settings › API keys**, and paste it here."),
+        "secret": "api_key",
+        "help": _("No server needed. Sign in at **strawpoll.com**, make a key under **Settings › API keys**, and paste it on the plugin's settings page."),
     }
 
     @staticmethod

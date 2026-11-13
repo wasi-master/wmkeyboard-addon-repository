@@ -17,12 +17,17 @@ def reply(body, status=200):
     return {"status": status, "text": json.dumps(body), "headers": {}}
 
 
-def signed_in(user="alice", password="app-pass"):
-    return [
-        {"when": {"name": "nextcloud:user"}, "reply": user},
-        {"when": {"name": "nextcloud:password"}, "reply": password},
-        {"reply": None},
-    ]
+# A secret row reads as a marker in the session's settings; its value comes
+# from secrets under the setting's key.
+SECRET = {"$secret": True}
+
+
+def secret(name, value):
+    return [{"when": {"name": name}, "reply": value}, {"reply": None}]
+
+
+def signed_in(password="app-pass"):
+    return secret("app_password", password)
 
 
 def walk(node, out):
@@ -82,7 +87,7 @@ ok(r, "load without a server")
 assert "Type the address of your Nextcloud Forms server" in texts(r), texts(r)
 r = s["event"]({"type": "click", "id": widgets(r, "empty")[0]["id"]})
 ok(r, "open settings")
-assert [c["op"] for c in s["calls"]()][-1] == "plugin.open_settings", s["calls"]()
+assert "plugin.open_settings" in [c["op"] for c in s["calls"]()], s["calls"]()
 
 # A server, no sign-in: the browser sign-in comes first.
 mock = {
@@ -97,7 +102,7 @@ mock = {
          "reply": reply({"server": BASE, "loginName": "alice", "appPassword": "app-pass"})},
     ],
 }
-s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "cloud.example.com"})
+s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "cloud.example.com", "user": "", "app_password": SECRET})
 r = s["load"]()
 ok(r, "load signed out")
 assert "Sign in to Nextcloud Forms" in texts(r), texts(r)
@@ -113,13 +118,12 @@ ok(r, "login flow poll")
 polled = requests(s)[-1]
 assert polled["url"] == BASE + "/index.php/login/v2/poll", polled
 assert "tok" in json.dumps(polled), polled
-saved = [c["args"] for c in s["calls"]() if c["op"] == "secrets.set"]
-assert {"name": "nextcloud:user", "value": "alice"} in saved, saved
-assert {"name": "nextcloud:password", "value": "app-pass"} in saved, saved
+saved = [c["args"] for c in s["calls"]() if c["op"] == "settings.set"]
+assert saved == [{"key": "user", "value": "alice"}, {"key": "app_password", "value": "app-pass"}], saved
 
 # Not finished in the browser yet: 404, and the panel says so.
 mock["http.request"][1] = {"when": {"method": "POST", "url": BASE + "/index.php/login/v2/poll"}, "reply": reply({}, 404)}
-s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "cloud.example.com"})
+s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "cloud.example.com", "user": "", "app_password": SECRET})
 s["load"]()
 s["event"]({"type": "click", "id": "browser"})
 s["settle"]()
@@ -127,40 +131,54 @@ s["event"]({"type": "click", "id": "signed_in"})
 r = s["settle"]()
 assert "Not signed in yet" in texts(r), texts(r)
 
-# An app password typed by hand is checked against the server first.
+# A password typed on the settings page is tried at once, so a wrong one is
+# said in the panel before the first poll.
 mock = {
-    "secrets.get": None,
-    "secrets.set": None,
+    "secrets.get": secret("app_password", "xxxx-yyyy"),
     "ui.toast": None,
     "http.request": [
         {"when": {"method": "GET", "url": BASE + "/ocs/v2.php/cloud/user"}, "reply": ocs({"id": "bob"})},
     ],
 }
-s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "https://cloud.example.com/"})
-s["load"]()
-s["event"]({"type": "click", "id": "manual"})
-s["event"]({"type": "change", "id": "user", "value": "bob"})
-s["event"]({"type": "change", "id": "password", "value": "xxxx-yyyy"})
-s["event"]({"type": "click", "id": "sign_in"})
+nc = {"service": "nextcloud_forms", "server": "https://cloud.example.com/", "user": "bob", "app_password": SECRET}
+s = plugin_test.session(mock=mock, settings=nc)
+r = s["load"]()
+assert "Make the poll" in texts(r), texts(r)
+s["event"]({"type": "setting", "key": "app_password", "value": SECRET})
 r = s["settle"]()
-ok(r, "manual sign-in")
+ok(r, "password typed in settings")
 sent = requests(s)[-1]
+assert sent["url"] == BASE + "/ocs/v2.php/cloud/user", sent
 assert sent["headers"]["Authorization"] == "Basic Ym9iOnh4eHgteXl5eQ==", sent["headers"]
 assert sent["headers"]["OCS-APIRequest"] == "true", sent["headers"]
-saved = [c["args"] for c in s["calls"]() if c["op"] == "secrets.set"]
-assert {"name": "nextcloud:password", "value": "xxxx-yyyy"} in saved, saved
+assert [c["args"]["text"] for c in s["calls"]() if c["op"] == "ui.toast"] == ["Signed in to Nextcloud Forms"]
 
-# A wrong password is refused, and nothing is saved.
 mock["http.request"] = [{"when": {"url": BASE + "/ocs/v2.php/cloud/user"}, "reply": ocs(None, 401)}]
-s = plugin_test.session(mock=mock, settings={"service": "nextcloud_forms", "server": "cloud.example.com"})
+s = plugin_test.session(mock=mock, settings=nc)
 s["load"]()
-s["event"]({"type": "click", "id": "manual"})
-s["event"]({"type": "change", "id": "user", "value": "bob"})
-s["event"]({"type": "change", "id": "password", "value": "wrong"})
-s["event"]({"type": "click", "id": "sign_in"})
+s["event"]({"type": "setting", "key": "app_password", "value": SECRET})
 r = s["settle"]()
 assert "turned down the sign-in" in texts(r), texts(r)
-assert not [c for c in s["calls"]() if c["op"] == "secrets.set"]
+
+# No password yet: the panel has no password box of its own, it sends the
+# user to the settings page.
+s = plugin_test.session(mock={"secrets.get": None, "plugin.open_settings": None},
+                        settings={"service": "nextcloud_forms", "server": "cloud.example.com", "user": "bob", "app_password": SECRET})
+r = s["load"]()
+assert not widgets(r, "input"), widgets(r, "input")
+s["event"]({"type": "click", "id": "settings"})
+assert "plugin.open_settings" in [c["op"] for c in s["calls"]()]
+
+# Sign out revokes the app password on the server and forgets it.
+mock = {"secrets.get": signed_in(), "http.request": [
+    {"when": {"method": "DELETE", "url": BASE + "/ocs/v2.php/core/apppassword"}, "reply": ocs([])}]}
+s = plugin_test.session(mock=mock, settings=nc)
+s["load"]()
+s["event"]({"type": "command", "id": "show_account"})
+s["event"]({"type": "click", "id": "sign_out"})
+s["settle"]()
+assert requests(s, "DELETE")[-1]["url"] == BASE + "/ocs/v2.php/core/apppassword"
+assert {"key": "app_password", "value": None} in [c["args"] for c in s["calls"]() if c["op"] == "settings.set"]
 
 
 # MARK: - Nextcloud Forms
@@ -189,7 +207,7 @@ forms_mock = {
         {"when": {"method": "DELETE", "url": FORMS + "/7"}, "reply": ocs(7)},
     ],
 }
-settings = {"service": "nextcloud_forms", "server": "cloud.example.com"}
+settings = {"service": "nextcloud_forms", "server": "cloud.example.com", "user": "alice", "app_password": SECRET}
 s = plugin_test.session(mock=forms_mock, settings=settings)
 r = s["load"]()
 ok(r, "forms load")
@@ -320,7 +338,7 @@ polls_mock = {
         {"when": {"method": "PUT", "url": POLLS + "/poll/12/close"}, "reply": ocs({"poll": {"id": 12}})},
     ],
 }
-s = plugin_test.session(mock=polls_mock, settings={"service": "nextcloud_polls", "server": "cloud.example.com"})
+s = plugin_test.session(mock=polls_mock, settings={"service": "nextcloud_polls", "server": "cloud.example.com", "user": "alice", "app_password": SECRET})
 ok(s["load"](), "polls load")
 fill(s, "Which days?", ["Mon", "Tue"], multi=True)
 s["event"]({"type": "click", "id": "make"})
@@ -343,7 +361,7 @@ r = s["settle"]()
 assert requests(s, "PUT")[-1]["url"] == POLLS + "/poll/12/close"
 
 # One answer each: maxVotesPerUser is 1.
-s = plugin_test.session(mock=polls_mock, settings={"service": "nextcloud_polls", "server": "cloud.example.com"})
+s = plugin_test.session(mock=polls_mock, settings={"service": "nextcloud_polls", "server": "cloud.example.com", "user": "alice", "app_password": SECRET})
 s["load"]()
 fill(s, "Pick one", ["Mon", "Tue"])
 s["event"]({"type": "click", "id": "make"})
@@ -400,11 +418,7 @@ def unb64(text):
 
 answers_one = {"responses": [{"1": {"id": "1", "Q1": "A1"}}, {"2": {"id": "2", "Q1": "A2"}}, {"3": {"id": "3", "Q1": "A1"}}]}
 ls_mock = {
-    "secrets.get": [
-        {"when": {"name": "limesurvey:user"}, "reply": "admin"},
-        {"when": {"name": "limesurvey:password"}, "reply": "pw"},
-        {"reply": None},
-    ],
+    "secrets.get": secret("app_password", "pw"),
     "ui.toast": None,
     "ui.dialog": [{"when": {"title": "Close this poll?"}, "reply": "Close poll"}],
     "http.request": [
@@ -419,7 +433,7 @@ ls_mock = {
         rpc_route("release_session_key", "OK"),
     ],
 }
-ls_settings = {"service": "limesurvey", "server": "survey.example.com/ls"}
+ls_settings = {"service": "limesurvey", "server": "survey.example.com/ls", "user": "admin", "app_password": SECRET}
 s = plugin_test.session(mock=ls_mock, settings=ls_settings)
 r = s["load"]()
 ok(r, "limesurvey load")
@@ -503,18 +517,20 @@ s["event"]({"type": "click", "id": "make"})
 r = s["settle"]()
 assert "JSON-RPC interface is off" in texts(r), texts(r)
 
-# A wrong password, typed in by hand.
-wrong = {"secrets.get": None, "secrets.set": None, "ui.toast": None,
+# A wrong password, typed on the settings page.
+wrong = {"secrets.get": secret("app_password", "nope"), "ui.toast": None,
          "http.request": [rpc_route("get_session_key", {"status": "Invalid user name or password", "error_code": 1})]}
 s = plugin_test.session(mock=wrong, settings=ls_settings)
-r = s["load"]()
-assert "Sign in to LimeSurvey" in texts(r) and "manual" not in [w.get("id") for w in widgets(r, "button")], texts(r)
-s["event"]({"type": "change", "id": "user", "value": "admin"})
-s["event"]({"type": "change", "id": "password", "value": "nope"})
-s["event"]({"type": "click", "id": "sign_in"})
+s["load"]()
+s["event"]({"type": "setting", "key": "app_password", "value": SECRET})
 r = s["settle"]()
 assert "turned down the user name or password" in texts(r), texts(r)
-assert not [c for c in s["calls"]() if c["op"] == "secrets.set"]
+
+# Not signed in: no browser sign-in for LimeSurvey, only the settings page.
+s = plugin_test.session(mock={"secrets.get": None}, settings={"service": "limesurvey", "server": "survey.example.com/ls"})
+r = s["load"]()
+ids = [w.get("id") for w in widgets(r, "button")]
+assert "Sign in to LimeSurvey" in texts(r) and "browser" not in ids and "settings" in ids, texts(r)
 
 
 # MARK: - StrawPoll
@@ -524,7 +540,7 @@ form = {"id": "u-1", "slug": "NPgxkzPqrn2", "urls": {"formUrl": "https://strawpo
 read_form = {"slug": "NPgxkzPqrn2", "isOpen": True, "responseCount": 5, "sections": [{"fields": [{"choices": [
     {"label": "Tea", "responseCount": 3}, {"label": "Coffee", "responseCount": 2}]}]}]}
 sp_mock = {
-    "secrets.get": [{"when": {"name": "strawpoll:password"}, "reply": "sp_key"}, {"reply": None}],
+    "secrets.get": secret("api_key", "sp_key"),
     "secrets.set": None,
     "ui.toast": None,
     "ui.dialog": [{"when": {"title": "Close this poll?"}, "reply": "Close poll"}],
@@ -535,7 +551,7 @@ sp_mock = {
         {"when": {"method": "GET", "url": SP + "/me"}, "reply": reply({"id": "me"})},
     ],
 }
-s = plugin_test.session(mock=sp_mock, settings={"service": "strawpoll", "server": ""})
+s = plugin_test.session(mock=sp_mock, settings={"service": "strawpoll", "server": "", "api_key": SECRET})
 r = s["load"]()
 ok(r, "strawpoll load")
 assert "Make the poll" in texts(r), texts(r)
@@ -561,14 +577,17 @@ r = s["settle"]()
 patch = requests(s, "PATCH")[-1]
 assert json.loads(patch["body"]) == {"isOpen": False}, patch
 
-# No key yet: one box, no server needed; a refused key says so.
-s = plugin_test.session(mock={"secrets.get": None, "secrets.set": None, "ui.toast": None,
-                              "http.request": [{"when": {"url": SP + "/me"}, "reply": reply({"message": "Unauthorized"}, 401)}]},
-                        settings={"service": "strawpoll", "server": ""})
+# No key yet: no server needed, the card points at the settings page.
+s = plugin_test.session(mock={"secrets.get": None}, settings={"service": "strawpoll", "server": "", "api_key": SECRET})
 r = s["load"]()
-assert "API key" in texts(r) and "User name" not in texts(r), texts(r)
-s["event"]({"type": "change", "id": "password", "value": "sp_bad"})
-s["event"]({"type": "click", "id": "sign_in"})
+assert "Sign in to StrawPoll" in texts(r) and "Type the address" not in texts(r), texts(r)
+
+# A refused key says so.
+s = plugin_test.session(mock={"secrets.get": secret("api_key", "sp_bad"), "ui.toast": None,
+                              "http.request": [{"when": {"url": SP + "/me"}, "reply": reply({"message": "Unauthorized"}, 401)}]},
+                        settings={"service": "strawpoll", "server": "", "api_key": SECRET})
+s["load"]()
+s["event"]({"type": "setting", "key": "api_key", "value": SECRET})
 r = s["settle"]()
 assert "StrawPoll turned down the API key" in texts(r), texts(r)
 
