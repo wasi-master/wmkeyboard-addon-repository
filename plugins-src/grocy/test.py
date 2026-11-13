@@ -115,8 +115,7 @@ def server(version="4.7.1", extra=None):
 
 
 def session(routes=None, settings=None, extra=None, key="test-key"):
-    mock = {"http.request": routes or server(), "secrets.get": key, "secrets.set": None,
-            "secrets.remove": None, "ui.toast": None}
+    mock = {"http.request": routes or server(), "secrets.get": key, "ui.toast": None}
     if extra:
         for k, v in extra.items():
             mock[k] = v
@@ -183,14 +182,14 @@ s = plugin_test.session(mock={"secrets.get": None, "plugin.open_settings": None}
 r = s["load"]()
 check("setup draws", r["ok"], r.get("error"))
 check("setup asks for the server", "Grocy server" in text_of(r), text_of(r))
-check("setup has a key box", find(r, id="api_key", kind="password") is not None)
+check("setup asks for the key", "API key" in text_of(r), text_of(r))
 s["event"]({"type": "click", "id": "button:Open settings"})
 expect("opens the settings page", [c["op"] for c in s["calls"]()][-1:], ["plugin.open_settings"])
 expect("setup sends nothing", len(requests(s)), 0)
 
 s = session(key=None, settings=SETTINGS)
 r = s["load"]()
-check("server set, no key: key box", find(r, id="api_key") is not None, text_of(r))
+check("server set, no key: asks for it", "Manage API keys" in text_of(r) and find(r, id="button:Open settings") is not None, text_of(r))
 check("server is shown", "https://grocy.example.com" in text_of(r))
 
 # A key typed on the settings page later: read again, and the panel loads.

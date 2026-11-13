@@ -41,15 +41,6 @@ def forget_key():
     _key[0] = None
 
 
-def save_key(text):
-    text = str(text or "").strip()
-    if text:
-        secrets.set(KEY_NAME, text)
-    else:
-        secrets.remove(KEY_NAME)
-    _key[0] = text
-
-
 def ready():
     return bool(base_url()) and bool(api_key())
 
