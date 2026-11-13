@@ -72,6 +72,9 @@ def host_problems(manifest: dict, permissions: list) -> list[str]:
     # network.local only widens a host setting; without both it grants nothing.
     if "network.local" in permissions and ("network" not in permissions or not host_setting):
         out.append("\"network.local\" needs \"network\" and a \"host\" setting")
+    # A secret row is kept in the plugin's secrets, which need storage.
+    if any(isinstance(s, dict) and s.get("type") == "secret" for s in manifest.get("settings", [])) and "storage" not in permissions:
+        out.append("a \"secret\" setting needs the \"storage\" permission")
     return out
 
 # PluginFile: what an API 5 archive may hold.
