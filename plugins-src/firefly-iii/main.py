@@ -626,6 +626,14 @@ def forget_token():
 
 # ---- drawing ---------------------------------------------------------------------
 
+def bind(fn, *args):
+    """A callback that calls fn(*args), for rows drawn in a loop: each row
+    keeps its own values without relying on lambda defaults."""
+    def call():
+        return fn(*args)
+    return call
+
+
 def fmt(value, symbol=""):
     text = f"{abs(value):.2f}"
     return ("-" if value < 0 else "") + (symbol or "") + text
@@ -706,10 +714,10 @@ def overview():
                     bits.append(first["budget"])
                 actions = {}
                 if first["type"] == "withdrawal":
-                    actions["Change category"] = lambda g=g, sp=first: start_pick(g, sp, "category")
+                    actions["Change category"] = bind(start_pick, g, first, "category")
                     if saved.budgets:
-                        actions["Change budget"] = lambda g=g, sp=first: start_pick(g, sp, "budget")
-                actions["Delete"] = lambda g=g: ask_delete(g)
+                        actions["Change budget"] = bind(start_pick, g, first, "budget")
+                actions["Delete"] = bind(ask_delete, g)
                 rows.append(ui.item(g["title"], subtitle=" · ".join(bits), key="tx" + g["id"],
                                     icon="receipt_long" if first["type"] == "withdrawal" else "swap_horiz",
                                     trailing=sign + fmt(firefly.group_total(g), first["symbol"]), actions=actions))
@@ -751,10 +759,10 @@ def queue_view():
         rows.append(ui.item(d.get("description") or "Receipt", subtitle=" · ".join(bits), key="q" + str(e["id"]),
                             icon="error" if e.get("error") else "schedule",
                             trailing=(d.get("amount") or "?") + " " + (d.get("currency") or ""),
-                            on_click=lambda e=e: edit_waiting(e),
-                            actions={"Send now": lambda e=e: send_waiting([e["id"]]),
-                                     "Edit": lambda e=e: edit_waiting(e),
-                                     "Delete": lambda e=e: drop(e["id"])}))
+                            on_click=bind(edit_waiting, e),
+                            actions={"Send now": bind(send_waiting, [e["id"]]),
+                                     "Edit": bind(edit_waiting, e),
+                                     "Delete": bind(drop, e["id"])}))
     ui.list(rows)
     ui.button("Send all", icon="cloud_upload", primary=True, on_click=lambda: send_waiting(), key="send_all",
               enabled=not state.sending)
@@ -834,5 +842,5 @@ def pick_page():
     with ui.column():
         ui.search(placeholder="Find", value=state.pick_filter,
                   on_change=lambda v: setattr(state, "pick_filter", v), key="pick_search")
-        ui.list([ui.item(r["name"], key="pick" + r["id"], on_click=lambda r=r: picked(r["id"])) for r in shown],
+        ui.list([ui.item(r["name"], key="pick" + r["id"], on_click=bind(picked, r["id"])) for r in shown],
                 empty="None found. Add it in Firefly III first.")
