@@ -11,6 +11,7 @@
   "tool": {"icon": "receipt_long", "tile": true, "float": true, "keyword": "firefly", "chip": true},
   "settings": [
     {"key": "server", "type": "host", "label": "Firefly III address", "summary": "Like https://money.example.com, or http://192.168.1.20:8080 at home"},
+    {"key": "token", "type": "secret", "label": "Personal Access Token", "summary": "From Firefly III: Options, Profile, OAuth, Personal Access Tokens"},
     {"key": "ai", "type": "switch", "label": "Read receipts with AI", "summary": "Uses the AI model you set up in the keyboard; needs the AI permission", "default": "false"},
     {"key": "keep_text", "type": "switch", "label": "Keep the scanned text in notes", "default": "true"},
     {"key": "tag", "type": "text", "label": "Tag for scanned receipts", "summary": "Leave empty for no tag", "default": "receipt"},

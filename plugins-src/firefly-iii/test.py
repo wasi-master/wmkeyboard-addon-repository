@@ -347,11 +347,10 @@ t0 = json.loads(posted(s)[0]["body"])["transactions"][0]
 assert t0["description"] == "Weekly shop" and t0["amount"] == "12.00", t0
 
 
-# A server out of reach: the entry waits, and Send all sends it later.
-OFFLINE = {"when": {"method": "POST", "headers": {"Authorization": "Bearer tok"}},
+# A server out of reach: the entry waits with the reason, and stays when Send all fails again.
+OFFLINE = {"when": {"method": "POST"},
            "reply": {"error": {"kind": "ConnectionError", "message": "failed to connect to /192.168.1.20"}}}
-GOOD = {"when": {"method": "POST", "headers": {"Authorization": "Bearer new"}}, "reply": ok({"data": {"id": "9"}})}
-s, r = session(posts=[OFFLINE, GOOD], extra={"scan.text": GRAND})
+s, r = session(posts=[OFFLINE], extra={"scan.text": GRAND})
 r = ev(s, "command", "scan_command")
 r = ev(s, "click", "f_send")
 assert "Type what it cost in the account's currency." in text(r) and r["host"]["canBack"]
@@ -360,20 +359,27 @@ r = ev(s, "click", "f_send")
 kept = waiting(s)
 assert len(kept) == 1 and "Could not reach Firefly III" in kept[0]["error"], kept
 assert "Waiting (1)" in text(r)
+r = ev(s, "change", "view", "queue")
+r = ev(s, "click", "send_all")
+assert len(waiting(s)) == 1 and len(posted(s)) == 2
+
+# Kept for later, then Send all: both go, the foreign one as Firefly's foreign amount.
+s, r = session(extra={"scan.text": GRAND})
 r = ev(s, "command", "scan_command")
 r = ev(s, "change", "f_account_amount", "5.10")
 r = ev(s, "click", "f_later")
-assert len(waiting(s)) == 2
-# A new token answers; both go.
-r = ev(s, "change", "view", "overview")
-r = ev(s, "click", "forget")
-r = ev(s, "submit", "token", "Bearer new")
+r = ev(s, "command", "scan_command")
+r = ev(s, "change", "f_account_amount", "5.20")
+r = ev(s, "change", "f_desc", "Second coffee")
+r = ev(s, "click", "f_later")
+assert len(waiting(s)) == 2 and not posted(s)
 r = ev(s, "change", "view", "queue")
 r = ev(s, "click", "send_all")
 assert waiting(s) == [], waiting(s)
-assert len(posted(s)) == 3
-fx = json.loads(posted(s)[1]["body"])["transactions"][0]
+assert len(posted(s)) == 2
+fx = json.loads(posted(s)[0]["body"])["transactions"][0]
 assert fx["amount"] == "5.10" and fx["foreign_amount"] == "5.50" and fx["foreign_currency_code"] == "USD", fx
+assert json.loads(posted(s)[1]["body"])["transactions"][0]["description"] == "Second coffee"
 
 # A reply the user must fix stays on the form.
 INVALID = {"when": {"method": "POST"}, "reply": ok({"message": "The given data was invalid.",
@@ -405,9 +411,11 @@ assert "home network" in text(r), text(r)
 s, r = start(BASE_MOCK, merged(SETTINGS, {"server": ""}))
 assert "settings page" in text(r) and not [c for c in s["calls"]() if c["op"] == "http.request"]
 s, r = start(merged(BASE_MOCK, {"secrets.get": "", "http.request": [STORED] + READS}))
-assert "Personal Access Token" in text(r)
-r = ev(s, "submit", "token", "  abc  ")
-assert any(c["op"] == "secrets.set" and c["args"]["value"] == "abc" for c in s["calls"]())
+assert "Personal Access Token" in text(r) and "settings page" in text(r)
+assert not [c for c in s["calls"]() if c["op"] == "http.request"]
+# Pasted with its "Bearer " prefix: still works.
+s, r = start(merged(BASE_MOCK, {"secrets.get": "Bearer  abc ", "http.request": [STORED] + READS}))
 assert "€1234.50" in text(r)
+assert all(c["args"]["headers"]["Authorization"] == "Bearer abc" for c in s["calls"]() if c["op"] == "http.request")
 
 print("firefly-iii: all tests passed")

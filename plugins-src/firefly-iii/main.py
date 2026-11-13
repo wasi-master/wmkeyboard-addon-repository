@@ -46,8 +46,13 @@ def server():
 
 
 def token():
+    """The Personal Access Token from the plugin's settings page (a secret
+    row, kept in secrets under "token"), read once per opening."""
     if state.token is None:
-        state.token = secrets.get("token", "") or ""
+        value = str(secrets.get("token", "") or "").strip()
+        if value.lower().startswith("bearer "):
+            value = value[7:].strip()
+        state.token = value
     return state.token
 
 
@@ -169,6 +174,7 @@ def opened():
 
 @plugin.command("Refresh", icon="refresh")
 def refresh_all():
+    state.token = None
     refresh(lists=True)
 
 
@@ -605,25 +611,6 @@ def delete_answer(group, choice):
     request("DELETE", "/transactions/" + group["id"], deleted)
 
 
-def save_token(text):
-    value = str(text or "").strip()
-    if value.lower().startswith("bearer "):
-        value = value[7:].strip()
-    if not value:
-        return
-    secrets.set("token", value)
-    state.token = value
-    refresh(lists=True)
-
-
-def forget_token():
-    secrets.remove("token")
-    state.token = ""
-    state.accounts = None
-    state.summary = None
-    state.recent = None
-
-
 # ---- drawing ---------------------------------------------------------------------
 
 def bind(fn, *args):
@@ -675,9 +662,9 @@ def setup():
     with ui.card(title="Connect to Firefly III"):
         ui.markdown("In Firefly III, open **Options → Profile → OAuth**, and under "
                     "**Personal Access Tokens** press **Create new token**. Copy the whole token "
-                    "and paste it here.")
-        ui.input(label="Personal Access Token", kind="password", on_submit=save_token, key="token")
-        ui.caption("Kept encrypted on this phone, and sent only to " + firefly.host_of(server()) + ".")
+                    "and paste it into **Personal Access Token** on this plugin's settings page.")
+        ui.caption("It is kept encrypted on this phone, and sent only to " + firefly.host_of(server()) + ".")
+        ui.button("I have pasted it", icon="refresh", on_click=refresh_all, key="recheck")
 
 
 def overview():
@@ -724,7 +711,6 @@ def overview():
             ui.list(rows, empty="No transactions yet")
     if state.version:
         ui.caption("Firefly III " + str(state.version) + " at " + firefly.host_of(server()))
-    ui.button("Use another token", on_click=forget_token, key="forget")
 
 
 def add_view():
