@@ -1,0 +1,16 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.languagetrainer",
+  "name": "Language Trainer",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Learn another language's letters, words and sentences: alphabet charts with pronunciation, drills both ways with any language you know, and the keyboard switched to that language while you type answers.",
+  "apiVersion": 5,
+  "permissions": ["storage", "device", "ai"],
+  "tool": {"icon": "school", "tile": true, "keyword": "learn"},
+  "settings": [
+    {"key": "round", "type": "number", "label": "Questions per round", "default": "10"},
+    {"key": "speak", "type": "switch", "label": "Read each question aloud", "summary": "With the phone's voice, when the question is in the language you learn", "default": "false"},
+    {"key": "romanization", "type": "switch", "label": "Show romanization", "summary": "The Latin spelling under words in other scripts", "default": "true"}
+  ]
+}

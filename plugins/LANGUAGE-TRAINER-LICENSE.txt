@@ -1,0 +1,20 @@
+Language Trainer: licences
+
+The plugin's code and its letter charts (plugins-src/language-trainer/*.py
+other than data_*.py, and tools/build_language_trainer_data.py) are under the
+MIT licence in plugins/LICENSE.txt.
+
+Words (the WORDS tables in data_*.py) come from the translation tables of
+English Wiktionary, https://en.wiktionary.org, by Wiktionary's contributors,
+read through the extracts at https://kaikki.org. A few entries were replaced
+by hand, and romanizations were adjusted to match the letter charts. They are
+under the Creative Commons Attribution-ShareAlike 4.0 International licence:
+https://creativecommons.org/licenses/by-sa/4.0/legalcode
+Changed versions of these tables must be shared under the same licence.
+
+Sentences (the SENTENCES tables in data_*.py) come from Tatoeba,
+https://tatoeba.org, by its contributors, under the Creative Commons
+Attribution 2.0 France licence:
+https://creativecommons.org/licenses/by/2.0/fr/legalcode
+Each sentence keeps its Tatoeba number; its author and history are at
+https://tatoeba.org/sentences/show/<number>.
