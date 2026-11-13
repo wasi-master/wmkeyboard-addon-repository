@@ -76,6 +76,8 @@ MAX_ENTRIES = 64
 MAX_ARCHIVE = 4 * 1024 * 1024
 MAX_ASSET = 512 * 1024
 ASSET_TYPES = {".png", ".webp", ".jpg", ".jpeg", ".svg", ".json", ".txt"}
+# PluginLocales: locales/<tag>.json, a language tag such as bn or pt-BR.
+LOCALE_FILE = re.compile(r"[a-z]{2,3}(-[A-Za-z0-9]{2,8})?\.json")
 
 
 def build(source: Path) -> tuple[bytes, list[str]]:
@@ -129,7 +131,10 @@ def build(source: Path) -> tuple[bytes, list[str]]:
             rel = path.relative_to(source).as_posix()
             if rel in names or rel == "test.py" or rel.startswith("tests/"):
                 continue
-            if rel.endswith(".py") or (rel.startswith("assets/") and path.suffix.lower() in ASSET_TYPES):
+            translation = rel.startswith("locales/") and LOCALE_FILE.fullmatch(rel[len("locales/"):]) is not None
+            if translation and path.stat().st_size > 64 * 1024:
+                problems.append(f"{source.name}: {rel} is over 64 KB")
+            if rel.endswith(".py") or translation or (rel.startswith("assets/") and path.suffix.lower() in ASSET_TYPES):
                 if rel.startswith("assets/") and path.stat().st_size > MAX_ASSET:
                     problems.append(f"{source.name}: {rel} is over 512 KB")
                 names.append(rel)
