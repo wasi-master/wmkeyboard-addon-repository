@@ -1,0 +1,19 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.fireflyiii",
+  "name": "Firefly III",
+  "pluginVersion": "1.0.0",
+  "author": "WM Keyboard",
+  "description": "Scan receipts into your own Firefly III, add spending by hand, keep entries until your server is in reach, and see balances and this month's spending.",
+  "apiVersion": 5,
+  "permissions": ["network", "network.local", "storage", "scan", "ai"],
+  "hosts": [],
+  "tool": {"icon": "receipt_long", "tile": true, "float": true, "keyword": "firefly", "chip": true},
+  "settings": [
+    {"key": "server", "type": "host", "label": "Firefly III address", "summary": "Like https://money.example.com, or http://192.168.1.20:8080 at home"},
+    {"key": "ai", "type": "switch", "label": "Read receipts with AI", "summary": "Uses the AI model you set up in the keyboard; needs the AI permission", "default": "false"},
+    {"key": "keep_text", "type": "switch", "label": "Keep the scanned text in notes", "default": "true"},
+    {"key": "tag", "type": "text", "label": "Tag for scanned receipts", "summary": "Leave empty for no tag", "default": "receipt"},
+    {"key": "apply_rules", "type": "switch", "label": "Let Firefly III rules run on new entries", "default": "true"}
+  ]
+}

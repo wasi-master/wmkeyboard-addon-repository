@@ -39,7 +39,7 @@ FORMAT = "wmkeyboard-plugin"
 KNOWN_PERMISSIONS = {
     "storage", "reminders", "selection",
     # API 5
-    "network", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
+    "network", "network.local", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
     "location", "files", "sensors", "scan", "device", "share", "notifications",
 }
 
@@ -69,6 +69,9 @@ def host_problems(manifest: dict, permissions: list) -> list[str]:
     host_setting = any(isinstance(s, dict) and s.get("type") == "host" for s in manifest.get("settings", []))
     if "network" in permissions and not hosts and not host_setting:
         out.append("\"network\" needs \"hosts\" (or a \"host\" setting)")
+    # network.local only widens a host setting; without both it grants nothing.
+    if "network.local" in permissions and ("network" not in permissions or not host_setting):
+        out.append("\"network.local\" needs \"network\" and a \"host\" setting")
     return out
 
 # PluginFile: what an API 5 archive may hold.

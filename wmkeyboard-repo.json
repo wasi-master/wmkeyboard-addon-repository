@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-13"
+    "updatedAt": "2026-11-14"
   },
   "addons": [
     {
@@ -1736,6 +1736,27 @@
         "previews/math-mode-grid.jpg"
       ],
       "minAppVersion": 43,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "firefly-iii",
+      "type": "plugin",
+      "name": "Firefly III",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Scan receipts into your own Firefly III: the keyboard reads the shop, total, date, currency and items, you pick the account, category and budget, and it is sent as a withdrawal. Add spending by hand or with @firefly, keep entries until your server is in reach, and see balances, this month's spending by category and recent transactions you can recategorise. Works with servers on your home network.",
+      "tags": [
+        "finance",
+        "budget",
+        "receipts",
+        "self-hosted",
+        "plugin"
+      ],
+      "path": "plugins/firefly-iii.wmplugin",
+      "sha256": "1beb1fccb5d8e71e3388066156c6d76d634111fea719d911aa15f6e5b230eb60",
+      "sizeBytes": 16804,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     }
