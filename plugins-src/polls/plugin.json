@@ -1,0 +1,20 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.polls",
+  "name": "Polls",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Write a poll in the keyboard, make it on your Nextcloud or LimeSurvey or on StrawPoll, and put its link into the chat. Follow the answers and close it from the keyboard.",
+  "apiVersion": 5,
+  "entry": "main.py",
+  "permissions": ["network", "network.local", "storage", "share"],
+  "hosts": ["api.strawpoll.com"],
+  "tool": {"icon": "how_to_vote", "tile": true, "float": true, "keyword": "poll", "chip": true},
+  "settings": [
+    {"key": "service", "type": "choice", "label": "Service", "default": "nextcloud_forms",
+     "options": ["nextcloud_forms", "nextcloud_polls", "limesurvey", "strawpoll"],
+     "summary": "Where your polls are made"},
+    {"key": "server", "type": "host", "label": "Your server",
+     "summary": "For Nextcloud and LimeSurvey: like https://cloud.example.com or http://192.168.1.20:8080"}
+  ]
+}

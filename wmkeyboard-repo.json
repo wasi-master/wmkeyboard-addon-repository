@@ -1848,6 +1848,28 @@
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "polls",
+      "type": "plugin",
+      "name": "Polls",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Write a poll in the keyboard and put its link into the chat. Polls are made on your own Nextcloud (Forms or Polls) or LimeSurvey, or on StrawPoll with a free API key if you have no server. One answer or several, an optional closing time, answers so far as a chart, and closing or deleting a poll from the keyboard. Type @poll with the question and answers to fill it in. Works with servers on your home network.",
+      "tags": [
+        "poll",
+        "survey",
+        "nextcloud",
+        "limesurvey",
+        "self-hosted",
+        "plugin"
+      ],
+      "path": "plugins/polls.wmplugin",
+      "sha256": "de9119df4b5fa6dab1d5a7fc46b3c4852b96f189d91f452cc4e11e0a6845cfec",
+      "sizeBytes": 16859,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }
