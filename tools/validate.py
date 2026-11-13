@@ -24,6 +24,8 @@ import sys
 import zipfile
 from pathlib import Path
 
+from plugin_icons import tool_problems
+
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "wmkeyboard-repo.json"
 SCHEMA = ROOT / "docs" / "addons" / "wmkeyboard-repo.schema.json"
@@ -124,6 +126,8 @@ def check_plugin(ident, payload, errors, warnings):
                 errors.append(f"{ident}: no plugin.json in the archive")
                 return
             manifest = json.loads(archive.read("plugin.json"))
+            # What the tool icon check may read: the archive's assets/.
+            archived = {name: archive.read(name) for name in names if name.startswith("assets/")}
             entry_name = manifest.get("entry", "main.py")
             if entry_name not in names:
                 errors.append(f"{ident}: entry {entry_name} is missing from the archive")
@@ -180,6 +184,9 @@ def check_plugin(ident, payload, errors, warnings):
         elif permission in API_5_PERMISSIONS and api_version != 5:
             errors.append(f"{ident}: permission {permission!r} needs apiVersion 5")
     errors.extend(f"{ident}: {problem}" for problem in host_problems(manifest, permissions))
+    icon_errors, icon_warnings = tool_problems(manifest, lambda name: archived.get(name))
+    errors.extend(f"{ident}: {problem}" for problem in icon_errors)
+    warnings.extend(f"{ident}: {problem}" for problem in icon_warnings)
 
 
 def is_remote(path: str) -> bool:

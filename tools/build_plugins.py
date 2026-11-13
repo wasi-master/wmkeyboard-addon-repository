@@ -23,6 +23,8 @@ import sys
 import zipfile
 from pathlib import Path
 
+from plugin_icons import tool_problems
+
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / "plugins-src"
 OUTPUT_DIR = ROOT / "plugins"
@@ -111,6 +113,12 @@ def build(source: Path) -> tuple[bytes, list[str]]:
         elif permission in API_5_PERMISSIONS and api != 5:
             problems.append(f"{source.name}: permission {permission!r} needs apiVersion 5")
     problems.extend(f"{source.name}: {p}" for p in host_problems(manifest, permissions))
+    icon_errors, icon_warnings = tool_problems(
+        manifest, lambda rel: (source / rel).read_bytes() if (source / rel).is_file() else None,
+    )
+    problems.extend(f"{source.name}: {p}" for p in icon_errors)
+    for line in icon_warnings:
+        print(f"warning: {source.name}: {line}", file=sys.stderr)
 
     if manifest.get("language", "python") != "python":
         problems.append(f"{source.name}: language must be \"python\"")

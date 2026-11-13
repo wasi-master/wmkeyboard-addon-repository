@@ -1577,7 +1577,7 @@
       "id": "cipher-tool",
       "type": "plugin",
       "name": "Cipher Tool",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": "Wasi Master",
       "description": "Caesar and Vigenere ciphers, encode and decode. The plugin the getting-started guide builds.",
       "tags": [
@@ -1587,13 +1587,13 @@
         "plugin"
       ],
       "path": "plugins/cipher-tool.wmplugin",
-      "sha256": "21ca357046a0de13cc214e349dad3881850df1ac42a242b4ace894b0efb93b4f",
-      "sizeBytes": 1912,
+      "sha256": "28d7040d8cc1347d441469342ec9ae0a1746a5545ba3d5b7d9212d2607e722bf",
+      "sizeBytes": 1926,
       "previews": [
         "previews/cipher-tool-grid.jpg",
         "previews/cipher-tool.jpg"
       ],
-      "minAppVersion": 43,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1601,7 +1601,7 @@
       "id": "lorem-ipsum",
       "type": "plugin",
       "name": "Lorem Ipsum",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Placeholder text: as many words, sentences or paragraphs of lorem ipsum as you need, ready to insert.",
       "tags": [
@@ -1611,9 +1611,9 @@
         "plugin"
       ],
       "path": "plugins/lorem-ipsum.wmplugin",
-      "sha256": "2da2c0c181e23378ebdc641d783bcf4a5bbb2fea6820541f681101aa91c26d3c",
-      "sizeBytes": 2765,
-      "minAppVersion": 43,
+      "sha256": "3b9643b24adc729615b05f8dbd8e3955c8357bb1b52afe93b1215d3e1d727b32",
+      "sizeBytes": 2782,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1621,7 +1621,7 @@
       "id": "ui-kitchen-sink",
       "type": "plugin",
       "name": "UI Kitchen Sink",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": "Wasi Master",
       "description": "Every plugin widget and event in one place, to look at and copy from.",
       "tags": [
@@ -1630,12 +1630,12 @@
         "plugin"
       ],
       "path": "plugins/ui-kitchen-sink.wmplugin",
-      "sha256": "b4ff580028734ab117c9d04f04eedd4f1de402725c0fc50f9dfcf0e54d3f43f1",
-      "sizeBytes": 2081,
+      "sha256": "909ef3193d940d761ab1d32ce1d4424b051817f1f7bc491e5b16dd832c65f5a9",
+      "sizeBytes": 2097,
       "previews": [
         "previews/ui-kitchen-sink-grid.jpg"
       ],
-      "minAppVersion": 43,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1643,7 +1643,7 @@
       "id": "todo-list",
       "type": "plugin",
       "name": "Todo List",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "author": "Wasi Master",
       "description": "A checklist with due dates and reminders. Shows how plugin storage, reminders and the date widget work.",
       "tags": [
@@ -1654,14 +1654,14 @@
         "plugin"
       ],
       "path": "plugins/todo-list.wmplugin",
-      "sha256": "5ba5917607a8e41e57411f906a4ead9210607976113368414a1e9e7bbfa3837c",
-      "sizeBytes": 3910,
+      "sha256": "29110a08303ad3831654222bfba3c83676c646135fa2f8da25b3d15dc3c4f615",
+      "sizeBytes": 3924,
       "previews": [
         "previews/todo-list-grid.jpg",
         "previews/todo-list-1.jpg",
         "previews/todo-list-2.jpg"
       ],
-      "minAppVersion": 43,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1669,7 +1669,7 @@
       "id": "text-tools",
       "type": "plugin",
       "name": "Text Tools",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": "Wasi Master",
       "description": "Change case, encode as base64/hex/URL, and count words.",
       "tags": [
@@ -1679,8 +1679,8 @@
         "plugin"
       ],
       "path": "plugins/text-tools.wmplugin",
-      "sha256": "0e178207a17f39a49f57744b5dd4bbbc502a5d8abcccdee61e3004cab5ed0b96",
-      "sizeBytes": 2424,
+      "sha256": "63755d22c4d8d0f7709ca1051aa8b4dfed857fca9ff8a6680e0ee3f2f251c3af",
+      "sizeBytes": 2444,
       "previews": [
         "previews/text-tools-grid.jpg",
         "previews/text-tools-1.jpg",
@@ -1691,7 +1691,7 @@
         "previews/text-tools-6.jpg",
         "previews/text-tools-7.jpg"
       ],
-      "minAppVersion": 43,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1720,7 +1720,7 @@
       "id": "math-mode",
       "type": "plugin",
       "name": "Math Mode",
-      "version": "2.0.0",
+      "version": "2.0.2",
       "author": "Wasi Master",
       "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹. Symbol palette, fractions, Greek, calculus, sets, chemistry and LaTeX.",
       "tags": [
@@ -1730,12 +1730,12 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "cb9a73399e89398718a79985a856025702006c7792d6cb3fe192fca87436aae9",
-      "sizeBytes": 19083,
+      "sha256": "f0190abe5655f84ecd8a799591cf29f863bd4fefd2349cc5ec5831f0fc93a1d8",
+      "sizeBytes": 19105,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
-      "minAppVersion": 43,
+      "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
@@ -1743,7 +1743,7 @@
       "id": "boycott-check",
       "type": "plugin",
       "name": "Boycott Check",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Scan a product's barcode, read its label or type a brand to see whether Tech for Palestine's boycott dataset or the BDS movement's own target list names it, with each entry's reasons, source links and alternatives. Brands and owners come from Open Food Facts. The dataset downloads once (about 0.8 MB) and then works offline. Photos are read as text, so a logo without a printed name can't be recognised.",
       "tags": [
@@ -1755,8 +1755,8 @@
         "plugin"
       ],
       "path": "plugins/boycott-check.wmplugin",
-      "sha256": "828450dd3851667aa73727bfe9552c4edac69bbcc49b2bc3293c602b9ff56145",
-      "sizeBytes": 14242,
+      "sha256": "5522a846ccd73799132eb289980d9f4ff71148d6ad3ab40539c33733acef511f",
+      "sizeBytes": 14552,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1765,7 +1765,7 @@
       "id": "firefly-iii",
       "type": "plugin",
       "name": "Firefly III",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Scan receipts into your own Firefly III: the keyboard reads the shop, total, date, currency and items, you pick the account, category and budget, and it is sent as a withdrawal. Add spending by hand or with @firefly, keep entries until your server is in reach, and see balances, this month's spending by category and recent transactions you can recategorise. Works with servers on your home network.",
       "tags": [
@@ -1776,8 +1776,8 @@
         "plugin"
       ],
       "path": "plugins/firefly-iii.wmplugin",
-      "sha256": "57c104a5e476495ffe0f570642b2c0c7dbe9b94525bb451194276bbeba722603",
-      "sizeBytes": 17062,
+      "sha256": "623132e3d3d4b75848e78ea926f3478b7307a6d027ed83b48a59c1b535fd37ce",
+      "sizeBytes": 17461,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1786,7 +1786,7 @@
       "id": "open-food-facts",
       "type": "plugin",
       "name": "Open Food Facts",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Scan a barcode, or type one or a product's name, for its Nutri-Score, NOVA group, Green-Score, ingredients, allergens, vegan, vegetarian and palm oil status, and labels such as halal, organic and fair trade. Falls through to Open Beauty Facts, Open Pet Food Facts and Open Products Facts. Signed in to Open Food Facts, add missing products, ingredients read with the camera, and photos. Data from Open Food Facts (ODbL).",
       "tags": [
@@ -1797,7 +1797,7 @@
         "plugin"
       ],
       "path": "plugins/open-food-facts.wmplugin",
-      "sha256": "a5f9217dd0eb29e7ea53543a708e9a23dac62b919456ed162c7a68119f3088d5",
+      "sha256": "dcba60156a9a843ba1e08e2b88a2857eb439aee635cf1e1803f2b59a6b07c118",
       "sizeBytes": 14313,
       "minAppVersion": 45,
       "license": "MIT",
@@ -1807,7 +1807,7 @@
       "id": "day-planner",
       "type": "plugin",
       "name": "Day Planner",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Time blocking: blocks on a day timeline you hold and drag to move or resize in 15-minute steps, tasks with steps, coloured tags, a board for today, tomorrow and later, hours per tag for the week, and reminders before each block. Shows your calendar's events and shares tasks with the To-do list once you allow it.",
       "tags": [
@@ -1819,7 +1819,7 @@
         "plugin"
       ],
       "path": "plugins/day-planner.wmplugin",
-      "sha256": "929c8e515a8ca6839559ff2c0484f36e06ce7f6ba1f4306262acf98ed642b1a9",
+      "sha256": "554a7bd7a533e120a27bd7c17d218986cf06c5277eb5587da9239a76db7d9e75",
       "sizeBytes": 11619,
       "minAppVersion": 45,
       "license": "MIT",
@@ -1829,7 +1829,7 @@
       "id": "grocy",
       "type": "plugin",
       "name": "Grocy",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Your own Grocy server from the keyboard: the shopping list to tick off and add to, stock that is low, due soon, overdue or expired, and the chores that are due. Scan a barcode to buy, use or open something, or link a new barcode to a product. Scan a receipt and its lines become purchases after you check them, matched by name or by your AI model. Works with servers on your home network.",
       "tags": [
@@ -1843,7 +1843,7 @@
         "plugin"
       ],
       "path": "plugins/grocy.wmplugin",
-      "sha256": "1760b80fc4ae05ccb554932138a95ff08b25d244f524735a0119d5efbb55f695",
+      "sha256": "d386452ee5133635c9164c9edb85b183297e9efc4fe7b312365e612977a3692d",
       "sizeBytes": 18603,
       "minAppVersion": 45,
       "license": "MIT",
@@ -1853,7 +1853,7 @@
       "id": "polls",
       "type": "plugin",
       "name": "Polls",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Write a poll in the keyboard and put its link into the chat. Polls are made on your own Nextcloud (Forms or Polls) or LimeSurvey, or on StrawPoll with a free API key if you have no server. One answer or several, an optional closing time, answers so far as a chart, and closing or deleting a poll from the keyboard. Type @poll with the question and answers to fill it in. Works with servers on your home network.",
       "tags": [
@@ -1865,8 +1865,8 @@
         "plugin"
       ],
       "path": "plugins/polls.wmplugin",
-      "sha256": "8085cfb4dd3da3e502d43259d82b57b455b0e76ded0be6eeaae514361709395a",
-      "sizeBytes": 17063,
+      "sha256": "4d4f664934b9ef7e43dd2122a8a44e74e080fdaa578eb5c78b91a50e6844f294",
+      "sizeBytes": 17060,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1875,7 +1875,7 @@
       "id": "transit-planner",
       "type": "plugin",
       "name": "Transit Planner",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Plan trips by train, metro, bus and ferry from the keyboard: fastest, fewest changes, least walking or cheapest where fares are known, with platforms, stops and live delays. See a station's next departures, other trains on the same route, and the first and last trip of the day. Pin a trip, get a reminder, alarm or timer before you leave or arrive, and insert or share a summary. Timetables from Transitous, which covers Japan's railways, Singapore and hundreds of other places; Singapore bus arrivals with your own LTA DataMall key; Dhaka Metro Line 6 offline.",
       "tags": [
@@ -1889,7 +1889,7 @@
         "plugin"
       ],
       "path": "plugins/transit-planner.wmplugin",
-      "sha256": "a1666ae6cdf5537e051800e3d429dd80b2165bdf7aaead6ef48564894126091a",
+      "sha256": "0243838ef2ecfe1463236ba989f45fddc0f99d14cea09d076992fa0f5ca8345e",
       "sizeBytes": 25431,
       "minAppVersion": 45,
       "license": "MIT",
@@ -1899,7 +1899,7 @@
       "id": "language-trainer",
       "type": "plugin",
       "name": "Language Trainer",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": "Wasi Master",
       "description": "Learn the letters, words and sentences of another language from the keyboard. Alphabet charts for Japanese kana, Korean Hangul, Russian, Greek, Hindi, Bengali, Arabic, Hebrew, Thai and Georgian give each letter's sound and read it aloud on a tap. Drills go both ways, letter to sound and sound to letter, as multiple choice or typed. About 200 everyday words and 250 to 360 sentences in each of 22 languages can be drilled against English or any other of them, such as Japanese with Hindi, and the letters and words you miss come back more often. While you type an answer, the keyboard shows that language's own keys. With an AI model set up, it explains an answer or writes new sentences.",
       "tags": [
@@ -1913,8 +1913,8 @@
         "plugin"
       ],
       "path": "plugins/language-trainer.wmplugin",
-      "sha256": "6da472c1f26484cf79aef71b0fc2b561fe819e594493cc2043c49fe19b284b78",
-      "sizeBytes": 232448,
+      "sha256": "53f6a63de8505349e5e727c4183c3675365eb254640ce0b2ab895f57d0b667e5",
+      "sizeBytes": 232779,
       "minAppVersion": 45,
       "license": "MIT, CC BY-SA 4.0, CC BY 2.0 FR",
       "licenseFile": "plugins/LANGUAGE-TRAINER-LICENSE.txt"

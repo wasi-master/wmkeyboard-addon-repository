@@ -2,7 +2,7 @@
   "format": "wmkeyboard-plugin",
   "id": "com.wasimaster.dayplanner",
   "name": "Day Planner",
-  "pluginVersion": "1.0.0",
+  "pluginVersion": "1.0.1",
   "author": "Wasi Master",
   "description": "Time blocking for your day: blocks on a timeline you drag to move or resize, tasks with steps, tags, a board for today, tomorrow and later, a week of time per tag, and reminders. Shows your calendar's events and shares tasks with the To-do list once you allow it.",
   "apiVersion": 5,

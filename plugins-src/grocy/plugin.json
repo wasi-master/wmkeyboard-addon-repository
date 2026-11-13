@@ -3,7 +3,7 @@
   "version": 1,
   "id": "com.wasimaster.grocy",
   "name": "Grocy",
-  "pluginVersion": "1.0.0",
+  "pluginVersion": "1.0.1",
   "author": "Wasi Master",
   "description": "Your Grocy server's shopping list, stock and chores. Scan a barcode to buy, use or open something, or scan a receipt to put a whole shop into stock.",
   "apiVersion": 5,

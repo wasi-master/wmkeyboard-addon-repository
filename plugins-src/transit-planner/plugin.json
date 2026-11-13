@@ -3,7 +3,7 @@
   "version": 1,
   "id": "com.wasimaster.transit",
   "name": "Transit Planner",
-  "pluginVersion": "1.0.0",
+  "pluginVersion": "1.0.1",
   "author": "Wasi Master",
   "description": "Plan trips by train, metro, bus and ferry, see what leaves a station next, pin a trip and get a reminder, alarm or timer before you leave or arrive. Timetables from Transitous (Japan, Singapore and hundreds of other places), Singapore live bus arrivals with your own LTA key, and Dhaka Metro offline.",
   "apiVersion": 5,
