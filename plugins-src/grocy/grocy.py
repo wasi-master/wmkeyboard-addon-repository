@@ -36,6 +36,11 @@ def api_key():
     return _key[0]
 
 
+def forget_key():
+    """Read the key from secrets again: the user changed it on the settings page."""
+    _key[0] = None
+
+
 def save_key(text):
     text = str(text or "").strip()
     if text:

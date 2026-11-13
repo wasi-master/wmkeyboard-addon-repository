@@ -178,17 +178,31 @@ def opened(s):
 
 # ------------------------------------------------------------- setup ----
 
-s = plugin_test.session(mock={"secrets.get": None}, settings={"server": "", "ai_receipts": True, "due_soon_days": 5})
+s = plugin_test.session(mock={"secrets.get": None, "plugin.open_settings": None},
+                        settings={"server": "", "ai_receipts": True, "due_soon_days": 5})
 r = s["load"]()
 check("setup draws", r["ok"], r.get("error"))
 check("setup asks for the server", "Grocy server" in text_of(r), text_of(r))
 check("setup has a key box", find(r, id="api_key", kind="password") is not None)
+s["event"]({"type": "click", "id": "button:Open settings"})
+expect("opens the settings page", [c["op"] for c in s["calls"]()][-1:], ["plugin.open_settings"])
 expect("setup sends nothing", len(requests(s)), 0)
 
 s = session(key=None, settings=SETTINGS)
 r = s["load"]()
 check("server set, no key: key box", find(r, id="api_key") is not None, text_of(r))
 check("server is shown", "https://grocy.example.com" in text_of(r))
+
+# A key typed on the settings page later: read again, and the panel loads.
+s = session(key=None)
+s["load"]()
+keyed = session()
+keyed["load"]()
+keyed["settle"]()
+before = len(requests(keyed, "GET", "/system/info"))
+keyed["event"]({"type": "setting", "key": "api_key", "value": "new"})
+expect("a new key loads again", len(requests(keyed, "GET", "/system/info")), before + 1)
+keyed["settle"]()
 
 # ------------------------------------------------------- the server ----
 

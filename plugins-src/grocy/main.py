@@ -294,14 +294,14 @@ def setup_page():
         ui.title("Connect to Grocy")
         if not grocy.base_url():
             ui.markdown(
-                "**1.** Type your Grocy server's address on this plugin's page, under "
-                "**Grocy server**: Tools › Plugins › Manage plugins › Grocy. For example "
-                "`grocy.example.com`, `example.com/grocy` or `192.168.1.20:9283`."
+                "**1.** Type your Grocy server's address under **Grocy server** on this plugin's "
+                "settings page, such as `grocy.example.com`, `example.com/grocy` or `192.168.1.20:9283`."
             )
             ui.caption("A server at home (an IP address, or a name like nas.local) also needs Local network access turned on there.")
+            ui.button("Open settings", icon="settings", primary=True, on_click=plugin.open_settings)
         else:
             ui.label("Server: " + grocy.base_url(), style="caption")
-        ui.markdown("**2.** In Grocy, open Settings › Manage API keys, add a key, and paste it here.")
+        ui.markdown("**2.** In Grocy, open Settings › Manage API keys, add a key, and paste it here or under **API key** in the settings.")
         ui.input(label="API key", kind="password", key="api_key", on_submit=save_key, placeholder="Paste the key, then Enter")
 
 
@@ -1073,6 +1073,12 @@ def from_keyword(text):
 def server_changed(_):
     s.products = {}
     s.loaded = False
+    refresh()
+
+
+@plugin.setting_changed("api_key")
+def key_changed(_):
+    grocy.forget_key()
     refresh()
 
 

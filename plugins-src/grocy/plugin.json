@@ -9,12 +9,47 @@
   "apiVersion": 5,
   "language": "python",
   "entry": "main.py",
-  "permissions": ["network", "network.local", "storage", "scan", "ai"],
+  "permissions": [
+    "network",
+    "network.local",
+    "storage",
+    "scan",
+    "ai"
+  ],
   "hosts": [],
-  "tool": {"icon": "kitchen", "tile": true, "float": true, "keyword": "grocy", "chip": true},
+  "tool": {
+    "icon": "kitchen",
+    "tile": true,
+    "float": true,
+    "keyword": "grocy",
+    "chip": true
+  },
   "settings": [
-    {"key": "server", "type": "host", "label": "Grocy server", "summary": "Its address, such as grocy.example.com or 192.168.1.20:9283"},
-    {"key": "ai_receipts", "type": "switch", "label": "Match receipts with AI", "summary": "Uses your AI model, when allowed, to find which product each receipt line is", "default": "true"},
-    {"key": "due_soon_days", "type": "number", "label": "Due soon means within", "summary": "Days, for the Due soon filter", "default": "5"}
+    {
+      "key": "server",
+      "type": "host",
+      "label": "Grocy server",
+      "summary": "Its address, such as grocy.example.com or 192.168.1.20:9283"
+    },
+    {
+      "key": "api_key",
+      "type": "secret",
+      "label": "API key",
+      "summary": "Make one in Grocy under Settings › Manage API keys"
+    },
+    {
+      "key": "ai_receipts",
+      "type": "switch",
+      "label": "Match receipts with AI",
+      "summary": "Uses your AI model, when allowed, to find which product each receipt line is",
+      "default": "true"
+    },
+    {
+      "key": "due_soon_days",
+      "type": "number",
+      "label": "Due soon means within",
+      "summary": "Days, for the Due soon filter",
+      "default": "5"
+    }
   ]
 }

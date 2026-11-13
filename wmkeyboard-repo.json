@@ -1843,8 +1843,8 @@
         "plugin"
       ],
       "path": "plugins/grocy.wmplugin",
-      "sha256": "17a638801bc229cf2a8d7a1dfe0de5ef907318bfd4da1550dc00e581845fb97d",
-      "sizeBytes": 18592,
+      "sha256": "939adb718c23e14889de56a56a1cd941e8193d8559acda6b823e849effd5b3b9",
+      "sizeBytes": 18752,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
