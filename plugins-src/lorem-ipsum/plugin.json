@@ -3,12 +3,17 @@
   "version": 1,
   "id": "com.wasimaster.loremipsum",
   "name": "Lorem Ipsum",
-  "pluginVersion": "1.0.1",
-  "tool": { "icon": "notes" },
+  "pluginVersion": "2.0.0",
+  "tool": {
+    "icon": "notes",
+    "tile": true
+  },
   "author": "Wasi Master",
-  "description": "Placeholder text: as many words, sentences or paragraphs of lorem ipsum as you need, ready to insert.",
-  "apiVersion": 4,
+  "description": "Placeholder text: any number of words, sentences or paragraphs of lorem ipsum, ready to insert.",
+  "apiVersion": 5,
   "language": "python",
   "entry": "main.py",
-  "permissions": []
+  "permissions": [
+    "storage"
+  ]
 }

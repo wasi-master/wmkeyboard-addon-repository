@@ -309,107 +309,6 @@ def generate_ui_kitchen_sink_preview():
 
 
 # -----------------------------------------------------------------------------
-# 3. TODO LIST PREVIEW
-# -----------------------------------------------------------------------------
-def generate_todo_list_preview():
-    w, h = 1080, 900
-    bg_colors = [
-        (13, 22, 38),       # Dark slate
-        (6, 78, 59),        # Emerald green
-        (45, 212, 191, 45), # Teal top-right glow
-        (16, 185, 129, 35), # Mint bottom-left glow
-    ]
-    canvas = create_gradient_background(w, h, bg_colors)
-    draw = ImageDraw.Draw(canvas)
-
-    font_title = ImageFont.truetype(INTER_PATH, 42)
-    font_sub = ImageFont.truetype(INTER_PATH, 19)
-    font_badge = ImageFont.truetype(INTER_PATH, 14)
-    font_label = ImageFont.truetype(INTER_PATH, 17)
-    font_body = ImageFont.truetype(INTER_PATH, 18)
-    font_mono = ImageFont.truetype(MONO_PATH, 16)
-
-    # Header
-    badge = make_badge_pill(
-        "PYTHON PLUGIN  •  PERSISTENT STORAGE DEMO",
-        font_badge,
-        (45, 212, 191),
-        (15, 23, 42, 230),
-        (45, 212, 191, 120),
-    )
-    canvas.paste(badge, (60, 45), badge)
-
-    draw.text((60, 95), "Todo List", fill=(248, 250, 252), font=font_title)
-    draw.text((60, 150), "A checklist that remembers itself — demonstrating wm.storage local persistence", fill=(148, 163, 184), font=font_sub)
-
-    card_x, card_y, card_w, card_h = 60, 195, 960, 655
-    draw.rounded_rectangle(
-        [card_x, card_y, card_x + card_w, card_y + card_h],
-        radius=20,
-        fill=(15, 23, 42, 235),
-        outline=(51, 65, 85),
-        width=2,
-    )
-
-    # Add item row mockup
-    add_y = card_y + 25
-    draw.rounded_rectangle([card_x + 20, add_y, card_x + 720, add_y + 48], radius=10, fill=(30, 41, 59), outline=(45, 212, 191, 150))
-    draw.text((card_x + 36, add_y + 14), "Buy coffee & matcha", fill=(248, 250, 252), font=font_body)
-
-    draw.rounded_rectangle([card_x + 735, add_y, card_x + card_w - 20, add_y + 48], radius=10, fill=(13, 148, 136), outline=None)
-    draw.text((card_x + 798, add_y + 14), "Add", fill=(255, 255, 255), font=font_label)
-
-    # Divider
-    div_y = add_y + 68
-    draw.line([(card_x + 20, div_y), (card_x + card_w - 20, div_y)], fill=(51, 65, 85), width=1)
-
-    # Items Stack
-    items = [
-        ("Finish WM Keyboard Python plugin guide", True),
-        ("Test local storage quota limits", False),
-        ("Export repo manifest with build_index.py", True),
-        ("Publish plugin preview images to repository", False),
-    ]
-
-    iy = div_y + 20
-    for text, is_done in items:
-        draw.rounded_rectangle([card_x + 20, iy, card_x + card_w - 20, iy + 56], radius=12, fill=(24, 33, 52), outline=(51, 65, 85))
-
-        if is_done:
-            # Checked Box
-            draw.rounded_rectangle([card_x + 36, iy + 14, card_x + 64, iy + 42], radius=6, fill=(13, 148, 136), outline=None)
-            draw.text((card_x + 42, iy + 17), "✓", fill=(255, 255, 255), font=font_label)
-            draw.text((card_x + 80, iy + 16), text, fill=(100, 116, 139), font=font_body)
-            # Strike-through line
-            t_len = draw.textlength(text, font=font_body)
-            draw.line([(card_x + 80, iy + 28), (card_x + 80 + t_len, iy + 28)], fill=(100, 116, 139), width=2)
-        else:
-            # Unchecked Box
-            draw.rounded_rectangle([card_x + 36, iy + 14, card_x + 64, iy + 42], radius=6, fill=(30, 41, 59), outline=(45, 212, 191), width=1)
-            draw.text((card_x + 80, iy + 16), text, fill=(248, 250, 252), font=font_body)
-
-        iy += 68
-
-    # Status Bar
-    stat_y = iy + 10
-    draw.text((card_x + 25, stat_y + 10), "2 of 4 items left", fill=(148, 163, 184), font=font_sub)
-
-    draw.rounded_rectangle([card_x + card_w - 200, stat_y, card_x + card_w - 20, stat_y + 44], radius=10, fill=(30, 41, 59), outline=(51, 65, 85))
-    draw.text((card_x + card_w - 165, stat_y + 11), "Clear finished", fill=(226, 232, 240), font=font_label)
-
-    # Architecture Bottom Box
-    arch_y = stat_y + 70
-    draw.rounded_rectangle([card_x + 20, arch_y, card_x + card_w - 20, arch_y + 120], radius=14, fill=(10, 18, 30), outline=(45, 212, 191, 140), width=2)
-    draw.text((card_x + 40, arch_y + 16), "STORAGE ARCHITECTURE (wm.storage)", fill=(45, 212, 191), font=font_badge)
-    draw.text((card_x + 40, arch_y + 46), "wm.storage.get(\"items\")  ↔  wm.storage.set(\"items\", json)", fill=(45, 212, 191), font=font_mono)
-    draw.text((card_x + 40, arch_y + 80), "• 100% On-Device  • Persists across app restarts  • Zero permissions", fill=(148, 163, 184), font=font_sub)
-
-    out_file = PREVIEWS_DIR / "todo-list-grid.jpg"
-    canvas.convert("RGB").save(out_file, "JPEG", quality=95)
-    print(f"Generated {out_file.relative_to(ROOT)}")
-
-
-# -----------------------------------------------------------------------------
 # 4. TEXT TOOLS PREVIEW
 # -----------------------------------------------------------------------------
 def generate_text_tools_preview():
@@ -718,7 +617,6 @@ def main():
     PREVIEWS_DIR.mkdir(exist_ok=True)
     generate_cipher_tool_preview()
     generate_ui_kitchen_sink_preview()
-    generate_todo_list_preview()
     generate_text_tools_preview()
     generate_math_mode_preview()
 

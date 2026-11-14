@@ -202,10 +202,10 @@ assert ct.hm(dhaka.next_trains(0, 15, late, 1)[0][0], dhaka.ZONE) == "06:30"
 # ------------------------------------------------------------- session ----
 
 s = plugin_test.session(mock=MOCK, settings={"time_format": "24h", "lead": 10, "results": 5,
-                                             "sg_bus": True, "dhaka_metro": True})
+                                             "region": "Singapore"})
 r = check(s["load"]())
 tree = r["ui"]
-assert "Find trips" in text_of(tree) and "Dhaka Metro" in text_of(tree) and "SG bus" in text_of(tree)
+assert "Find trips" in text_of(tree) and "SG bus" in text_of(tree) and "Dhaka Metro" not in text_of(tree)
 
 # From: type, pause, pick. To: submit, pick. The plan follows by itself.
 check(s["event"]({"type": "submit", "id": "frm_box", "value": "Shinjuku"}))
@@ -323,6 +323,7 @@ check(s["settle"]())
 assert [c for c in s["calls"]() if c["op"] == "http.request"][-1]["args"]["params"]["BusStopCode"] == "83139"
 
 # ------------------------------------------------------------ Dhaka ----
+check(s["event"]({"type": "setting", "key": "region", "value": "Bangladesh"}))
 
 check(s["event"]({"type": "change", "id": "tabs", "value": 3}))
 check(s["event"]({"type": "change", "id": "metro_from", "value": "8"}))
@@ -331,8 +332,12 @@ r = check(s["render"]())
 shown = text_of(r["ui"])
 assert "৳50" in shown and "৳45 with a card" in shown and "14 min" in shown, shown[-2500:]
 
-# Hiding tabs in settings.
-s2 = plugin_test.session(mock=MOCK, settings={"sg_bus": False, "dhaka_metro": False})
+# First open: the region question, then only that region's tabs.
+s3 = plugin_test.session(mock=MOCK, settings={})
+r = check(s3["load"]())
+assert "Where do you travel?" in text_of(r["ui"]) and "Find trips" not in text_of(r["ui"])
+
+s2 = plugin_test.session(mock=MOCK, settings={"region": "Japan"})
 r = check(s2["load"]())
 assert "Dhaka Metro" not in text_of(r["ui"]) and "SG bus" not in text_of(r["ui"])
 

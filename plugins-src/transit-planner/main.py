@@ -108,12 +108,39 @@ def lead_minutes():
         return 10
 
 
+REGIONS = [
+    ("Singapore", "Trips, departures and live bus arrivals", "directions_bus"),
+    ("Bangladesh", "Dhaka Metro Line 6, offline, with trips and departures", "subway"),
+    ("Japan", "Trips and departures on Japan's railways", "train"),
+    ("Somewhere else", "Trips and departures wherever Transitous has timetables", "public"),
+]
+
+
+def region():
+    """The place chosen on first open (or in settings); None until then."""
+    chosen = plugin.settings.get("region", "Not chosen")
+    return None if chosen in (None, "", "Not chosen") else chosen
+
+
 def show_sg():
-    return bool(plugin.settings.get("sg_bus", True))
+    return region() == "Singapore"
 
 
 def show_metro():
-    return bool(plugin.settings.get("dhaka_metro", True))
+    return region() == "Bangladesh"
+
+
+def choose_region(name):
+    plugin.settings.set("region", name)
+    state.tab = 0
+
+
+def region_picker():
+    """First open: one question, so the tabs that follow are only the useful ones."""
+    ui.title("Where do you travel?")
+    ui.caption("The planner shows the tabs for that place. You can change it in the plugin's settings.")
+    ui.list([ui.item(name, subtitle=line, icon=icon, on_click=lambda name=name: choose_region(name))
+             for name, line, icon in REGIONS], key="regions")
 
 
 # ------------------------------------------------------------ requests ----
@@ -1216,6 +1243,9 @@ def metro_tab():
 
 
 def render():
+    if region() is None:
+        region_picker()
+        return
     tabs = [ui.page("Trips", *collect(trips_tab)), ui.page("Departures", *collect(departures_tab))]
     if show_sg():
         tabs.append(ui.page("SG bus", *collect(sg_tab)))

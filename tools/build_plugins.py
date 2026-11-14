@@ -77,6 +77,11 @@ def host_problems(manifest: dict, permissions: list) -> list[str]:
     # A secret row is kept in the plugin's secrets, which need storage.
     if any(isinstance(s, dict) and s.get("type") == "secret" for s in manifest.get("settings", [])) and "storage" not in permissions:
         out.append("a \"secret\" setting needs the \"storage\" permission")
+    # Before the app read bare values, `"default": true` failed the whole
+    # manifest decode and the file showed as "not a WM Keyboard plugin".
+    for s in manifest.get("settings", []):
+        if isinstance(s, dict) and "default" in s and not isinstance(s["default"], str):
+            out.append(f"setting {s.get('key')!r}: default must be text, such as \"true\" or \"5\"")
     return out
 
 # PluginFile: what an API 5 archive may hold.
@@ -113,6 +118,10 @@ def build(source: Path) -> tuple[bytes, list[str]]:
         elif permission in API_5_PERMISSIONS and api != 5:
             problems.append(f"{source.name}: permission {permission!r} needs apiVersion 5")
     problems.extend(f"{source.name}: {p}" for p in host_problems(manifest, permissions))
+    # plugin.state(persist=True) saves through storage; without it the panel
+    # fails on open with a PermissionError (Lorem Ipsum 2.0.0 did).
+    if "storage" not in permissions and any("persist=True" in f.read_text(errors="ignore") for f in source.rglob("*.py") if f.name != "test.py"):
+        problems.append(f"{source.name}: plugin.state(persist=True) needs the \"storage\" permission")
     icon_errors, icon_warnings = tool_problems(
         manifest, lambda rel: (source / rel).read_bytes() if (source / rel).is_file() else None,
     )

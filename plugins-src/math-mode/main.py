@@ -1667,7 +1667,9 @@ def help_page():
 
 
 def render():
-    col = [ui.input("expr", label="Math", placeholder="x^2 + sqrt(2) = pi/4")]
+    # The result sits above the box: typing collapses the panel to the box
+    # and the keys, and what is right above the box stays in sight.
+    col = []
     if expr == "":
         col.append(ui.label(
             "Type math the way you say it: x^2, sqrt(2), pi, 1/2, int_0^1, x in RR. "
@@ -1679,6 +1681,7 @@ def render():
             col.append(ui.output(c, id="out" if n == 0 else "out" + str(n + 1)))
         if len(chunks) > 1:
             col.append(ui.label("Long result, shown in " + str(len(chunks)) + " parts.", style="caption"))
+    col.append(ui.input("expr", label="Math", placeholder="x^2 + sqrt(2) = pi/4"))
     col.append(ui.tabs("tabs", symbols_page(), options_page(), help_page()))
     col.append(ui.button("clear", "Clear"))
     return ui.column(col)

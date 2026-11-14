@@ -1601,9 +1601,9 @@
       "id": "lorem-ipsum",
       "type": "plugin",
       "name": "Lorem Ipsum",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "author": "Wasi Master",
-      "description": "Placeholder text: as many words, sentences or paragraphs of lorem ipsum as you need, ready to insert.",
+      "description": "Placeholder text: any number of words, sentences or paragraphs of lorem ipsum, a tab for each, ready to insert.",
       "tags": [
         "lorem ipsum",
         "placeholder",
@@ -1611,8 +1611,8 @@
         "plugin"
       ],
       "path": "plugins/lorem-ipsum.wmplugin",
-      "sha256": "3b9643b24adc729615b05f8dbd8e3955c8357bb1b52afe93b1215d3e1d727b32",
-      "sizeBytes": 2782,
+      "sha256": "1a94c5af26fadd8c1c9265d6b97c52b41640b2232cdeb2f0812488e30d5ae67e",
+      "sizeBytes": 3392,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1634,32 +1634,6 @@
       "sizeBytes": 2097,
       "previews": [
         "previews/ui-kitchen-sink-grid.jpg"
-      ],
-      "minAppVersion": 45,
-      "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt"
-    },
-    {
-      "id": "todo-list",
-      "type": "plugin",
-      "name": "Todo List",
-      "version": "3.0.1",
-      "author": "Wasi Master",
-      "description": "A checklist with due dates and reminders. Shows how plugin storage, reminders and the date widget work.",
-      "tags": [
-        "todo",
-        "storage",
-        "reminders",
-        "demo",
-        "plugin"
-      ],
-      "path": "plugins/todo-list.wmplugin",
-      "sha256": "29110a08303ad3831654222bfba3c83676c646135fa2f8da25b3d15dc3c4f615",
-      "sizeBytes": 3924,
-      "previews": [
-        "previews/todo-list-grid.jpg",
-        "previews/todo-list-1.jpg",
-        "previews/todo-list-2.jpg"
       ],
       "minAppVersion": 45,
       "license": "MIT",
@@ -1720,7 +1694,7 @@
       "id": "math-mode",
       "type": "plugin",
       "name": "Math Mode",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "author": "Wasi Master",
       "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹. Symbol palette, fractions, Greek, calculus, sets, chemistry and LaTeX.",
       "tags": [
@@ -1730,8 +1704,8 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "f0190abe5655f84ecd8a799591cf29f863bd4fefd2349cc5ec5831f0fc93a1d8",
-      "sizeBytes": 19105,
+      "sha256": "44341b0c3e4ddb9cfaa61f942e11b10292ce3a78a6b98d5d2edd8dfa8013cbbb",
+      "sizeBytes": 19167,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
@@ -1743,7 +1717,7 @@
       "id": "boycott-check",
       "type": "plugin",
       "name": "Boycott Check",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": "Wasi Master",
       "description": "Scan a product's barcode, read its label or type a brand to see whether Tech for Palestine's boycott dataset or the BDS movement's own target list names it, with each entry's reasons, source links and alternatives. Brands and owners come from Open Food Facts. The dataset downloads once (about 0.8 MB) and then works offline. Photos are read as text, so a logo without a printed name can't be recognised.",
       "tags": [
@@ -1755,8 +1729,8 @@
         "plugin"
       ],
       "path": "plugins/boycott-check.wmplugin",
-      "sha256": "5522a846ccd73799132eb289980d9f4ff71148d6ad3ab40539c33733acef511f",
-      "sizeBytes": 14552,
+      "sha256": "7ff8b6f0dfd564eb6397abb8866e9340100ad62e2d9dcaea6e150b5ec1ff8d36",
+      "sizeBytes": 14556,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1875,9 +1849,9 @@
       "id": "transit-planner",
       "type": "plugin",
       "name": "Transit Planner",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "author": "Wasi Master",
-      "description": "Plan trips by train, metro, bus and ferry from the keyboard: fastest, fewest changes, least walking or cheapest where fares are known, with platforms, stops and live delays. See a station's next departures, other trains on the same route, and the first and last trip of the day. Pin a trip, get a reminder, alarm or timer before you leave or arrive, and insert or share a summary. Timetables from Transitous, which covers Japan's railways, Singapore and hundreds of other places; Singapore bus arrivals with your own LTA DataMall key; Dhaka Metro Line 6 offline.",
+      "description": "Pick where you travel, then plan trips by train, metro, bus and ferry from the keyboard: fastest, fewest changes, least walking or cheapest where fares are known, with platforms, stops and live delays. See a station's next departures, other trains on the same route, and the first and last trip of the day. Pin a trip, get a reminder, alarm or timer before you leave or arrive, and insert or share a summary. Timetables from Transitous, which covers Japan's railways, Singapore and hundreds of other places; Singapore bus arrivals with your own LTA DataMall key; Dhaka Metro Line 6 offline.",
       "tags": [
         "transit",
         "train",
@@ -1889,8 +1863,8 @@
         "plugin"
       ],
       "path": "plugins/transit-planner.wmplugin",
-      "sha256": "0243838ef2ecfe1463236ba989f45fddc0f99d14cea09d076992fa0f5ca8345e",
-      "sizeBytes": 25431,
+      "sha256": "b94fc69803373286932b8464d202f88b9b2cc68071e68a749fb9c9c548117ffe",
+      "sizeBytes": 25871,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
