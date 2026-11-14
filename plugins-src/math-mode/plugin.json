@@ -3,9 +3,11 @@
   "version": 1,
   "id": "com.wasimaster.mathmode",
   "name": "Math Mode",
-  "pluginVersion": "2.0.3",
+  "pluginVersion": "2.1.0",
   "tool": {
-    "icon": "functions"
+    "icon": "functions",
+    "color": "#5C6BC0",
+    "fullBleed": true
   },
   "author": "Wasi Master",
   "description": "Type math the way you say it and get real Unicode: x^2 → x², sqrt(2) → √2, pi → π, int_0^1 → ∫₀¹.",

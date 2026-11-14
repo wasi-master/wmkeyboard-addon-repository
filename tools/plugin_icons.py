@@ -70,6 +70,13 @@ def svg_problems(name: str, data: bytes) -> list[str]:
     return out
 
 
+# The tool fields that only change how the keyboard draws a plugin.
+DRAWING_KEYS = {"icon", "color", "fullBleed"}
+
+# Mirrors PluginToolSpec.colorArgb.
+COLOR_PATTERN = re.compile(r"#[0-9A-Fa-f]{6}")
+
+
 def tool_problems(manifest: dict, read: Callable[[str], bytes | None]) -> tuple[list[str], list[str]]:
     """Errors and warnings about the `tool` block. [read] returns a file of the archive or source, or None."""
     errors: list[str] = []
@@ -78,9 +85,16 @@ def tool_problems(manifest: dict, read: Callable[[str], bytes | None]) -> tuple[
     if not isinstance(tool, dict):
         return ["\"tool\" must be an object"], warnings
     api = manifest.get("apiVersion", 1)
-    # An icon name is the one tool field an API 4 plugin may carry.
-    if api != 5 and any(key != "icon" for key in tool):
-        errors.append("a \"tool\" block beyond \"icon\" needs apiVersion 5")
+    # How the keyboard draws it (icon, colour, full bleed) is all an API 4
+    # plugin's tool block may say.
+    if api != 5 and any(key not in DRAWING_KEYS for key in tool):
+        errors.append("a \"tool\" block beyond \"icon\", \"color\" and \"fullBleed\" needs apiVersion 5")
+    color = tool.get("color", "")
+    # The app ignores a colour it cannot read and draws the theme's instead.
+    if color != "" and not (isinstance(color, str) and COLOR_PATTERN.fullmatch(color.strip())):
+        errors.append(f"tool.color {color!r} is not \"#RRGGBB\"")
+    if not isinstance(tool.get("fullBleed", False), bool):
+        errors.append("tool.fullBleed must be true or false")
     icon = str(tool.get("icon", "")).strip()
     if not ICON_PATTERN.fullmatch(icon):
         errors.append(f"tool.icon {icon!r} is neither a Material Symbols name nor \"assets/<file>.svg\"")

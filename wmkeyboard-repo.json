@@ -1587,8 +1587,8 @@
         "plugin"
       ],
       "path": "plugins/cipher-tool.wmplugin",
-      "sha256": "28d7040d8cc1347d441469342ec9ae0a1746a5545ba3d5b7d9212d2607e722bf",
-      "sizeBytes": 1926,
+      "sha256": "dbb461d26bbbebd0266f4bece69b9904a634146d6f2ff4c566fb42c450bbc20a",
+      "sizeBytes": 1940,
       "previews": [
         "previews/cipher-tool-grid.jpg",
         "previews/cipher-tool.jpg"
@@ -1611,8 +1611,8 @@
         "plugin"
       ],
       "path": "plugins/lorem-ipsum.wmplugin",
-      "sha256": "1a94c5af26fadd8c1c9265d6b97c52b41640b2232cdeb2f0812488e30d5ae67e",
-      "sizeBytes": 3392,
+      "sha256": "af26b0418079b24193a83597602c995d8df4e6146b43b96a974389562f4c6d7e",
+      "sizeBytes": 3419,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1630,8 +1630,8 @@
         "plugin"
       ],
       "path": "plugins/ui-kitchen-sink.wmplugin",
-      "sha256": "909ef3193d940d761ab1d32ce1d4424b051817f1f7bc491e5b16dd832c65f5a9",
-      "sizeBytes": 2097,
+      "sha256": "9342a6c308875b56b36936162ca8153971c1b108e2df79683ba4e2041f9db935",
+      "sizeBytes": 2122,
       "previews": [
         "previews/ui-kitchen-sink-grid.jpg"
       ],
@@ -1653,8 +1653,8 @@
         "plugin"
       ],
       "path": "plugins/text-tools.wmplugin",
-      "sha256": "63755d22c4d8d0f7709ca1051aa8b4dfed857fca9ff8a6680e0ee3f2f251c3af",
-      "sizeBytes": 2444,
+      "sha256": "c21a68bfe2dfe37d2a17f15c5725abd34e053e8e2b7c902393fbd34bc2babb08",
+      "sizeBytes": 2456,
       "previews": [
         "previews/text-tools-grid.jpg",
         "previews/text-tools-1.jpg",
@@ -1704,8 +1704,8 @@
         "plugin"
       ],
       "path": "plugins/math-mode.wmplugin",
-      "sha256": "44341b0c3e4ddb9cfaa61f942e11b10292ce3a78a6b98d5d2edd8dfa8013cbbb",
-      "sizeBytes": 19167,
+      "sha256": "4a00db4a6dc1d0f5ca42cc014ed128da9263af81b02046abcb871bb17bf50fbc",
+      "sizeBytes": 19194,
       "previews": [
         "previews/math-mode-grid.jpg"
       ],
@@ -1729,29 +1729,8 @@
         "plugin"
       ],
       "path": "plugins/boycott-check.wmplugin",
-      "sha256": "7ff8b6f0dfd564eb6397abb8866e9340100ad62e2d9dcaea6e150b5ec1ff8d36",
-      "sizeBytes": 14556,
-      "minAppVersion": 45,
-      "license": "MIT",
-      "licenseFile": "plugins/LICENSE.txt"
-    },
-    {
-      "id": "firefly-iii",
-      "type": "plugin",
-      "name": "Firefly III",
-      "version": "1.0.1",
-      "author": "Wasi Master",
-      "description": "Scan receipts into your own Firefly III: the keyboard reads the shop, total, date, currency and items, you pick the account, category and budget, and it is sent as a withdrawal. Add spending by hand or with @firefly, keep entries until your server is in reach, and see balances, this month's spending by category and recent transactions you can recategorise. Works with servers on your home network.",
-      "tags": [
-        "finance",
-        "budget",
-        "receipts",
-        "self-hosted",
-        "plugin"
-      ],
-      "path": "plugins/firefly-iii.wmplugin",
-      "sha256": "623132e3d3d4b75848e78ea926f3478b7307a6d027ed83b48a59c1b535fd37ce",
-      "sizeBytes": 17461,
+      "sha256": "3ebf43058eff9e057a6c6d63bad642f5e5733b966d458cf9ae02a52aea566cff",
+      "sizeBytes": 14579,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1771,8 +1750,8 @@
         "plugin"
       ],
       "path": "plugins/open-food-facts.wmplugin",
-      "sha256": "dcba60156a9a843ba1e08e2b88a2857eb439aee635cf1e1803f2b59a6b07c118",
-      "sizeBytes": 14313,
+      "sha256": "28f1c14ad9595bc1eaea21dfe94bc76321b05870ab1b9b0ef7e9d93eb14b8e9d",
+      "sizeBytes": 14338,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1793,32 +1772,29 @@
         "plugin"
       ],
       "path": "plugins/day-planner.wmplugin",
-      "sha256": "554a7bd7a533e120a27bd7c17d218986cf06c5277eb5587da9239a76db7d9e75",
-      "sizeBytes": 11619,
+      "sha256": "8f3c7204c96a40dca594e39b9f0e3500bd3538b67251669e52a04b81c9bb5535",
+      "sizeBytes": 11641,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
     {
-      "id": "grocy",
+      "id": "firefly-iii",
       "type": "plugin",
-      "name": "Grocy",
+      "name": "Firefly III",
       "version": "1.0.1",
       "author": "Wasi Master",
-      "description": "Your own Grocy server from the keyboard: the shopping list to tick off and add to, stock that is low, due soon, overdue or expired, and the chores that are due. Scan a barcode to buy, use or open something, or link a new barcode to a product. Scan a receipt and its lines become purchases after you check them, matched by name or by your AI model. Works with servers on your home network.",
+      "description": "Scan receipts into your own Firefly III: the keyboard reads the shop, total, date, currency and items, you pick the account, category and budget, and it is sent as a withdrawal. Add spending by hand or with @firefly, keep entries until your server is in reach, and see balances, this month's spending by category and recent transactions you can recategorise. Works with servers on your home network.",
       "tags": [
-        "grocy",
-        "pantry",
-        "shopping list",
-        "chores",
-        "barcode",
+        "finance",
+        "budget",
         "receipts",
         "self-hosted",
         "plugin"
       ],
-      "path": "plugins/grocy.wmplugin",
-      "sha256": "d386452ee5133635c9164c9edb85b183297e9efc4fe7b312365e612977a3692d",
-      "sizeBytes": 18603,
+      "path": "plugins/firefly-iii.wmplugin",
+      "sha256": "d3f1881e0484091e28baa12cc17c75a201ce33959188d047951e381744144488",
+      "sizeBytes": 17485,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1839,8 +1815,8 @@
         "plugin"
       ],
       "path": "plugins/polls.wmplugin",
-      "sha256": "4d4f664934b9ef7e43dd2122a8a44e74e080fdaa578eb5c78b91a50e6844f294",
-      "sizeBytes": 17060,
+      "sha256": "d10a9a45a6de9d307464e9d9fea1e0046b17893e17a2e4f444b3e72f93c1a14b",
+      "sizeBytes": 17082,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1863,8 +1839,32 @@
         "plugin"
       ],
       "path": "plugins/transit-planner.wmplugin",
-      "sha256": "b94fc69803373286932b8464d202f88b9b2cc68071e68a749fb9c9c548117ffe",
-      "sizeBytes": 25871,
+      "sha256": "03907830a502ddceb26cb7653d882ff05af2fed9e213c5bab9cecaa446d19eb0",
+      "sizeBytes": 26162,
+      "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "grocy",
+      "type": "plugin",
+      "name": "Grocy",
+      "version": "1.0.1",
+      "author": "Wasi Master",
+      "description": "Your own Grocy server from the keyboard: the shopping list to tick off and add to, stock that is low, due soon, overdue or expired, and the chores that are due. Scan a barcode to buy, use or open something, or link a new barcode to a product. Scan a receipt and its lines become purchases after you check them, matched by name or by your AI model. Works with servers on your home network.",
+      "tags": [
+        "grocy",
+        "pantry",
+        "shopping list",
+        "chores",
+        "barcode",
+        "receipts",
+        "self-hosted",
+        "plugin"
+      ],
+      "path": "plugins/grocy.wmplugin",
+      "sha256": "84a2dd8ee6614b5d8b6d98b54a6a3aa2926489aaf185dbb649494639130dc13b",
+      "sizeBytes": 18626,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
@@ -1887,8 +1887,8 @@
         "plugin"
       ],
       "path": "plugins/language-trainer.wmplugin",
-      "sha256": "53f6a63de8505349e5e727c4183c3675365eb254640ce0b2ab895f57d0b667e5",
-      "sizeBytes": 232779,
+      "sha256": "65fa33244214606411e943e964db893bb0ee17c33464422b6f030d9da772669c",
+      "sizeBytes": 232807,
       "minAppVersion": 45,
       "license": "MIT, CC BY-SA 4.0, CC BY 2.0 FR",
       "licenseFile": "plugins/LANGUAGE-TRAINER-LICENSE.txt"

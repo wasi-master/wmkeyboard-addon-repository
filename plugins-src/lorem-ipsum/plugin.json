@@ -3,10 +3,12 @@
   "version": 1,
   "id": "com.wasimaster.loremipsum",
   "name": "Lorem Ipsum",
-  "pluginVersion": "2.0.0",
+  "pluginVersion": "2.1.0",
   "tool": {
     "icon": "notes",
-    "tile": true
+    "tile": true,
+    "color": "#8D6E63",
+    "fullBleed": true
   },
   "author": "Wasi Master",
   "description": "Placeholder text: any number of words, sentences or paragraphs of lorem ipsum, ready to insert.",

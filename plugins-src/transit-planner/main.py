@@ -40,7 +40,15 @@ saved = plugin.state(
     order="best",
     metro_from=0,
     metro_to=15,
+    # Where it was left: the stop each board showed, and when trips were last
+    # planned, so the next open picks up there.
+    board_stop=None,
+    sg_stop=None,
+    planned_at=0,
 )
+
+# Trips planned this long ago are planned again on the next open.
+RESUME_SECONDS = 3 * 3600
 
 state = plugin.state(
     tab=0,
@@ -285,6 +293,7 @@ def pick(side, p):
         saved.to = p
     elif side == "board":
         state.board_stop = p
+        saved.board_stop = p
         remember_stop(p)
         load_board()
         return
@@ -361,6 +370,7 @@ def plan(cursor=None, more=None):
             state.earlier = earlier
             state.later = later
         state.planned_at = now()
+        saved.planned_at = state.planned_at
         if not state.trips and not state.direct:
             state.notice = "No trips found. The timetable may not cover this place, or try another time."
         else:
@@ -703,6 +713,7 @@ def sg_pick(p):
     p = dict(p)
     p["code"] = code
     state.sg_stop = p
+    saved.sg_stop = p
     state.sg_found = []
     state.sg_text = ""
     keep = [s for s in saved.sg_stops if s.get("code") != code]
@@ -737,6 +748,16 @@ def opened():
     except (PermissionError, NotImplementedError):
         state.sg_key = ""
     drop_old_pins()
+    resume()
+
+
+def resume():
+    """Opens where it was left: the boards on their stops, recent trips planned again."""
+    state.board_stop = state.board_stop or saved.board_stop
+    state.sg_stop = state.sg_stop or saved.sg_stop
+    if (not state.trips and saved.frm and saved.to and not state.busy
+            and 0 < now() - saved.planned_at < RESUME_SECONDS):
+        plan()
 
 
 @plugin.every(seconds=30, name="tick")
@@ -786,6 +807,13 @@ def tab_changed(i):
     state.tab = i
     state.error = ""
     state.notice = ""
+    # A board opened on its remembered stop shows its departures straight away.
+    if state.busy:
+        return
+    if i == 1 and state.board_stop and not state.board:
+        load_board()
+    elif show_sg() and i == 2 and state.sg_stop and not state.sg:
+        load_sg()
 
 
 # -------------------------------------------------------------- drawing ----
