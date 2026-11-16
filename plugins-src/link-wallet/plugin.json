@@ -1,0 +1,26 @@
+{
+  "format": "wmkeyboard-plugin",
+  "version": 1,
+  "id": "com.wasimaster.linkwallet",
+  "name": "Link wallet",
+  "pluginVersion": "1.0.0",
+  "tool": {
+    "icon": "bookmarks",
+    "tile": true,
+    "float": true,
+    "color": "#5C6BC0",
+    "fullBleed": true
+  },
+  "author": "Wasi Master",
+  "description": "Keep the links you open often as buttons in the keyboard. A tap opens one; a hold types, copies, shares, renames, moves or deletes it. No sync and no account.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "permissions": [
+    "storage",
+    "share",
+    "field.write",
+    "clipboard.write",
+    "clipboard.read"
+  ]
+}

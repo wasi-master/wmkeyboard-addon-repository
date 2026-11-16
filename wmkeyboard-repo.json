@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-17"
   },
   "addons": [
     {
@@ -1842,6 +1842,26 @@
       "sha256": "03907830a502ddceb26cb7653d882ff05af2fed9e213c5bab9cecaa446d19eb0",
       "sizeBytes": 26162,
       "minAppVersion": 45,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "link-wallet",
+      "type": "plugin",
+      "name": "Link wallet",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Keep the links you open often as buttons in the keyboard. Tap one to open it in your browser; hold it to type it into the chat, copy it, share it, rename it, change its address, move it or delete it. Add starts from the link you copied last. No sync and no account: the links stay on your phone.",
+      "tags": [
+        "links",
+        "bookmarks",
+        "browser",
+        "plugin"
+      ],
+      "path": "plugins/link-wallet.wmplugin",
+      "sha256": "984e8af435336170c61bc5a3387e8695beb4e4da96ba713e387ab11214182c7b",
+      "sizeBytes": 4456,
+      "minAppVersion": 46,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
     },
