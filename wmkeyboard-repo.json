@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-17"
+    "updatedAt": "2026-11-21"
   },
   "addons": [
     {
@@ -1839,8 +1839,8 @@
         "plugin"
       ],
       "path": "plugins/transit-planner.wmplugin",
-      "sha256": "03907830a502ddceb26cb7653d882ff05af2fed9e213c5bab9cecaa446d19eb0",
-      "sizeBytes": 26162,
+      "sha256": "b85d4387595036966455fa9c9674dd2b800cdab946d3ea48d9c8ad205292e782",
+      "sizeBytes": 26047,
       "minAppVersion": 45,
       "license": "MIT",
       "licenseFile": "plugins/LICENSE.txt"
