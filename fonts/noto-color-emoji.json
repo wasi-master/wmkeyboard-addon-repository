@@ -1,7 +1,7 @@
 {
-  "version": "2.51.0",
+  "version": "2.57.0",
   "name": "Noto Color Emoji",
-  "sizeBytes": 10673480,
-  "sha256": "72a635cb3d2f3524c51620cdde406b217204e8a6a06c6a096ff8ed4b5fd6e27b",
+  "sizeBytes": 10730124,
+  "sha256": "15671215ab769fdc7162a045d56fd7d7e477c51b04e6b3c761d914d8fdd6cc44",
   "url": "https://raw.githubusercontent.com/wasi-master/wmkeyboard-addon-repository/HEAD/fonts/noto-color-emoji.ttf"
 }
