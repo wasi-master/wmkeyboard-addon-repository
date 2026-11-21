@@ -1,0 +1,50 @@
+name: Update Noto Color Emoji
+
+# Google publishes a new Noto Color Emoji build for every Unicode emoji
+# release. The keyboard's catalog follows Unicode, so a stale font here means
+# phones that took the "newest emoji" download still draw the new emoji as
+# empty boxes. Checks weekly and commits the new build straight to main.
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-noto-emoji
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch the newest release if it is newer
+        id: noto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/update_noto_emoji.py | tee -a "$GITHUB_OUTPUT"
+
+      - name: Refresh checksums
+        if: steps.noto.outputs.updated != ''
+        run: python3 tools/build_index.py
+
+      - name: Commit
+        if: steps.noto.outputs.updated != ''
+        env:
+          VERSION: ${{ steps.noto.outputs.updated }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898210+github-actions[bot]@users.noreply.github.com"
+          git add fonts/noto-color-emoji.ttf fonts/noto-color-emoji.json wmkeyboard-repo.json
+          git commit -m "feat(fonts): Noto Color Emoji $VERSION" \
+            -m "Published automatically from the latest googlefonts/noto-emoji release."
+          git push
