@@ -181,12 +181,14 @@ for a in range(16):
         assert (dhaka.fare(a, b) == 0) == (a == b)
         assert a == b or 20 <= dhaka.fare(a, b) <= 100
 assert dhaka.fare(0, 15) == 100 and dhaka.fare(0, 8) == 60 and dhaka.card_fare(0, 15) == 90
-assert dhaka.ride_minutes(0, 15) == 31 and dhaka.ride_minutes(0, 8) == 17
+assert dhaka.ride_minutes(0, 15) == 38 and dhaka.ride_minutes(0, 8) == 20
 # Wednesday 2026-11-18 at 06:00 Dhaka: the first train south leaves Uttara North at 06:30.
 wed_6 = ct.parse_iso("2026-11-18T00:00:00Z")
 assert dhaka.day_kind((wed_6 + dhaka.OFFSET) // 86400) == "sun_thu"
 dep, arr = dhaka.next_trains(0, 15, wed_6, 1)[0]
-assert ct.hm(dep, dhaka.ZONE) == "06:30" and arr - dep == 31 * 60, (ct.hm(dep, dhaka.ZONE), arr - dep)
+assert ct.hm(dep, dhaka.ZONE) == "06:30" and arr - dep == 37.5 * 60, (ct.hm(dep, dhaka.ZONE), arr - dep)
+# Farmgate, ten stops on at 2.5 minutes a stop: 06:55, as MetroPoth's station table has it.
+assert ct.hm(dhaka.next_trains(10, 15, wed_6, 1)[0][0], dhaka.ZONE) == "06:55"
 first, last = dhaka.first_last(15, 0, wed_6)
 assert ct.hm(first, dhaka.ZONE) == "07:15" and ct.hm(last, dhaka.ZONE) == "22:30"
 # Friday: nothing until three in the afternoon.

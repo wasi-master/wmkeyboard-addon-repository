@@ -2,13 +2,15 @@
 #
 # Sources:
 # - Timetable: DMTCL, https://dmtcl.gov.bd/pages/static-pages/6922df5f933eb65569e218ed
-#   (last updated 1 September 2026). Holiday timetables are not covered.
+#   (last updated 1 September 2026), as MetroPoth lists it,
+#   https://metropoth.com/bn/blog/dhaka-metro-rail-schedule-timings (checked
+#   6 November 2026). Holiday timetables are not covered.
 # - Fares: DTCA fare chart of 8 September 2022 (memo 35.02.0000.016.47.001.19-371),
 #   linked from https://dmtcl.gov.bd/pages/static-pages/6922df5a933eb65569e2169f.
 #   MRT Pass and Rapid Pass pay 10% less.
-# - Ride times: 17 minutes Uttara North to Agargaon and 14 minutes Agargaon to
-#   Motijheel (The Business Standard, November 2023), shared out between the
-#   stations by distance. Times at stations between the ends are estimates.
+# - Ride times: about 2.5 minutes between neighbouring stations, 38 minutes end
+#   to end (MetroPoth's station table). DMTCL publishes times only at the ends of
+#   the line, so times at the stations between are estimates.
 # - Station positions: OpenStreetMap.
 
 import clock_text
@@ -42,7 +44,6 @@ STATIONS = [
 
 NORTH_END = 0
 SOUTH_END = len(STATIONS) - 1
-AGARGAON = 8
 
 # Single-journey fares in taka, rows and columns in station order.
 FARES = [
@@ -64,11 +65,8 @@ FARES = [
     [100, 90, 90, 80, 70, 60, 60, 50, 50, 40, 30, 30, 20, 20, 20, 0],
 ]
 
-# Straight-line kilometres between neighbouring stations (OpenStreetMap),
-# only to share the two published ride times out between the stations.
-GAPS_KM = [1.07, 1.55, 2.20, 0.79, 1.23, 1.08, 0.99, 1.47, 1.37, 0.91, 1.04, 1.35, 0.87, 1.10, 1.20]
-NORTH_HALF_MIN = 17
-SOUTH_HALF_MIN = 14
+# Minutes from one station to the next, the same between every pair.
+STOP_MIN = 2.5
 
 # The timetable: (first, last, every N minutes) bands of departures from
 # the end of the line. "south" leaves Uttara North, "north" leaves Motijheel.
@@ -104,13 +102,7 @@ def _minutes(hhmm):
 
 def _offsets():
     """Minutes from Uttara North to each station."""
-    north = sum(GAPS_KM[:AGARGAON])
-    south = sum(GAPS_KM[AGARGAON:])
-    out = [0.0]
-    for i, km in enumerate(GAPS_KM):
-        share = NORTH_HALF_MIN * km / north if i < AGARGAON else SOUTH_HALF_MIN * km / south
-        out.append(out[-1] + share)
-    return out
+    return [i * STOP_MIN for i in range(len(STATIONS))]
 
 
 OFFSETS = _offsets()
