@@ -1,0 +1,22 @@
+{
+  "noto-color-emoji": {
+    "repo": "googlefonts/noto-emoji",
+    "tag": "v2026-09-24-unicode18_0"
+  },
+  "twemoji": {
+    "repo": "Nerixyz/twemoji-colr-font",
+    "tag": "v0.0.2"
+  },
+  "openmoji-color": {
+    "repo": "hfg-gmuend/openmoji",
+    "tag": "17.0.0"
+  },
+  "blobmoji": {
+    "repo": "DavidBerdik/blobmoji2",
+    "tag": "blobmoji-17r1"
+  },
+  "fluent-emoji": {
+    "repo": "tetunori/fluent-emoji-webfont",
+    "tag": "v0.8.5"
+  }
+}

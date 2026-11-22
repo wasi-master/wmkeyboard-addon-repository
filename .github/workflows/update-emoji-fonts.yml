@@ -1,0 +1,59 @@
+name: Update emoji fonts
+
+# Noto Color Emoji, Twemoji, OpenMoji, Blobmoji and Fluent Emoji are builds
+# other projects publish. The keyboard's catalog follows Unicode, so a stale
+# font here means phones that installed it draw the newest emoji as empty
+# boxes. Checks weekly; each font that has a new upstream release gets its
+# own commit on main. tools/emoji_upstreams.json records the tag published.
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-emoji-fonts
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Fluent Emoji is rebuilt by tools/slim_fluent_emoji.py to fit the
+      # app's 32 MiB emoji-font cap.
+      - run: pip install fonttools pillow
+
+      - name: Update each font that has a new release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898210+github-actions[bot]@users.noreply.github.com"
+          for id in $(python3 tools/update_emoji_fonts.py --list); do
+            if ! out=$(python3 tools/update_emoji_fonts.py --only "$id"); then
+              echo "::warning::$id: update failed, skipped"
+              git checkout -- . && git clean -fdq fonts
+              continue
+            fi
+            if [ -z "$out" ]; then
+              # A new tag with an unchanged font only moves the recorded tag.
+              if ! git diff --quiet tools/emoji_upstreams.json; then
+                git commit -q -m "chore(fonts): $id upstream tag, font unchanged" tools/emoji_upstreams.json
+              fi
+              continue
+            fi
+            python3 tools/build_index.py
+            git add fonts wmkeyboard-repo.json tools/emoji_upstreams.json
+            git commit -q -m "feat(fonts): $out" \
+              -m "Published automatically from the latest upstream release of $id."
+          done
+          git push
