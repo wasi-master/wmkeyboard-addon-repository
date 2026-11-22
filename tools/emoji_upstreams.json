@@ -18,5 +18,25 @@
   "fluent-emoji": {
     "repo": "tetunori/fluent-emoji-webfont",
     "tag": "v0.8.5"
+  },
+  "fluent-emoji@flat": {
+    "repo": "tetunori/fluent-emoji-webfont",
+    "tag": "v0.8.5"
+  },
+  "fluent-emoji@high-contrast": {
+    "repo": "tetunori/fluent-emoji-webfont",
+    "tag": "v0.8.5"
+  },
+  "noto-emoji-3d": {
+    "repo": "googlefonts/noto-emoji",
+    "tag": "v2026-09-24-unicode18_0"
+  },
+  "tossface": {
+    "repo": "toss/tossface",
+    "tag": "v1.6.1"
+  },
+  "fluent-emoji@high-contrast-light": {
+    "repo": "tetunori/fluent-emoji-webfont",
+    "tag": "v0.8.5"
   }
 }

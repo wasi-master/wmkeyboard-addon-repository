@@ -65,7 +65,8 @@ def extract_emoji_image(font_path, font_type, glyph_name, pil_font=None, cbdt_st
         return fetch_openmoji_png(glyph_name)
     return None
 
-def generate_preview(font_path, font_type, output_path, title, subtitle, bg_start, bg_end, accent_color, emoji_list=DEFAULT_EMOJI_LIST):
+def generate_preview(font_path, font_type, output_path, title, subtitle, bg_start, bg_end, accent_color, emoji_list=DEFAULT_EMOJI_LIST,
+                     card_fill=(30, 41, 59), title_color=(255, 255, 255), subtitle_color=(203, 213, 225)):
     width, height = 1080, 900
     canvas = Image.new("RGB", (width, height))
     draw = ImageDraw.Draw(canvas)
@@ -92,11 +93,11 @@ def generate_preview(font_path, font_type, output_path, title, subtitle, bg_star
 
     # Title
     title_w = draw.textlength(title, font=title_font)
-    draw.text(((width - title_w) // 2, 60), title, fill=(255, 255, 255), font=title_font)
+    draw.text(((width - title_w) // 2, 60), title, fill=title_color, font=title_font)
 
     # Subtitle
     sub_w = draw.textlength(subtitle, font=subtitle_font)
-    draw.text(((width - sub_w) // 2, 135), subtitle, fill=(203, 213, 225), font=subtitle_font)
+    draw.text(((width - sub_w) // 2, 135), subtitle, fill=subtitle_color, font=subtitle_font)
 
     # Divider line
     draw.line([(120, 185), (width - 120, 185)], fill=(71, 85, 105), width=2)
@@ -119,7 +120,7 @@ def generate_preview(font_path, font_type, output_path, title, subtitle, bg_star
         draw.rounded_rectangle(
             [x, y, x + card_w, y + card_h],
             radius=16,
-            fill=(30, 41, 59),
+            fill=card_fill,
             outline=accent_color,
             width=2
         )
@@ -144,6 +145,53 @@ def generate_preview(font_path, font_type, output_path, title, subtitle, bg_star
 
 def main():
     configs = [
+        {
+            "font_path": FONTS_DIR / "noto-emoji-3d.ttf",
+            "font_type": "cbdt",
+            "output_path": PREVIEWS_DIR / "noto-emoji-3d.jpg",
+            "title": "Noto Emoji 3D",
+            "subtitle": "Google's new 3D emoji, drawn on every Android version",
+            "bg_start": (15, 23, 42),
+            "bg_end": (67, 56, 202),
+            "accent_color": (165, 180, 252),
+            "emoji_list": DEFAULT_EMOJI_LIST
+        },
+        {
+            "font_path": FONTS_DIR / "fluent-emoji-flat.ttf",
+            "font_type": "cbdt",
+            "output_path": PREVIEWS_DIR / "fluent-emoji-flat.jpg",
+            "title": "Fluent Emoji Flat",
+            "subtitle": "Microsoft's emoji in their flat style",
+            "bg_start": (15, 23, 42),
+            "bg_end": (49, 46, 129),
+            "accent_color": (129, 140, 248),
+            "emoji_list": DEFAULT_EMOJI_LIST
+        },
+        {
+            "font_path": FONTS_DIR / "fluent-emoji-high-contrast.ttf",
+            "font_type": "cbdt",
+            "output_path": PREVIEWS_DIR / "fluent-emoji-high-contrast.jpg",
+            "title": "Fluent Emoji High Contrast",
+            "subtitle": "Black lines, for light keyboards",
+            "bg_start": (241, 245, 249),
+            "bg_end": (203, 213, 225),
+            "accent_color": (71, 85, 105),
+            "emoji_list": DEFAULT_EMOJI_LIST,
+            "card_fill": (255, 255, 255),
+            "title_color": (15, 23, 42),
+            "subtitle_color": (71, 85, 105)
+        },
+        {
+            "font_path": FONTS_DIR / "fluent-emoji-high-contrast-inverted.ttf",
+            "font_type": "cbdt",
+            "output_path": PREVIEWS_DIR / "fluent-emoji-high-contrast-inverted.jpg",
+            "title": "Fluent Emoji High Contrast",
+            "subtitle": "White lines, for dark keyboards",
+            "bg_start": (15, 23, 42),
+            "bg_end": (51, 65, 85),
+            "accent_color": (148, 163, 184),
+            "emoji_list": DEFAULT_EMOJI_LIST
+        },
         {
             "font_path": FONTS_DIR / "noto-color-emoji.ttf",
             "font_type": "cbdt",

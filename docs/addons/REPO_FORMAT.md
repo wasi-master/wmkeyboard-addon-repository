@@ -108,6 +108,8 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | `licenseText` | | Full licence text, inline. |
 | `licenseFile` | | Licence text as a file, relative or absolute; fetched when the user opens it. |
 | `localizations` | | The same `dictionary`, `emoji_keywords` or `vocabulary` addon in other languages, one payload each. See [Localized addons](#localized-addons). Ignored for every other type. |
+| `variants` | | Other builds of the same addon for the user to choose between, such as an emoji font in 3D, flat and high-contrast styles. See [Addons with variants](#addons-with-variants). Ignored for the per-language types, whose choices are `localizations`. |
+| `variantName` | | What the entry's own payload is called among its `variants`, such as `"3D"`. Defaults to "Standard". |
 | `requires` | | Ids of other entries **in this same manifest** the addon was designed with — a theme naming its font and sound. Soft: the install screen offers to download them together, and skipping them still installs a working addon that falls back to the user's global choices. Unresolvable ids are ignored. |
 
 ### Licensing
@@ -201,6 +203,55 @@ list. An older app ignores `localizations` and offers the base list alone.
 Because the install key of the base list is `<repoId>/<id>`, keep an existing
 entry's `id` when adding languages to it. Renaming it orphans every install.
 
+### Addons with variants
+
+Some addons come in several builds of the same thing: Fluent Emoji in its 3D,
+flat and high-contrast sets, or an emoji font at two picture sizes. Publish them
+as one entry. The entry's own `path` is the first build, named by `variantName`,
+and each item in `variants` adds another:
+
+```json
+{
+  "id": "fluent-emoji",
+  "type": "emoji_font",
+  "name": "Fluent Emoji",
+  "version": "1.1.0",
+  "path": "fonts/fluent-emoji.ttf",
+  "variantName": "3D",
+  "license": "MIT",
+  "variants": [
+    { "id": "flat", "name": "Flat", "path": "fonts/fluent-emoji-flat.ttf",
+      "previews": ["previews/fluent-emoji-flat.jpg"] },
+    { "id": "high-contrast", "name": "High contrast", "path": "fonts/fluent-emoji-high-contrast.ttf",
+      "description": "Black and white, with strong outlines." }
+  ]
+}
+```
+
+| Field | Req | Notes |
+|---|---|---|
+| `id` | ✔ | Unique within the entry. Letters, digits, `.`, `_` and `-`. Never reuse one: it is part of the install key. |
+| `path` | ✔ | This build's payload, resolved like the entry's own `path`. |
+| `name` | | What the user picks it by. Defaults to `id`. |
+| `sha256`, `sizeBytes` | | As on the entry, for this payload. |
+| `version` | | Semver for this build alone. Defaults to the entry's `version`. |
+| `description` | | One line on what sets this build apart, shown in its row. |
+| `previews` | | Screenshots of this build. The addon's page shows every variant's screenshots together. |
+| `minAppVersion` | | An app floor for this build alone, such as a file larger than older apps accept. |
+
+Everything else (type, author, licence, tags, `requires`) is the entry's. A
+variant with no `path`, a malformed `id`, or an `id` used twice is dropped, and
+the rest of the addon still loads.
+
+The app shows one card. On the addon's page, each build is a row with its own
+install, update and uninstall, tracked under `<repoId>/<id>@<variant id>` and
+installed under the entry's name with the variant's after it, as in
+"Fluent Emoji (Flat)". The user can install one, several, or all of them with
+**Install all**, and switch between installed ones wherever that type is
+chosen. The download arrow on the card installs the entry's own build. An older
+app ignores `variants` and offers the entry's own build alone, so keep that one
+a complete addon.
+
 ## 4. Path & URL resolution (hybrid model)
 
 `path`, `previews[]` and `repo.icon` are each **either**:
@@ -230,7 +281,7 @@ Relative paths resolve against that manifest URL's directory. **`https` only** �
 | `stickers` | `*.wmstickers` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-stickers"`, `"version":1`, `pack` metadata with its `stickers[]`) and the image files under `stickers/`. See [Sticker packs](#sticker-packs). |
 | `icon_pack` | `*.wmicons` | ZIP archive containing a `pack.json` envelope (`"format":"wmkeyboard-icons"`, `"version":1`, `pack` metadata) and one SVG per replaced icon under `icons/`, named for its slot. See [Icon packs](#icon-packs). |
 | `font` | `*.ttf`, `*.otf` | Standard TrueType or OpenType font file used for keyboard key labels and text typography. Declare `langIds` when the face only covers some scripts. |
-| `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. |
+| `emoji_font` | `*.ttf`, `*.otf` | A font whose glyphs are emoji — Twemoji, OpenMoji and the like. Same file format as `font`, kept a separate type because it is chosen in a different place (Emoji settings, not the key-label pickers) and because a colour emoji font on the key labels is not a choice anyone makes on purpose. Colour builds (`COLR`/`CBDT`) draw in colour on Android 8+; a monochrome outline build takes the keyboard's text colour. **Installing one switches to it**, since there is exactly one slot it can go in. Up to 256 MB (64 MB for a `font`); apps before version code 46 take 64 MB, so give a larger build `"minAppVersion": 46`. |
 | `sound` | `*.mp3` | A single short key-press sound. Keep it under ~300 ms and a few tens of KB: it is loaded into a `SoundPool` and replayed on every keystroke. |
 | `plugin` | `*.wmplugin` | ZIP archive containing a `plugin.json` manifest (`"format":"wmkeyboard-plugin"`) and a Python script. **The only payload that is code rather than data** — see [Plugins](#plugins). |
 | `vocabulary` | `*.wmvocab.json` (may be gzipped as `.wmvocab.json.gz`) | Envelope `{ "format":"wmkeyboard-vocab", "version":1, "pack": { "id", "name", "langId", … }, "words": [ { "word", "pos", "ipa", "senses", "synonyms", "antonyms", "triggers", … } ] }` — the app's own vocabulary-pack format, the same file it writes when you export a list you made in the app. **`langId` is required**, like a dictionary. The full record shape is documented in the [wmkeyboard-data repository](https://github.com/wasi-master/wmkeyboard-data/tree/main/vocab). |

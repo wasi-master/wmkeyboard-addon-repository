@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-21"
+    "updatedAt": "2026-11-22"
   },
   "addons": [
     {
@@ -858,12 +858,35 @@
       "path": "fonts/noto-color-emoji.ttf",
       "sha256": "15671215ab769fdc7162a045d56fd7d7e477c51b04e6b3c761d914d8fdd6cc44",
       "sizeBytes": 10730124,
-      "minAppVersion": 3,
       "previews": [
         "previews/noto-color-emoji.jpg"
       ],
+      "minAppVersion": 3,
       "license": "OFL-1.1",
       "licenseFile": "fonts/NOTO-COLOR-EMOJI-LICENSE.txt"
+    },
+    {
+      "id": "noto-emoji-3d",
+      "type": "emoji_font",
+      "name": "Noto Emoji 3D",
+      "version": "2.57.0",
+      "author": "Google",
+      "description": "Google's new 3D emoji, with the same coverage as Noto Color Emoji. Google publishes them in a format Android cannot draw, so this build moves the pictures into Noto Color Emoji's bitmap font.",
+      "tags": [
+        "emoji",
+        "colour",
+        "google",
+        "noto",
+        "3d"
+      ],
+      "path": "fonts/noto-emoji-3d.ttf",
+      "sha256": "8cbf0aede573929f7714a5df999ebf6eded8b87d0ca651ea444b18449ab4e58b",
+      "sizeBytes": 18735852,
+      "previews": [
+        "previews/noto-emoji-3d.jpg"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/NOTO-EMOJI-3D-LICENSE.txt"
     },
     {
       "id": "twemoji",
@@ -962,7 +985,7 @@
       "name": "Fluent Emoji",
       "version": "1.1.0",
       "author": "Microsoft Corporation and tetunori",
-      "description": "Microsoft's modern, friendly 3D emoji collection as a colour font. Built as a bitmap (CBDT) face so it draws on every Android version, and slimmed to fit the 32 MB emoji-font cap.",
+      "description": "Microsoft's modern, friendly emoji collection as a colour font, in its 3D and flat styles and two high-contrast outline styles. Built as bitmap (CBDT) faces so they draw on every Android version.",
       "tags": [
         "emoji",
         "colour",
@@ -977,7 +1000,66 @@
         "previews/fluent-emoji.jpg"
       ],
       "license": "MIT",
-      "licenseFile": "fonts/FLUENT-EMOJI-LICENSE.txt"
+      "licenseFile": "fonts/FLUENT-EMOJI-LICENSE.txt",
+      "variantName": "3D",
+      "variants": [
+        {
+          "id": "flat",
+          "name": "Flat",
+          "description": "The flat, two-dimensional version of the same set.",
+          "path": "fonts/fluent-emoji-flat.ttf",
+          "sha256": "8497191ff76954dcc376eb2cd20669604493a1da735f90b9dd3b6bb8c45be8da",
+          "sizeBytes": 12871900,
+          "previews": [
+            "previews/fluent-emoji-flat.jpg"
+          ]
+        },
+        {
+          "id": "high-contrast",
+          "name": "High contrast, dark lines",
+          "description": "Black outlines with no fill, for light keyboards.",
+          "path": "fonts/fluent-emoji-high-contrast.ttf",
+          "sha256": "d440ede37b18cbb598db78d86bcd042b434777ac60177e548c138a76516d3668",
+          "sizeBytes": 12220000,
+          "previews": [
+            "previews/fluent-emoji-high-contrast.jpg"
+          ]
+        },
+        {
+          "id": "high-contrast-light",
+          "name": "High contrast, light lines",
+          "description": "White outlines with no fill, for dark keyboards.",
+          "path": "fonts/fluent-emoji-high-contrast-inverted.ttf",
+          "sha256": "9188588112290f526dfee594480b0a7a83404e354313868935da97baa8bd6850",
+          "sizeBytes": 10783736,
+          "previews": [
+            "previews/fluent-emoji-high-contrast-inverted.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tossface",
+      "type": "emoji_font",
+      "name": "Tossface",
+      "version": "1.6.1",
+      "author": "Toss team (Viva Republica)",
+      "description": "Toss's simple, flat emoji set from Korea, drawn to stay clear at small sizes. Covers emoji up to Unicode 15.0; newer ones are drawn in your phone's own emoji font. A few emoji are Toss's own designs rather than the standard picture. Downloaded unmodified from Toss's GitHub release.",
+      "tags": [
+        "emoji",
+        "colour",
+        "tossface",
+        "korean",
+        "flat"
+      ],
+      "path": "https://github.com/toss/tossface/releases/download/v1.6.1/TossFaceFontWeb.otf",
+      "sha256": "e99b8642c24631f550aaa90644a17dc164367a79fc7c1584b1ea254b41db770b",
+      "sizeBytes": 6042748,
+      "previews": [
+        "previews/tossface.jpg"
+      ],
+      "license": "Tossface License",
+      "licenseFile": "fonts/TOSSFACE-LICENSE.txt"
     },
     {
       "id": "undraw-illustrations",

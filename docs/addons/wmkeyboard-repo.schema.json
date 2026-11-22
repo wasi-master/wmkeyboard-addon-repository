@@ -227,6 +227,17 @@
             "type": "string"
           },
           "description": "Ids of other entries in this same manifest the addon was designed with (a theme naming its font and sound). Soft dependencies: the install screen offers to download them together, and skipping them still installs a working addon that falls back to the user's global choices. Unresolvable ids are ignored."
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/variant"
+          },
+          "description": "Other builds of the same addon for the user to choose between (an emoji font in 3D, flat and high-contrast styles). The entry's own path is the first, named by variantName. Each installs as its own variant under <repoId>/<id>@<variant id>. Ignored for the per-language types and by app versions that predate it, which offer the entry's own build alone."
+        },
+        "variantName": {
+          "type": "string",
+          "description": "What the entry's own payload is called among its variants, such as 3D. Defaults to Standard."
         }
       },
       "allOf": [
@@ -245,6 +256,59 @@
           }
         }
       ]
+    },
+    "variant": {
+      "type": "object",
+      "required": [
+        "id",
+        "path"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "description": "Unique within the entry. Part of the install key <repoId>/<id>@<variant id>, so never reuse one."
+        },
+        "name": {
+          "type": "string",
+          "description": "What the user picks this build by. Defaults to id."
+        },
+        "path": {
+          "type": "string",
+          "description": "This build's payload, resolved like the entry's own path."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Optional lowercase hex SHA-256 of this payload."
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optional payload size."
+        },
+        "version": {
+          "type": "string",
+          "description": "Semver for this build alone. Defaults to the entry's version."
+        },
+        "description": {
+          "type": "string",
+          "description": "One line on what sets this build apart."
+        },
+        "previews": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Screenshots of this build. Defaults to the entry's."
+        },
+        "minAppVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "App versionCode floor for this build alone."
+        }
+      }
     }
   }
 }

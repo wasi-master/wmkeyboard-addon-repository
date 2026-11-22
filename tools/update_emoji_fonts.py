@@ -109,12 +109,24 @@ class Upstream:
     and returns None (Fluent, which goes through the slimming script).
     ``version(release, data)`` returns the version to publish, or None to bump
     the patch of the current one.
+
+    ``variant`` names one of the entry's ``variants[]`` instead of the entry's
+    own payload. ``remote(release)`` is for a file published unmodified: the
+    manifest points at the upstream URL instead of a copy here (too big for a
+    git repository, or a licence that allows only the original), and the
+    script downloads it only to record its checksum and size.
     """
 
     id: str
     repo: str
     fetch: Callable[[dict], bytes | None]
     version: Callable[[dict, bytes | None], str | None]
+    variant: str | None = None
+    remote: Callable[[dict], str] | None = None
+
+    @property
+    def key(self) -> str:
+        return f"{self.id}@{self.variant}" if self.variant else self.id
 
 
 # ---- per-font sources ----
@@ -158,19 +170,45 @@ def _blobmoji_version(release: dict, _data: bytes | None) -> str | None:
     return f"{m[1]}.0.{int(m[2]) - 1}" if m else None
 
 
-def _fluent_fetch(release: dict) -> None:
-    raw = _get(f"https://raw.githubusercontent.com/tetunori/fluent-emoji-webfont/{release['tag_name']}/dist/FluentEmojiColor.ttf")
-    _font(raw, "fluent")
+def _fluent(dist: str, target: str) -> Callable[[dict], None]:
+    """Fetch one of tetunori's builds at the tag and slim it into ``target``."""
+    def fetch(release: dict) -> None:
+        raw = _get(f"https://raw.githubusercontent.com/tetunori/fluent-emoji-webfont/{release['tag_name']}/dist/{dist}")
+        _font(raw, "fluent")
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import slim_fluent_emoji  # needs fontTools + Pillow
+
+        with tempfile.NamedTemporaryFile(suffix=".ttf") as tmp:
+            tmp.write(raw)
+            tmp.flush()
+            # Its report goes to stderr: stdout is what the workflow reads.
+            with contextlib.redirect_stdout(sys.stderr):
+                slim_fluent_emoji.main(tmp.name, ROOT / target)
+        return None
+    return fetch
+
+
+def _noto_3d_fetch(release: dict) -> None:
+    # The 3D fonts are in Git LFS, so raw.githubusercontent.com serves only
+    # the pointer; media.githubusercontent.com serves the file. They are sbix,
+    # which Android does not draw, so build_noto_3d.py moves the pictures into
+    # the 2D font of the same release (updated earlier in this run).
+    raw = _get(f"https://media.githubusercontent.com/media/googlefonts/noto-emoji/{release['tag_name']}/3D/fonts/Noto-3D-128.ttf")
+    _font(raw, "noto-emoji-3d")
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    import slim_fluent_emoji  # needs fontTools + Pillow
+    import build_noto_3d  # needs fontTools + Pillow
 
     with tempfile.NamedTemporaryFile(suffix=".ttf") as tmp:
         tmp.write(raw)
         tmp.flush()
-        # Its report goes to stderr: stdout is what the workflow reads.
         with contextlib.redirect_stdout(sys.stderr):
-            slim_fluent_emoji.main(tmp.name)
+            build_noto_3d.build(tmp.name, str(ROOT / "fonts/noto-color-emoji.ttf"),
+                                ROOT / "fonts/noto-emoji-3d.ttf", palette=True)
     return None
+
+
+def _release_asset(repo: str, name: str) -> Callable[[dict], str]:
+    return lambda r: f"https://github.com/{repo}/releases/download/{r['tag_name']}/{name}"
 
 
 UPSTREAMS = [
@@ -182,8 +220,21 @@ UPSTREAMS = [
              lambda r: _font(_openmoji_fetch(r), "openmoji"), lambda r, d: semver(r["tag_name"])),
     Upstream("blobmoji", "DavidBerdik/blobmoji2",
              lambda r: _font(_asset(r, "NotoColorEmoji.ttf"), "blobmoji"), _blobmoji_version),
-    Upstream("fluent-emoji", "tetunori/fluent-emoji-webfont", _fluent_fetch,
-             lambda r, d: None),
+    Upstream("fluent-emoji", "tetunori/fluent-emoji-webfont",
+             _fluent("FluentEmojiColor.ttf", "fonts/fluent-emoji.ttf"), lambda r, d: None),
+    Upstream("fluent-emoji", "tetunori/fluent-emoji-webfont",
+             _fluent("FluentEmojiFlat.ttf", "fonts/fluent-emoji-flat.ttf"), lambda r, d: None,
+             variant="flat"),
+    Upstream("fluent-emoji", "tetunori/fluent-emoji-webfont",
+             _fluent("FluentEmojiHighContrast.ttf", "fonts/fluent-emoji-high-contrast.ttf"), lambda r, d: None,
+             variant="high-contrast"),
+    Upstream("fluent-emoji", "tetunori/fluent-emoji-webfont",
+             _fluent("FluentEmojiHighContrastInverted.ttf", "fonts/fluent-emoji-high-contrast-inverted.ttf"),
+             lambda r, d: None, variant="high-contrast-light"),
+    Upstream("noto-emoji-3d", "googlefonts/noto-emoji", _noto_3d_fetch,
+             lambda r, d: head_revision(d)),
+    Upstream("tossface", "toss/tossface", lambda r: None,
+             lambda r, d: semver(r["tag_name"]), remote=_release_asset("toss/tossface", "TossFaceFontWeb.otf")),
 ]
 
 
@@ -198,31 +249,57 @@ def _dump(path: Path, value) -> None:
 def update(up: Upstream, check: bool) -> str | None:
     """Returns "<name> <version>" when the font was (or, with check, would be) updated."""
     state = _load(STATE)
-    recorded = state.get(up.id, {}).get("tag")
+    recorded = state.get(up.key, {}).get("tag")
     release = _api(f"{up.repo}/releases/latest")
     tag = release["tag_name"]
     manifest = _load(MANIFEST)
     entry = next(a for a in manifest["addons"] if a["id"] == up.id)
-    print(f"{up.id}: published {entry['version']} from {recorded}, upstream latest {tag}", file=sys.stderr)
+    # The object whose path and version change: the entry, or one variant.
+    holder = next(v for v in entry["variants"] if v["id"] == up.variant) if up.variant else entry
+    name = f"{entry['name']} ({holder.get('name') or up.variant})" if up.variant else entry["name"]
+    old = holder.get("version") or entry["version"]
+    print(f"{up.key}: published {old} from {recorded}, upstream latest {tag}", file=sys.stderr)
     if tag == recorded:
         return None
     if check:
-        return f"{entry['name']} {tag}"
+        return f"{name} {tag}"
 
-    state[up.id] = {"repo": up.repo, "tag": tag}
-    payload = ROOT / entry["path"]
-    before = payload.read_bytes()
-    data = up.fetch(release)
-    if data is not None:
-        if data == before:
-            # A new tag with the same font in it: nothing for phones to fetch.
+    state[up.key] = {"repo": up.repo, "tag": tag}
+    if up.remote:
+        url = up.remote(release)
+        data = _font(_get(url), up.key)
+        if holder.get("sha256") == hashlib.sha256(data).hexdigest():
             _dump(STATE, state)
             return None
-        payload.write_bytes(data)
-    old = entry["version"]
-    upstream = up.version(release, data if data is not None else payload.read_bytes())
+        holder["path"] = url
+        holder["sha256"] = hashlib.sha256(data).hexdigest()
+        holder["sizeBytes"] = len(data)
+    else:
+        payload = ROOT / holder["path"]
+        before = payload.read_bytes()
+        data = up.fetch(release)
+        if data is not None:
+            if data == before:
+                # A new tag with the same font in it: nothing for phones to fetch.
+                _dump(STATE, state)
+                return None
+            payload.write_bytes(data)
+        else:
+            data = payload.read_bytes()
+    upstream = up.version(release, data)
     new = upstream if upstream and version_key(upstream) > version_key(old) else bump_patch(old)
 
+    if up.variant:
+        # A variant has a version of its own only once one differs from the
+        # entry's; build_index and the app fall back to the entry's.
+        holder["version"] = new
+        _dump(MANIFEST, manifest)
+        _dump(STATE, state)
+        return f"{name} {new}"
+    # Variants without a version of their own inherit the entry's; pin them
+    # to it first, or this bump would offer every variant as an update too.
+    for variant in entry.get("variants", []):
+        variant.setdefault("version", old)
     entry["version"] = new
     licence = entry.get("licenseFile")
     text = (ROOT / licence).read_text(encoding="utf-8") if licence else None
@@ -238,17 +315,17 @@ def update(up: Upstream, check: bool) -> str | None:
     _dump(MANIFEST, manifest)
     if text is not None:
         (ROOT / licence).write_text(text, encoding="utf-8")
-    sidecar = payload.with_suffix(".json")
-    if sidecar.exists():
+    sidecar = (ROOT / entry["path"]).with_suffix(".json")
+    if not up.remote and sidecar.exists():
         side = _load(sidecar)
         side["version"] = new
-        blob = payload.read_bytes()
+        blob = (ROOT / entry["path"]).read_bytes()
         side["sizeBytes"] = len(blob)
         side["sha256"] = hashlib.sha256(blob).hexdigest()
         _dump(sidecar, side)
 
     _dump(STATE, state)
-    return f"{entry['name']} {new}"
+    return f"{name} {new}"
 
 
 def main() -> int:
@@ -259,9 +336,9 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.list:
-        print("\n".join(up.id for up in UPSTREAMS))
+        print("\n".join(up.key for up in UPSTREAMS))
         return 0
-    targets = [up for up in UPSTREAMS if args.only in (None, up.id)]
+    targets = [up for up in UPSTREAMS if args.only in (None, up.key)]
     if not targets:
         raise SystemExit(f"unknown id {args.only}")
     behind = False

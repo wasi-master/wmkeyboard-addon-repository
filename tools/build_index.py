@@ -52,10 +52,17 @@ FIELD_ORDER = [
     "licenseFile",
     "requires",
     "localizations",
+    "variantName",
+    "variants",
 ]
 
 # The order each localizations[] item is written back in.
 LOCALIZATION_FIELD_ORDER = ["locale", "name", "description", "version", "path", "sha256", "sizeBytes"]
+
+# The order each variants[] item is written back in.
+VARIANT_FIELD_ORDER = [
+    "id", "name", "description", "version", "path", "sha256", "sizeBytes", "previews", "minAppVersion",
+]
 
 # Where each type's payloads conventionally live, used only to spot files that
 # exist but were never indexed. The manifest's `path` is what actually locates a
@@ -92,6 +99,11 @@ def ordered(entry: dict, order: list[str] = FIELD_ORDER) -> dict:
         result["localizations"] = [
             ordered(item, LOCALIZATION_FIELD_ORDER) if isinstance(item, dict) else item
             for item in result["localizations"]
+        ]
+    if isinstance(result.get("variants"), list):
+        result["variants"] = [
+            ordered(item, VARIANT_FIELD_ORDER) if isinstance(item, dict) else item
+            for item in result["variants"]
         ]
     return result
 
@@ -166,6 +178,11 @@ def main() -> int:
         refresh(ident, entry, args, changes, problems, indexed)
         for item in entry.get("localizations", []):
             refresh(f"{ident}@{item.get('locale', '?')}", item, args, changes, problems, indexed)
+        for item in entry.get("variants", []):
+            refresh(f"{ident}@{item.get('id', '?')}", item, args, changes, problems, indexed)
+            for preview in item.get("previews", []):
+                if not is_remote(preview) and not (ROOT / preview).is_file():
+                    problems.append(f"{ident}@{item.get('id', '?')}: preview does not exist — {preview}")
 
         for preview in entry.get("previews", []):
             if not is_remote(preview) and not (ROOT / preview).is_file():

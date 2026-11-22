@@ -290,6 +290,45 @@ def check_localizations(
             check_payload_checksums(where, payload, item, errors, warnings)
 
 
+VARIANT_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+
+
+def check_variants(ident: str, entry: dict, errors: list[str], warnings: list[str]) -> None:
+    """Check each ``variants[]`` item the way the app's codec filters them."""
+    variants = entry.get("variants")
+    if not variants:
+        return
+    kind = entry.get("type", "")
+    if kind in LOCALIZABLE_TYPES:
+        warnings.append(f"{ident}: variants are ignored for type {kind} — use localizations")
+        return
+    seen: set[str] = set()
+    for index, item in enumerate(variants):
+        vid = item.get("id", "")
+        where = f"{ident}@{vid or index}"
+        if not VARIANT_ID.fullmatch(vid):
+            errors.append(f"{where}: malformed variant id {vid!r} — the app drops it")
+            continue
+        if vid.lower() in seen:
+            errors.append(f"{where}: duplicate variant id — the app keeps only the first")
+        seen.add(vid.lower())
+        path = item.get("path", "")
+        if not path:
+            errors.append(f"{where}: no path — the app drops it")
+            continue
+        payload = check_asset(f"{where}.path", path, errors, warnings)
+        suffix = EXPECTED_SUFFIX.get(kind)
+        if suffix and not is_remote(path) and not path.endswith(suffix):
+            expected = suffix if isinstance(suffix, str) else " or ".join(suffix)
+            warnings.append(f"{where}: type {kind} usually ends in {expected} — got {path}")
+        if payload is not None:
+            check_payload_checksums(where, payload, item, errors, warnings)
+            if kind == "emoji_font":
+                check_emoji_font(where, payload, errors, warnings)
+        for preview in item.get("previews", []):
+            check_asset(f"{where}.previews", preview, errors, warnings)
+
+
 def check_icon_pack(ident: str, payload: Path, errors: list[str], warnings: list[str]) -> None:
     """Validate .wmicons ZIP structure, SVG XML, width/height, and arc path data formatting."""
     import re
@@ -576,6 +615,7 @@ def main() -> int:
             errors.append(f"{ident}: dictionaries must declare a langId")
 
         check_localizations(ident, entry, lang_ids, errors, warnings)
+        check_variants(ident, entry, errors, warnings)
 
         # Not required, but an addon whose licence nobody can find is one
         # nobody can safely reuse — and for a font or an icon set that is the
