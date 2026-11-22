@@ -134,7 +134,7 @@ for case in CASES:
 
 expect("un-hex keeps what is not hex", run("hex_decode", "48 zz 69"), "Hzzi")
 expect("un-base64 of junk", run("b64_decode", "!!"), "")
-# U+FFFD written as itself: wm-python reads no \\u escapes in literals.
+# U+FFFD written as itself: wm-python reads no \u escapes in literals.
 expect("bad UTF-8 becomes U+FFFD", run("hex_decode", "ff41"), "�A")
 expect("upper", run("upper", "abc def"), "ABC DEF")
 expect("lower", run("lower", "ABC DEF"), "abc def")
