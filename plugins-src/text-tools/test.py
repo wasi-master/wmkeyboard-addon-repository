@@ -101,10 +101,20 @@ def expect(what, got, want):
         fails.append(what + ": expected " + repr(want) + ", got " + repr(got))
 
 
+def shown():
+    # What the panel shows as the result. load() hands back the module's
+    # globals as they were after loading, so a global the plugin reassigns
+    # later reads stale there; render() sees the live value.
+    for node in plugin["render"]()["children"]:
+        if node["type"] == "output" and node["id"] == "out":
+            return node["text"]
+    return ""
+
+
 def run(action, text):
     plugin["on_event"]({"type": "input_changed", "id": "text", "value": text})
     plugin["on_event"]({"type": "click", "id": action})
-    return plugin["output"]
+    return shown()
 
 
 CASES = [
@@ -124,7 +134,8 @@ for case in CASES:
 
 expect("un-hex keeps what is not hex", run("hex_decode", "48 zz 69"), "Hzzi")
 expect("un-base64 of junk", run("b64_decode", "!!"), "")
-expect("bad UTF-8 becomes U+FFFD", run("hex_decode", "ff41"), "\uFFFDA")
+# U+FFFD written as itself: wm-python reads no \\u escapes in literals.
+expect("bad UTF-8 becomes U+FFFD", run("hex_decode", "ff41"), "�A")
 expect("upper", run("upper", "abc def"), "ABC DEF")
 expect("lower", run("lower", "ABC DEF"), "abc def")
 expect("title", run("title", "don't STOP 3rd time"), "Don't Stop 3Rd Time")
@@ -134,7 +145,7 @@ expect("count nothing", run("stats", ""), "0 characters\n0 letters\n0 words\n0 l
 
 plugin["on_event"]({"type": "click", "id": "clear"})
 expect("clear empties the box", writes[-1], ["text", ""])
-expect("clear empties the result", plugin["output"], "")
+expect("clear empties the result", shown(), "")
 
 if fails:
     for message in fails:
