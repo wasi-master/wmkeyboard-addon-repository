@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 env:
-  # TODO: replace with the WMKeyboard commit that ships wm-python-cli
-  # (native/wm-python-cli), before the first push of the Python plugins.
-  WM_PYTHON_REV: REPLACE_WITH_WMKEYBOARD_SHA
+  # The WMKeyboard commit whose wm-python the plugin tests run on. Move it
+  # forward with the app, so the tests run on the interpreter people have.
+  WM_PYTHON_REV: 2913f7f8b9f7b1cd62dc2fe7ce8b3f24ea5ce4ec
 
 jobs:
   validate:
