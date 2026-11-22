@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
+from urllib.parse import quote
+
+# The docs site's /open/ page. WM Keyboard claims it as an App Link, so on a
+# phone with the app the link opens the addon's page in the app; anywhere else
+# the page loads and offers an "Open in WM Keyboard" button.
+OPEN_PAGE = "https://wmkeyboard.app/open/"
+REPO_URL = "https://github.com/wasi-master/wmkeyboard-addon-repository"
+
+
+def open_link(addon_id=None):
+    link = f"{OPEN_PAGE}?repo={quote(REPO_URL, safe='')}"
+    return link if addon_id is None else f"{link}&id={quote(addon_id, safe='')}"
+
 
 ROOT = Path(__file__).resolve().parent.parent
 manifest = json.loads((ROOT / "wmkeyboard-repo.json").read_text(encoding="utf-8"))
@@ -22,7 +35,7 @@ for a in addons:
 
     file_link = f"[`{path}`]({path})"
 
-    rows.append(f"| **{name}** | `{atype}` | {desc} | {prev_md} | {file_link} |")
+    rows.append(f"| **{name}** | `{atype}` | {desc} | {prev_md} | [Open]({open_link(aid)}) | {file_link} |")
 
 table_md = "\n".join(rows)
 
@@ -37,10 +50,12 @@ readme_content = f"""<div align="center">
 ## Addons Catalog
 
 To add this repository in **WM Keyboard**, open **Settings → Addons → Add repository** and paste the repository URL:
-`https://github.com/wasi-master/wmkeyboard-addon-repository`
+`https://github.com/wasi-master/wmkeyboard-addon-repository`, or [open it in the app]({open_link()}).
 
-| Addon | Type | Description | Preview | Payload File |
-|---|---|---|---|---|
+On a phone with WM Keyboard, an addon's **Open** link goes straight to its page in the app, where you tap Install. Elsewhere it opens a page with an **Open in WM Keyboard** button.
+
+| Addon | Type | Description | Preview | Open in app | Payload File |
+|---|---|---|---|---|---|
 {table_md}
 
 Everything is indexed by [`wmkeyboard-repo.json`](wmkeyboard-repo.json) at the repository root.

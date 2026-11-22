@@ -52,7 +52,8 @@ jobs:
               continue
             fi
             python3 tools/build_index.py
-            git add fonts wmkeyboard-repo.json tools/emoji_upstreams.json
+            python3 tools/gen_readme.py
+            git add fonts wmkeyboard-repo.json tools/emoji_upstreams.json README.md
             git commit -q -m "feat(fonts): $out" \
               -m "Published automatically from the latest upstream release of $id."
           done
