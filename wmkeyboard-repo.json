@@ -859,6 +859,9 @@
       "sha256": "15671215ab769fdc7162a045d56fd7d7e477c51b04e6b3c761d914d8fdd6cc44",
       "sizeBytes": 10730124,
       "minAppVersion": 3,
+      "previews": [
+        "previews/noto-color-emoji.jpg"
+      ],
       "license": "OFL-1.1",
       "licenseFile": "fonts/NOTO-COLOR-EMOJI-LICENSE.txt"
     },

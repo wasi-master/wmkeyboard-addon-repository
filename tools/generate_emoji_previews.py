@@ -145,6 +145,17 @@ def generate_preview(font_path, font_type, output_path, title, subtitle, bg_star
 def main():
     configs = [
         {
+            "font_path": FONTS_DIR / "noto-color-emoji.ttf",
+            "font_type": "cbdt",
+            "output_path": PREVIEWS_DIR / "noto-color-emoji.jpg",
+            "title": "Noto Color Emoji",
+            "subtitle": "Google's standard Android emoji, current release",
+            "bg_start": (15, 23, 42),
+            "bg_end": (30, 58, 138),
+            "accent_color": (96, 165, 250),
+            "emoji_list": DEFAULT_EMOJI_LIST
+        },
+        {
             "font_path": FONTS_DIR / "blobmoji.ttf",
             "font_type": "cbdt",
             "output_path": PREVIEWS_DIR / "blobmoji.jpg",
