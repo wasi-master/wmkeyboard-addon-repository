@@ -1177,7 +1177,7 @@
       "id": "noto-sans-bengali",
       "type": "font",
       "name": "Noto Sans Bengali (variable)",
-      "version": "3.11.0",
+      "version": "3.11.1",
       "author": "Google",
       "description": "The variable build of Noto Sans Bengali, the face the keyboard draws Bengali in by default, with Weight 100 to 900 and Width 62.5 to 100. Pick it for Bengali to tune the weight and width of every key, or to let a theme's font motion move Bengali labels.",
       "tags": [
@@ -1194,8 +1194,7 @@
         "previews/noto-sans-bengali-grid.jpg"
       ],
       "langIds": [
-        "bn",
-        "en"
+        "bn"
       ],
       "license": "OFL-1.1",
       "licenseFile": "fonts/OFL-LICENSE.txt"
@@ -1204,7 +1203,7 @@
       "id": "anek-bangla",
       "type": "font",
       "name": "Anek Bangla",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "author": "Ek Type",
       "description": "A Bengali and Latin sans that stretches from condensed to wide, width 75 to 125, and weighs from 100 to 800. Bengali and Latin are drawn to match, so a Banglish line stays in one face.",
       "tags": [
@@ -1221,8 +1220,7 @@
         "previews/anek-bangla-grid.jpg"
       ],
       "langIds": [
-        "bn",
-        "en"
+        "bn"
       ],
       "license": "OFL-1.1",
       "licenseFile": "fonts/OFL-LICENSE.txt"
