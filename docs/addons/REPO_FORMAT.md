@@ -475,6 +475,31 @@ to a page showing the repository's host, the addon and its author, and the user
 taps Install; that tap is also what adds the repository to their list. Treat the
 links as a shortcut to the page, not as an install button.
 
+Most READMEs, chat apps and Markdown renderers refuse to make a
+`wmkeyboard://` link tappable. Write the same link as an `https` address on the
+docs site's `/open/` page instead, which the app claims as an App Link: on a
+phone with WM Keyboard it opens the app directly, and anywhere else the page
+loads and offers a button.
+
+| Link | Same as |
+|---|---|
+| `https://wmkeyboard.app/open/?repo=<repo URL>` | `wmkeyboard://repo?url=<repo URL>` |
+| `https://wmkeyboard.app/open/?repo=<repo URL>&id=<addonId>` | `wmkeyboard://addon?repo=<repo URL>&id=<addonId>` |
+
+### The "Add repository" badge
+
+For the top of a README, next to the store badges people already know. Put
+your repository's address, percent-encoded, after `?repo=`:
+
+```html
+<a href="https://wmkeyboard.app/open/?repo=https%3A%2F%2Fgithub.com%2Fyou%2Fyour-addons"><img src="https://wmkeyboard.app/badges/add-repository.png" alt="Add repository to WM Keyboard" height="72"></a>
+```
+
+The image is the size of the Google Play, F-Droid and Obtainium "Get it on"
+badges, margin included, so all of them line up at one `height`. Tapping it
+opens the add-repository dialog with your address filled in; nothing is fetched
+until the user taps **Add**.
+
 ## 7. Versioning & updates
 
 - Bump an addon's `version` (semver) to publish an update; the app compares it against the installed version and offers **Update**.

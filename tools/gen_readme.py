@@ -43,6 +43,8 @@ readme_content = f"""<div align="center">
   <img src="icon.png" width="128" height="128" alt="WM Keyboard Icon" />
   <h1>WM Keyboard Official Addons</h1>
   <p>Official addon repository for WM Keyboard: themes, layouts, dictionaries, snippet packs, stickers, icon packs, fonts, emoji fonts, key sounds and Python plugins.</p>
+  <a href="{open_link()}"><img src="https://wmkeyboard.app/badges/add-repository.png" alt="Add repository to WM Keyboard" height="72"></a>
+  <p><sub>WM Keyboard lists this repository under <b>Settings → Addons</b> on its own. You only need the badge if you removed it.</sub></p>
 </div>
 
 ---
