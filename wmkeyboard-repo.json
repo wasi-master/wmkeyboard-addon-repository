@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   "addons": [
     {
@@ -656,12 +656,13 @@
       "name": "Inter",
       "version": "4.1.0",
       "author": "Rasmus Andersson",
-      "description": "A clean, highly legible variable sans-serif font family optimized for computer screens and mobile UI.",
+      "description": "A clean, highly legible variable sans-serif font family optimized for computer screens and mobile UI. Variable in Weight 100 to 900 and Optical size 14 to 32.",
       "tags": [
         "sans-serif",
         "modern",
         "clean",
         "ui",
+        "variable",
         "font"
       ],
       "path": "fonts/inter.ttf",
@@ -685,11 +686,12 @@
       "name": "JetBrains Mono",
       "version": "2.304.0",
       "author": "JetBrains",
-      "description": "A monospaced font family created for developers and code editing.",
+      "description": "A monospaced font family created for developers and code editing. Variable in Weight 100 to 800.",
       "tags": [
         "monospace",
         "developer",
         "code",
+        "variable",
         "font"
       ],
       "path": "fonts/jetbrains-mono.ttf",
@@ -713,11 +715,12 @@
       "name": "Caveat",
       "version": "1.0.0",
       "author": "Pablo Impallari",
-      "description": "A casual and expressive handwriting script font with a natural aesthetic.",
+      "description": "A casual and expressive handwriting script font with a natural aesthetic. Variable in Weight 400 to 700.",
       "tags": [
         "handwriting",
         "script",
         "casual",
+        "variable",
         "font"
       ],
       "path": "fonts/caveat.ttf",
@@ -833,6 +836,389 @@
       "sizeBytes": 198612,
       "previews": [
         "previews/pixelborno-grid.jpg"
+      ],
+      "langIds": [
+        "bn",
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "roboto-flex",
+      "type": "font",
+      "name": "Roboto Flex",
+      "version": "3.200.0",
+      "author": "Font Bureau, David Berlow, Santiago Orozco and others",
+      "description": "Roboto with every dial on the outside: thirteen variable axes. Weight, width, optical size, slant and grade, plus nine more that set stroke thickness, counter width and the heights of capitals, lowercase, ascenders, descenders and figures. The widest playground for the Font axes screen and for theme font motion.",
+      "tags": [
+        "sans-serif",
+        "ui",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/roboto-flex.ttf",
+      "sha256": "9b523f7d82593df0107173849ebb8c817471a1df4b4fb2c3cbf40cfd810c8281",
+      "sizeBytes": 1787292,
+      "previews": [
+        "previews/roboto-flex-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru",
+        "el"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "recursive",
+      "type": "font",
+      "name": "Recursive",
+      "version": "1.85.0",
+      "author": "Arrow Type, Stephen Nixon",
+      "description": "One family that slides from a crisp sans to a loose brush casual, and from proportional to monospace. Axes for Casual, Cursive, Monospace, Slant and Weight 300 to 1000.",
+      "tags": [
+        "sans-serif",
+        "casual",
+        "monospace",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/recursive.ttf",
+      "sha256": "653221ca467f4732fe6856ac493f6c409e9f56a7674abe36b2364acc89796f7c",
+      "sizeBytes": 2379132,
+      "previews": [
+        "previews/recursive-grid.jpg"
+      ],
+      "langIds": [
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "fraunces",
+      "type": "font",
+      "name": "Fraunces",
+      "version": "1.0.0",
+      "author": "Undercase Type, Phaedra Charles, Flavia Zimbardi",
+      "description": "A soft, wonky old-style serif in the spirit of Windsor and Cooper. Axes for Softness (sharp to rounded), Wonk (the leaning n, m and h), Optical size 9 to 144, and Weight.",
+      "tags": [
+        "serif",
+        "display",
+        "soft",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/fraunces.ttf",
+      "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+      "sizeBytes": 360440,
+      "previews": [
+        "previews/fraunces-grid.jpg"
+      ],
+      "langIds": [
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "shantell-sans",
+      "type": "font",
+      "name": "Shantell Sans",
+      "version": "1.11.0",
+      "author": "Shantell Martin, Arrow Type, Anya Danilova",
+      "description": "Marker handwriting by the artist Shantell Martin. Its Bounce axis makes letters hop up and down the line, Informality loosens the strokes, Spacing spreads them out, and Weight runs 300 to 800. Bounce is made for a Finger or Typing speed font motion.",
+      "tags": [
+        "handwriting",
+        "casual",
+        "playful",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/shantell-sans.ttf",
+      "sha256": "d98a7913853f78d71aa0b86daf66b5eddb5a3266c07bfd51ef70632b88c41084",
+      "sizeBytes": 1284736,
+      "previews": [
+        "previews/shantell-sans-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "anybody",
+      "type": "font",
+      "name": "Anybody",
+      "version": "1.114.0",
+      "author": "Tyler Finck",
+      "description": "A sans that goes from ultra-condensed to ultra-expanded, width 50 to 150, and from hairline to black, weight 100 to 900. Narrow it to fit long labels, or widen it on a big tablet board.",
+      "tags": [
+        "sans-serif",
+        "display",
+        "condensed",
+        "expanded",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/anybody.ttf",
+      "sha256": "b184bd7e6ca8348bbaecec98951565729d7e89b7872d4898a1f9981342b5b64c",
+      "sizeBytes": 201352,
+      "previews": [
+        "previews/anybody-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "vi"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "bricolage-grotesque",
+      "type": "font",
+      "name": "Bricolage Grotesque",
+      "version": "1.1.0",
+      "author": "Mathieu Triay",
+      "description": "A characterful grotesque with ink traps that open up at small sizes. Axes for Optical size 12 to 96, Width 75 to 100, and Weight 200 to 800.",
+      "tags": [
+        "sans-serif",
+        "grotesque",
+        "display",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/bricolage-grotesque.ttf",
+      "sha256": "413e7357809ddd12fd80a96a8a396de0e401638d4acd3cb3e37532f0472ac682",
+      "sizeBytes": 408496,
+      "previews": [
+        "previews/bricolage-grotesque-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "vi"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "kablammo",
+      "type": "font",
+      "name": "Kablammo",
+      "version": "1.2.0",
+      "author": "Vectro Type Foundry",
+      "description": "Rubbery cartoon capitals with one Morph axis that bends and wobbles every glyph. A lighting pattern font motion on Morph makes the whole board wobble.",
+      "tags": [
+        "display",
+        "cartoon",
+        "playful",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/kablammo.ttf",
+      "sha256": "900c8c183efc8d913da30dceb9e4e9886888bbd48847455343f12ce85a334925",
+      "sizeBytes": 2209224,
+      "previews": [
+        "previews/kablammo-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru",
+        "vi"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "climate-crisis",
+      "type": "font",
+      "name": "Climate Crisis",
+      "version": "1.7.0",
+      "author": "Daniel Coull, Eino Korkala",
+      "description": "Made for Helsingin Sanomat: a heavy display face whose Year axis melts the letters from 1979 to 2050, following the projected loss of Arctic sea ice.",
+      "tags": [
+        "display",
+        "heavy",
+        "statement",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/climate-crisis.ttf",
+      "sha256": "4b25279f80e420f9f09dbba13eb14d0beabfa013d17f74bad19cc9fdf4d55523",
+      "sizeBytes": 3601356,
+      "previews": [
+        "previews/climate-crisis-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "handjet",
+      "type": "font",
+      "name": "Handjet",
+      "version": "2.3.0",
+      "author": "Rosetta, David Březina",
+      "description": "A dot-matrix face built from elements you can reshape: Element shape changes each dot (round, square, star and more), Element grid doubles the grid, and Weight runs 100 to 900. Covers Latin, Cyrillic, Greek, Arabic, Armenian and Hebrew.",
+      "tags": [
+        "pixel",
+        "dot-matrix",
+        "retro",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/handjet.ttf",
+      "sha256": "9262749e8bb0b73ebcae0e20428689c3c59576eebeb6c4e1020300d2d41bdf4d",
+      "sizeBytes": 283912,
+      "previews": [
+        "previews/handjet-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru",
+        "el",
+        "ar",
+        "hy",
+        "he"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "sixtyfour",
+      "type": "font",
+      "name": "Sixtyfour",
+      "version": "2.1.0",
+      "author": "Jens Kutílek",
+      "description": "The 8-bit home computer face, with a Scanline axis that splits each pixel into CRT lines and a Bleed axis that lets the glow spill over. Retro theme material.",
+      "tags": [
+        "pixel",
+        "retro",
+        "8-bit",
+        "monospace",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/sixtyfour.ttf",
+      "sha256": "3d5a3bb3257a491124347bac83ca7f0c8c77a9961270f353b498f3153e751c68",
+      "sizeBytes": 71536,
+      "previews": [
+        "previews/sixtyfour-grid.jpg"
+      ],
+      "langIds": [
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "tilt-warp",
+      "type": "font",
+      "name": "Tilt Warp",
+      "version": "1.0.0",
+      "author": "Andy Clymer",
+      "description": "Chunky letters that turn in 3D: horizontal and vertical rotation axes, each from -45° to 45°. A Finger or Glide motion makes the keys lean toward your finger.",
+      "tags": [
+        "display",
+        "3d",
+        "playful",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/tilt-warp.ttf",
+      "sha256": "e650320e405c220853184fa20a60a812f3f0275c3a1b2d1769409ad1cb4bfca5",
+      "sizeBytes": 256812,
+      "previews": [
+        "previews/tilt-warp-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "vi"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "commissioner",
+      "type": "font",
+      "name": "Commissioner",
+      "version": "1.1.0",
+      "author": "Kostas Bartsokas",
+      "description": "A plain sans that can grow flared, glyphic serifs (Flair) and fuller, rounder forms (Volume), with Slant and Weight 100 to 900. One axis turns a UI face into a display one.",
+      "tags": [
+        "sans-serif",
+        "flared",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/commissioner.ttf",
+      "sha256": "db01279a6eb8676ee62675a4d7e5edbfe5f08fbc109358e2f49760b70c0447d3",
+      "sizeBytes": 742232,
+      "previews": [
+        "previews/commissioner-grid.jpg"
+      ],
+      "langIds": [
+        "en",
+        "ru",
+        "el",
+        "vi"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "noto-sans-bengali",
+      "type": "font",
+      "name": "Noto Sans Bengali (variable)",
+      "version": "3.11.0",
+      "author": "Google",
+      "description": "The variable build of Noto Sans Bengali, the face the keyboard draws Bengali in by default, with Weight 100 to 900 and Width 62.5 to 100. Pick it for Bengali to tune the weight and width of every key, or to let a theme's font motion move Bengali labels.",
+      "tags": [
+        "bengali",
+        "bangla",
+        "sans-serif",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/noto-sans-bengali.ttf",
+      "sha256": "dcd42978094e584a849c84a51450eeac40c8826057d566ea6d4b9627a403a05a",
+      "sizeBytes": 463668,
+      "previews": [
+        "previews/noto-sans-bengali-grid.jpg"
+      ],
+      "langIds": [
+        "bn",
+        "en"
+      ],
+      "license": "OFL-1.1",
+      "licenseFile": "fonts/OFL-LICENSE.txt"
+    },
+    {
+      "id": "anek-bangla",
+      "type": "font",
+      "name": "Anek Bangla",
+      "version": "1.3.0",
+      "author": "Ek Type",
+      "description": "A Bengali and Latin sans that stretches from condensed to wide, width 75 to 125, and weighs from 100 to 800. Bengali and Latin are drawn to match, so a Banglish line stays in one face.",
+      "tags": [
+        "bengali",
+        "bangla",
+        "sans-serif",
+        "variable",
+        "font"
+      ],
+      "path": "fonts/anek-bangla.ttf",
+      "sha256": "8b4ec2eaf7400ea9903718a4addf3135475292e6e0b04db7735d0f999289d919",
+      "sizeBytes": 1344456,
+      "previews": [
+        "previews/anek-bangla-grid.jpg"
       ],
       "langIds": [
         "bn",

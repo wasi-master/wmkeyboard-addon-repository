@@ -141,8 +141,292 @@ FONT_CONFIGS = [
         "chars_font_size": 20,
         # A Bengali face on a QWERTY board would preview none of itself.
         "key_rows": "probhat",
+    },    # Variable faces, previewed at an instance that shows what their axes do.
+    {
+        "id": "roboto-flex",
+        "name": "Roboto Flex",
+        "subtitle": "Thirteen axes: weight, width, grade, optical size and every proportion",
+        "font_path": FONTS_DIR / "roboto-flex.ttf",
+        "output_path": PREVIEWS_DIR / "roboto-flex-grid.jpg",
+        "sample_text": 'The quick brown fox jumps over the lazy dog',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (30, 41, 59),
+        "accent_color": (96, 165, 250),
+        "footer_text": "SIL Open Font License • 13 variable axes • Font Bureau for Google",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 560, 'wdth': 112, 'GRAD': 40},
+    },
+    {
+        "id": "recursive",
+        "name": "Recursive",
+        "subtitle": "Sans to casual to mono, all in one file",
+        "font_path": FONTS_DIR / "recursive.ttf",
+        "output_path": PREVIEWS_DIR / "recursive-grid.jpg",
+        "sample_text": 'const swell = (weight) => weight + 300;',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (20, 30, 45),
+        "accent_color": (250, 204, 21),
+        "footer_text": "SIL Open Font License • Casual, Cursive, Mono, Slant and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 620, 'CASL': 1, 'CRSV': 1},
+    },
+    {
+        "id": "fraunces",
+        "name": "Fraunces",
+        "subtitle": "A soft, wonky old-style serif with an optical size axis",
+        "font_path": FONTS_DIR / "fraunces.ttf",
+        "output_path": PREVIEWS_DIR / "fraunces-grid.jpg",
+        "sample_text": 'Soft serifs, wonky leaning letters',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (41, 24, 20),
+        "accent_color": (251, 146, 60),
+        "footer_text": "SIL Open Font License • Softness, Wonk, Optical size and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 44,
+        "chars_font_size": 21,
+        "variation": {'opsz': 72, 'wght': 620, 'SOFT': 100, 'WONK': 1},
+    },
+    {
+        "id": "shantell-sans",
+        "name": "Shantell Sans",
+        "subtitle": "Marker handwriting that can bounce, loosen up and spread out",
+        "font_path": FONTS_DIR / "shantell-sans.ttf",
+        "output_path": PREVIEWS_DIR / "shantell-sans-grid.jpg",
+        "sample_text": 'Bouncy letters for a cheerful keyboard',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (46, 16, 101),
+        "accent_color": (244, 114, 182),
+        "footer_text": "SIL Open Font License • Bounce, Informality, Spacing and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 560, 'INFM': 70, 'BNCE': 60},
+    },
+    {
+        "id": "anybody",
+        "name": "Anybody",
+        "subtitle": "From ultra-condensed to ultra-expanded, hairline to black",
+        "font_path": FONTS_DIR / "anybody.ttf",
+        "output_path": PREVIEWS_DIR / "anybody-grid.jpg",
+        "sample_text": 'Wide or narrow, light or heavy',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (17, 24, 39),
+        "accent_color": (52, 211, 153),
+        "footer_text": "SIL Open Font License • Width 50–150 and Weight 100–900 axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wdth': 125, 'wght': 620},
+    },
+    {
+        "id": "bricolage-grotesque",
+        "name": "Bricolage Grotesque",
+        "subtitle": "A quirky grotesque with ink traps that open up at small sizes",
+        "font_path": FONTS_DIR / "bricolage-grotesque.ttf",
+        "output_path": PREVIEWS_DIR / "bricolage-grotesque-grid.jpg",
+        "sample_text": 'Expressive grotesque for every size',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (31, 41, 55),
+        "accent_color": (167, 139, 250),
+        "footer_text": "SIL Open Font License • Optical size, Width and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'opsz': 48, 'wght': 600, 'wdth': 90},
+    },
+    {
+        "id": "kablammo",
+        "name": "Kablammo",
+        "subtitle": "Rubbery cartoon letters that morph as the axis turns",
+        "font_path": FONTS_DIR / "kablammo.ttf",
+        "output_path": PREVIEWS_DIR / "kablammo-grid.jpg",
+        "sample_text": 'KABLAMMO! Letters that wobble',
+        "specimen_chars": 'AA BB CC DD EE FF GG HH II JJ KK LL MM NN OO PP QQ RR SS TT UU VV WW XX YY ZZ • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (127, 29, 29),
+        "accent_color": (253, 224, 71),
+        "footer_text": "SIL Open Font License • One Morph axis that bends every glyph",
+        "main_key_size": 40,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 38,
+        "chars_font_size": 21,
+        "variation": {'MORF': 20},
+    },
+    {
+        "id": "climate-crisis",
+        "name": "Climate Crisis",
+        "subtitle": "Letters that melt away from 1979 to 2050, as the Arctic ice does",
+        "font_path": FONTS_DIR / "climate-crisis.ttf",
+        "output_path": PREVIEWS_DIR / "climate-crisis-grid.jpg",
+        "sample_text": 'WARMING STRIPES 1979 → 2050',
+        "specimen_chars": 'AA BB CC DD EE FF GG HH II JJ KK LL MM NN OO PP QQ RR SS TT UU VV WW XX YY ZZ • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (12, 74, 110),
+        "accent_color": (248, 113, 113),
+        "footer_text": "SIL Open Font License • A Year axis, 1979 to 2050 • Helsingin Sanomat",
+        "main_key_size": 40,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 36,
+        "chars_font_size": 21,
+        "variation": {'YEAR': 2025},
+    },
+    {
+        "id": "handjet",
+        "name": "Handjet",
+        "subtitle": "A dot-matrix face built from pixels that change shape",
+        "font_path": FONTS_DIR / "handjet.ttf",
+        "output_path": PREVIEWS_DIR / "handjet-grid.jpg",
+        "sample_text": 'Dot matrix with pixels you can reshape',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (15, 23, 42),
+        "accent_color": (45, 212, 191),
+        "footer_text": "SIL Open Font License • Element shape, Element grid and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 500, 'ELSH': 2},
+    },
+    {
+        "id": "sixtyfour",
+        "name": "Sixtyfour",
+        "subtitle": "A 1980s home-computer face with scanlines and CRT bleed",
+        "font_path": FONTS_DIR / "sixtyfour.ttf",
+        "output_path": PREVIEWS_DIR / "sixtyfour-grid.jpg",
+        "sample_text": '10 PRINT "HELLO" : GOTO 10',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (23, 37, 84),
+        "accent_color": (147, 197, 253),
+        "footer_text": "SIL Open Font License • Scanline and Bleed axes",
+        "main_key_size": 30,
+        "hint_key_size": 14,
+        "space_key_size": 16,
+        "sample_font_size": 30,
+        "chars_font_size": 15,
+        "variation": {'SCAN': 40, 'BLED': 30},
+    },
+    {
+        "id": "tilt-warp",
+        "name": "Tilt Warp",
+        "subtitle": "Letters that tilt in 3D, left and right, up and down",
+        "font_path": FONTS_DIR / "tilt-warp.ttf",
+        "output_path": PREVIEWS_DIR / "tilt-warp-grid.jpg",
+        "sample_text": 'Letters that lean toward you',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (55, 48, 163),
+        "accent_color": (196, 181, 253),
+        "footer_text": "SIL Open Font License • Horizontal and Vertical rotation axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'XROT': 25, 'YROT': -15},
+    },
+    {
+        "id": "commissioner",
+        "name": "Commissioner",
+        "subtitle": "A sans that grows flared serifs and volume as you ask",
+        "font_path": FONTS_DIR / "commissioner.ttf",
+        "output_path": PREVIEWS_DIR / "commissioner-grid.jpg",
+        "sample_text": 'From plain sans to flared and full',
+        "specimen_chars": 'Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz • 0123456789',
+        "bg_start": (15, 23, 42),
+        "bg_end": (39, 39, 42),
+        "accent_color": (250, 250, 250),
+        "footer_text": "SIL Open Font License • Flair, Volume, Slant and Weight axes",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 520, 'FLAR': 70, 'VOLM': 40},
+    },
+    {
+        "id": "noto-sans-bengali",
+        "name": "Noto Sans Bengali",
+        "subtitle": "Google's Bengali sans, variable in weight and width",
+        "font_path": FONTS_DIR / "noto-sans-bengali.ttf",
+        "output_path": PREVIEWS_DIR / "noto-sans-bengali-grid.jpg",
+        "sample_text": 'আমি বাংলায় গান গাই — ami bhalo achi',
+        "specimen_chars": 'কখগঘঙ চছজঝঞ টঠডঢণ তথদধন পফবভম যরলশষসহ • ক্ষ জ্ঞ ন্ত র্ক • ০১২৩৪৫৬৭৮৯',
+        "bg_start": (15, 23, 42),
+        "bg_end": (20, 40, 30),
+        "accent_color": (110, 231, 183),
+        "footer_text": "SIL Open Font License • Width and Weight axes • Bengali and Latin",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 520},
+        "key_rows": "probhat",
+    },
+    {
+        "id": "anek-bangla",
+        "name": "Anek Bangla",
+        "subtitle": "A Bengali and Latin sans that stretches from condensed to wide",
+        "font_path": FONTS_DIR / "anek-bangla.ttf",
+        "output_path": PREVIEWS_DIR / "anek-bangla-grid.jpg",
+        "sample_text": 'আমি বাংলায় গান গাই — ami bhalo achi',
+        "specimen_chars": 'কখগঘঙ চছজঝঞ টঠডঢণ তথদধন পফবভম যরলশষসহ • ক্ষ জ্ঞ ন্ত র্ক • ০১২৩৪৫৬৭৮৯',
+        "bg_start": (15, 23, 42),
+        "bg_end": (45, 20, 40),
+        "accent_color": (253, 164, 175),
+        "footer_text": "SIL Open Font License • Width and Weight axes • Bengali and Latin",
+        "main_key_size": 46,
+        "hint_key_size": 18,
+        "space_key_size": 20,
+        "sample_font_size": 40,
+        "chars_font_size": 21,
+        "variation": {'wght': 560, 'wdth': 110},
+        "key_rows": "probhat",
     },
 ]
+
+# Axis values a variable face is previewed at, by font path. A variable font's
+# default instance can sit anywhere (Anybody's is a hairline 100, Fraunces' a
+# black 900), so each config may name the instance that shows it best.
+VARIATIONS: dict[str, dict[str, float]] = {}
+
+
+def load_font(path, size: int) -> ImageFont.FreeTypeFont:
+    """ImageFont.truetype, cut at the axis values [VARIATIONS] holds for [path]."""
+    font = ImageFont.truetype(str(path), size)
+    wanted = VARIATIONS.get(str(path))
+    if wanted:
+        axes = TTFont(str(path))["fvar"].axes
+        font.set_variation_by_axes([wanted.get(a.axisTag, a.defaultValue) for a in axes])
+    return font
+
 
 def covered_codepoints(font_path) -> set | None:
     """The codepoints a face actually maps, or None when unreadable. Lets a
@@ -328,9 +612,9 @@ def render_keyboard_font_mockup(
     )
 
     # Fonts
-    target_main_font = ImageFont.truetype(target_font_path, main_key_size)
-    target_hint_font = ImageFont.truetype(target_font_path, hint_key_size)
-    target_space_font = ImageFont.truetype(target_font_path, space_key_size)
+    target_main_font = load_font(target_font_path, main_key_size)
+    target_hint_font = load_font(target_font_path, hint_key_size)
+    target_space_font = load_font(target_font_path, space_key_size)
 
     inter_action_font = ImageFont.truetype(inter_font_path, 28)
     inter_hint_font = ImageFont.truetype(inter_font_path, 16)
@@ -498,10 +782,10 @@ def generate_font_preview(cfg: dict):
     # Dynamic scaling for Line 1 (Sample Text) to guarantee ZERO overflow
     sample_text = cfg["sample_text"]
     sample_size = cfg["sample_font_size"]
-    specimen_font = ImageFont.truetype(str(font_path), sample_size)
+    specimen_font = load_font(font_path, sample_size)
     while line_width(sample_text, specimen_font, sample_size) > max_text_w and sample_size > 14:
         sample_size -= 1
-        specimen_font = ImageFont.truetype(str(font_path), sample_size)
+        specimen_font = load_font(font_path, sample_size)
 
     stw = line_width(sample_text, specimen_font, sample_size)
     stx = spec_x + (spec_w - stw) / 2
@@ -511,10 +795,10 @@ def generate_font_preview(cfg: dict):
     # Dynamic scaling for Line 2 (Alphabet & Numbers) to guarantee ZERO overflow
     specimen_chars = cfg["specimen_chars"]
     chars_size = cfg["chars_font_size"]
-    chars_font = ImageFont.truetype(str(font_path), chars_size)
+    chars_font = load_font(font_path, chars_size)
     while line_width(specimen_chars, chars_font, chars_size) > max_text_w and chars_size > 10:
         chars_size -= 1
-        chars_font = ImageFont.truetype(str(font_path), chars_size)
+        chars_font = load_font(font_path, chars_size)
 
     alw = line_width(specimen_chars, chars_font, chars_size)
     alx = spec_x + (spec_w - alw) / 2
@@ -554,8 +838,15 @@ def generate_font_preview(cfg: dict):
 
 
 def main():
+    import sys
+    # Ids on the command line regenerate only those previews.
+    only = set(sys.argv[1:])
     PREVIEWS_DIR.mkdir(exist_ok=True)
     for cfg in FONT_CONFIGS:
+        if cfg.get("variation"):
+            VARIATIONS[str(cfg["font_path"])] = cfg["variation"]
+        if only and cfg["id"] not in only:
+            continue
         if cfg["font_path"].exists():
             generate_font_preview(cfg)
 
