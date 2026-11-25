@@ -191,6 +191,16 @@
           "minimum": 0,
           "description": "Optional minimum app versionCode required to install."
         },
+        "fileTypes": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._+-]{0,15}$"},
+          "description": "For a plugin: the file extensions it shows or colours in the Files tool, lower case without the dot. The Files tool offers the plugin for such a file when nothing installed draws it. tools/build_index.py derives it from the plugin's previews and syntax."
+        },
+        "fileNames": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "For a plugin: whole file names it shows or colours (Dockerfile, .gitignore), as fileTypes."
+        },
         "langId": {
           "type": "string",
           "description": "Language id from the app's LanguageRegistry. REQUIRED for type=dictionary; optional grouping hint for type=layout. Must be an already-registered id."

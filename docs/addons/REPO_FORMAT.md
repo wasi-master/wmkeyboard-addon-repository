@@ -111,6 +111,7 @@ Unknown fields are ignored, so future versions can add fields without breaking o
 | `variants` | | Other builds of the same addon for the user to choose between, such as an emoji font in 3D, flat and high-contrast styles. See [Addons with variants](#addons-with-variants). Ignored for the per-language types, whose choices are `localizations`. |
 | `variantName` | | What the entry's own payload is called among its `variants`, such as `"3D"`. Defaults to "Standard". |
 | `requires` | | Ids of other entries **in this same manifest** the addon was designed with — a theme naming its font and sound. Soft: the install screen offers to download them together, and skipping them still installs a working addon that falls back to the user's global choices. Unresolvable ids are ignored. |
+| `fileTypes`, `fileNames` | *plugin* | Extensions (lower case, no dot) and whole file names the plugin shows or colours in the Files tool, which offers it for such a file when nothing installed draws it. `tools/build_index.py` derives both from the plugin's `previews` and `syntax`; don't write them by hand. |
 
 ### Licensing
 

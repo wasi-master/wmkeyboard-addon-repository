@@ -5,6 +5,8 @@ that does not parse ends the walk rather than the preview.
 The format: https://www.sqlite.org/fileformat2.html
 """
 
+from wm import formats
+
 HEADER = b"SQLite format 3\x00"
 MAX_PAGES = 2000          # pages one walk may visit
 MAX_PAYLOAD = 65536       # bytes of one row followed through overflow pages
@@ -12,19 +14,12 @@ MAX_PAYLOAD = 65536       # bytes of one row followed through overflow pages
 
 def _uint(data, at, n):
     """An n-byte big-endian unsigned integer."""
-    v = 0
-    for i in range(n):
-        v = v * 256 + data[at + i]
-    return v
+    return int.from_bytes(data[at:at + n], "big")
 
 
 def _int(data, at, n):
-    """An n-byte big-endian two's-complement integer; the sign comes from
-    the first byte, so an 8-byte one never leaves 64 bits."""
-    v = data[at] - 256 if data[at] >= 128 else data[at]
-    for i in range(1, n):
-        v = v * 256 + data[at + i]
-    return v
+    """An n-byte big-endian two's-complement integer."""
+    return int.from_bytes(data[at:at + n], "big", signed=True)
 
 
 def varint(data, at):
@@ -32,18 +27,14 @@ def varint(data, at):
     v = 0
     for i in range(8):
         b = data[at + i]
-        v = v * 128 + (b & 0x7F)
+        v = (v << 7) | (b & 0x7F)
         if b < 0x80:
             return v, at + i + 1
-    # Nine bytes hold all 64 bits, the top one the sign. The interpreter's
-    # integers turn to floats long before 2 ** 64, so a negative one is built
-    # from its inverted bits, which keeps a small number small.
-    if data[at] & 0x40:
-        inv = 0
-        for i in range(8):
-            inv = inv * 128 + (0x7F - (data[at + i] & 0x7F))
-        return -(inv * 256 + (0xFF - data[at + 8]) + 1), at + 9
-    return v * 256 + data[at + 8], at + 9
+    # The ninth byte is a whole 8 bits: 64 in all, the top one the sign,
+    # which is taken before the last shift so the value stays in 64 bits.
+    if v >= 1 << 55:
+        v = v - (1 << 56)
+    return (v << 8) | data[at + 8], at + 9
 
 
 class Database:
@@ -81,7 +72,7 @@ class Database:
         i = 0
         little = self.encoding == 2
         while i + 1 < len(raw):
-            out.append(chr(raw[i] + raw[i + 1] * 256 if little else raw[i] * 256 + raw[i + 1]))
+            out.append(chr(raw[i] | (raw[i + 1] << 8) if little else (raw[i] << 8) | raw[i + 1]))
             i = i + 2
         return "".join(out)
 
@@ -152,7 +143,6 @@ class Database:
                 values.append(_int(payload, at, n) if at + n <= len(payload) else None)
                 at = at + n
             elif t == 7:
-                from wm import formats
                 values.append(formats.unpack(">d", payload, at)[0] if at + 8 <= len(payload) else None)
                 at = at + 8
             elif t == 8:

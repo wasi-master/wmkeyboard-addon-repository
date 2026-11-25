@@ -51,6 +51,8 @@ FIELD_ORDER = [
     "licenseText",
     "licenseFile",
     "requires",
+    "fileTypes",
+    "fileNames",
     "localizations",
     "variantName",
     "variants",
@@ -144,6 +146,50 @@ def refresh(ident: str, holder: dict, args, changes: list[str], problems: list[s
         holder["sha256"] = digest
 
 
+def plugin_file_types(payload: Path) -> tuple[list[str], list[str]]:
+    """The extensions and whole names a .wmplugin shows or colours: every
+    `previews` and `syntax` entry's, in the order the plugin lists them."""
+    import zipfile
+
+    with zipfile.ZipFile(payload) as archive:
+        manifest = json.loads(archive.read("plugin.json"))
+    types: list[str] = []
+    names: list[str] = []
+    for item in manifest.get("previews", []) + manifest.get("syntax", []):
+        if not isinstance(item, dict):
+            continue
+        for ext in item.get("extensions", []):
+            ext = str(ext).lower().lstrip(".")
+            if ext and ext not in types:
+                types.append(ext)
+        for name in item.get("names", []):
+            if name not in names:
+                names.append(str(name))
+    return types, names
+
+
+def refresh_file_types(ident: str, entry: dict, changes: list[str], problems: list[str]) -> None:
+    """`fileTypes` and `fileNames` from the plugin's own manifest, so the
+    Files tool's offers never drift from what the plugin declares."""
+    if entry.get("type") != "plugin" or is_remote(entry.get("path", "")):
+        return
+    payload = ROOT / entry.get("path", "")
+    if not payload.is_file():
+        return
+    try:
+        types, names = plugin_file_types(payload)
+    except (OSError, KeyError, ValueError) as error:
+        problems.append(f"{ident}: cannot read the plugin's manifest — {error}")
+        return
+    for field, value in (("fileTypes", types), ("fileNames", names)):
+        if value and entry.get(field) != value:
+            changes.append(f"{ident}: {field} -> {len(value)}")
+            entry[field] = value
+        elif not value and field in entry:
+            changes.append(f"{ident}: dropped {field}")
+            entry.pop(field)
+
+
 def is_remote(path: str) -> bool:
     return path.startswith("https://") or path.startswith("http://")
 
@@ -176,6 +222,7 @@ def main() -> int:
     for entry in addons:
         ident = entry.get("id", "<no id>")
         refresh(ident, entry, args, changes, problems, indexed)
+        refresh_file_types(ident, entry, changes, problems)
         for item in entry.get("localizations", []):
             refresh(f"{ident}@{item.get('locale', '?')}", item, args, changes, problems, indexed)
         for item in entry.get("variants", []):

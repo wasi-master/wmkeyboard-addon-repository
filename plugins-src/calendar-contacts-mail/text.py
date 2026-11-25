@@ -1,6 +1,8 @@
 """Decoding shared by calendars, contacts and mail: folded lines, property
 parameters, quoted-printable, RFC 2047 encoded words, and charsets."""
 
+import base64
+
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -143,7 +145,6 @@ def quoted_printable(text, header=False):
 
 
 def b64(text):
-    import base64
     try:
         return base64.b64decode("".join(text.split()))
     except ValueError:

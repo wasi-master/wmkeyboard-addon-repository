@@ -9,7 +9,7 @@ on:
 env:
   # The WMKeyboard commit whose wm-python the plugin tests run on. Move it
   # forward with the app, so the tests run on the interpreter people have.
-  WM_PYTHON_REV: c16275e402ec4b81f326896eee191d89cb334b35
+  WM_PYTHON_REV: 0541cc02ecdb8f1a57df6dc3811fe94fb1368a3a
 
 jobs:
   validate:

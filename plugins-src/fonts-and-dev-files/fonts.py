@@ -8,19 +8,16 @@ NAME_IDS = {0: "Copyright", 1: "Family", 2: "Style", 4: "Full name", 5: "Version
 
 
 def u16(d, at):
-    return d[at] * 256 + d[at + 1]
+    return int.from_bytes(d[at:at + 2], "big")
 
 
 def u32(d, at):
-    return ((d[at] * 256 + d[at + 1]) * 256 + d[at + 2]) * 256 + d[at + 3]
+    return int.from_bytes(d[at:at + 4], "big")
 
 
 def fixed(d, at):
     """A 16.16 fixed-point number."""
-    whole = u16(d, at)
-    if whole >= 32768:
-        whole = whole - 65536
-    return whole + u16(d, at + 2) / 65536
+    return int.from_bytes(d[at:at + 4], "big", signed=True) / 65536
 
 
 class Font:
@@ -102,7 +99,7 @@ class Font:
                 chars = []
                 j = 0
                 while j + 1 < len(raw):
-                    chars.append(chr(raw[j] * 256 + raw[j + 1]))
+                    chars.append(chr((raw[j] << 8) | raw[j + 1]))
                     j = j + 2
                 text = "".join(chars)
             elif platform == 1 and encoding == 0:

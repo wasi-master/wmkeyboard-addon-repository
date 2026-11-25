@@ -5,10 +5,7 @@ MAX_OBJECTS = 20000
 
 
 def _int_be(d, at, n):
-    v = 0
-    for i in range(n):
-        v = v * 256 + d[at + i]
-    return v
+    return int.from_bytes(d[at:at + n], "big")
 
 
 def binary(d):
@@ -28,10 +25,7 @@ def binary(d):
     def length(at, low):
         if low != 0x0F:
             return low, at + 1
-        marker = d[at + 1]
-        n = 1
-        for _ in range(marker & 0x0F):
-            n = n * 2
+        n = 1 << (d[at + 1] & 0x0F)
         return _int_be(d, at + 2, n), at + 2 + n
 
     def obj(i, depth):
@@ -49,15 +43,9 @@ def binary(d):
         if high == 0x0:
             return None
         if high == 0x1:
-            n = 1
-            for _ in range(low):
-                n = n * 2
-            # Only 8-byte integers are signed; the sign comes from the first
-            # byte so a small negative number stays a small integer.
-            v = d[at + 1] - 256 if n == 8 and d[at + 1] >= 128 else d[at + 1]
-            for k in range(1, n):
-                v = v * 256 + d[at + 1 + k]
-            return v
+            n = 1 << low
+            # Only 8-byte integers are signed.
+            return int.from_bytes(d[at + 1:at + 1 + n], "big", signed=n == 8)
         if high == 0x2:
             from wm import formats
             return formats.unpack(">f" if low == 2 else ">d", d, at + 1)[0]
