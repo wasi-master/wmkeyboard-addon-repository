@@ -1,0 +1,5 @@
+From: news@example.com
+Subject: Weekly news
+Content-Type: text/html; charset=iso-8859-1
+
+<html><body><h1>News</h1><p>Prices fell &amp; rose.</p><div>Café open</div></body></html>

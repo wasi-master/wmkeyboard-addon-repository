@@ -1,0 +1,66 @@
+{
+ "rules": [
+  {
+   "match": "=\\s*\\d+(?=\\s*[;\\[])",
+   "kind": "number"
+  }
+ ],
+ "lineComment": "//",
+ "blockComment": [
+  "/*",
+  "*/"
+ ],
+ "strings": [
+  "\"",
+  "'"
+ ],
+ "keywords": [
+  "syntax",
+  "edition",
+  "package",
+  "import",
+  "public",
+  "weak",
+  "option",
+  "message",
+  "enum",
+  "service",
+  "rpc",
+  "returns",
+  "stream",
+  "repeated",
+  "optional",
+  "required",
+  "oneof",
+  "map",
+  "reserved",
+  "extensions",
+  "extend",
+  "to",
+  "max",
+  "group"
+ ],
+ "types": [
+  "double",
+  "float",
+  "int32",
+  "int64",
+  "uint32",
+  "uint64",
+  "sint32",
+  "sint64",
+  "fixed32",
+  "fixed64",
+  "sfixed32",
+  "sfixed64",
+  "bool",
+  "string",
+  "bytes"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "inf",
+  "nan"
+ ]
+}

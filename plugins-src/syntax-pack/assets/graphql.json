@@ -1,0 +1,51 @@
+{
+ "rules": [
+  {
+   "match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+   "kind": "constant"
+  },
+  {
+   "match": "@[A-Za-z_][A-Za-z0-9_]*",
+   "kind": "attribute"
+  },
+  {
+   "match": "\\.\\.\\.",
+   "kind": "operator"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\"\"\"",
+  "\""
+ ],
+ "keywords": [
+  "query",
+  "mutation",
+  "subscription",
+  "fragment",
+  "on",
+  "type",
+  "interface",
+  "union",
+  "enum",
+  "input",
+  "scalar",
+  "schema",
+  "extend",
+  "implements",
+  "directive",
+  "repeatable"
+ ],
+ "types": [
+  "Int",
+  "Float",
+  "String",
+  "Boolean",
+  "ID"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "null"
+ ]
+}

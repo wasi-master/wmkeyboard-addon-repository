@@ -1,0 +1,20 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.subtitlesandmaps",
+  "name": "Subtitles and Maps",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows subtitle and lyric files and GPS tracks in the keyboard's file manager. Subtitles (SRT, WebVTT, ASS and SSA) and synced lyrics (LRC) appear as a list of lines with their times. Tracks and routes (GPX, KML, GeoJSON, TCX) show their shape, distance, time, climb and an elevation chart, plus their named places.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "subtitles", "color": "#00897B"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "subtitles", "name": "Subtitles", "extensions": ["srt", "vtt", "webvtt", "ass", "ssa", "lrc", "sbv"],
+     "mimes": ["application/x-subrip", "text/vtt", "text/x-ssa"]},
+    {"id": "track", "name": "Map", "extensions": ["gpx", "kml", "geojson", "tcx"],
+     "mimes": ["application/gpx+xml", "application/vnd.google-earth.kml+xml", "application/geo+json"], "maxBytes": 16777216}
+  ]
+}

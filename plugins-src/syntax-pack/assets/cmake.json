@@ -1,0 +1,68 @@
+{
+ "rules": [
+  {
+   "match": "\\$\\{[^\\}\\n]*\\}|\\$ENV\\{[^\\}\\n]*\\}|\\$<[^>\\n]*>",
+   "kind": "constant"
+  },
+  {
+   "match": "#\\[(=*)\\[[\\s\\S]*?\\]\\1\\]",
+   "kind": "comment"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\""
+ ],
+ "calls": true,
+ "caseInsensitive": true,
+ "keywords": [
+  "if",
+  "elseif",
+  "else",
+  "endif",
+  "foreach",
+  "endforeach",
+  "while",
+  "endwhile",
+  "function",
+  "endfunction",
+  "macro",
+  "endmacro",
+  "return",
+  "break",
+  "continue",
+  "block",
+  "endblock",
+  "AND",
+  "OR",
+  "NOT",
+  "STREQUAL",
+  "EQUAL",
+  "LESS",
+  "GREATER",
+  "MATCHES",
+  "DEFINED",
+  "EXISTS",
+  "PUBLIC",
+  "PRIVATE",
+  "INTERFACE",
+  "REQUIRED",
+  "COMPONENTS",
+  "VERSION",
+  "LANGUAGES",
+  "CACHE",
+  "PARENT_SCOPE",
+  "STATIC",
+  "SHARED",
+  "MODULE",
+  "IMPORTED"
+ ],
+ "constants": [
+  "ON",
+  "OFF",
+  "TRUE",
+  "FALSE",
+  "YES",
+  "NO"
+ ]
+}

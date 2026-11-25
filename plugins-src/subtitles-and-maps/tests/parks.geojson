@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"name": "Big park", "area": 12.5}, "geometry": {"type": "Polygon", "coordinates": [[[90.4, 23.8], [90.41, 23.8], [90.41, 23.81], [90.4, 23.8]]]}}, {"type": "Feature", "properties": {"name": "Gate", "open": true}, "geometry": {"type": "Point", "coordinates": [90.4, 23.8]}}]}

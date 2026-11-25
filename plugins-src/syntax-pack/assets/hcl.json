@@ -1,0 +1,76 @@
+{
+ "rules": [
+  {
+   "match": "^\\s*[A-Za-z_][A-Za-z0-9_-]*(?=\\s*=(?!=))",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "\\$\\{[^\\}\\n]*\\}|%\\{[^\\}\\n]*\\}",
+   "kind": "constant"
+  },
+  {
+   "match": "<<-?[A-Z_]+",
+   "kind": "string"
+  }
+ ],
+ "lineComment": [
+  "#",
+  "//"
+ ],
+ "blockComment": [
+  "/*",
+  "*/"
+ ],
+ "strings": [
+  "\""
+ ],
+ "calls": true,
+ "keywords": [
+  "resource",
+  "data",
+  "variable",
+  "output",
+  "module",
+  "provider",
+  "locals",
+  "terraform",
+  "backend",
+  "required_providers",
+  "for",
+  "in",
+  "if",
+  "else",
+  "endif",
+  "endfor",
+  "for_each",
+  "count",
+  "depends_on",
+  "lifecycle",
+  "dynamic",
+  "content",
+  "moved",
+  "import",
+  "removed",
+  "check",
+  "job",
+  "group",
+  "task"
+ ],
+ "types": [
+  "string",
+  "number",
+  "bool",
+  "list",
+  "map",
+  "set",
+  "object",
+  "tuple",
+  "any"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "null"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "rules": [
+  {
+   "match": "^\\s*(export\\s+)?[A-Za-z_][A-Za-z0-9_.]*(?=\\s*=)",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "\\$\\{?[A-Za-z_][A-Za-z0-9_]*(:?[-=?+][^\\}\\n]*)?\\}?",
+   "kind": "constant"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\"",
+  "'"
+ ],
+ "constants": [
+  "true",
+  "false"
+ ]
+}

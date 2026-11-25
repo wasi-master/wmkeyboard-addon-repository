@@ -1,0 +1,36 @@
+{
+ "rules": [
+  {
+   "match": "^\\s*\\[[^\\]\\n]*\\]",
+   "kind": "heading",
+   "flags": "m"
+  },
+  {
+   "match": "^\\s*[^=:\\s;#\\[][^=:\\n]*?(?=\\s*[=:])",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "\\$\\{[^\\}\\n]*\\}|%\\([A-Za-z0-9_]+\\)s",
+   "kind": "constant"
+  }
+ ],
+ "lineComment": [
+  "#",
+  ";"
+ ],
+ "strings": [
+  "\""
+ ],
+ "constants": [
+  "true",
+  "false",
+  "yes",
+  "no",
+  "on",
+  "off",
+  "none",
+  "null"
+ ],
+ "caseInsensitive": true
+}

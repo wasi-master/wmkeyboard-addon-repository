@@ -1,0 +1,25 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.officeviewer",
+  "name": "Office Viewer",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows Word, Excel and PowerPoint files, and their OpenDocument cousins, in the keyboard's file manager: a document's headings, text and tables, every sheet of a spreadsheet, and each slide's title and text. The grid shows the picture a document saved of its first page.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "description", "color": "#1E88E5"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "word", "name": "Document", "extensions": ["docx", "docm", "dotx", "odt", "ott"],
+     "mimes": ["application/vnd.openxmlformats-officedocument.wordprocessingml.*", "application/vnd.oasis.opendocument.text*"],
+     "maxBytes": 16777216, "thumbnails": true},
+    {"id": "sheet", "name": "Spreadsheet", "extensions": ["xlsx", "xlsm", "xltx", "ods", "ots"],
+     "mimes": ["application/vnd.openxmlformats-officedocument.spreadsheetml.*", "application/vnd.oasis.opendocument.spreadsheet*"],
+     "maxBytes": 16777216, "thumbnails": true},
+    {"id": "slides", "name": "Slides", "extensions": ["pptx", "pptm", "potx", "ppsx", "odp", "otp"],
+     "mimes": ["application/vnd.openxmlformats-officedocument.presentationml.*", "application/vnd.oasis.opendocument.presentation*"],
+     "maxBytes": 16777216, "thumbnails": true}
+  ]
+}

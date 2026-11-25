@@ -1,0 +1,23 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.dataviewer",
+  "name": "Data Viewer",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows data files as tables in the keyboard's file manager: CSV and TSV files with their rows and columns, JSON and JSON Lines as folding sections and tables, Jupyter notebooks cell by cell with their outputs, and SQLite databases table by table.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "grid_on", "color": "#43A047"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "table", "name": "Table", "extensions": ["csv", "tsv", "tab", "psv"],
+     "mimes": ["text/csv", "text/tab-separated-values", "text/comma-separated-values"]},
+    {"id": "json", "name": "Data", "extensions": ["json", "jsonl", "ndjson", "json5", "har", "webmanifest"],
+     "mimes": ["application/json", "application/x-ndjson", "application/jsonl"]},
+    {"id": "notebook", "name": "Notebook", "extensions": ["ipynb"], "mimes": ["application/x-ipynb+json"], "maxBytes": 16777216},
+    {"id": "sqlite", "name": "Database", "extensions": ["db", "sqlite", "sqlite3", "db3", "gpkg", "mbtiles"],
+     "mimes": ["application/vnd.sqlite3", "application/x-sqlite3"], "maxBytes": 16777216}
+  ]
+}

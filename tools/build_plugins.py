@@ -24,6 +24,7 @@ import zipfile
 from pathlib import Path
 
 from plugin_icons import tool_problems
+from plugin_previews import preview_problems
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / "plugins-src"
@@ -43,6 +44,7 @@ KNOWN_PERMISSIONS = {
     # API 5
     "network", "network.local", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
     "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo", "clock",
+    "previews",
 }
 
 # Plugins are Python: API 4 (the wm and ui globals) or API 5 (the wm
@@ -122,6 +124,10 @@ def build(source: Path) -> tuple[bytes, list[str]]:
     # fails on open with a PermissionError (Lorem Ipsum 2.0.0 did).
     if "storage" not in permissions and any("persist=True" in f.read_text(errors="ignore") for f in source.rglob("*.py") if f.name != "test.py"):
         problems.append(f"{source.name}: plugin.state(persist=True) needs the \"storage\" permission")
+    problems.extend(
+        f"{source.name}: {p}"
+        for p in preview_problems(manifest, lambda rel: (source / rel).read_bytes() if (source / rel).is_file() else None)
+    )
     icon_errors, icon_warnings = tool_problems(
         manifest, lambda rel: (source / rel).read_bytes() if (source / rel).is_file() else None,
     )

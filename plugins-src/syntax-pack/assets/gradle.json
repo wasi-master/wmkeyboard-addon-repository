@@ -1,0 +1,101 @@
+{
+ "rules": [
+  {
+   "match": "\\$\\{[^\\}\\n]*\\}|\\$[A-Za-z_][A-Za-z0-9_]*",
+   "kind": "constant"
+  },
+  {
+   "match": "@[A-Za-z_][A-Za-z0-9_.]*",
+   "kind": "attribute"
+  }
+ ],
+ "lineComment": "//",
+ "blockComment": [
+  "/*",
+  "*/"
+ ],
+ "strings": [
+  "\"\"\"",
+  "\"",
+  "'"
+ ],
+ "calls": true,
+ "keywords": [
+  "val",
+  "var",
+  "fun",
+  "class",
+  "object",
+  "interface",
+  "if",
+  "else",
+  "when",
+  "for",
+  "while",
+  "do",
+  "return",
+  "import",
+  "package",
+  "in",
+  "is",
+  "as",
+  "by",
+  "get",
+  "set",
+  "private",
+  "internal",
+  "public",
+  "override",
+  "abstract",
+  "open",
+  "data",
+  "sealed",
+  "enum",
+  "companion",
+  "lateinit",
+  "const",
+  "try",
+  "catch",
+  "finally",
+  "throw",
+  "apply",
+  "plugins",
+  "dependencies",
+  "repositories",
+  "android",
+  "kotlin",
+  "tasks",
+  "allprojects",
+  "subprojects",
+  "buildscript",
+  "def",
+  "ext"
+ ],
+ "types": [
+  "String",
+  "Int",
+  "Long",
+  "Boolean",
+  "Double",
+  "Float",
+  "List",
+  "Map",
+  "Set",
+  "Any",
+  "Unit",
+  "File",
+  "Project",
+  "Task",
+  "JavaVersion",
+  "JvmTarget",
+  "Provider",
+  "Property"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "null",
+  "this",
+  "it"
+ ]
+}

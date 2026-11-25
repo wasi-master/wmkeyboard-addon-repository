@@ -1,0 +1,1 @@
+<?xml version="1.0"?><kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Trip</name><Placemark><name>Path</name><LineString><coordinates>90.40,23.80,5 90.41,23.80,6</coordinates></LineString></Placemark><Placemark><name>Hotel</name><Point><coordinates>90.41,23.80</coordinates></Point></Placemark></Document></kml>

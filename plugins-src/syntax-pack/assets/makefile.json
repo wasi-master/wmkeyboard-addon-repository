@@ -1,0 +1,29 @@
+{
+ "rules": [
+  {
+   "match": "^\\s*-?(include|sinclude|ifeq|ifneq|ifdef|ifndef|else|endif|define|endef|export|unexport|override|vpath)\\b",
+   "kind": "keyword",
+   "flags": "m"
+  },
+  {
+   "match": "^[A-Za-z_][A-Za-z0-9_.-]*(?=\\s*(::|:|\\+|\\?|!)?=)",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "^[^\\s:#=][^:#=\\n]*(?=:(?!=))",
+   "kind": "function",
+   "flags": "m"
+  },
+  {
+   "match": "\\$\\([^)\\n]*\\)|\\$\\{[^\\}\\n]*\\}|\\$[@<^?*%+|]",
+   "kind": "constant"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\"",
+  "'"
+ ],
+ "numbers": false
+}

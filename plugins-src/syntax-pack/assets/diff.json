@@ -1,0 +1,35 @@
+{
+ "rules": [
+  {
+   "match": "^(diff|index|similarity|rename|new file|deleted file|old mode|new mode|Only in|Binary files)[^\\n]*",
+   "kind": "comment",
+   "flags": "m"
+  },
+  {
+   "match": "^(\\+\\+\\+|---)(\\s[^\\n]*)?$",
+   "kind": "heading",
+   "flags": "m"
+  },
+  {
+   "match": "^@@[^\\n]*",
+   "kind": "function",
+   "flags": "m"
+  },
+  {
+   "match": "^[+>][^\\n]*",
+   "kind": "string",
+   "flags": "m"
+  },
+  {
+   "match": "^[-<][^\\n]*",
+   "kind": "constant",
+   "flags": "m"
+  },
+  {
+   "match": "^\\\\ No newline[^\\n]*",
+   "kind": "comment",
+   "flags": "m"
+  }
+ ],
+ "numbers": false
+}

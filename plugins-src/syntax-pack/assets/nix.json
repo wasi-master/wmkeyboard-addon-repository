@@ -1,0 +1,51 @@
+{
+ "rules": [
+  {
+   "match": "[A-Za-z_][A-Za-z0-9_'.-]*(?=\\s*=(?!=))",
+   "kind": "attribute"
+  },
+  {
+   "match": "https?://[^\\s;\"]+",
+   "kind": "link"
+  },
+  {
+   "match": "builtins\\.[A-Za-z]+",
+   "kind": "function"
+  },
+  {
+   "match": "<[A-Za-z0-9._/-]+>",
+   "kind": "string"
+  },
+  {
+   "match": "\\.{0,2}/[A-Za-z0-9._+-]+(/[A-Za-z0-9._+-]+)*",
+   "kind": "string"
+  }
+ ],
+ "lineComment": "#",
+ "blockComment": [
+  "/*",
+  "*/"
+ ],
+ "strings": [
+  "''",
+  "\""
+ ],
+ "keywords": [
+  "let",
+  "in",
+  "with",
+  "rec",
+  "inherit",
+  "if",
+  "then",
+  "else",
+  "assert",
+  "or",
+  "import"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "null"
+ ]
+}

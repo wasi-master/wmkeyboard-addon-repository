@@ -1,0 +1,52 @@
+{
+ "rules": [
+  {
+   "match": "^(---|\\.\\.\\.)\\s*$",
+   "kind": "punctuation",
+   "flags": "m"
+  },
+  {
+   "match": "^\\s*(-\\s+)*[^\\s#:'\"\\-\\[\\{][^:#\\n]*?(?=:(\\s|$))",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "^\\s*(-\\s+)*(\"[^\"\\n]*\"|'[^'\\n]*')(?=:(\\s|$))",
+   "kind": "attribute",
+   "flags": "m"
+  },
+  {
+   "match": "[&*][A-Za-z0-9_-]+",
+   "kind": "constant"
+  },
+  {
+   "match": "!![A-Za-z]+|![A-Za-z0-9/._-]*",
+   "kind": "type"
+  },
+  {
+   "match": "(?<=:\\s)[|>][-+0-9]*(?=\\s*$)",
+   "kind": "operator",
+   "flags": "m"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\"",
+  "'"
+ ],
+ "constants": [
+  "true",
+  "false",
+  "null",
+  "yes",
+  "no",
+  "on",
+  "off",
+  "True",
+  "False",
+  "Null",
+  "TRUE",
+  "FALSE",
+  "NULL"
+ ]
+}

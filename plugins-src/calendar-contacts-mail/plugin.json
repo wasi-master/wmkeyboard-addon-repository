@@ -1,0 +1,19 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.cardsandmail",
+  "name": "Calendar, Contacts and Mail",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows calendar, contact and email files in the keyboard's file manager: the events in an .ics file with their times, places and repeats; every contact in a .vcf file with phone numbers, emails and addresses; and an .eml message with its sender, recipients, text and attachments, or a whole .mbox mailbox. The grid shows a contact's photo.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "event", "color": "#E53935"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "calendar", "name": "Events", "extensions": ["ics", "ical", "ifb", "vcs"], "mimes": ["text/calendar", "text/x-vcalendar"]},
+    {"id": "contacts", "name": "Contacts", "extensions": ["vcf", "vcard"], "mimes": ["text/vcard", "text/x-vcard", "text/directory"], "thumbnails": true},
+    {"id": "mail", "name": "Message", "extensions": ["eml", "mbox", "mbx"], "mimes": ["message/rfc822", "application/mbox"]}
+  ]
+}

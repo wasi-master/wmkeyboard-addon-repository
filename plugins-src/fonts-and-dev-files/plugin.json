@@ -1,0 +1,23 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.fontsanddevfiles",
+  "name": "Fonts and Dev Files",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows fonts, certificates, torrents and property lists in the keyboard's file manager. A TrueType or OpenType font is drawn in sample text with its name, designer, licence, glyph count and variable axes. A certificate shows who it was issued to and by, when it expires, its other names and its fingerprints. A .torrent lists its files, size, trackers and info hash, and an Apple .plist (text or binary) opens as folding sections.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "font_download", "color": "#5E35B1"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "font", "name": "Font", "extensions": ["ttf", "otf", "ttc", "otc", "woff"],
+     "mimes": ["font/*", "application/font-sfnt", "application/x-font-ttf", "application/x-font-otf", "application/font-woff"], "maxBytes": 16777216},
+    {"id": "cert", "name": "Certificate", "extensions": ["pem", "crt", "cer", "der", "cert", "csr", "pub", "key"],
+     "mimes": ["application/x-x509-ca-cert", "application/x-x509-user-cert", "application/pkix-cert", "application/x-pem-file"]},
+    {"id": "torrent", "name": "Torrent", "extensions": ["torrent"], "mimes": ["application/x-bittorrent"]},
+    {"id": "plist", "name": "Property list", "extensions": ["plist", "mobileconfig", "webloc", "strings"],
+     "mimes": ["application/x-plist", "application/x-apple-aspen-config"]}
+  ]
+}

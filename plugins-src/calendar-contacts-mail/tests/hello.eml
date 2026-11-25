@@ -1,0 +1,29 @@
+From: =?UTF-8?B?QXnDqWE=?= <a@example.com>
+To: Bo <bo@example.com>,
+ Cy <cy@example.com>
+Subject: =?UTF-8?Q?Caf=C3=A9_plans?= =?UTF-8?Q?_for_Friday?=
+Date: Wed, 4 Mar 2026 10:00:00 +0600
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="outer"
+
+--outer
+Content-Type: multipart/alternative; boundary=inner
+
+--inner
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Let's meet at the caf=C3=A9 at 5.=
+ See you.
+--inner
+Content-Type: text/html; charset=utf-8
+
+<p>Let's meet</p>
+--inner--
+--outer
+Content-Type: application/pdf; name="menu.pdf"
+Content-Disposition: attachment; filename="menu.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgZmFrZQ==
+--outer--

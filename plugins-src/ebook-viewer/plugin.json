@@ -1,0 +1,20 @@
+{
+  "format": "wmkeyboard-plugin",
+  "id": "com.wasimaster.ebookviewer",
+  "name": "E-book Viewer",
+  "pluginVersion": "1.0.0",
+  "author": "Wasi Master",
+  "description": "Shows EPUB and FictionBook e-books and CBZ comics in the keyboard's file manager: the cover, title, author, publisher and description, the table of contents, and the opening of the first chapter. The grid shows each book's cover.",
+  "apiVersion": 5,
+  "language": "python",
+  "entry": "main.py",
+  "panel": false,
+  "tool": {"icon": "menu_book", "color": "#8D6E63"},
+  "permissions": ["previews"],
+  "previews": [
+    {"id": "epub", "name": "E-book", "extensions": ["epub", "kepub", "fb2"],
+     "mimes": ["application/epub+zip", "application/x-fictionbook+xml"], "maxBytes": 16777216, "thumbnails": true},
+    {"id": "comic", "name": "Comic", "extensions": ["cbz"],
+     "mimes": ["application/vnd.comicbook+zip", "application/x-cbz"], "maxBytes": 16777216, "thumbnails": true}
+  ]
+}

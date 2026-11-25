@@ -1,0 +1,10 @@
+From a@example.com Wed Mar  4 10:00:00 2026
+From: a@example.com
+Subject: First
+
+Hello
+From b@example.com Thu Mar  5 10:00:00 2026
+From: b@example.com
+Subject: Second
+
+Bye

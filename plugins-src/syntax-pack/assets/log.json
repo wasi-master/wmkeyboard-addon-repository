@@ -1,0 +1,53 @@
+{
+ "rules": [
+  {
+   "match": "\\d{4}-\\d{2}-\\d{2}[T ]\\d{2}:\\d{2}(:\\d{2}([.,]\\d+)?)?(Z|[+-]\\d{2}:?\\d{2})?",
+   "kind": "constant"
+  },
+  {
+   "match": "^\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d+",
+   "kind": "constant",
+   "flags": "m"
+  },
+  {
+   "match": "\\[?\\d{2}:\\d{2}:\\d{2}([.,]\\d+)?\\]?",
+   "kind": "constant"
+  },
+  {
+   "match": "\\b(FATAL|CRITICAL|CRIT|SEVERE|ERROR|ERR|PANIC|EMERG|ALERT|FAIL(ED|URE)?|Exception|Error)\\b",
+   "kind": "keyword"
+  },
+  {
+   "match": "\\b(WARN(ING)?)\\b",
+   "kind": "type"
+  },
+  {
+   "match": "\\b(INFO|NOTICE)\\b",
+   "kind": "function"
+  },
+  {
+   "match": "\\b(DEBUG|TRACE|VERBOSE|FINE(R|ST)?)\\b",
+   "kind": "comment"
+  },
+  {
+   "match": "(?<=\\s)[EF](?=[\\s/])",
+   "kind": "keyword"
+  },
+  {
+   "match": "(?<=\\s)W(?=[\\s/])",
+   "kind": "type"
+  },
+  {
+   "match": "^\\s+at [^\\n]*",
+   "kind": "comment",
+   "flags": "m"
+  },
+  {
+   "match": "https?://[^\\s\"'<>]+",
+   "kind": "link"
+  }
+ ],
+ "strings": [
+  "\""
+ ]
+}

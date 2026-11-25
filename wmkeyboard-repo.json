@@ -9,7 +9,7 @@
     "author": "Wasi Master",
     "homepage": "https://github.com/wasi-master/wmkeyboard-addon-repository",
     "icon": "icon.png",
-    "updatedAt": "2026-11-23"
+    "updatedAt": "2026-11-26"
   },
   "addons": [
     {
@@ -2381,6 +2381,172 @@
       "minAppVersion": 45,
       "license": "MIT, CC BY-SA 4.0, CC BY 2.0 FR",
       "licenseFile": "plugins/LANGUAGE-TRAINER-LICENSE.txt"
+    },
+    {
+      "id": "office-viewer",
+      "type": "plugin",
+      "name": "Office Viewer",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Word, Excel and PowerPoint files and their OpenDocument cousins in the file manager: a document's headings, text and tables, every sheet of a workbook, and each slide's title and text. The grid shows the picture a document saved of its first page.",
+      "tags": [
+        "office",
+        "word",
+        "excel",
+        "powerpoint",
+        "docx",
+        "xlsx",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/office-viewer.wmplugin",
+      "sha256": "64276ed418070499d1de757b20270cceb2a293a9a566184eeec3f1e22320d2c0",
+      "sizeBytes": 5079,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "ebook-viewer",
+      "type": "plugin",
+      "name": "E-book Viewer",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "EPUB and FictionBook e-books and CBZ comics in the file manager: the cover, title, author, publisher and description, the table of contents, and the opening of the first chapter. The grid shows each book's cover.",
+      "tags": [
+        "epub",
+        "ebook",
+        "comic",
+        "cbz",
+        "fb2",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/ebook-viewer.wmplugin",
+      "sha256": "3aea63926dc498250ee9d262f0772d63614c548460d3b16f1d4ed8fe79a31b73",
+      "sizeBytes": 4511,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "data-viewer",
+      "type": "plugin",
+      "name": "Data Viewer",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Data files as tables in the file manager: CSV and TSV with their rows and columns, JSON and JSON Lines as folding sections and tables, Jupyter notebooks cell by cell with their outputs, and SQLite databases table by table.",
+      "tags": [
+        "csv",
+        "json",
+        "sqlite",
+        "jupyter",
+        "data",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/data-viewer.wmplugin",
+      "sha256": "ab914d2670c826db73b2734b16fc3db086f0ade993d4cc93634cf113c820086d",
+      "sizeBytes": 6993,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "calendar-contacts-mail",
+      "type": "plugin",
+      "name": "Calendar, Contacts and Mail",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Calendar, contact and email files in the file manager: the events in an .ics file with their times, places and repeats; the contacts in a .vcf file with their numbers, emails and addresses; and an .eml message with its text and attachments, or a whole .mbox mailbox. The grid shows a contact's photo.",
+      "tags": [
+        "ics",
+        "vcard",
+        "vcf",
+        "eml",
+        "email",
+        "calendar",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/calendar-contacts-mail.wmplugin",
+      "sha256": "efabb50581e92425c57cb40184ef0f17c79a3abe6e4e38707a66d5ae0a0a061f",
+      "sizeBytes": 7898,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "subtitles-and-maps",
+      "type": "plugin",
+      "name": "Subtitles and Maps",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Subtitles, lyrics and GPS tracks in the file manager. SRT, WebVTT, ASS, SSA, SBV and LRC files appear as a list of timed lines. GPX, KML, GeoJSON and TCX files show the route's shape, distance, time, climb and an elevation chart, and their named places.",
+      "tags": [
+        "subtitles",
+        "srt",
+        "lrc",
+        "gpx",
+        "kml",
+        "geojson",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/subtitles-and-maps.wmplugin",
+      "sha256": "6f9252a13d38bff6fe61292cfb47399a33b779f427e2338ca75321e577b805c4",
+      "sizeBytes": 6931,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "fonts-and-dev-files",
+      "type": "plugin",
+      "name": "Fonts and Dev Files",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Fonts, certificates, torrents and property lists in the file manager. A font is drawn in sample text with its name, designer, licence and variable axes. A certificate shows who it is for and from, when it expires and its fingerprints. A .torrent lists its files, trackers and info hash, and a .plist opens as folding sections.",
+      "tags": [
+        "font",
+        "ttf",
+        "certificate",
+        "pem",
+        "torrent",
+        "plist",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/fonts-and-dev-files.wmplugin",
+      "sha256": "16918582dab52c815f2cdd6c964b80e9cf27a72c7064f2d4b7e206147b9a974b",
+      "sizeBytes": 10777,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
+    },
+    {
+      "id": "syntax-pack",
+      "type": "plugin",
+      "name": "Syntax Pack",
+      "version": "1.0.0",
+      "author": "Wasi Master",
+      "description": "Colours for config, build and data files in the file manager: TOML, INI, YAML, .env, Dockerfile, Makefile, CMake, Gradle, Terraform, Nix, Zig, GraphQL, Protocol Buffers, diffs, logs and .gitignore files. Needs no permissions.",
+      "tags": [
+        "syntax",
+        "highlighting",
+        "toml",
+        "yaml",
+        "dockerfile",
+        "terraform",
+        "file-preview",
+        "plugin"
+      ],
+      "path": "plugins/syntax-pack.wmplugin",
+      "sha256": "df12b5650f84c6a55bb20ff8ecd2141902dd4e4b03651608ab4fe2a0815ff5c8",
+      "sizeBytes": 8454,
+      "minAppVersion": 47,
+      "license": "MIT",
+      "licenseFile": "plugins/LICENSE.txt"
     }
   ]
 }

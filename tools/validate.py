@@ -25,6 +25,7 @@ import zipfile
 from pathlib import Path
 
 from plugin_icons import tool_problems
+from plugin_previews import preview_problems
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "wmkeyboard-repo.json"
@@ -60,6 +61,7 @@ KNOWN_PLUGIN_PERMISSIONS = {
     # API 5
     "network", "network.local", "ai", "field.read", "field.write", "clipboard.read", "clipboard.write",
     "location", "files", "sensors", "scan", "device", "share", "notifications", "calendar", "todo", "clock",
+    "previews",
 }
 
 # The app's PluginManifestCodec.API_VERSION. 4 is Python, which replaced Lua:
@@ -184,6 +186,7 @@ def check_plugin(ident, payload, errors, warnings):
         elif permission in API_5_PERMISSIONS and api_version != 5:
             errors.append(f"{ident}: permission {permission!r} needs apiVersion 5")
     errors.extend(f"{ident}: {problem}" for problem in host_problems(manifest, permissions))
+    errors.extend(f"{ident}: {problem}" for problem in preview_problems(manifest, lambda name: archived.get(name)))
     icon_errors, icon_warnings = tool_problems(manifest, lambda name: archived.get(name))
     errors.extend(f"{ident}: {problem}" for problem in icon_errors)
     warnings.extend(f"{ident}: {problem}" for problem in icon_warnings)

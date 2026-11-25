@@ -1,0 +1,24 @@
+{
+ "rules": [
+  {
+   "match": "^![^\\n]*",
+   "kind": "keyword",
+   "flags": "m"
+  },
+  {
+   "match": "\\*\\*|[*?]",
+   "kind": "operator"
+  },
+  {
+   "match": "\\[[^\\]\\n]*\\]",
+   "kind": "constant"
+  },
+  {
+   "match": "/$",
+   "kind": "punctuation",
+   "flags": "m"
+  }
+ ],
+ "lineComment": "#",
+ "numbers": false
+}

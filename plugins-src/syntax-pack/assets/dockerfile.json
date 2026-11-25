@@ -1,0 +1,39 @@
+{
+ "rules": [
+  {
+   "match": "\\$\\{?[A-Za-z_][A-Za-z0-9_]*(:-[^\\}\\n]*)?\\}?",
+   "kind": "constant"
+  },
+  {
+   "match": "--[a-z][a-z-]*",
+   "kind": "attribute"
+  }
+ ],
+ "lineComment": "#",
+ "strings": [
+  "\"",
+  "'"
+ ],
+ "caseInsensitive": true,
+ "keywords": [
+  "from",
+  "as",
+  "run",
+  "cmd",
+  "label",
+  "maintainer",
+  "expose",
+  "env",
+  "add",
+  "copy",
+  "entrypoint",
+  "volume",
+  "user",
+  "workdir",
+  "arg",
+  "onbuild",
+  "stopsignal",
+  "healthcheck",
+  "shell"
+ ]
+}
