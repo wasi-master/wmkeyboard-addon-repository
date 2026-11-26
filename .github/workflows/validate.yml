@@ -7,8 +7,10 @@ on:
   workflow_dispatch:
 
 env:
-  # The WMKeyboard commit whose wm-python the plugin tests run on. Move it
-  # forward with the app, so the tests run on the interpreter people have.
+  # The WMKeyboard commit whose wm-python the plugin tests run on, through
+  # wmpy (native/wmpy). Move it forward with the app, so the tests run on
+  # the interpreter people have. It must be a commit that has native/wmpy:
+  # an older one only has the runner's old name, wm-python-cli.
   WM_PYTHON_REV: 0541cc02ecdb8f1a57df6dc3811fe94fb1368a3a
 
 jobs:
@@ -24,19 +26,19 @@ jobs:
       - run: pip install jsonschema
 
       # Plugin tests run on wm-python, the interpreter the keyboard ships (a
-      # Rust port of PyMini), through its command-line runner. Pin the rev to
-      # the WMKeyboard commit whose wm-python matches the app being released.
+      # Rust port of PyMini), through wmpy, its command-line tool. Pin the rev
+      # to the WMKeyboard commit whose wm-python matches the app being released.
       - uses: dtolnay/rust-toolchain@stable
 
       - uses: actions/cache@v4
         with:
           path: ~/.cargo/bin
-          key: wm-python-cli-${{ env.WM_PYTHON_REV }}
+          key: wmpy-${{ env.WM_PYTHON_REV }}
 
-      - name: Install wm-python-cli
+      - name: Install wmpy
         run: |
-          command -v wm-python-cli || cargo install \
-            --git https://github.com/wasi-master/WMKeyboard --rev "$WM_PYTHON_REV" wm-python-cli
+          command -v wmpy || cargo install \
+            --git https://github.com/wasi-master/WMKeyboard --rev "$WM_PYTHON_REV" wmpy
 
       # Schema pass, plus the things a schema can't express: every path,
       # preview and icon resolves to a file that is actually in the repo, ids
@@ -54,6 +56,7 @@ jobs:
         run: python3 tools/build_plugins.py --check
 
       # Every plugin is linted for Python PyMini lacks and smoke-rendered
-      # against the widget caps; every test.py runs on wm-python-cli.
+      # against the widget caps; every test.py and tests/test_*.py runs
+      # under wmpy test.
       - name: Run plugin tests
         run: python3 tools/test_plugins.py --require-cli

@@ -4,22 +4,25 @@
 WM Keyboard runs plugins on wm-python, its Rust port of PyMini (the small
 Python Clink uses). It is not CPython: strings are grapheme clusters, some
 of Python 3 is missing (the plugin docs list what), and only the bundled
-modules exist. So the real check is the real interpreter, through its
-command-line runner:
+modules exist. So the real check is the real interpreter, through wmpy,
+its command-line tool (https://wmkeyboard.pages.dev/plugins/wmpy/):
 
-    cargo install --git https://github.com/wasi-master/WMKeyboard --rev <sha> wm-python-cli
+    cargo install --git https://github.com/wasi-master/WMKeyboard --rev <sha> wmpy
+
+An older checkout's runner, wm-python-cli, is used when wmpy is not on PATH.
 
 For every plugin this script
 
 1. lints main.py (and test.py) for Python that PyMini does not have,
 2. renders it with stand-in `wm` and `ui` and touches every widget it shows,
    checking each tree against the host's caps (CPython, tools/pyplugin_host.py),
-3. runs its test.py, if it has one, under `wm-python-cli test <folder>`.
+3. runs its tests (test.py and tests/test_*.py), if it has any, under
+   `wmpy test <folder>`.
    Without the CLI on PATH, test.py runs on CPython with the same stand-ins
    and a warning, which catches most mistakes but not the PyMini-only ones.
 
 An API 5 plugin (the `wm` package) skips steps 1 and 2: the stand-ins model
-API 4 only. It must have a test.py, and it needs the CLI.
+API 4 only. It must have a test.py, and it needs wmpy.
 
 A test.py imports `plugin_test`, which the runner provides: `read(name)`
 returns a file from the plugin's folder and `load(name, wm, ui)` runs a plugin
@@ -28,8 +31,8 @@ raises; the run then exits non-zero.
 
     python3 tools/test_plugins.py              # every plugin
     python3 tools/test_plugins.py math-mode    # just one
-    python3 tools/test_plugins.py --cpython    # skip wm-python-cli even if installed
-    python3 tools/test_plugins.py --require-cli  # fail when wm-python-cli is missing (CI)
+    python3 tools/test_plugins.py --cpython    # skip wmpy even if installed
+    python3 tools/test_plugins.py --require-cli  # fail when wmpy is missing (CI)
 """
 
 from __future__ import annotations
@@ -43,7 +46,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / "plugins-src"
-CLI = "wm-python-cli"
+CLI = "wmpy"
+# What the runner was called before it became wmpy; used when only it is installed.
+OLD_CLI = "wm-python-cli"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pyplugin_host  # noqa: E402
@@ -73,7 +78,7 @@ def main(argv: list[str]) -> int:
             sys.exit(f"no such plugin: {', '.join(sorted(missing))}")
         folders = [p for p in folders if p.name in args.plugins]
 
-    cli = None if args.cpython else shutil.which(CLI)
+    cli = None if args.cpython else (shutil.which(CLI) or shutil.which(OLD_CLI))
     if cli is None and args.require_cli:
         sys.exit(f"{CLI} is not on PATH")
     if cli is None and not args.cpython:
@@ -90,11 +95,13 @@ def main(argv: list[str]) -> int:
         # checks it.
         api5 = api_of(folder) == 5
         test = folder / "test.py"
+        # wmpy also runs tests/test_*.py; the CPython stand-ins run test.py only.
+        has_tests = test.is_file() or any((folder / "tests").glob("**/test_*.py"))
         if not entry.is_file():
             problems.append(f"{entry.relative_to(ROOT)} is missing")
         elif api5:
-            if not test.is_file():
-                problems.append("an API 5 plugin needs a test.py, run under wm-python-cli")
+            if not has_tests:
+                problems.append(f"an API 5 plugin needs a test.py (or tests/test_*.py), run under {CLI}")
             elif cli is None:
                 problems.append(f"an API 5 plugin is tested only under {CLI}, which is not on PATH")
         else:
@@ -107,20 +114,20 @@ def main(argv: list[str]) -> int:
             print(f"   {line}")
 
         test_failed = False
-        if test.is_file() and not problems:
+        if has_tests and not problems:
             if cli:
                 result = subprocess.run([cli, "test", str(folder)], text=True, capture_output=True)
                 sys.stdout.write(result.stdout)
                 if result.returncode != 0:
                     sys.stdout.write(result.stderr)
                     test_failed = True
-            else:
+            elif test.is_file():
                 test_failed = pyplugin_host.run_test(folder) != 0
         if problems or test_failed:
             failed += 1
             print(f"   FAILED ({folder.name})")
-        elif not test.is_file():
-            print("   ok (lint and smoke; no test.py)")
+        elif not has_tests:
+            print("   ok (lint and smoke; no tests)")
     return 1 if failed else 0
 
 
