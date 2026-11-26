@@ -11,7 +11,7 @@ env:
   # wmpy (native/wmpy). Move it forward with the app, so the tests run on
   # the interpreter people have. It must be a commit that has native/wmpy:
   # an older one only has the runner's old name, wm-python-cli.
-  WM_PYTHON_REV: 0541cc02ecdb8f1a57df6dc3811fe94fb1368a3a
+  WM_PYTHON_REV: 9c11c5fc61ce9fd397b005a88976d773cd65f98e
 
 jobs:
   validate:
