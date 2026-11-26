@@ -2,9 +2,10 @@
 """Checks every plugin in plugins-src/ and runs its tests.
 
 WM Keyboard runs plugins on wm-python, its Rust port of PyMini (the small
-Python Clink uses). PyMini is not CPython: strings are grapheme clusters,
-there are no classes or `with`, and only a few modules exist. So the real
-check is the real interpreter, through its command-line runner:
+Python Clink uses). It is not CPython: strings are grapheme clusters, some
+of Python 3 is missing (the plugin docs list what), and only the bundled
+modules exist. So the real check is the real interpreter, through its
+command-line runner:
 
     cargo install --git https://github.com/wasi-master/WMKeyboard --rev <sha> wm-python-cli
 
